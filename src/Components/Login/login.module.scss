@@ -1,0 +1,89 @@
+.loginConteiner {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    background: linear-gradient(135deg, #1e2947, #121829);
+  
+    .logo {
+      height: 700px;
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding-left: 1rem;
+    }
+  
+    .fieldWrapper {
+      background-color: rgb(14, 21, 53);
+      height: 100%;
+      width: 700px;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+  
+      .form {
+        width: 500px;
+        display: flex;
+        height: 100%;
+        padding: 0 50px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+  
+        input {
+          margin: 18px 0;
+          border-radius: 8px;
+          border: 1px solid #3a4760;
+          outline: none;
+          height: 40px;
+          padding: 15px;
+          font-size: 1rem;
+          background-color: #1d2a40;
+          color: #ffffff;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+          &:focus {
+            border-color: #6a5aff;
+            box-shadow: 0 0 6px rgba(106, 90, 255, 0.5);
+          }
+        }
+  
+        .error {
+          font-size: 14px;
+          color: #e74c3c;
+          text-align: start;
+          padding: 5px;
+          margin-top: -12px;
+        }
+  
+        button {
+          background-color: rgb(106, 90, 255);
+          color: white;
+          border: none;
+          padding: 10px;
+          border-radius: 20px;
+          width: 200px;
+          cursor: pointer;
+          align-self: center;
+          margin-top: 20px;
+          font-size: 1rem;
+          font-weight: bold;
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  
+          &:hover {
+            background-color: rgb(86, 70, 230);
+            box-shadow: 0 4px 8px rgba(86, 70, 230, 0.5);
+          }
+        }
+      }
+    }
+  }
+  
