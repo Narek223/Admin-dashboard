@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./login.module.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-export default function Login() {
-  
+export default function Login({ onSuccess }) {
   const validationSchema = Yup.object({
     username: Yup.string()
       .required("Please enter your email")
@@ -21,8 +20,13 @@ export default function Login() {
     password: "",
   };
 
-  const handleSubmit = ({ setSubmitting }) => {
+  const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(false);
+
+    if (values.username && values.password) {
+      onSuccess();
+    }
+    console.log("Form submitted", values);
   };
 
   return (
@@ -37,7 +41,7 @@ export default function Login() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({isValid }) => (
+          {({ isValid }) => (
             <Form className={styles.form}>
               <Field
                 type="text"

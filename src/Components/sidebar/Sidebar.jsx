@@ -3,13 +3,12 @@ import styles from "./sidebar.module.scss";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import { sidebardata } from "../../Services/data/sidebar/sidebar";
 import { RxHamburgerMenu } from "react-icons/rx";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import { NavLink } from "react-router-dom";
+import logo from "../../assets/Logo/logo.png";
+import Divider from "@mui/material/Divider";
+import { otherpages } from "../../Services/data/sidebar/sidebar";
+import SiderbarCart from "./SidebarCart/SiderbarCart";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   const sidebarWidth = isOpen ? "250px" : "80px";
@@ -34,7 +33,8 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         PaperProps={{
           style: {
             width: sidebarWidth,
-            backgroundColor: "rgb(15,21,53)",
+            backgroundColor: "rgb(255,255,255)",
+            color: "black",
             overflow: "hidden",
           },
         }}
@@ -45,35 +45,27 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         <Box className={styles.box} role="presentation">
           <List className={styles.list}>
             <div className={styles.logo}>
-              {isOpen && <p>Logo</p>}
+              {isOpen && <img src={logo} />}
               <p onClick={closedrawer} aria-expanded={isOpen} role="button">
                 <RxHamburgerMenu />
               </p>
             </div>
-            <div className={styles.listbox}>
-              {sidebardata?.map(({ title, id, icon, path }) => (
-                <ListItem className={styles.listitem} key={id} disablePadding>
-                  <NavLink
-                    to={path}
-                    style={{ textDecoration: "none" }}
-                    onClick={handleItemClick}
-                    className={({ isActive }) =>
-                      isActive ? styles.activeLink : ""
-                    }
-                  >
-                    <ListItemButton className={styles.buttons}>
-                      <ListItemIcon className={styles.icons}>
-                        {icon}
-                      </ListItemIcon>
-                      {isOpen && (
-                        <ListItemText primary={title} className={styles.text} />
-                      )}
-                    </ListItemButton>
-                  </NavLink>
-                </ListItem>
-              ))}
-            </div>
+
+            <SiderbarCart
+              array={sidebardata}
+              handleItemClick={handleItemClick}
+              isOpen={isOpen}
+            />
           </List>
+          <Divider />
+          <list className={styles.list}>
+            {isOpen && <p className={styles.pages}>PAGES</p>}
+            <SiderbarCart
+              array={otherpages}
+              handleItemClick={handleItemClick}
+              isOpen={isOpen}
+            />
+          </list>
         </Box>
       </Drawer>
     </div>

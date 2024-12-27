@@ -1,0 +1,50 @@
+
+.listbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    
+  
+.listitem {
+    width: 100%;
+    height: 50px;
+    .activeLink {
+      color: #ffffff;
+      background-color: rgba(212, 163, 115, 1);
+
+      .buttons {
+        border-radius: 6px;
+        color: #ffffff;
+      }
+
+      .icons {
+        color: #ffffff;
+      }
+    }
+    .buttons {
+      width: 100%;
+      height: 50px;
+      padding: 0;
+      color: rgb(19, 19, 19);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+ 
+   
+      .icons {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        color: inherit;
+        min-width: 0;
+        padding: 0 13px 0 13px;
+      }
+      .text{
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+  }
+}
