@@ -10,6 +10,8 @@ import { sidebardata } from "../../Services/data/sidebar/sidebar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { NavLink } from "react-router-dom";
+import logo from '../../assets/logo/Frame 1410117065.png'
+
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   const sidebarWidth = isOpen ? "250px" : "80px";
@@ -34,7 +36,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         PaperProps={{
           style: {
             width: sidebarWidth,
-            backgroundColor: "rgb(15,21,53)",
+            backgroundColor: "white)",
             overflow: "hidden",
           },
         }}
@@ -45,7 +47,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         <Box className={styles.box} role="presentation">
           <List className={styles.list}>
             <div className={styles.logo}>
-              {isOpen && <p>Logo</p>}
+              {isOpen && <img src={logo}/>}
               <p onClick={closedrawer} aria-expanded={isOpen} role="button">
                 <RxHamburgerMenu />
               </p>

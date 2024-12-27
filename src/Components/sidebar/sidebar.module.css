@@ -11,21 +11,26 @@
   flex-direction: column;
   align-items: baseline;
   justify-content: space-between;
-  padding: 20px 20px;
+  padding: 20px 24px;
 }
 .conteiner .box .list a {
   width: 100%;
   text-decoration: none;
+  color: black;
+}
+.conteiner .box .list a .buttons {
+  color: black;
 }
 .conteiner .box .list a.activeLink {
-  color: #ffffff;
-  background-color: rgb(27, 33, 63);
+  color: white;
+  background-color: rgb(212, 163, 115);
+  border-radius: 6px;
 }
 .conteiner .box .list a.activeLink .buttons {
   color: #fff;
 }
 .conteiner .box .list a.activeLink .icons {
-  color: #fff;
+  color: white;
 }
 .conteiner .box .list .logo {
   display: flex;
@@ -33,11 +38,11 @@
   align-content: center;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0 50px 0;
+  padding-bottom: 50px;
 }
 .conteiner .box .list .logo p {
   font-size: 25px;
-  color: white;
+  color: black;
   display: flex;
   cursor: pointer;
 }
@@ -46,22 +51,22 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
 }
 .conteiner .box .list .listbox .listitem {
   width: 100%;
   height: 53px;
-  color: white;
+}
+.conteiner .box .list .listbox .listitem.activeLink {
+  background-color: rgb(212, 163, 115);
 }
 .conteiner .box .list .listbox .listitem .buttons {
   width: 100%;
   font-size: 20px;
   padding: 0;
-  color: rgb(132, 132, 132);
+  color: black;
 }
 .conteiner .box .list .listbox .listitem .buttons .icons {
-  text-align: center;
   display: flex;
   align-items: center;
-  color: white;
+  color: inherit;
 }/*# sourceMappingURL=sidebar.module.css.map */

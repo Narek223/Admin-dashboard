@@ -10,11 +10,11 @@ function App() {
 
   return (
     <div>
-     <Login/>
+     {/* <Login/> */}
 
-    {/* <div className={`app-container ${isSidebarOpen ? "" : "sidebar-closed"}`}>
+ <div className={`app-container ${isSidebarOpen ? "" : "sidebar-closed"}`}>
      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} /> 
-      <Login/>
+     
       <div className="content">
         <Routes>
           <Route path="/" element={<h1>main </h1>} />
@@ -24,7 +24,7 @@ function App() {
           <Route path="/Reporting" element={<h1>Reporting Page</h1>} />
         </Routes> 
       </div>
-</div> */}
+</div> 
     </div>
   );
 }
