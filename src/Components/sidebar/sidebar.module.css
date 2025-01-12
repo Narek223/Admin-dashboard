@@ -3,70 +3,50 @@
   height: 100%;
 }
 .conteiner .box {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.conteiner .box .logout {
+  margin-top: auto;
+  height: 90px;
+  border-radius: 6px;
 }
 .conteiner .box .list {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  justify-content: space-between;
-  padding: 20px 24px;
+  padding: 16px 24px;
+  font-family: "Manrope";
+}
+.conteiner .box .list .pages {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgb(188, 188, 189);
+  padding: 13px 14px;
+  font-family: "Manrope";
+  font-weight: 600;
 }
 .conteiner .box .list a {
+  border-radius: 6px;
   width: 100%;
   text-decoration: none;
-  color: black;
-}
-.conteiner .box .list a .buttons {
-  color: black;
-}
-.conteiner .box .list a.activeLink {
-  color: white;
-  background-color: rgb(212, 163, 115);
-  border-radius: 6px;
-}
-.conteiner .box .list a.activeLink .buttons {
-  color: #fff;
-}
-.conteiner .box .list a.activeLink .icons {
-  color: white;
 }
 .conteiner .box .list .logo {
   display: flex;
   width: 100%;
-  align-content: center;
-  justify-content: space-between;
   align-items: center;
-  padding-bottom: 50px;
+  justify-content: space-between;
+  padding: 19px 5px;
 }
 .conteiner .box .list .logo p {
   font-size: 25px;
-  color: black;
+  color: #000;
   display: flex;
   cursor: pointer;
 }
-.conteiner .box .list .listbox {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.conteiner .box .list .listbox .listitem {
-  width: 100%;
-  height: 53px;
-}
-.conteiner .box .list .listbox .listitem.activeLink {
-  background-color: rgb(212, 163, 115);
-}
-.conteiner .box .list .listbox .listitem .buttons {
-  width: 100%;
-  font-size: 20px;
-  padding: 0;
-  color: black;
-}
-.conteiner .box .list .listbox .listitem .buttons .icons {
-  display: flex;
-  align-items: center;
-  color: inherit;
+.conteiner .box .list .logo img {
+  max-width: 100%;
+  height: auto;
 }/*# sourceMappingURL=sidebar.module.css.map */

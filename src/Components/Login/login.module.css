@@ -5,76 +5,83 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
-  background: linear-gradient(135deg, #1e2947, #121829);
 }
-.loginConteiner .logo {
-  height: 700px;
-  display: flex;
-  align-items: center;
-  color: #ffffff;
-  font-size: 2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding-left: 1rem;
+.loginConteiner .logobox {
+  width: 740px;
+}
+.loginConteiner .logobox .logo {
+  background-image: url("../../assets/SignIn/signIn.png");
+  background-repeat: no-repeat;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
 }
 .loginConteiner .fieldWrapper {
-  background-color: rgb(14, 21, 53);
   height: 100%;
   width: 700px;
   display: flex;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  align-items: center;
   border-radius: 8px;
 }
-.loginConteiner .fieldWrapper .form {
-  width: 500px;
+.loginConteiner .fieldWrapper .textbox {
+  width: 144px;
+  height: 56px;
+  color: rgb(41, 41, 41);
+}
+.loginConteiner .fieldWrapper .textbox h1 {
+  font-weight: 700;
+  font-size: 24px;
+}
+.loginConteiner .fieldWrapper .textbox p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+}
+.loginConteiner .fieldWrapper .formbox {
+  width: 400px;
+  height: 364px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.loginConteiner .fieldWrapper .formbox .form {
+  width: 100%;
   display: flex;
   height: 100%;
-  padding: 0 50px;
   flex-direction: column;
   align-items: stretch;
-  justify-content: center;
+  justify-content: flex-end;
 }
-.loginConteiner .fieldWrapper .form input {
-  margin: 18px 0;
-  border-radius: 8px;
-  border: 1px solid #3a4760;
+.loginConteiner .fieldWrapper .formbox .form input {
+  margin: 15px 0;
+  height: 51px;
   outline: none;
-  height: 40px;
+  color: rgb(10, 10, 10);
   padding: 15px;
   font-size: 1rem;
-  background-color: #1d2a40;
-  color: #ffffff;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.loginConteiner .fieldWrapper .form input:focus {
-  border-color: #6a5aff;
-  box-shadow: 0 0 6px rgba(106, 90, 255, 0.5);
-}
-.loginConteiner .fieldWrapper .form .error {
+.loginConteiner .fieldWrapper .formbox .form .error {
   font-size: 14px;
   color: #e74c3c;
   text-align: start;
   padding: 5px;
   margin-top: -12px;
 }
-.loginConteiner .fieldWrapper .form button {
-  background-color: rgb(106, 90, 255);
+.loginConteiner .fieldWrapper .formbox .form button {
+  height: 51px;
+  background-color: rgb(212, 163, 115);
   color: white;
   border: none;
   padding: 10px;
-  border-radius: 20px;
-  width: 200px;
+  border-radius: 5px;
+  width: 100%;
   cursor: pointer;
   align-self: center;
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: bold;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-.loginConteiner .fieldWrapper .form button:hover {
-  background-color: rgb(86, 70, 230);
-  box-shadow: 0 4px 8px rgba(86, 70, 230, 0.5);
 }/*# sourceMappingURL=login.module.css.map */

@@ -7,24 +7,45 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
 
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);  
+  };
   return (
     <div>
-     {/* <Login/> */}
+  
 
- <div className={`app-container ${isSidebarOpen ? "" : "sidebar-closed"}`}>
+  {!isLoggedIn?
+(
+ <Login onSuccess={handleLoginSuccess} /> 
+):
+  (
+
+<div className={`app-container ${isSidebarOpen ? "" : "sidebar-closed"}`}>
      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} /> 
-     
+ 
       <div className="content">
         <Routes>
-          <Route path="/" element={<h1>main </h1>} />
-          <Route path="/Dashboard" element={<h1>Dashboard page</h1>} />
-          <Route path="/Projects" element={<Project />} />
-          <Route path="/Tasks" element={<h1>Tasks Page</h1>} />
-          <Route path="/Reporting" element={<h1>Reporting Page</h1>} />
+          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="/Services" element={<h1>Services page</h1>} />
+          <Route path="/Exports" element={<Project />} />
+          <Route path="/Client" element={<h1>Client Page</h1>} />
+          <Route path="/Blog" element={<h1>Blog Page</h1>} />
+          <Route path="/Categories" element={<h1>Categories Page</h1>} />
         </Routes> 
       </div>
 </div> 
+
+
+
+  )} 
+  
+
+
+
+    
+   
     </div>
   );
 }

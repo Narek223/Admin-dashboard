@@ -1,0 +1,77 @@
+.logoutbox .ListBox {
+  width: 100%;
+  height: 50px;
+  padding: 16px 24px;
+}
+.logoutbox .ListBox .logoutButton {
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  color: rgb(19, 19, 19);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logoutbox .ListBox .logoutButton:hover {
+  border-radius: 6px;
+}
+.logoutbox .ListBox .logoutButton .logoutText {
+  font-size: 16px;
+}
+.logoutbox .ListBox .icons {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  min-width: 0;
+  padding: 0 13px 0 13px;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .logoutmodal {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 593px;
+  height: 317px;
+  border-radius: 15px;
+  text-align: center;
+}
+.modal .logoutmodal .logoutText {
+  border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+  height: 208px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.modal .logoutmodal .logoutText h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: rgb(0, 0, 0);
+}
+.modal .logoutmodal .buttons {
+  width: 100%;
+  flex: 1;
+  align-items: stretch;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.modal .logoutmodal .buttons button {
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+.modal .logoutmodal .buttons button:nth-of-type(1) {
+  border-right: 1px solid rgba(150, 150, 150, 0.2);
+}/*# sourceMappingURL=logoutmodal.module.css.map */

@@ -3,79 +3,56 @@
   height: 100%;
 
   .box {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .logout {
+      margin-top: auto; 
+      height: 90px;
+      border-radius: 6px;
+    }
 
     .list {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: baseline;
-      justify-content: space-between;
-      padding: 20px 24px;
+      padding: 16px 24px;
+      font-family: "Manrope";
+
+      .pages {
+        font-size: 12px;
+        font-weight: 700;
+        color: rgba(188, 188, 189);
+        padding: 13px 14px;
+        font-family: "Manrope";
+        font-weight: 600;
+      }
 
       a {
+        border-radius: 6px;
         width: 100%;
         text-decoration: none;
-        color: black;
-.buttons{
-  color: black;
-}
-        &.activeLink {
-          color: white;
-          background-color: rgba(212, 163, 115, 1);
-          border-radius: 6px;
-
-          .buttons {
-            color: #fff;
-          }
-
-          .icons {
-            color: white;
-          }
-        }
       }
 
       .logo {
         display: flex;
         width: 100%;
-        align-content: center;
-        justify-content: space-between;
         align-items: center;
-        padding-bottom: 50px;
+        justify-content: space-between;
+        padding: 19px 5px;
 
         p {
           font-size: 25px;
-          color: black;
+          color: #000;
           display: flex;
           cursor: pointer;
         }
-      }
 
-      .listbox {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-
-        .listitem {
-          width: 100%;
-          height: 53px;
-          &.activeLink{
-            background-color: rgba(212, 163, 115, 1);
-          }
-  
-          .buttons {
-            width: 100%;
-            font-size: 20px;
-            padding: 0;
-            color: black;
-
-            .icons {
-              display: flex;
-              align-items: center;
-              color: inherit; // Использование унаследованного цвета
-            }
-          }
+        img {
+          max-width: 100%;
+          height: auto;
         }
       }
     }

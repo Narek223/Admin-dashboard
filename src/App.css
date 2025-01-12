@@ -22,3 +22,10 @@
   background-color: #f4f4f4; 
   overflow-y: auto; 
 }
+html{
+  font-family: "Manrope";
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("../src/Font/Manrope-VariableFont_wght.ttf");
+}

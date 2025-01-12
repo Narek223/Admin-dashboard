@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./login.module.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-export default function Login() {
-  
+export default function Login({ onSuccess }) {
+
   const validationSchema = Yup.object({
     username: Yup.string()
       .required("Please enter your email")
@@ -21,58 +21,70 @@ export default function Login() {
     password: "",
   };
 
-  const handleSubmit = ({ setSubmitting }) => {
+  const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(false);
+
+    if (values.username && values.password) {
+      onSuccess();
+    }
+    console.log("Form submitted", values);
   };
 
   return (
     <div className={styles.loginConteiner}>
-      <div className={styles.logo}>
-        <p>Logo</p>
+      <div className={styles.logobox}>
+        <div className={styles.logo}></div>
       </div>
 
       <div className={styles.fieldWrapper}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({isValid }) => (
-            <Form className={styles.form}>
-              <Field
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Enter the Email "
-              />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className={styles.error}
-              />
+        <div className={styles.formbox}>
+          <div className={styles.textbox}>
+            <h1>Hey,hello👋 </h1>
+            <p>Let’s Get Started!</p>
+          </div>
 
-              <Field
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Enter the password "
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={styles.error}
-              />
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isValid }) => (
+              <Form className={styles.form}>
+                <Field
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Login "
+                />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className={styles.error}
+                />
 
-              <button
-                type="submit"
-                className={styles.submitButton}
-                disabled={!isValid}
-              >
-                Submit
-              </button>
-            </Form>
-          )}
-        </Formik>
+                <Field
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password "
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={styles.error}
+                />
+
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={!isValid}
+                >
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
     </div>
   );
