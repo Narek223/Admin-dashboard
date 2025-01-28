@@ -29,3 +29,7 @@ html{
   font-family: "Manrope";
   src: url("../src/Font/Manrope-VariableFont_wght.ttf");
 }
+button:active {
+  transform: scale(0.9);
+  transition: transform 0.2s ease; 
+}

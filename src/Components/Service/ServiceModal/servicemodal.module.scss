@@ -1,0 +1,164 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modalBox {
+    padding: 20px 33px;
+    border-radius: 12px;
+    width: 610px;
+    height: 900px;
+    background-color: white;
+
+    h1 {
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .close {
+      display: flex;
+      justify-content: flex-end;
+
+      .icon {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .addService {
+      padding: 20px 0;
+
+      .service {
+        display: flex;
+        margin: 18px 0 0 0;
+        .formControl {
+          &:nth-child(1) {
+            margin: 0 30px 0 0;
+          }
+
+          width: 100%;
+
+          .inputlabel {
+            margin-bottom: 8px;
+            position: static;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(127, 129, 136, 1);
+          }
+
+          .nativeSelect {
+            border-radius: 5px;
+            border: none;
+            margin: 0;
+            border: 1px solid rgba(98, 99, 115, 0.3);
+            height: 51px;
+     
+        text-decoration: none !important;
+            select {
+            
+              border-radius: 5px;
+              height: 100%;
+              padding: 0 18px;
+              color: rgba(127, 129, 136, 1);
+              font-weight: 500;
+              border: none;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .inputGroup {
+        width: 100%;
+
+        display: flex;
+        .formControl {
+          &:nth-child(1) {
+            margin: 0 30px 0 0;
+          }
+          .inputlabel {
+            margin-bottom: 18px;
+            position: static;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(127, 129, 136, 1);
+            position: static;
+          }
+          .textInput {
+            outline: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 0 18px;
+            margin-bottom: 8px;
+            position: static;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(127, 129, 136, 1);
+            width: 256px;
+            border: 1px solid rgba(98, 99, 115, 0.3);
+            height: 51px;
+            &:focus{
+              background-color: white;
+            }
+          }
+        }
+      }
+      .description {
+        margin: 18px 0;
+        .descriptionForm {
+          margin: 0 30px 0 0;
+          :hover{
+            border-bottom: 1px solid white;
+          }
+          .label {
+            margin-bottom: 8px;
+            position: static;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(127, 129, 136, 1);
+          }
+          .descriptionSelect {
+            border-radius: 4px;
+            border: none;
+            margin: 0;
+            border: 1px solid rgba(98, 99, 115, 0.3);
+            height: 51px;
+          
+            select {
+              border-radius: 5px;
+              height: 100%;
+              padding: 0 18px;
+              color: rgba(127, 129, 136, 1);
+              font-weight: 500;
+              border: none;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+     
+      .btnbox{
+        display: flex;
+        button{
+          width: 265px;
+          height:51px;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+          &:nth-child(1){
+            background-color: rgba(247, 247, 249, 1);
+            color:black;
+            margin: 0 30px 0 0;
+          }
+          &:nth-child(2){
+            background-color: rgba(212, 163, 115, 1);
+            color:white;
+          }
+        }
+      }
+    }
+  }
+}
+
+

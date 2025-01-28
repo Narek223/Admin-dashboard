@@ -1,0 +1,145 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal .modalBox {
+  padding: 20px 33px;
+  border-radius: 12px;
+  width: 610px;
+  height: 900px;
+  background-color: white;
+}
+.modal .modalBox h1 {
+  font-weight: 700;
+  font-size: 24px;
+}
+.modal .modalBox .close {
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .modalBox .close .icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.modal .modalBox .addService {
+  padding: 20px 0;
+}
+.modal .modalBox .addService .service {
+  display: flex;
+  margin: 18px 0 0 0;
+}
+.modal .modalBox .addService .service .formControl {
+  width: 100%;
+}
+.modal .modalBox .addService .service .formControl:nth-child(1) {
+  margin: 0 30px 0 0;
+}
+.modal .modalBox .addService .service .formControl .inputlabel {
+  margin-bottom: 8px;
+  position: static;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+}
+.modal .modalBox .addService .service .formControl .nativeSelect {
+  border-radius: 5px;
+  border: none;
+  margin: 0;
+  border: 1px solid rgba(98, 99, 115, 0.3);
+  height: 51px;
+  text-decoration: none !important;
+}
+.modal .modalBox .addService .service .formControl .nativeSelect select {
+  border-radius: 5px;
+  height: 100%;
+  padding: 0 18px;
+  color: rgb(127, 129, 136);
+  font-weight: 500;
+  border: none;
+  font-size: 14px;
+}
+.modal .modalBox .addService .inputGroup {
+  width: 100%;
+  display: flex;
+}
+.modal .modalBox .addService .inputGroup .formControl:nth-child(1) {
+  margin: 0 30px 0 0;
+}
+.modal .modalBox .addService .inputGroup .formControl .inputlabel {
+  margin-bottom: 18px;
+  position: static;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+  position: static;
+}
+.modal .modalBox .addService .inputGroup .formControl .textInput {
+  outline: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 0 18px;
+  margin-bottom: 8px;
+  position: static;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+  width: 256px;
+  border: 1px solid rgba(98, 99, 115, 0.3);
+  height: 51px;
+}
+.modal .modalBox .addService .inputGroup .formControl .textInput:focus {
+  background-color: white;
+}
+.modal .modalBox .addService .description {
+  margin: 18px 0;
+}
+.modal .modalBox .addService .description .descriptionForm {
+  margin: 0 30px 0 0;
+}
+.modal .modalBox .addService .description .descriptionForm :hover {
+  border-bottom: 1px solid white;
+}
+.modal .modalBox .addService .description .descriptionForm .label {
+  margin-bottom: 8px;
+  position: static;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+}
+.modal .modalBox .addService .description .descriptionForm .descriptionSelect {
+  border-radius: 4px;
+  border: none;
+  margin: 0;
+  border: 1px solid rgba(98, 99, 115, 0.3);
+  height: 51px;
+}
+.modal .modalBox .addService .description .descriptionForm .descriptionSelect select {
+  border-radius: 5px;
+  height: 100%;
+  padding: 0 18px;
+  color: rgb(127, 129, 136);
+  font-weight: 500;
+  border: none;
+  font-size: 14px;
+}
+.modal .modalBox .addService .btnbox {
+  display: flex;
+}
+.modal .modalBox .addService .btnbox button {
+  width: 265px;
+  height: 51px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.modal .modalBox .addService .btnbox button:nth-child(1) {
+  background-color: rgb(247, 247, 249);
+  color: black;
+  margin: 0 30px 0 0;
+}
+.modal .modalBox .addService .btnbox button:nth-child(2) {
+  background-color: rgb(212, 163, 115);
+  color: white;
+}/*# sourceMappingURL=servicemodal.module.css.map */

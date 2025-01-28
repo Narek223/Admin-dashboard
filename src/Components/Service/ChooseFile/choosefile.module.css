@@ -1,0 +1,70 @@
+.choosefile {
+  margin: 32px 34px;
+}
+.choosefile p {
+  color: rgb(108, 111, 119);
+  font-size: 14px;
+  font-weight: 600;
+}
+.choosefile .dragandrob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 156px;
+  background-color: rgb(247, 247, 249);
+  border-radius: 12px;
+}
+.choosefile .dragandrob h1 {
+  color: rgb(41, 41, 41);
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Manrope";
+}
+.choosefile .dragandrob img {
+  margin: 20px 0;
+}
+.choosefile .dragandrob button {
+  -webkit-text-decoration: 1px solid blue;
+          text-decoration: 1px solid blue;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  color: rgb(88, 122, 209);
+  cursor: pointer;
+}
+.choosefile .UploadedfilesBox {
+  margin: 30px 0;
+}
+.choosefile .UploadedfilesBox h1 {
+  color: rgb(41, 41, 41);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 17px 0;
+}
+.choosefile .UploadedfilesBox .Uploadedfiles {
+  padding: 22px 18px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background-color: rgb(247, 247, 249);
+  height: 72px;
+}
+.choosefile .UploadedfilesBox .Uploadedfiles .global {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.choosefile .UploadedfilesBox .Uploadedfiles .global img {
+  width: 26px;
+  height: 32px;
+}
+.choosefile .UploadedfilesBox .Uploadedfiles .global .fileinfo {
+  margin: 0 10px;
+}
+.choosefile .UploadedfilesBox .Uploadedfiles .global .trash {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}/*# sourceMappingURL=choosefile.module.css.map */

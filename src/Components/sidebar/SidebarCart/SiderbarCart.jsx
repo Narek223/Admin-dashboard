@@ -15,7 +15,7 @@ export default function SiderbarCart({ array, handleItemClick, isOpen }) {
           <NavLink
             to={path}
             style={{ textDecoration: "none" }}
-            onClick={handleItemClick}
+           
             className={({ isActive }) => (isActive ? styles.activeLink : " ")}
           >
             <ListItemButton className={styles.buttons}>

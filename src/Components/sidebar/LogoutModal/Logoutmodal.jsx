@@ -14,6 +14,13 @@ export default function Logoutmodal({ isOpen }) {
   const handleOpen = () => setstate(true);
   const handleClose = () => setstate(false);
 
+
+const logout = () => {
+  localStorage.removeItem("token");
+  window.location.reload();
+}
+
+
   return (
     <div className={styles.logoutbox}>
       <Divider />
@@ -51,7 +58,7 @@ export default function Logoutmodal({ isOpen }) {
 
             <div className={styles.buttons}>
               <button onClick={handleClose}>Cancel</button>
-              <button>Log Out</button>
+              <button onClick={logout}>Log Out</button>
             </div>
           </div>
         </Box>

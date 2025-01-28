@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Sidebar from "./Components/sidebar/Sidebar";
 import Login from "./Components/Login/Login";
+import Service from "./Components/Service/Service";
 import "./App.css";
 import Project from "./Components/Projects/Project";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,6 +13,13 @@ function App() {
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);  
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div>
   
@@ -28,7 +36,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/Services" element={<h1>Services page</h1>} />
+          <Route path="/Services" element={<Service/>} />
           <Route path="/Exports" element={<Project />} />
           <Route path="/Client" element={<h1>Client Page</h1>} />
           <Route path="/Blog" element={<h1>Blog Page</h1>} />

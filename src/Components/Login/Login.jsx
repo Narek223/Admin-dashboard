@@ -25,7 +25,9 @@ export default function Login({ onSuccess }) {
     setSubmitting(false);
 
     if (values.username && values.password) {
+      localStorage.setItem("token", "login");
       onSuccess();
+      
     }
     console.log("Form submitted", values);
   };
