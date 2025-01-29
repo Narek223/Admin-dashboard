@@ -131,7 +131,21 @@ export default function Service() {
             anchorEl={servicesAnchorEl}
             open={openServicesMenu}
             onClose={handleClose}
-            sx={menuStyles}
+            sx={{ 
+              "& .MuiPaper-root": {
+              backgroundColor: "rgba(248, 249, 250, 1)",
+              borderRadius: "8px",
+              padding: 0,
+              width:
+              openServicesMenu && servicesAnchorEl
+                  ? `${servicesAnchorEl.offsetWidth}px`
+                  : "auto",
+              minWidth: 100,
+            },
+            "& .MuiMenuItem-root:hover": {
+              backgroundColor: "white",
+            },
+          }}
           >
             {["Hair Care", "Wedding Hairstyle", "Gunung Sumbing"].map(
               (service) => (
