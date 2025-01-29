@@ -1,11 +1,11 @@
 export const services = [
     {
-      id: 1,
+      id: 0,
       input: "Service Name",
       options: ["Hair Care", "Wedding Hairstyle", "Gunung Sumbing"],
     },
     {
-      id: 2,
+      id: 1,
       input: "Category",
       options: ["Classic", "Modern"],
     },

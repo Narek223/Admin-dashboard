@@ -1,4 +1,4 @@
-import React, { useCallback, useState,useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import styles from "./servicemodal.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -12,22 +12,21 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 export default function Servicemodal({ open, onClose, onAddService, addimg }) {
-  const [selectedDescription, setSelectedDescription] = useState("Ten"); 
-  
-  const [selectedServices, setSelectedServices] = useState(
-    services.map((service) => service.options[0] || "")
-  );
-  const [id,setid]=useState(0);
+
+
+  const [id, setid] = useState(0);
   const [servicesList, setServicesList] = useState([]);
-  const [name, setname] = useState([]);
+  const [service, setservice] = useState("");
+  const [category, setcategory] = useState("");
   const [price, setPrice] = useState("");
   const [duration, setDuration] = useState("");
-  const [description, setDescription] = useState([]);
+  const [description, setDescription] = useState("");
   const [files, setFiles] = useState("");
 
   const handleSave = () => {
     if (
-      name.length !== 2 ||
+      !service ||
+      !category ||
       !price ||
       !duration ||
       !description.length ||
@@ -38,7 +37,8 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
 
     const newService = {
       id,
-      name: [...name],
+      service,
+      category,
       price,
       duration,
       description,
@@ -48,20 +48,21 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
     onAddService(newService);
     onClose();
 
-    setname([]);
+    setservice("");
+    setcategory("");
     setPrice("");
     setDuration("");
-    setDescription([]);
+    setDescription("");
   };
 
   const handleFileSelect = (fileUrl) => {
     setFiles(fileUrl);
   };
 
-useEffect(()=>{
-  setid(servicesList.length)
-},[servicesList])
- 
+  useEffect(() => {
+    setid(servicesList.length);
+  }, [servicesList]);
+
   return (
     <Modal
       open={open}
@@ -77,58 +78,81 @@ useEffect(()=>{
         <h1>Add Service</h1>
         <div className={styles.addService}>
           <div className={styles.service}>
-            {services.map((service,id) => (
-              <FormControl
-                key={service.id}
-                className={styles.formControl}
-                variant="outlined"
+            <FormControl className={styles.formControl} variant="outlined">
+              <InputLabel
+                shrink={true}
+                variant="standard"
+                className={styles.inputlabel}
               >
-                <InputLabel
-                  shrink={true}
-                  variant="standard"
-                  htmlFor={`service-select-${service.id}`}
-                  className={styles.inputlabel}
-                >
-                  {service.input}
-                </InputLabel>
-                <Select
-                    value={selectedServices[id]}
-                    IconComponent={FaAngleDown}
-                  onChange={(e) =>{
-                    const newSelectedServices = [...selectedServices];
-                    newSelectedServices[id] = e.target.value;
-                    setSelectedServices(newSelectedServices);
-                   setname((prevname) => [...prevname, e.target.value])
-                  }}
-                  className={styles.nativeSelect}
-                  
-                  MenuProps={{
-                    PaperProps: {
-                      sx: {
-                        backgroundColor: "rgba(248, 249, 250, 1)",
-                        borderRadius: "8px",
-                        padding: 0,
-                        "& .MuiMenuItem-root:hover": {
-                          backgroundColor: "white",
-                   
-                        },
+                Service Name
+              </InputLabel>
+              <Select
+                value={service || "Hair Care"}
+                IconComponent={FaAngleDown}
+                onChange={(e) => setservice(e.target.value)}
+                className={styles.nativeSelect}
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      backgroundColor: "rgba(248, 249, 250, 1)",
+                      borderRadius: "8px",
+                      padding: 0,
+                      "& .MuiMenuItem-root:hover": {
+                        backgroundColor: "white",
                       },
                     },
-                  }}
-                >
-                  {service.options.map((option, index) => (
-                   
-                    <MenuItem
-                      value={option}
-                      className={styles.option}
-                      key={index}
-                    >
-                      {option}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            ))}
+                  },
+                }}
+              >
+                {services[0].options.map((option, index) => (
+                  <MenuItem
+                    value={option}
+                    className={styles.option}
+                    key={index}
+                  >
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl className={styles.formControl} variant="outlined">
+              <InputLabel
+                shrink={true}
+                variant="standard"
+                className={styles.inputlabel}
+              >
+                Category
+              </InputLabel>
+              <Select
+                value={category || "Classic"}
+                IconComponent={FaAngleDown}
+                onChange={(e) => setcategory(e.target.value)}
+                className={styles.nativeSelect}
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      backgroundColor: "rgba(248, 249, 250, 1)",
+                      borderRadius: "8px",
+                      padding: 0,
+                      "& .MuiMenuItem-root:hover": {
+                        backgroundColor: "white",
+                      },
+                    },
+                  },
+                }}
+              >
+                {services[1].options.map((option, index) => (
+                  <MenuItem
+                    value={option}
+                    className={styles.option}
+                    key={index}
+                  >
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
 
           <div className={styles.inputGroup}>
@@ -177,15 +201,9 @@ useEffect(()=>{
                 Description
               </InputLabel>
               <Select
-               value={selectedDescription}
-                onChange={(e) =>{
-                  const value = e.target.value;
-                  if (!description.includes(value)) {
-                    setDescription((prevDescription) => [...prevDescription, value]);
-                  }
-                  setSelectedDescription(value); 
-                
-                }}
+               value={description || "Ten"}
+            
+                onChange={(e) => setDescription(e.target.value)}
                 IconComponent={FaAngleDown}
                 className={styles.descriptionSelect}
                 MenuProps={{

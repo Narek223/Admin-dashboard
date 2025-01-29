@@ -68,6 +68,11 @@
   justify-content: space-between;
   flex: 1;
 }
+.servicesConteiner .addServices .servicesNames .servicebox img {
+  border-radius: 4px;
+  width: 85px;
+  height: 65px;
+}
 .servicesConteiner .addServices .servicesNames .servicebox p:nth-child(1) {
   width: 20px;
   height: 20px;
@@ -85,6 +90,9 @@
 }
 .servicesConteiner .addServices .servicesNames .serviceboxtwo p {
   margin: 0 60px;
+}
+.servicesConteiner .addServices .servicesNames .editandelete .newicon {
+  margin: 0 12px 0 0;
 }
 .servicesConteiner .addServices .services {
   margin: 40px 0 28px 0;
@@ -107,5 +115,15 @@
   width: 100%;
 }
 .servicesConteiner .addServicestwo .info {
+  cursor: pointer;
+}
+.servicesConteiner .addServicesTwo {
+  margin: 40px 0 28px 0;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  height: 99px;
+  width: 100%;
+}
+.servicesConteiner .addServicesTwo .infobtn {
   cursor: pointer;
 }/*# sourceMappingURL=service.module.css.map */

@@ -31,8 +31,8 @@ export default function Service() {
     setAnchorEl(null);
   };
 
-  const handleDeleteService = (ind) => {
-    setServicesList(servicesList.filter((elem, id) => elem.id !== ind));
+  const handleDeleteService = (id) => {
+    setServicesList(servicesList.filter((elem, index) => elem.id !== id));
     setAnchorEl(null);
   };
 
@@ -51,6 +51,9 @@ export default function Service() {
     setserviceicon(true);
   };
 
+  const infoclose = () => {
+    setAnchorEl(null);
+  };
   const handleSelect = (value) => {
     handleClose();
   };
@@ -58,9 +61,7 @@ export default function Service() {
   const handleCategoryClick = (event) => {
     setCategoryAnchorEl(event.currentTarget);
     setServicesList(
-      servicesList.filter(
-        (elem, id) => elem.name[1] !== event.currentTarget.dataset.category
-      )
+      servicesList.filter((elem, id) => elem.category !== event.target.value)
     );
 
     seticon(false);
@@ -175,8 +176,8 @@ export default function Service() {
                 <div className={styles.servicebox}>
                   <p></p>
                   <img src={elem.files} alt="Service" />
-                  <p>{elem.name[0]}</p>
-                  <p>{elem.name[1]}</p>
+                  <p>{elem.service}</p>
+                  <p>{elem.category}</p>
                   <p>{elem.description}</p>
                 </div>
                 <div className={styles.serviceboxtwo}>
@@ -194,27 +195,34 @@ export default function Service() {
                 </p>
                 <Menu
                   id="info-btn"
+                  className={styles.editandelete}
                   anchorEl={anchorEl}
                   open={open}
-                  onClose={handleClose}
+                  onClose={infoclose}
                   sx={{
                     "& .MuiPaper-root": {
                       width: "148px",
-
                       backgroundColor: "rgba(248, 249, 250, 1)",
                       borderRadius: "8px",
                       padding: 0,
+                      
+                    },
+                    "&.MuiSvgIcon-root": {
+                      margin: "0 12px 0 0", 
+                    },
+                    "& .MuiMenuItem-root:nth-child(2)": {
+                    color:'red'
                     },
                     "& .MuiMenuItem-root:hover": {
                       backgroundColor: "white",
                     },
                   }}
                 >
-                  <MenuItem onClick={handleClosetwo}>
-                    <GrEdit className={styles.icon} /> Edit
+                  <MenuItem onClick={handleClosetwo}  >
+                    <GrEdit className={styles.newicon} style={{ marginRight: "12px" }} /> Edit
                   </MenuItem>
                   <MenuItem onClick={() => handleDeleteService(id)}>
-                    <FaRegTrashAlt /> Delete
+                    <FaRegTrashAlt  className={styles.newicon} style={{ marginRight: "12px" }}  /> Delete
                   </MenuItem>
                 </Menu>
               </div>
