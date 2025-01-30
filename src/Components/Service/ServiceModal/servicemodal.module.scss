@@ -7,7 +7,9 @@
     padding: 20px 33px;
     border-radius: 12px;
     width: 610px;
-    height: 900px;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: scroll;
     background-color: white;
 
     h1 {
@@ -80,7 +82,7 @@
           .inputlabel {
             margin-bottom: 18px;
             position: static;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             color: rgba(127, 129, 136, 1);
             position: static;
@@ -95,7 +97,7 @@
             font-size: 14px;
             font-weight: 500;
             color: rgba(127, 129, 136, 1);
-            width: 256px;
+            width: 255px;
             border: 1px solid rgba(98, 99, 115, 0.3);
             height: 51px;
             &:focus{

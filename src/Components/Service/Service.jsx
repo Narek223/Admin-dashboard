@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./service.module.scss";
 import { MdOutlineAdd } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa";
@@ -15,15 +15,15 @@ export default function Service() {
   const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
   const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
 
-  const open = Boolean(anchorEl);
+  // const open = Boolean(anchorEl);
   const openCategoryMenu = Boolean(categoryAnchorEl);
   const openServicesMenu = Boolean(servicesAnchorEl);
-
+  
   const [icon, seticon] = useState(true);
   const [serviceicon, setserviceicon] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servicesList, setServicesList] = useState([]);
-
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
@@ -32,12 +32,15 @@ export default function Service() {
   };
 
   const handleDeleteService = (id) => {
-    setServicesList(servicesList.filter((elem, index) => elem.id !== id));
+    setServicesList(servicesList.filter((elem) => elem.id !== id));
+
     setAnchorEl(null);
   };
 
-  const handleClick = (event) => {
+  
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setSelectedServiceId(id);
   };
 
   const handleAddService = (newService) => {
@@ -53,7 +56,9 @@ export default function Service() {
 
   const infoclose = () => {
     setAnchorEl(null);
+    setSelectedServiceId(null);
   };
+
   const handleSelect = (value) => {
     handleClose();
   };
@@ -84,7 +89,7 @@ export default function Service() {
             aria-haspopup="true"
             aria-expanded={false}
           >
-            Category{" "}
+            Category
             {icon == true ? (
               <FaAngleDown className={styles.icon} />
             ) : (
@@ -131,21 +136,21 @@ export default function Service() {
             anchorEl={servicesAnchorEl}
             open={openServicesMenu}
             onClose={handleClose}
-            sx={{ 
+            sx={{
               "& .MuiPaper-root": {
-              backgroundColor: "rgba(248, 249, 250, 1)",
-              borderRadius: "8px",
-              padding: 0,
-              width:
-              openServicesMenu && servicesAnchorEl
-                  ? `${servicesAnchorEl.offsetWidth}px`
-                  : "auto",
-              minWidth: 100,
-            },
-            "& .MuiMenuItem-root:hover": {
-              backgroundColor: "white",
-            },
-          }}
+                backgroundColor: "rgba(248, 249, 250, 1)",
+                borderRadius: "8px",
+                padding: 0,
+                width:
+                  openServicesMenu && servicesAnchorEl
+                    ? `${servicesAnchorEl.offsetWidth}px`
+                    : "auto",
+                minWidth: 100,
+              },
+              "& .MuiMenuItem-root:hover": {
+                backgroundColor: "white",
+              },
+            }}
           >
             {["Hair Care", "Wedding Hairstyle", "Gunung Sumbing"].map(
               (service) => (
@@ -170,7 +175,7 @@ export default function Service() {
       <div className={styles.addServices}>
         <div className={styles.servicesNames}>
           <div className={styles.servicebox}>
-            <p></p>
+            <p>N</p>
             <p>Image</p>
             <p>Service Name</p>
             <p>Category</p>
@@ -184,8 +189,8 @@ export default function Service() {
         </div>
 
         {servicesList.length > 0 &&
-          servicesList.map((elem, id) => (
-            <div key={id} className={styles.addServicesTwo}>
+          servicesList.map((elem) => (
+            <div key={elem.id} className={styles.addServicesTwo}>
               <div className={styles.servicesNames}>
                 <div className={styles.servicebox}>
                   <p></p>
@@ -201,9 +206,9 @@ export default function Service() {
                 <p
                   id="info-btn"
                   className={styles.infobtn}
-                  onClick={handleClick}
+                  onClick={(event) => handleClick(event, elem.id)}
                   aria-haspopup="true"
-                  aria-expanded={false}
+                  aria-expanded={selectedServiceId === elem.id}
                 >
                   <AiOutlineMore />
                 </p>
@@ -211,7 +216,7 @@ export default function Service() {
                   id="info-btn"
                   className={styles.editandelete}
                   anchorEl={anchorEl}
-                  open={open}
+                  open={Boolean(anchorEl) && selectedServiceId === elem.id}
                   onClose={infoclose}
                   sx={{
                     "& .MuiPaper-root": {
@@ -219,24 +224,31 @@ export default function Service() {
                       backgroundColor: "rgba(248, 249, 250, 1)",
                       borderRadius: "8px",
                       padding: 0,
-                      
                     },
                     "&.MuiSvgIcon-root": {
-                      margin: "0 12px 0 0", 
+                      margin: "0 12px 0 0",
                     },
                     "& .MuiMenuItem-root:nth-child(2)": {
-                    color:'red'
+                      color: "red",
                     },
                     "& .MuiMenuItem-root:hover": {
                       backgroundColor: "white",
                     },
                   }}
                 >
-                  <MenuItem onClick={handleClosetwo}  >
-                    <GrEdit className={styles.newicon} style={{ marginRight: "12px" }} /> Edit
+                  <MenuItem onClick={handleClosetwo}>
+                    <GrEdit
+                      className={styles.newicon}
+                      style={{ marginRight: "12px" }}
+                    />{" "}
+                    Edit
                   </MenuItem>
-                  <MenuItem onClick={() => handleDeleteService(id)}>
-                    <FaRegTrashAlt  className={styles.newicon} style={{ marginRight: "12px" }}  /> Delete
+                  <MenuItem onClick={() => handleDeleteService(elem.id)}>
+                    <FaRegTrashAlt
+                      className={styles.newicon}
+                      style={{ marginRight: "12px" }}
+                    />{" "}
+                    Delete
                   </MenuItem>
                 </Menu>
               </div>

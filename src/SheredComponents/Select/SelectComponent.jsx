@@ -17,14 +17,13 @@ export default function SelectComponent({
   optionclass,
   deafultvalue,
 }) {
-
   return (
     <FormControl className={formControlClass} variant="outlined">
       <InputLabel shrink={true} variant="standard" className={inputlabelClass}>
         {servicename}
       </InputLabel>
       <Select
-        value={service || deafultvalue}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        value={service || deafultvalue}
         IconComponent={FaAngleDown}
         onChange={(e) => sets(e.target.value)}
         className={nativeSelect}
