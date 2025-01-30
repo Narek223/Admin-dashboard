@@ -24,7 +24,7 @@ export default function SelectComponent({
         {servicename}
       </InputLabel>
       <Select
-        value={service || deafultvalue}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        value={service || deafultvalue}                       git pull                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         IconComponent={FaAngleDown}
         onChange={(e) => sets(e.target.value)}
         className={nativeSelect}
