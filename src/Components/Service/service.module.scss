@@ -61,6 +61,7 @@
         font-weight: 600;
         font-size: 14px;
         color: rgba(41, 41, 41, 1);
+        align-items: center;
       }
       .servicebox {
         width: 50%;
@@ -75,13 +76,7 @@
           width: 85px;
           height: 65px;
         }
-        p:nth-child(1) {
-          width: 20px;
-          height: 20px;
-          border: 1px solid black;
-          border-radius: 5px;
-          cursor: pointer;
-        }
+       
       }
       .serviceboxtwo {
         display: flex;
@@ -114,18 +109,9 @@
       }
     }
   }
-  .addServicestwo {
-    margin: 28px 0 22px 0;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 12px;
-    height: 99px;
-    width: 100%;
-    .info {
-      cursor: pointer;
-    }
-  }
+ 
   .addServicesTwo {
-    margin: 40px 0 28px 0;
+    margin: 22px 0 22px 0;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 12px;
     height: 99px;
@@ -134,4 +120,6 @@
       cursor: pointer;
     }
   }
+
+  
 }

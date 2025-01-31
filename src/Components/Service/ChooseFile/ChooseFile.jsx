@@ -55,12 +55,12 @@ const delate=()=>{
           <button type="button"> Choose file </button>
         </div>
         <p>Only .doc, .txt and .pdf files 2500 kb max file size</p>
+        {files.length !==0?(
         <div className={styles.UploadedfilesBox}>
+         
           <h1>Uploaded files</h1>
           <div className={styles.Uploadedfiles}>
-           
-
-              {files.length >0? (
+    
                  <div className={styles.global}>
               <img src={fileimg} />
                 <div className={styles.fileinfo}>
@@ -71,14 +71,13 @@ const delate=()=>{
                 <FaTrash />
               </div>
               </div>
-              ) : (
-                <p>no files here</p>
-              )}
+            </div>
+         
 
-           
-           
-          </div>
         </div>
+         ) : (
+          null
+        )}
       </div>
     </div>
   );

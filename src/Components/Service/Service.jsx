@@ -170,7 +170,7 @@ export default function Service() {
       <div className={styles.addServices}>
         <div className={styles.servicesNames}>
           <div className={styles.servicebox}>
-            <p></p>
+            <p>N</p>
             <p>Image</p>
             <p>Service Name</p>
             <p>Category</p>
@@ -184,11 +184,11 @@ export default function Service() {
         </div>
 
         {servicesList.length > 0 &&
-          servicesList.map((elem, id) => (
-            <div key={id} className={styles.addServicesTwo}>
+          servicesList.map((elem, index) => (
+            <div key={elem.id} className={styles.addServicesTwo}>
               <div className={styles.servicesNames}>
                 <div className={styles.servicebox}>
-                  <p></p>
+                  <p>{index+1}</p>
                   <img src={elem.files} alt="Service" />
                   <p>{elem.service}</p>
                   <p>{elem.category}</p>
@@ -235,7 +235,7 @@ export default function Service() {
                   <MenuItem onClick={handleClosetwo}  >
                     <GrEdit className={styles.newicon} style={{ marginRight: "12px" }} /> Edit
                   </MenuItem>
-                  <MenuItem onClick={() => handleDeleteService(id)}>
+                  <MenuItem onClick={() => handleDeleteService(elem.id)}>
                     <FaRegTrashAlt  className={styles.newicon} style={{ marginRight: "12px" }}  /> Delete
                   </MenuItem>
                 </Menu>

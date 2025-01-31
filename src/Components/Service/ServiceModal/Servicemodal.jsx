@@ -42,7 +42,8 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
       duration,
       description,
       files,
-    };
+    }
+    
     setServicesList((prevServices) => [...prevServices, newService]);
     onAddService(newService);
     onClose();
