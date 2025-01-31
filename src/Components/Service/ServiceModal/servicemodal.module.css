@@ -7,7 +7,9 @@
   padding: 20px 33px;
   border-radius: 12px;
   width: 610px;
-  height: 900px;
+  height: auto;
+  max-height: 90vh;
+  overflow-y: scroll;
   background-color: white;
 }
 .modal .modalBox h1 {
@@ -70,7 +72,7 @@
 .modal .modalBox .addService .inputGroup .formControl .inputlabel {
   margin-bottom: 18px;
   position: static;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: rgb(127, 129, 136);
   position: static;
@@ -85,7 +87,7 @@
   font-size: 14px;
   font-weight: 500;
   color: rgb(127, 129, 136);
-  width: 256px;
+  width: 255px;
   border: 1px solid rgba(98, 99, 115, 0.3);
   height: 51px;
 }

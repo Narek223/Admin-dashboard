@@ -23,16 +23,16 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
   const [files, setFiles] = useState("");
 
   const handleSave = () => {
-    if (
-      !service ||
-      !category ||
-      !price ||
-      !duration ||
-      !description.length ||
-      !files
-    ) {
-      return;
-    }
+    // if (
+    //   !service ||
+    //   !category ||
+    //   !price ||
+    //   !duration ||
+    //   !description.length ||
+    //   !files
+    // ) {
+    //   return;
+    // }
 
     const newService = {
       id,
