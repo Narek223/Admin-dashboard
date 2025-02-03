@@ -68,17 +68,16 @@
   justify-content: space-between;
   flex: 1;
 }
+.servicesConteiner .addServices .servicesNames .servicebox svg {
+  width: 20px;
+  height: 20px;
+}
 .servicesConteiner .addServices .servicesNames .servicebox img {
   border-radius: 4px;
   width: 85px;
   height: 65px;
-}
-.servicesConteiner .addServices .servicesNames .servicebox p:nth-child(1) {
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .servicesConteiner .addServices .servicesNames .serviceboxtwo {
   display: flex;
@@ -107,18 +106,12 @@
   align-items: center;
   height: 100%;
 }
-.servicesConteiner .addServicestwo {
-  margin: 28px 0 22px 0;
-  background-color: rgb(255, 255, 255);
-  border-radius: 12px;
-  height: 99px;
+.servicesConteiner .addServices .services .servicebox svg {
   width: 100%;
-}
-.servicesConteiner .addServicestwo .info {
-  cursor: pointer;
+  height: 100%;
 }
 .servicesConteiner .addServicesTwo {
-  margin: 40px 0 28px 0;
+  margin: 22px 0 22px 0;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
   height: 99px;

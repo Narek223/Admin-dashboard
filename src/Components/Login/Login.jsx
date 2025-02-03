@@ -3,7 +3,7 @@ import styles from "./login.module.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-export default function Login({ onSuccess }) {
+export default function Login({ onSuccess }){
 
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -13,7 +13,7 @@ export default function Login({ onSuccess }) {
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "incorrect email"
       ),
-    password: Yup.string().required("password is required").min(6),
+    password: Yup.string().required("password is required").min(6).max(20),
   });
 
   const initialValues = {
@@ -23,11 +23,9 @@ export default function Login({ onSuccess }) {
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(false);
-
     if (values.username && values.password) {
       localStorage.setItem("token", "login");
       onSuccess();
-      
     }
     console.log("Form submitted", values);
   };

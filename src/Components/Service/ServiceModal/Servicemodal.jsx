@@ -15,24 +15,24 @@ import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 export default function Servicemodal({ open, onClose, onAddService, addimg }) {
   const [id, setid] = useState(0);
   const [servicesList, setServicesList] = useState([]);
-  const [service, setservice] = useState("");
-  const [category, setcategory] = useState("");
+  const [service, setservice] = useState("Hair Care");
+  const [category, setcategory] = useState("Classic");
   const [price, setPrice] = useState("");
   const [duration, setDuration] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("Ten");
   const [files, setFiles] = useState("");
 
   const handleSave = () => {
-    if (
-      !service ||
-      !category ||
-      !price ||
-      !duration ||
-      !description.length ||
-      !files
-    ) {
-      return;
-    }
+    // if (
+    //   !service ||
+    //   !category ||
+    //   !price ||
+    //   !duration ||
+    //   !description.length ||
+    //   !files
+    // ) {
+    //   return;
+    // }
 
     const newService = {
       id,

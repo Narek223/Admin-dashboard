@@ -9,7 +9,7 @@
     width: 610px;
     height: auto;
     max-height: 90vh;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     background-color: white;
 
     h1 {
@@ -55,10 +55,9 @@
             margin: 0;
             border: 1px solid rgba(98, 99, 115, 0.3);
             height: 51px;
-     
-        text-decoration: none !important;
+
+            text-decoration: none !important;
             select {
-            
               border-radius: 5px;
               height: 100%;
               padding: 0 18px;
@@ -100,7 +99,7 @@
             width: 255px;
             border: 1px solid rgba(98, 99, 115, 0.3);
             height: 51px;
-            &:focus{
+            &:focus {
               background-color: white;
             }
           }
@@ -110,7 +109,7 @@
         margin: 18px 0;
         .descriptionForm {
           margin: 0 30px 0 0;
-          :hover{
+          :hover {
             border-bottom: 1px solid white;
           }
           .label {
@@ -126,7 +125,7 @@
             margin: 0;
             border: 1px solid rgba(98, 99, 115, 0.3);
             height: 51px;
-          
+
             select {
               border-radius: 5px;
               height: 100%;
@@ -139,23 +138,23 @@
           }
         }
       }
-     
-      .btnbox{
+
+      .btnbox {
         display: flex;
-        button{
+        button {
           width: 265px;
-          height:51px;
+          height: 51px;
           border: none;
           cursor: pointer;
           border-radius: 4px;
-          &:nth-child(1){
+          &:nth-child(1) {
             background-color: rgba(247, 247, 249, 1);
-            color:black;
+            color: black;
             margin: 0 30px 0 0;
           }
-          &:nth-child(2){
+          &:nth-child(2) {
             background-color: rgba(212, 163, 115, 1);
-            color:white;
+            color: white;
           }
         }
       }
@@ -163,4 +162,10 @@
   }
 }
 
-
+@media screen and (max-height: 930px) {
+  .modal {
+    .modalBox {
+      overflow-y: scroll;
+    }
+  }
+}

@@ -7,18 +7,22 @@ import { AiOutlineMore } from "react-icons/ai";
 import { FaAngleUp } from "react-icons/fa6";
 import { GrEdit } from "react-icons/gr";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { menuStyles } from "../../Services/data/addServices/serviceStyles";
 import { Menu, MenuItem } from "@mui/material";
+import { AiOutlineFieldNumber } from "react-icons/ai";
+import Pagination from "@mui/material/Pagination";
+import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 
 export default function Service() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
   const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
 
-  const open = Boolean(anchorEl);
   const openCategoryMenu = Boolean(categoryAnchorEl);
   const openServicesMenu = Boolean(servicesAnchorEl);
 
+  const [categoryValue, setcategoryValue] = useState("All");
+  const [serviceValue, setserviceValue] = useState("All Services");
+  const open = Boolean(anchorEl);
   const [icon, seticon] = useState(true);
   const [serviceicon, setserviceicon] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,16 +31,17 @@ export default function Service() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const handleClosetwo = () => {
-    setAnchorEl(null);
-  };
+  const handleClosetwo = () => setAnchorEl(null);
 
+  const [page, setpage] = useState(1);
+
+  const itemsPerPage = 5;
   const handleDeleteService = (id) => {
-    setServicesList(servicesList.filter((elem, index) => elem.id !== id));
+    setServicesList(servicesList.filter((elem) => elem.id !== id));
     setAnchorEl(null);
   };
 
-  const handleClick = (event) => {
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -54,16 +59,29 @@ export default function Service() {
   const infoclose = () => {
     setAnchorEl(null);
   };
+
+  const filterCategory =
+    categoryValue === "All"
+      ? servicesList
+      : servicesList.filter((elem) => elem.category === categoryValue);
+
+  const filterServices =
+    serviceValue === "All Services"
+      ? filterCategory
+      : filterCategory.filter((elem) => elem.service === serviceValue);
+
   const handleSelect = (value) => {
+    setcategoryValue(value);
+    handleClose();
+  };
+
+  const handleServiceSelect = (value) => {
+    setserviceValue(value);
     handleClose();
   };
 
   const handleCategoryClick = (event) => {
     setCategoryAnchorEl(event.currentTarget);
-    setServicesList(
-      servicesList.filter((elem, id) => elem.category !== event.target.value)
-    );
-
     seticon(false);
   };
 
@@ -72,6 +90,14 @@ export default function Service() {
     setserviceicon(false);
   };
 
+  const handlePageChange = (event, value) => {
+    setpage(value);
+  };
+
+  const paginatedServices = filterServices.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
   return (
     <div className={styles.servicesConteiner}>
       <div className={styles.filter}>
@@ -113,14 +139,14 @@ export default function Service() {
             open={openCategoryMenu}
             onClose={handleClose}
           >
-            {["Classic", "Modern"].map((category) => (
+            {["All", "Classic", "Modern"].map((category) => (
               <MenuItem key={category} onClick={() => handleSelect(category)}>
                 {category}
               </MenuItem>
             ))}
           </Menu>
           <button onClick={handleServicesClick}>
-            All Services{" "}
+            {serviceValue}
             {serviceicon == true ? (
               <FaAngleDown className={styles.icon} />
             ) : (
@@ -131,29 +157,35 @@ export default function Service() {
             anchorEl={servicesAnchorEl}
             open={openServicesMenu}
             onClose={handleClose}
-            sx={{ 
+            sx={{
               "& .MuiPaper-root": {
-              backgroundColor: "rgba(248, 249, 250, 1)",
-              borderRadius: "8px",
-              padding: 0,
-              width:
-              openServicesMenu && servicesAnchorEl
-                  ? `${servicesAnchorEl.offsetWidth}px`
-                  : "auto",
-              minWidth: 100,
-            },
-            "& .MuiMenuItem-root:hover": {
-              backgroundColor: "white",
-            },
-          }}
+                backgroundColor: "rgba(248, 249, 250, 1)",
+                borderRadius: "8px",
+                padding: 0,
+                width:
+                  openServicesMenu && servicesAnchorEl
+                    ? `${servicesAnchorEl.offsetWidth}px`
+                    : "auto",
+                minWidth: 100,
+              },
+              "& .MuiMenuItem-root:hover": {
+                backgroundColor: "white",
+              },
+            }}
           >
-            {["Hair Care", "Wedding Hairstyle", "Gunung Sumbing"].map(
-              (service) => (
-                <MenuItem key={service} onClick={() => handleSelect(service)}>
-                  {service}
-                </MenuItem>
-              )
-            )}
+            {[
+              "All Services",
+              "Hair Care",
+              "Wedding Hairstyle",
+              "Gunung Sumbing",
+            ].map((service) => (
+              <MenuItem
+                key={service}
+                onClick={() => handleServiceSelect(service)}
+              >
+                {service}
+              </MenuItem>
+            ))}
           </Menu>
           <button onClick={handleOpenModal}>
             <MdOutlineAdd className={styles.icon} /> Add Service
@@ -170,7 +202,9 @@ export default function Service() {
       <div className={styles.addServices}>
         <div className={styles.servicesNames}>
           <div className={styles.servicebox}>
-            <p>N</p>
+            <p>
+              <AiOutlineFieldNumber />
+            </p>
             <p>Image</p>
             <p>Service Name</p>
             <p>Category</p>
@@ -183,12 +217,12 @@ export default function Service() {
           </div>
         </div>
 
-        {servicesList.length > 0 &&
-          servicesList.map((elem, index) => (
+        {paginatedServices.length > 0 &&
+          paginatedServices.map((elem, index) => (
             <div key={elem.id} className={styles.addServicesTwo}>
               <div className={styles.servicesNames}>
                 <div className={styles.servicebox}>
-                  <p>{index+1}</p>
+                  <p>{index + 1}</p>
                   <img src={elem.files} alt="Service" />
                   <p>{elem.service}</p>
                   <p>{elem.category}</p>
@@ -219,29 +253,43 @@ export default function Service() {
                       backgroundColor: "rgba(248, 249, 250, 1)",
                       borderRadius: "8px",
                       padding: 0,
-                      
                     },
                     "&.MuiSvgIcon-root": {
-                      margin: "0 12px 0 0", 
+                      margin: "0 12px 0 0",
                     },
                     "& .MuiMenuItem-root:nth-child(2)": {
-                    color:'red'
+                      color: "red",
                     },
                     "& .MuiMenuItem-root:hover": {
                       backgroundColor: "white",
                     },
                   }}
                 >
-                  <MenuItem onClick={handleClosetwo}  >
-                    <GrEdit className={styles.newicon} style={{ marginRight: "12px" }} /> Edit
+                  <MenuItem onClick={handleClosetwo}>
+                    <GrEdit
+                      className={styles.newicon}
+                      style={{ marginRight: "12px" }}
+                    />{" "}
+                    Edit
                   </MenuItem>
                   <MenuItem onClick={() => handleDeleteService(elem.id)}>
-                    <FaRegTrashAlt  className={styles.newicon} style={{ marginRight: "12px" }}  /> Delete
+                    <FaRegTrashAlt
+                      className={styles.newicon}
+                      style={{ marginRight: "12px" }}
+                    />{" "}
+                    Delete
                   </MenuItem>
                 </Menu>
               </div>
             </div>
           ))}
+
+        <PaginationComponent
+          page={page}
+          onChange={handlePageChange}
+          perpage={itemsPerPage}
+          service={filterServices}
+        />
       </div>
     </div>
   );
