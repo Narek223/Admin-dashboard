@@ -1,0 +1,11 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+.pagination .perpages {
+  display: flex;
+  align-items: center;
+}
+.pagination .perpages p {
+  margin: 8px;
+}/*# sourceMappingURL=pagination.module.css.map */

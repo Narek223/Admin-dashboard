@@ -9,7 +9,6 @@
   width: 610px;
   height: auto;
   max-height: 90vh;
-  overflow-y: scroll;
   background-color: white;
 }
 .modal .modalBox h1 {
@@ -144,4 +143,10 @@
 .modal .modalBox .addService .btnbox button:nth-child(2) {
   background-color: rgb(212, 163, 115);
   color: white;
+}
+
+@media screen and (max-height: 930px) {
+  .modal .modalBox {
+    overflow-y: scroll;
+  }
 }/*# sourceMappingURL=servicemodal.module.css.map */

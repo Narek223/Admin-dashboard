@@ -6,7 +6,7 @@ import { FaTrash } from "react-icons/fa";
 
 export default function ChooseFile({ addimg }) {
   const [files, setFiles] = useState([]);
-  const [imagePreview, setImagePreview] = useState("");
+  const [imagePreview, setImagePreview] = useState(" ");
 
   const onDrop = useCallback((acceptedFiles) => {
     setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);

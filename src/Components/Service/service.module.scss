@@ -1,4 +1,10 @@
 .servicesConteiner {
+
+.service{
+
+height: 90vh;
+
+
   .filter {
     display: flex;
     justify-content: space-between;
@@ -130,5 +136,5 @@ svg{
     }
   }
 
-  
+}
 }
