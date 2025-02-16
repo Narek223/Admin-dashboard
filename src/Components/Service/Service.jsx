@@ -29,8 +29,12 @@ export default function Service() {
   const [servicesList, setServicesList] = useState([]);
   const [edit, setedit] = useState();
 
-  const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+
+    setedit(null);
+  };
 
   const handleClosetwo = (id) => {
     setAnchorEl(null);
@@ -38,7 +42,7 @@ export default function Service() {
 
     setedit(id);
   };
-  console.log(edit);
+
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
@@ -245,7 +249,7 @@ export default function Service() {
               <div key={elem.id} className={styles.addServicesTwo}>
                 <div className={styles.servicesNames}>
                   <div className={styles.servicebox}>
-                    <p>{index + 1}</p>
+                    <p>{elem.id}</p>
                     <img src={elem.files} alt="Service" />
                     <p>{elem.service}</p>
                     <p>{elem.category}</p>
@@ -276,6 +280,7 @@ export default function Service() {
                         backgroundColor: "rgba(248, 249, 250, 1)",
                         borderRadius: "8px",
                         padding: 0,
+                        boxShadow: "none",
                       },
                       "&.MuiSvgIcon-root": {
                         margin: "0 12px 0 0",

@@ -55,8 +55,8 @@
             margin: 0;
             border: 1px solid rgba(98, 99, 115, 0.3);
             height: 51px;
-
-            text-decoration: none !important;
+            color: rgb(127, 129, 136);
+           
             select {
               border-radius: 5px;
               height: 100%;
@@ -106,8 +106,10 @@
         }
       }
       .description {
+ 
         margin: 18px 0;
         .descriptionForm {
+ 
           margin: 0 30px 0 0;
           :hover {
             border-bottom: 1px solid white;
@@ -120,6 +122,7 @@
             color: rgba(127, 129, 136, 1);
           }
           .descriptionSelect {
+            color: rgb(127, 129, 136);
             border-radius: 4px;
             border: none;
             margin: 0;
@@ -127,6 +130,7 @@
             height: 51px;
 
             select {
+              color: rgb(127, 129, 136);
               border-radius: 5px;
               height: 100%;
               padding: 0 18px;

@@ -48,6 +48,11 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
   }, [edit, resetForm]);
 
   const handleSave = () => {
+
+
+
+
+
     const newService = {
       id,
       service,
@@ -179,7 +184,7 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
             </FormControl>
           </div>
 
-          <ChooseFile addimg={handleFileSelect} />
+          <ChooseFile addimg={handleFileSelect} edit={edit}/>
 
           <div className={styles.btnbox}>
             <button onClick={onClose}>Cancel</button>

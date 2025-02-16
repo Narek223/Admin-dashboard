@@ -4,9 +4,19 @@ import { useDropzone } from "react-dropzone";
 import styles from "./choosefile.module.scss";
 import { FaTrash } from "react-icons/fa";
 
-export default function ChooseFile({ addimg }) {
+export default function ChooseFile({ addimg ,edit}) {
   const [files, setFiles] = useState([]);
   const [imagePreview, setImagePreview] = useState(" ");
+  const [name, setname] = useState("");
+
+  useEffect(() => {
+    if (edit && edit.files) {
+    
+      setFiles(
+        edit.files[0])
+}
+  }, [edit]);
+
 
   const onDrop = useCallback((acceptedFiles) => {
     setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
@@ -16,8 +26,8 @@ export default function ChooseFile({ addimg }) {
 
       setImagePreview(imagePreview);
       addimg(previewURL);
-    }
-  }, []);
+      setname(file.name)
+  }}, []);
 
   useEffect(() => {
     return () => {
@@ -36,7 +46,8 @@ export default function ChooseFile({ addimg }) {
   });
 
 const delate=()=>{
-setFiles("")
+  setFiles([]);
+    setImagePreview("");
 }
 
   return (
@@ -55,7 +66,7 @@ setFiles("")
           <button type="button"> Choose file </button>
         </div>
         <p>Only .doc, .txt and .pdf files 2500 kb max file size</p>
-        {files.length !==0?(
+        {files.length !==0  ?(
         <div className={styles.UploadedfilesBox}>
          
           <h1>Uploaded files</h1>
@@ -64,8 +75,10 @@ setFiles("")
                  <div className={styles.global}>
               <img src={fileimg} />
                 <div className={styles.fileinfo}>
+                <p>{name.name }</p>
+                
                   <p>{files[0].name}</p>
-                  <p> {(files[0].size / 1024).toFixed(2)} kb </p>
+                  <p>{ (files[0].size / 1024).toFixed(2)}  kb  </p>
                 </div>
                 <div className={styles.trash} onClick={delate}>
                 <FaTrash />

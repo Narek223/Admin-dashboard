@@ -23,7 +23,11 @@ export default function PaginationComponent({
 
   return (
     <div className={styles.pagination}>
-      <Stack spacing={3} direction="row" alignItems="center">
+      <div className={styles.stack}>
+
+
+    
+      <Stack spacing={3} direction="row" alignItems="center"   className={styles.stack}   >
         <div className={styles.perpages}>
           <p>Results per page</p>
           <Select
@@ -33,15 +37,11 @@ export default function PaginationComponent({
               PaperProps: {
                 sx: {
                   backgroundColor: "#F8F9FA",
-                  borderRadius: "8px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                 
-                
+                  borderRadius: "8px", 
                   "& .MuiMenuItem-root:hover": {
                     backgroundColor: "#FFFFFF",
                     border:'none',
-                  },
+                  },  
                 },
               },
             }}
@@ -51,7 +51,7 @@ export default function PaginationComponent({
               borderRadius: "8px",
             }}
           >
-            {[2, 5, 10].map((option) => (
+            {[5, 10,15].map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
@@ -59,12 +59,10 @@ export default function PaginationComponent({
           </Select>
         </div>
 <div>
-
-
-
         <Pagination
           count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
+ 
           onChange={handlePageChange}
           shape="rounded"
           sx={{
@@ -83,6 +81,7 @@ export default function PaginationComponent({
         />
         </div>
       </Stack>
+      </div>
     </div>
   );
 }
