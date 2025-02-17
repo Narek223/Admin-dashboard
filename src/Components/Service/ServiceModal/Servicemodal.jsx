@@ -48,7 +48,16 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
   }, [edit, resetForm]);
 
   const handleSave = () => {
-
+    if (
+      !service ||
+      !category ||
+      !price ||
+      !duration ||
+      !description.length ||
+      !files
+    ) {
+      return;
+    }
 
 
 

@@ -20,7 +20,7 @@ export default function Service() {
   const openCategoryMenu = Boolean(categoryAnchorEl);
   const openServicesMenu = Boolean(servicesAnchorEl);
 
-  const [categoryValue, setcategoryValue] = useState("All");
+  const [categoryValue, setcategoryValue] = useState("All Categories");
   const [serviceValue, setserviceValue] = useState("All Services");
   const open = Boolean(anchorEl);
   const [icon, seticon] = useState(true);
@@ -128,6 +128,7 @@ export default function Service() {
         <div className={styles.filter}>
           <h1>Services</h1>
           <div className={styles.buttonBox}>
+            
             <button
               onClick={handleCategoryClick}
               variant="contained"
@@ -135,7 +136,7 @@ export default function Service() {
               aria-haspopup="true"
               aria-expanded={false}
             >
-              Category{" "}
+             All Categories
               {icon == true ? (
                 <FaAngleDown className={styles.icon} />
               ) : (
@@ -164,7 +165,7 @@ export default function Service() {
               open={openCategoryMenu}
               onClose={handleClose}
             >
-              {["All", "Classic", "Modern"].map((category) => (
+              {["All Categories", "Classic", "Modern"].map((category) => (
                 <MenuItem key={category} onClick={() => handleSelect(category)}>
                   {category}
                 </MenuItem>
@@ -260,7 +261,7 @@ export default function Service() {
                     <p>{elem.price}</p>
                     <p>{elem.duration}</p>
                   </div>
-                  <p
+                  <button
                     id="info-btn"
                     className={styles.infobtn}
                     onClick={handleClick}
@@ -268,7 +269,7 @@ export default function Service() {
                     aria-expanded={false}
                   >
                     <AiOutlineMore />
-                  </p>
+                  </button>
                   <Menu
                     id="info-btn"
                     className={styles.editandelete}
