@@ -11,6 +11,8 @@
   margin-top: auto;
   height: 90px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
 }
 .conteiner .box .list {
   width: 100%;

@@ -1,0 +1,19 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.stack {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.perpages {
+  display: flex;
+  align-items: center;
+}
+.perpages p {
+  margin: 8px;
+}/*# sourceMappingURL=pagination.module.css.map */

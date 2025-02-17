@@ -12,27 +12,46 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 
-export default function Servicemodal({ open, onClose, onAddService, addimg }) {
-  const [id, setid] = useState(0);
-  const [servicesList, setServicesList] = useState([]);
-  const [service, setservice] = useState("");
-  const [category, setcategory] = useState("");
+export default function Servicemodal({ open, onClose, onAddService, edit }) {
+  const [id, setId] = useState(0);
+  const [service, setService] = useState("Hair Care");
+  const [category, setCategory] = useState("Classic");
   const [price, setPrice] = useState("");
   const [duration, setDuration] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("Ten");
   const [files, setFiles] = useState("");
 
+  
+  const resetForm = useCallback(() => {
+    setService("Hair Care");
+    setCategory("Classic");
+    setPrice("");
+    setDuration("");
+    setDescription("Ten");
+    setFiles("");
+    setId(0);
+  }, []);
+
+
+  useEffect(() => {
+    if (edit) {
+      setService(edit.service || "Hair Care");
+      setCategory(edit.category || "Classic");
+      setPrice(edit.price || "");
+      setDuration(edit.duration || "");
+      setDescription(edit.description || "Ten");
+      setFiles(edit.files || "");
+      setId(edit.id || 0);
+    } else {
+      resetForm();
+    }
+  }, [edit, resetForm]);
+
   const handleSave = () => {
-    // if (
-    //   !service ||
-    //   !category ||
-    //   !price ||
-    //   !duration ||
-    //   !description.length ||
-    //   !files
-    // ) {
-    //   return;
-    // }
+
+
+
+
 
     const newService = {
       id,
@@ -42,26 +61,21 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
       duration,
       description,
       files,
-    }
-    
-    setServicesList((prevServices) => [...prevServices, newService]);
-    onAddService(newService);
-    onClose();
+    };
 
-    setservice("");
-    setcategory("");
-    setPrice("");
-    setDuration("");
-    setDescription("");
+    if (edit) {
+      onAddService(newService, true);
+    } else {
+      onAddService(newService,false);
+    }
+
+    onClose();
+    resetForm();
   };
 
   const handleFileSelect = (fileUrl) => {
     setFiles(fileUrl);
   };
-
-  useEffect(() => {
-    setid(servicesList.length);
-  }, [servicesList]);
 
   return (
     <Modal
@@ -75,7 +89,7 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
         <p className={styles.close}>
           <AiOutlineClose onClick={onClose} className={styles.icon} />
         </p>
-        <h1>Add Service</h1>
+        <h1>{edit ? "Edit Service" : "Add Service"}</h1>
         <div className={styles.addService}>
           <div className={styles.service}>
             <SelectComponent
@@ -84,18 +98,18 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
               formControlClass={styles.formControl}
               inputlabelClass={styles.inputlabel}
               service={service}
-              sets={setservice}
+              sets={setService}
               nativeSelect={styles.nativeSelect}
               services={services[0].options}
               optionclass={styles.option}
             />
             <SelectComponent
               deafultvalue={"Classic"}
-              servicename=" Category"
+              servicename="Category"
               formControlClass={styles.formControl}
               inputlabelClass={styles.inputlabel}
               service={category}
-              sets={setcategory}
+              sets={setCategory}
               nativeSelect={styles.nativeSelect}
               services={services[1].options}
               optionclass={styles.option}
@@ -104,14 +118,11 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
 
           <div className={styles.inputGroup}>
             <FormControl className={styles.formControl}>
-              <InputLabel
-                htmlFor="price-input"
-                variant="standard"
-                className={styles.inputlabel}
-              >
+              <InputLabel htmlFor="price-input" variant="standard" className={styles.inputlabel}>
                 Price
               </InputLabel>
               <input
+                value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 id="price-input"
@@ -120,16 +131,13 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
               />
             </FormControl>
             <FormControl className={styles.formControl}>
-              <InputLabel
-                variant="standard"
-                htmlFor="duration-input"
-                className={styles.inputlabel}
-              >
+              <InputLabel variant="standard" htmlFor="duration-input" className={styles.inputlabel}>
                 Duration
               </InputLabel>
               <input
                 type="text"
                 id="duration-input"
+                value={duration}
                 onChange={(e) => setDuration(e.target.value)}
                 className={styles.textInput}
                 placeholder="30 min"
@@ -148,7 +156,7 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
                 Description
               </InputLabel>
               <Select
-                value={description || "Ten"}
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 IconComponent={FaAngleDown}
                 className={styles.descriptionSelect}
@@ -175,11 +183,12 @@ export default function Servicemodal({ open, onClose, onAddService, addimg }) {
               </Select>
             </FormControl>
           </div>
-          <ChooseFile addimg={handleFileSelect} />
+
+          <ChooseFile addimg={handleFileSelect} edit={edit}/>
 
           <div className={styles.btnbox}>
-            <button onClick={onClose}>Cancle</button>
-            <button onClick={handleSave}>Save</button>
+            <button onClick={onClose}>Cancel</button>
+            <button onClick={handleSave}>{edit ? "Update" : "Save"}</button>
           </div>
         </div>
       </Box>
