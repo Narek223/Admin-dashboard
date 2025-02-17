@@ -37,6 +37,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             backgroundColor: "rgb(255,255,255)",
             color: "black",
             overflow: "hidden",
+            border:'white'
           },
         }}
         ModalProps={{
