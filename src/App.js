@@ -5,7 +5,7 @@ import Service from "./Components/Service/Service";
 import "./App.css";
 import Project from "./Components/Projects/Project";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import Meny from "./Components/menu/Meny";
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);  

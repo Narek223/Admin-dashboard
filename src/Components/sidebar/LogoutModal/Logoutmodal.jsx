@@ -53,6 +53,7 @@ const logout = () => {
           <div className={styles.logoutmodal}>
             <div className={styles.logoutText}>
               <h1>Log Out</h1>
+              <br/>
               <p>Are you sure you want to log out?</p>
             </div>
 

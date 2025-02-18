@@ -12,6 +12,9 @@ import { AiOutlineFieldNumber } from "react-icons/ai";
 import Pagination from "@mui/material/Pagination";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 
+
+
+
 export default function Service() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
@@ -81,7 +84,7 @@ export default function Service() {
   };
 
   const filterCategory =
-    categoryValue === "All"
+    categoryValue === "All Categories"
       ? servicesList
       : servicesList.filter((elem) => elem.category === categoryValue);
 
@@ -124,11 +127,11 @@ export default function Service() {
 
   return (
     <div className={styles.servicesConteiner}>
+      
       <div className={styles.service}>
         <div className={styles.filter}>
           <h1>Services</h1>
           <div className={styles.buttonBox}>
-            
             <button
               onClick={handleCategoryClick}
               variant="contained"
@@ -136,7 +139,7 @@ export default function Service() {
               aria-haspopup="true"
               aria-expanded={false}
             >
-             All Categories
+              {categoryValue}
               {icon == true ? (
                 <FaAngleDown className={styles.icon} />
               ) : (
@@ -166,7 +169,13 @@ export default function Service() {
               onClose={handleClose}
             >
               {["All Categories", "Classic", "Modern"].map((category) => (
-                <MenuItem key={category} onClick={() => handleSelect(category)}>
+                <MenuItem
+                style={{
+                  backgroundColor: category === categoryValue ? "rgba(25, 118, 210, 0.08)" : "", 
+                }}
+                  key={category}
+                  onClick={() => handleSelect(category)}
+                >
                   {category}
                 </MenuItem>
               ))}
@@ -208,6 +217,9 @@ export default function Service() {
               ].map((service) => (
                 <MenuItem
                   key={service}
+                  style={{
+                    backgroundColor: service === serviceValue ? "rgba(25, 118, 210, 0.08)" : "", 
+                  }}
                   onClick={() => handleServiceSelect(service)}
                 >
                   {service}
@@ -237,7 +249,7 @@ export default function Service() {
               <p>Service Name</p>
               <p>Category</p>
               <p className={styles.description}>Description</p>
-          
+
               <p>Price</p>
               <p>Duration</p>
             </div>
@@ -250,14 +262,13 @@ export default function Service() {
                   <div className={styles.servicebox}>
                     <p>{elem.id}</p>
                     <div className={styles.img}>
-                    <img src={elem.files} alt="Service" />
+                      <img src={elem.files} alt="Service" />
                     </div>
-                   
+
                     <p>{elem.service}</p>
                     <p>{elem.category}</p>
-                    <p >{elem.description}</p>
+                    <p>{elem.description}</p>
 
-                    
                     <p>{elem.price}</p>
                     <p>{elem.duration}</p>
                   </div>

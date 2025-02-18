@@ -47,7 +47,7 @@ export default function PaginationComponent({
             }}
             sx={{
               height: "38px",
-              backgroundColor: "#ECEDF1",
+              backgroundColor: "transparent",
               borderRadius: "8px",
             }}
           >
@@ -61,13 +61,13 @@ export default function PaginationComponent({
 <div>
         <Pagination
           count={Math.ceil(totalItems / itemsPerPage)}
-          page={currentPage}
+          page={currentPage+1}
  
           onChange={handlePageChange}
           shape="rounded"
           sx={{
             "& .MuiPaginationItem-root": {
-              backgroundColor: "#ECEDF1",
+              backgroundColor: "#transparent",
               display:'flex',
               "&:hover": {
                 backgroundColor: "#DADCE0",
