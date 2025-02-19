@@ -1,6 +1,11 @@
 .servicesConteiner {
+ 
+  .serviceWrapper{
+    padding: 10px  0 0 20px; 
+  
   .service {
-    height: 90vh;
+
+    height: calc(90vh - 80px);
     overflow-y: scroll;
     .filter {
       display: flex;
@@ -36,7 +41,9 @@
           border: none;
           // padding: 12px 24px;
           margin: 10px 21px;
- 
+ &:nth-child(3){
+  margin: 10px 0 10px 21px;
+ }
           .icon {
             width: 20px;
             height: 20px;
@@ -158,4 +165,5 @@
       }
     }
   }
+}
 }

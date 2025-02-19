@@ -3,9 +3,9 @@ import Sidebar from "./Components/sidebar/Sidebar";
 import Login from "./Components/Login/Login";
 import Service from "./Components/Service/Service";
 import "./App.css";
-import Project from "./Components/Projects/Project";
+import Experts from "./Components/Experts/Experts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Meny from "./Components/menu/Meny";
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<h1>Home</h1>} />
           <Route path="/Services" element={<Service/>} />
-          <Route path="/Exports" element={<Project />} />
+          <Route path="/Experts" element={<Experts />} />
           <Route path="/Client" element={<h1>Client Page</h1>} />
           <Route path="/Blog" element={<h1>Blog Page</h1>} />
           <Route path="/Categories" element={<h1>Categories Page</h1>} />

@@ -5,12 +5,12 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import { sidebardata } from "../../Services/data/sidebar/sidebar";
 import { RxHamburgerMenu } from "react-icons/rx";
-import logo from "../../assets/logo/logo.png";
+import logo from "../../assets/Logo/logo.png";
 import Divider from "@mui/material/Divider";
 import { otherpages } from "../../Services/data/sidebar/sidebar";
 import SiderbarCart from "./SidebarCart/SiderbarCart";
 import Logoutmodal from "./LogoutModal/Logoutmodal";
-import Meny from "../menu/Meny";
+
 export default function Sidebar({ isOpen, setIsOpen }) {
   const sidebarWidth = isOpen ? "250px" : "80px";
 
@@ -38,7 +38,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             backgroundColor: "rgb(255,255,255)",
             color: "black",
             overflow: "hidden",
-            bprder:'white'
+            border:'white'
           },
         }}
         ModalProps={{

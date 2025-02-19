@@ -11,7 +11,7 @@ import { BiCalendar } from "react-icons/bi";
 export const sidebardata = [
   { id: 1, title: "Dashboard", icon: <GrProjects/>, path:"/"},
   { id: 2, title: "Services", icon: <MdOutlineContentCut />,path:"/Services" },
-  { id: 3, title: "Exports", icon: <GrProjects />,path:"/Exports" },
+  { id: 3, title: "Experts", icon: <GrProjects />,path:"/Experts" },
   { id: 4, title: "Client", icon: <FaTasks /> ,path:"/Client" },
   { id: 5, title: "Blog", icon: <IoMdLaptop />,path:"/Blog" },
   { id: 6, title: "Categories", icon: <MdOutlineFilterList />,path:"/Categories" },

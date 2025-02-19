@@ -10,6 +10,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { Menu, MenuItem } from "@mui/material";
 import { AiOutlineFieldNumber } from "react-icons/ai";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
+import Header from "../Header/Header";
 
 export default function Service() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -27,7 +28,6 @@ export default function Service() {
   const [servicesList, setServicesList] = useState([]);
   const [edit, setedit] = useState(null);
 
-  // Новое состояние для выбранного элемента списка
   const [selectedService, setSelectedService] = useState(null);
 
   const handleCloseModal = () => setIsModalOpen(false);
@@ -36,13 +36,11 @@ export default function Service() {
     setedit(null);
   };
 
-  // Открытие общего меню с выбранным элементом
   const handleInfoClick = (event, elem) => {
     setAnchorEl(event.currentTarget);
     setSelectedService(elem);
   };
 
-  // Открытие модального окна редактирования для выбранного элемента
   const handleEdit = () => {
     setAnchorEl(null);
     setIsModalOpen(true);
@@ -126,7 +124,13 @@ export default function Service() {
   );
 
   return (
+    <div>
+   <Header/>
+
     <div className={styles.servicesConteiner}>
+   <div className={styles.serviceWrapper}>
+
+
       <div className={styles.service}>
         <div className={styles.filter}>
           <h1>Services</h1>
@@ -288,7 +292,6 @@ export default function Service() {
         </div>
       </div>
 
-
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -335,6 +338,8 @@ export default function Service() {
         onPageChange={handlePageChange}
         onItemsPerPageChange={handleItemsPerPageChange}
       />
+    </div>
+    </div>
     </div>
   );
 }
