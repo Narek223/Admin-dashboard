@@ -21,6 +21,7 @@
   color: black;
   cursor: pointer;
   position: absolute;
+  font-weight: 600;
 }
 .conteiner .searchWrapper input[type=text] {
   outline: none;
@@ -44,6 +45,10 @@
   font-weight: 400;
   color: rgb(160, 174, 192);
 }
+.conteiner .contactWrapper {
+  display: flex;
+  align-items: center;
+}
 .conteiner .contactWrapper button {
   background-color: rgb(212, 163, 115);
   color: white;
@@ -53,7 +58,7 @@
   border-radius: 8px;
   margin: 0 32px;
   cursor: pointer;
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 16px;
 }
 .conteiner .contactWrapper button .addIcon {
@@ -61,12 +66,17 @@
   height: 24px;
   color: white;
   cursor: pointer;
-  position: static;
+  position: unset;
+  font-weight: 600;
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
-.conteiner .contactWrapper button .bellIcon {
+.conteiner .contactWrapper .bellIcon {
   width: 24px;
   height: 24px;
   color: black;
   cursor: pointer;
-  position: static;
+  position: unset;
+  font-weight: 600;
 }/*# sourceMappingURL=header.module.css.map */
