@@ -79,4 +79,30 @@
   cursor: pointer;
   position: unset;
   font-weight: 600;
+}
+.conteiner .modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.conteiner .modal .clientmodal {
+  background-color: white;
+  width: 610px;
+  height: 442px;
+  border-radius: 12px;
+}
+.conteiner .modal .clientmodal .close {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.conteiner .modal .clientmodal .close .icon {
+  margin: 20px 35px;
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.conteiner .modal .clientmodal .clientmodalpage {
+  margin: 0 33px;
 }/*# sourceMappingURL=header.module.css.map */
