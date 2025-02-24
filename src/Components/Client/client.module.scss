@@ -1,0 +1,66 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .clientmodal {
+      background-color: white;
+      width: 610px;
+      height: 442px;
+      border-radius: 12px;
+      .close {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        justify-content: flex-end;
+
+        .icon {
+          margin: 20px 35px 0 0;
+          width: 24px;
+          height: 24px;
+          color: black;
+        }
+      }
+      .clientmodalpage {
+        margin: 0 33px;
+        h1{
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 32px;
+        }
+      }
+    }
+    .formControl {
+        &:nth-child(1) {
+          margin: 0 30px 0 0;
+        }
+
+        width: 100%;
+
+        .inputlabel {
+          margin-bottom: 8px;
+          position: static;
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(127, 129, 136, 1);
+        }
+
+        .nativeSelect {
+          border-radius: 5px;
+          border: none;
+          margin: 0;
+          border: 1px solid rgba(98, 99, 115, 0.3);
+          height: 51px;
+          color: rgb(127, 129, 136);
+         
+          select {
+            border-radius: 5px;
+            height: 100%;
+            padding: 0 18px;
+            color: rgba(127, 129, 136, 1);
+            font-weight: 500;
+            border: none;
+            font-size: 14px;
+          }
+        }
+      }
+  }

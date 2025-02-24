@@ -144,25 +144,7 @@
         }
       }
 
-      .btnbox {
-        display: flex;
-        button {
-          width: 265px;
-          height: 51px;
-          border: none;
-          cursor: pointer;
-          border-radius: 4px;
-          &:nth-child(1) {
-            background-color: rgba(247, 247, 249, 1);
-            color: black;
-            margin: 0 30px 0 0;
-          }
-          &:nth-child(2) {
-            background-color: rgba(212, 163, 115, 1);
-            color: white;
-          }
-        }
-      }
+  
     }
   }
 }

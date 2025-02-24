@@ -11,6 +11,9 @@ import { FaAngleDown } from "react-icons/fa";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
+import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
+
+
 
 export default function Servicemodal({ open, onClose, onAddService, edit }) {
   const [id, setId] = useState(0);
@@ -110,7 +113,7 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
               sets={setService}
               nativeSelect={styles.nativeSelect}
               services={services[0].options}
-              optionclass={styles.option}
+           
             />
             <SelectComponent
               deafultvalue={"Classic"}
@@ -121,7 +124,7 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
               sets={setCategory}
               nativeSelect={styles.nativeSelect}
               services={services[1].options}
-              optionclass={styles.option}
+            
             />
           </div>
 
@@ -192,13 +195,8 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
               </Select>
             </FormControl>
           </div>
-
           <ChooseFile addimg={handleFileSelect} edit={edit}/>
-
-          <div className={styles.btnbox}>
-            <button onClick={onClose}>Cancel</button>
-            <button onClick={handleSave}>{edit ? "Update" : "Save"}</button>
-          </div>
+          <ModalBtn onClose={onClose} handleSave={handleSave} edit={edit} />
         </div>
       </Box>
     </Modal>
