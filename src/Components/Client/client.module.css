@@ -8,6 +8,7 @@
   width: 610px;
   height: 442px;
   border-radius: 12px;
+  padding: 18px 33px;
 }
 .modal .clientmodal .close {
   width: 100%;
@@ -16,46 +17,16 @@
   justify-content: flex-end;
 }
 .modal .clientmodal .close .icon {
-  margin: 20px 35px 0 0;
   width: 24px;
   height: 24px;
   color: black;
-}
-.modal .clientmodal .clientmodalpage {
-  margin: 0 33px;
 }
 .modal .clientmodal .clientmodalpage h1 {
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
 }
-.modal .formControl {
-  width: 100%;
-}
-.modal .formControl:nth-child(1) {
-  margin: 0 30px 0 0;
-}
-.modal .formControl .inputlabel {
-  margin-bottom: 8px;
-  position: static;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgb(127, 129, 136);
-}
-.modal .formControl .nativeSelect {
-  border-radius: 5px;
-  border: none;
-  margin: 0;
-  border: 1px solid rgba(98, 99, 115, 0.3);
-  height: 51px;
-  color: rgb(127, 129, 136);
-}
-.modal .formControl .nativeSelect select {
-  border-radius: 5px;
-  height: 100%;
-  padding: 0 18px;
-  color: rgb(127, 129, 136);
-  font-weight: 500;
-  border: none;
-  font-size: 14px;
+.modal .clientmodal .clentselect .clentwrapper {
+  display: flex;
+  padding: 20px 0 0 0;
 }/*# sourceMappingURL=client.module.css.map */

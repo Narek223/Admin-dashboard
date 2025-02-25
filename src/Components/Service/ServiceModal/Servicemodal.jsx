@@ -12,10 +12,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
+import Inputs from "../../../SheredComponents/Inputs/Inputs";
 
-
-
-export default function Servicemodal({ open, onClose, onAddService, edit }) {
+export default function Servicemodal({
+  open,
+  onClose,
+  onAddService,
+  edit,
+  error,
+}) {
   const [id, setId] = useState(0);
   const [service, setService] = useState("Hair Care");
   const [category, setCategory] = useState("Classic");
@@ -24,7 +29,6 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
   const [description, setDescription] = useState("Ten");
   const [files, setFiles] = useState("");
 
-  
   const resetForm = useCallback(() => {
     setService("Hair Care");
     setCategory("Classic");
@@ -34,7 +38,6 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
     setFiles("");
     setId(0);
   }, []);
-
 
   useEffect(() => {
     if (edit) {
@@ -51,6 +54,8 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
   }, [edit, resetForm]);
 
   const handleSave = () => {
+    duration || price === "" ? error(true) : error(false);
+
     if (
       !service ||
       !category ||
@@ -61,9 +66,6 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
     ) {
       return;
     }
-
-
-
 
     const newService = {
       id,
@@ -78,7 +80,7 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
     if (edit) {
       onAddService(newService, true);
     } else {
-      onAddService(newService,false);
+      onAddService(newService, false);
     }
 
     onClose();
@@ -107,54 +109,36 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
             <SelectComponent
               deafultvalue={"Hair Care"}
               servicename="Service Name"
-              formControlClass={styles.formControl}
-              inputlabelClass={styles.inputlabel}
               service={service}
               sets={setService}
-              nativeSelect={styles.nativeSelect}
               services={services[0].options}
-           
             />
             <SelectComponent
               deafultvalue={"Classic"}
               servicename="Category"
-              formControlClass={styles.formControl}
-              inputlabelClass={styles.inputlabel}
               service={category}
               sets={setCategory}
-              nativeSelect={styles.nativeSelect}
               services={services[1].options}
-            
             />
           </div>
 
           <div className={styles.inputGroup}>
-            <FormControl className={styles.formControl}>
-              <InputLabel htmlFor="price-input" variant="standard" className={styles.inputlabel}>
-                Price
-              </InputLabel>
-              <input
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                type="number"
-                id="price-input"
-                className={styles.textInput}
-                placeholder="$45"
-              />
-            </FormControl>
-            <FormControl className={styles.formControl}>
-              <InputLabel variant="standard" htmlFor="duration-input" className={styles.inputlabel}>
-                Duration
-              </InputLabel>
-              <input
-                type="text"
-                id="duration-input"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                className={styles.textInput}
-                placeholder="30 min"
-              />
-            </FormControl>
+            <Inputs
+              error={error}
+              value={price}
+              state={setPrice}
+              placeholder="$45"
+              type="number"
+              label="Price"
+            />
+            <Inputs
+              error={error}
+              value={duration}
+              state={setDuration}
+              placeholder="30 min"
+              type="text"
+              label="Duration"
+            />
           </div>
 
           <div className={styles.description}>
@@ -195,7 +179,7 @@ export default function Servicemodal({ open, onClose, onAddService, edit }) {
               </Select>
             </FormControl>
           </div>
-          <ChooseFile addimg={handleFileSelect} edit={edit}/>
+          <ChooseFile addimg={handleFileSelect} edit={edit} />
           <ModalBtn onClose={onClose} handleSave={handleSave} edit={edit} />
         </div>
       </Box>

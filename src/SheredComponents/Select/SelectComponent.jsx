@@ -5,28 +5,30 @@ import Select from "@mui/material/Select";
 import { FaAngleDown } from "react-icons/fa";
 import MenuItem from "@mui/material/MenuItem";
 import { menuStyles } from "../../Services/data/addServices/serviceStyles";
+import styles from "./select.module.scss";
 
 export default function SelectComponent({
-  formControlClass,
-  inputlabelClass,
   service,
   sets,
-  nativeSelect,
   services,
   servicename,
-  optionclass,
   deafultvalue,
 }) {
   return (
-    <FormControl className={formControlClass} variant="outlined">
-      <InputLabel shrink={true} variant="standard" className={inputlabelClass}>
+    <FormControl className={styles.formControl} variant="outlined" required>
+      <InputLabel
+        shrink={true}
+        variant="standard"
+        className={styles.inputlabel}
+      >
         {servicename}
       </InputLabel>
       <Select
+      required
         value={service || deafultvalue}
         IconComponent={FaAngleDown}
         onChange={(e) => sets(e.target.value)}
-        className={nativeSelect}
+        className={styles.nativeSelect}
         MenuProps={{
           PaperProps: {
             sx: { menuStyles },
@@ -34,7 +36,7 @@ export default function SelectComponent({
         }}
       >
         {services.map((option, index) => (
-          <MenuItem value={option} className={optionclass} key={index}>
+          <MenuItem value={option} className={styles.option} key={index}>
             {option}
           </MenuItem>
         ))}

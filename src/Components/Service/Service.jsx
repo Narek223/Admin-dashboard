@@ -27,10 +27,14 @@ export default function Service() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servicesList, setServicesList] = useState([]);
   const [edit, setedit] = useState(null);
-
+  const [error, setError] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
-  const handleCloseModal = () => setIsModalOpen(false);
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setError(false)
+  
+  };
   const handleOpenModal = () => {
     setIsModalOpen(true);
     setedit(null);
@@ -74,6 +78,7 @@ export default function Service() {
     setServicesAnchorEl(null);
     seticon(true);
     setserviceicon(true);
+
   };
 
   const infoclose = () => {
@@ -245,6 +250,7 @@ export default function Service() {
           onClose={handleCloseModal}
           onAddService={handleAddService}
           edit={edit}
+          error={setError}
         />
 
         <div className={styles.addServices}>

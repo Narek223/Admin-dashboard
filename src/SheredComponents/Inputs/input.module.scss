@@ -1,0 +1,35 @@
+
+    .formControl {
+      &:nth-child(1) {
+        margin: 0 30px 0 0;
+        width: 47%;
+      }
+      width: 47%;
+      .inputlabel {
+        margin-bottom: 18px;
+        position: static;
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(127, 129, 136, 1);
+        position: static;
+      }
+      .textInput {
+        outline: none;
+        border-radius: 5px;
+        margin: 10px 0;
+        // width: 255px;
+
+        margin-bottom: 8px;
+        position: static;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(127, 129, 136, 1);
+   
+        border: 1px solid rgba(98, 99, 115, 0.3);
+   
+        &:focus {
+          background-color: white;
+        }
+      }
+    }
+  
