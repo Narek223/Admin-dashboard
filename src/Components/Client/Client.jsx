@@ -6,6 +6,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import styles from "./client.module.scss";
 import ModalBtn from "../../SheredComponents/ModalButtons/ModalBtn";
 import Inputs from "../../SheredComponents/Inputs/Inputs";
+import DataPicker from "../../SheredComponents/DataPicker/DataPicker";
+
 
 export default function Client() {
   const [open, setOpen] = useState(false);
@@ -46,14 +48,15 @@ export default function Client() {
                   type="text"
                   label="Full Name"
                 />
-                <Inputs
+                <DataPicker/>
+                {/* <Inputs
                   error={null}
                   value={data}
                   state={setData}
                   placeholder="14 Feb 1996"
                   type="text"
                   label="Birth Date"
-                />
+                /> */}
               </div>
               <div>
                 <Inputs

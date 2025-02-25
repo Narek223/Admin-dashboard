@@ -28,5 +28,6 @@
 }
 .modal .clientmodal .clentselect .clentwrapper {
   display: flex;
+  align-items: center;
   padding: 20px 0 0 0;
 }/*# sourceMappingURL=client.module.css.map */
