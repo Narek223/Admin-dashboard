@@ -31,13 +31,15 @@ export default function Service() {
   const [selectedService, setSelectedService] = useState(null);
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
     setError(false)
+    setIsModalOpen(false)
   
+    setError(false)
   };
   const handleOpenModal = () => {
     setIsModalOpen(true);
     setedit(null);
+    setError(false)
   };
 
   const handleInfoClick = (event, elem) => {
@@ -78,6 +80,7 @@ export default function Service() {
     setServicesAnchorEl(null);
     seticon(true);
     setserviceicon(true);
+    setError(false)
 
   };
 
@@ -133,8 +136,13 @@ export default function Service() {
    <Header/>
 
     <div className={styles.servicesConteiner}>
+      <div className={styles.Wrapper}>
+
+      
    <div className={styles.serviceWrapper}>
 
+<div className={styles.test}>
+  
 
       <div className={styles.service}>
         <div className={styles.filter}>
@@ -250,7 +258,8 @@ export default function Service() {
           onClose={handleCloseModal}
           onAddService={handleAddService}
           edit={edit}
-          error={setError}
+          seterror={setError}
+          error={error}
         />
 
         <div className={styles.addServices}>
@@ -297,7 +306,7 @@ export default function Service() {
             ))}
         </div>
       </div>
-
+</div>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -344,6 +353,7 @@ export default function Service() {
         onPageChange={handlePageChange}
         onItemsPerPageChange={handleItemsPerPageChange}
       />
+    </div>
     </div>
     </div>
     </div>

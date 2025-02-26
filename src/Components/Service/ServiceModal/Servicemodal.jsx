@@ -19,6 +19,7 @@ export default function Servicemodal({
   onClose,
   onAddService,
   edit,
+  seterror,
   error,
 }) {
   const [id, setId] = useState(0);
@@ -29,6 +30,8 @@ export default function Servicemodal({
   const [description, setDescription] = useState("Ten");
   const [files, setFiles] = useState("");
 
+
+
   const resetForm = useCallback(() => {
     setService("Hair Care");
     setCategory("Classic");
@@ -37,6 +40,7 @@ export default function Servicemodal({
     setDescription("Ten");
     setFiles("");
     setId(0);
+ 
   }, []);
 
   useEffect(() => {
@@ -54,7 +58,7 @@ export default function Servicemodal({
   }, [edit, resetForm]);
 
   const handleSave = () => {
-    duration || price === "" ? error(true) : error(false);
+    duration || price === "" ? seterror(true) : seterror(false);
 
     if (
       !service ||
@@ -85,6 +89,7 @@ export default function Servicemodal({
 
     onClose();
     resetForm();
+    
   };
 
   const handleFileSelect = (fileUrl) => {

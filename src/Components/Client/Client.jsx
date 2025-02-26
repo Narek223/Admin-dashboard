@@ -7,17 +7,39 @@ import styles from "./client.module.scss";
 import ModalBtn from "../../SheredComponents/ModalButtons/ModalBtn";
 import Inputs from "../../SheredComponents/Inputs/Inputs";
 import DataPicker from "../../SheredComponents/DataPicker/DataPicker";
-
+import ChooseFile from "../Service/ChooseFile/ChooseFile";
 
 export default function Client() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const [data, setData] = useState("");
+  const [date, setDate] = useState("");
   const [mail, setMail] = useState("");
   const [phone, setPhone] = useState("");
 
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+
+
+const handleSave=()=>{
+  if (
+    !name ||
+    !date ||
+    !mail ||
+    !phone 
+  ) {
+    return;
+  }
+
+  const clientObj={
+    name,
+    date,
+    mail,
+    phone,
+  }
+ console.log(clientObj)
+ handleClose()
+}
+
 
   return (
     <div>
@@ -48,7 +70,7 @@ export default function Client() {
                   type="text"
                   label="Full Name"
                 />
-                <DataPicker/>
+                <DataPicker setDate={setDate}/>
                 {/* <Inputs
                   error={null}
                   value={data}
@@ -77,11 +99,13 @@ export default function Client() {
                   pattern="[\+]?[0-9]{1,4}?[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}"
                 />
               </div>
+              <ChooseFile addimg={null} edit={null} />
               <ModalBtn
                 onClose={handleClose}
-                handleSave={handleClose}
+                handleSave={handleSave}
                 edit={open}
               />
+            
             </div>
           </div>
         </Box>

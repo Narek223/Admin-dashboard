@@ -6,7 +6,9 @@
   .clientmodal {
     background-color: white;
     width: 610px;
-    height: 442px;
+overflow-y: scroll;
+    height: auto;
+    max-height: 90vh;
     border-radius: 12px;
     padding: 18px 33px;
     .close {
@@ -35,6 +37,13 @@
 padding: 20px 0 0 0;
        
       }
+    }
+  }
+}
+@media screen and (max-height: 930px) {
+  .modal {
+    .clientmodal {
+      overflow-y: scroll;
     }
   }
 }

@@ -1,31 +1,31 @@
-.servicesConteiner .serviceWrapper {
-  padding: 10px 0 0 20px;
+.servicesConteiner .Wrapper {
+  padding: 10px 20px;
 }
-.servicesConteiner .serviceWrapper .service {
+.servicesConteiner .Wrapper .serviceWrapper .service {
   height: calc(90vh - 80px);
   overflow-y: scroll;
 }
-.servicesConteiner .serviceWrapper .service .filter {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
   height: 52px;
 }
-.servicesConteiner .serviceWrapper .service .filter h1 {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter h1 {
   font-size: 18px;
   font-weight: 700;
 }
-.servicesConteiner .serviceWrapper .service .filter .buttonBox {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox {
   display: flex;
 }
-.servicesConteiner .serviceWrapper .service .filter .buttonBox .manu {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox .manu {
   background-color: rgb(248, 249, 250);
 }
-.servicesConteiner .serviceWrapper .service .filter .buttonBox .manu .customMenuItem {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox .manu .customMenuItem {
   background-color: #141313;
 }
-.servicesConteiner .serviceWrapper .service .filter .buttonBox button {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,106 +40,106 @@
   border: none;
   margin: 10px 21px;
 }
-.servicesConteiner .serviceWrapper .service .filter .buttonBox button:nth-child(3) {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox button:nth-child(3) {
   margin: 10px 0 10px 21px;
 }
-.servicesConteiner .serviceWrapper .service .filter .buttonBox button .icon {
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox button .icon {
   width: 20px;
   height: 20px;
   margin: 0 5px;
 }
-.servicesConteiner .serviceWrapper .service .addServices {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices {
   margin: 40px 0 28px 0;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
   height: 64px;
   width: 100%;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames {
   padding: 0 27px;
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p {
   font-family: "Manrope";
   font-weight: 600;
   font-size: 14px;
   color: rgb(41, 41, 41);
   align-items: center;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(1) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(1) {
   width: 50px;
   display: flex;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(2) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(2) {
   width: 150px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(3) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(3) {
   width: 150px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(4) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(4) {
   width: 150px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(5) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(5) {
   width: calc(100% - 800px);
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(6) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(6) {
   width: 150px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames p:nth-child(7) {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames p:nth-child(7) {
   width: 150px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames .servicebox {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames .servicebox {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames .servicebox .img {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames .servicebox .img {
   width: 150px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames .servicebox svg {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames .servicebox svg {
   width: 20px;
   height: 20px;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames .servicebox img {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames .servicebox img {
   border-radius: 4px;
   width: 85px;
   height: 65px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.servicesConteiner .serviceWrapper .service .addServices .servicesNames .editandelete .newicon {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .servicesNames .editandelete .newicon {
   margin: 0 12px 0 0;
 }
-.servicesConteiner .serviceWrapper .service .addServices .services {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .services {
   margin: 40px 0 28px 0;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
   height: 64px;
   width: 100%;
 }
-.servicesConteiner .serviceWrapper .service .addServices .services .servicebox {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .services .servicebox {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 100%;
 }
-.servicesConteiner .serviceWrapper .service .addServices .services .servicebox svg {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServices .services .servicebox svg {
   width: 100%;
   height: 100%;
 }
-.servicesConteiner .serviceWrapper .service .addServicesTwo {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServicesTwo {
   margin: 22px 0 22px 0;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
   height: 99px;
   width: 100%;
 }
-.servicesConteiner .serviceWrapper .service .addServicesTwo .infobtn {
+.servicesConteiner .Wrapper .serviceWrapper .service .addServicesTwo .infobtn {
   width: 1px;
   cursor: pointer;
   background-color: white;

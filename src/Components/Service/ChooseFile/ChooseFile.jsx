@@ -66,7 +66,7 @@ export default function ChooseFile({ addimg, edit }) {
         <p>Only .doc, .txt and .pdf files 2500 kb max file size</p>
         {files.length !== 0 ? (
           <div className={styles.UploadedfilesBox}>
-            <h1>Uploaded files</h1>
+            <h1>Uploaded Images</h1>
             <div className={styles.Uploadedfiles}>
               <div className={styles.global}>
                 <img src={fileimg} />

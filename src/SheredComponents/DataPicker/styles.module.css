@@ -1,6 +1,7 @@
-.datapicker {
-  margin-bottom: 8px;
-  position: static;
+.datepickerConteiner {
+  width: 47%;
+}
+.datepickerConteiner .datapicker {
   font-size: 14px;
   font-weight: 500;
   color: rgb(127, 129, 136);
