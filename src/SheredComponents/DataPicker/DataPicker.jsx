@@ -7,7 +7,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import styles from "./styles.module.scss";
 import { datestyles } from "../../Services/data/datePickerStyles/datePickerStyles";
 
-export default function ResponsiveDatePickers({setDate}) {
+export default function ResponsiveDatePickers({error,setDate}) {
   // const [selectedDate, setSelectedDate] = useState(dayjs(new Date));
 
 
@@ -31,7 +31,7 @@ export default function ResponsiveDatePickers({setDate}) {
             disablePast={false}
             slotProps={{
               textField: {
-                
+                error: error,
                 InputLabelProps: {
                   className: "datapicker",
                   

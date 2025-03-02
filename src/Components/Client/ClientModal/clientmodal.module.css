@@ -1,0 +1,41 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .clientmodal {
+  background-color: white;
+  width: 610px;
+  overflow-y: scroll;
+  height: auto;
+  max-height: 90vh;
+  border-radius: 12px;
+  padding: 18px 33px;
+}
+.modal .clientmodal .close {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .clientmodal .close .icon {
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.modal .clientmodal .clientmodalpage h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+.modal .clientmodal .clentselect .clentwrapper {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 0 0;
+}
+
+@media screen and (max-height: 930px) {
+  .modal .clientmodal {
+    overflow-y: scroll;
+  }
+}/*# sourceMappingURL=clientmodal.module.css.map */

@@ -1,41 +1,37 @@
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.ClientConteiner .clinetWrapper {
+  padding: 10px 20px;
 }
-.modal .clientmodal {
-  background-color: white;
-  width: 610px;
-  overflow-y: scroll;
-  height: auto;
-  max-height: 90vh;
+.ClientConteiner .clinetWrapper .clientheader {
+  margin: 40px 0 12px 0;
+  background-color: #FFFFFF;
   border-radius: 12px;
-  padding: 18px 33px;
-}
-.modal .clientmodal .close {
+  height: 72px;
   width: 100%;
-  cursor: pointer;
-  display: flex;
-  justify-content: flex-end;
 }
-.modal .clientmodal .close .icon {
-  width: 24px;
-  height: 24px;
-  color: black;
-}
-.modal .clientmodal .clientmodalpage h1 {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 32px;
-}
-.modal .clientmodal .clentselect .clentwrapper {
+.ClientConteiner .clinetWrapper .clientheader ul {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  padding: 20px 0 0 0;
+  list-style: none;
+  padding: 0 27px;
 }
-
-@media screen and (max-height: 930px) {
-  .modal .clientmodal {
-    overflow-y: scroll;
-  }
+.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(1) {
+  width: 100px;
+  display: flex;
+}
+.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(2) {
+  width: 200px;
+}
+.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(3) {
+  width: 200px;
+}
+.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(4) {
+  width: 200px;
+}
+.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(5) {
+  width: calc(100% - 800px);
+}
+.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(6) {
+  width: 200px;
 }/*# sourceMappingURL=client.module.css.map */

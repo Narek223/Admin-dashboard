@@ -57,8 +57,18 @@ export default function Servicemodal({
     }
   }, [edit, resetForm]);
 
+  useEffect(() => {
+      if (duration && price) {
+        seterror(false);
+      }
+    }, [ duration, price, seterror]);
+
+
   const handleSave = () => {
-    duration || price === "" ? seterror(true) : seterror(false);
+    const hasEmptyFields = !duration || !price
+    seterror(hasEmptyFields);
+
+    if (hasEmptyFields) return;
 
     if (
       !service ||
@@ -129,7 +139,7 @@ export default function Servicemodal({
 
           <div className={styles.inputGroup}>
             <Inputs
-              error={error}
+              error={error && !price}
               value={price}
               state={setPrice}
               placeholder="$45"
@@ -137,7 +147,7 @@ export default function Servicemodal({
               label="Price"
             />
             <Inputs
-              error={error}
+              error={error && !duration}
               value={duration}
               state={setDuration}
               placeholder="30 min"
