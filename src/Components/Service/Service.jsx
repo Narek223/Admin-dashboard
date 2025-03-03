@@ -11,7 +11,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { AiOutlineFieldNumber } from "react-icons/ai";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import Header from "../Header/Header";
-
+import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn"
 
 
 export default function Service() {
@@ -35,7 +35,7 @@ export default function Service() {
   const handleCloseModal = () => {
     setError(false)
     setIsModalOpen(false)
-  
+
     setError(false)
   };
   const handleOpenModal = () => {
@@ -135,181 +135,181 @@ export default function Service() {
 
   return (
     <div>
-   <Header/>
+      <Header />
 
-    <div className={styles.servicesConteiner}>
-      <div className={styles.Wrapper}>
+      <div className={styles.servicesConteiner}>
+        <div className={styles.Wrapper}>
 
-      
-   <div className={styles.serviceWrapper}>
 
-<div className={styles.test}>
-  
+          <div className={styles.serviceWrapper}>
 
-      <div className={styles.service}>
-        <div className={styles.filter}>
-          <h1>Services</h1>
-          <div className={styles.buttonBox}>
-            <button
-              onClick={handleCategoryClick}
-              variant="contained"
-              id="basic-button"
-              aria-haspopup="true"
-              aria-expanded={false}
-            >
-              {categoryValue}
-              {icon ? (
-                <FaAngleDown className={styles.icon} />
-              ) : (
-                <FaAngleUp className={styles.icon} />
-              )}
-            </button>
-            <Menu
-              sx={{
-                "& .MuiPaper-root": {
-                  backgroundColor: "rgba(248, 249, 250, 1)",
-                  borderRadius: "8px",
-                  padding: 0,
-                  width:
-                    openCategoryMenu && categoryAnchorEl
-                      ? `${categoryAnchorEl.offsetWidth}px`
-                      : "auto",
-                  minWidth: 100,
-                },
-                "& .MuiMenuItem-root:hover": {
-                  backgroundColor: "white",
-                },
-              }}
-              id="basic-menu"
-              className={styles.manu}
-              anchorEl={categoryAnchorEl}
-              open={openCategoryMenu}
-              onClose={handleClose}
-            >
-              {["All Categories", "Classic", "Modern"].map((category) => (
-                <MenuItem
-                  key={category}
-                  style={{
-                    backgroundColor:
-                      category === categoryValue
-                        ? "rgba(25, 118, 210, 0.08)"
-                        : "",
-                  }}
-                  onClick={() => handleSelect(category)}
-                >
-                  {category}
-                </MenuItem>
-              ))}
-            </Menu>
-            <button onClick={handleServicesClick}>
-              {serviceValue}
-              {serviceicon ? (
-                <FaAngleDown className={styles.icon} />
-              ) : (
-                <FaAngleUp className={styles.icon} />
-              )}
-            </button>
-            <Menu
-              anchorEl={servicesAnchorEl}
-              open={openServicesMenu}
-              onClose={handleClose}
-              sx={{
-                "& .MuiPaper-root": {
-                  backgroundColor: "rgba(248, 249, 250, 1)",
-                  borderRadius: "8px",
-                  padding: 0,
-                  width:
-                    openServicesMenu && servicesAnchorEl
-                      ? `${servicesAnchorEl.offsetWidth}px`
-                      : "auto",
-                  minWidth: 100,
-                },
-                "& .MuiMenuItem-root:hover": {
-                  backgroundColor: "white",
-                },
-              }}
-            >
-              {[
-                "All Services",
-                "Hair Care",
-                "Wedding Hairstyle",
-                "Gunung Sumbing",
-              ].map((service) => (
-                <MenuItem
-                  key={service}
-                  style={{
-                    backgroundColor:
-                      service === serviceValue
-                        ? "rgba(25, 118, 210, 0.08)"
-                        : "",
-                  }}
-                  onClick={() => handleServiceSelect(service)}
-                >
-                  {service}
-                </MenuItem>
-              ))}
-            </Menu>
-            <button onClick={handleOpenModal}>
-              <MdOutlineAdd className={styles.icon} /> Add Service
-            </button>
-          </div>
-        </div>
+            <div className={styles.test}>
 
-        <Servicemodal
-          open={isModalOpen}
-          onClose={handleCloseModal}
-          onAddService={handleAddService}
-          edit={edit}
-          seterror={setError}
-          error={error}
-        />
 
-        <div className={styles.addServices}>
-          <div className={styles.servicesNames}>
-            <div className={styles.servicebox}>
-              <p>
-                <AiOutlineFieldNumber />
-              </p>
-              <p>Image</p>
-              <p>Service Name</p>
-              <p>Category</p>
-              <p className={styles.description}>Description</p>
-              <p>Price</p>
-              <p>Duration</p>
-            </div>
-          </div>
-
-          {paginatedServices.length > 0 &&
-            paginatedServices.map((elem) => (
-              <div key={elem.id} className={styles.addServicesTwo}>
-                <div className={styles.servicesNames}>
-                  <div className={styles.servicebox}>
-                    <p>{elem.id}</p>
-                    <div className={styles.img}>
-                      <img src={elem.files} alt="Service" />
-                    </div>
-                    <p>{elem.service}</p>
-                    <p>{elem.category}</p>
-                    <p>{elem.description}</p>
-                    <p>{elem.price}</p>
-                    <p>{elem.duration}</p>
+              <div className={styles.service}>
+                <div className={styles.filter}>
+                  <h1>Services</h1>
+                  <div className={styles.buttonBox}>
+                    <button
+                      onClick={handleCategoryClick}
+                      variant="contained"
+                      id="basic-button"
+                      aria-haspopup="true"
+                      aria-expanded={false}
+                    >
+                      {categoryValue}
+                      {icon ? (
+                        <FaAngleDown className={styles.icon} />
+                      ) : (
+                        <FaAngleUp className={styles.icon} />
+                      )}
+                    </button>
+                    <Menu
+                      sx={{
+                        "& .MuiPaper-root": {
+                          backgroundColor: "rgba(248, 249, 250, 1)",
+                          borderRadius: "8px",
+                          padding: 0,
+                          width:
+                            openCategoryMenu && categoryAnchorEl
+                              ? `${categoryAnchorEl.offsetWidth}px`
+                              : "auto",
+                          minWidth: 100,
+                        },
+                        "& .MuiMenuItem-root:hover": {
+                          backgroundColor: "white",
+                        },
+                      }}
+                      id="basic-menu"
+                      className={styles.manu}
+                      anchorEl={categoryAnchorEl}
+                      open={openCategoryMenu}
+                      onClose={handleClose}
+                    >
+                      {["All Categories", "Classic", "Modern"].map((category) => (
+                        <MenuItem
+                          key={category}
+                          style={{
+                            backgroundColor:
+                              category === categoryValue
+                                ? "rgba(25, 118, 210, 0.08)"
+                                : "",
+                          }}
+                          onClick={() => handleSelect(category)}
+                        >
+                          {category}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                    <button onClick={handleServicesClick}>
+                      {serviceValue}
+                      {serviceicon ? (
+                        <FaAngleDown className={styles.icon} />
+                      ) : (
+                        <FaAngleUp className={styles.icon} />
+                      )}
+                    </button>
+                    <Menu
+                      anchorEl={servicesAnchorEl}
+                      open={openServicesMenu}
+                      onClose={handleClose}
+                      sx={{
+                        "& .MuiPaper-root": {
+                          backgroundColor: "rgba(248, 249, 250, 1)",
+                          borderRadius: "8px",
+                          padding: 0,
+                          width:
+                            openServicesMenu && servicesAnchorEl
+                              ? `${servicesAnchorEl.offsetWidth}px`
+                              : "auto",
+                          minWidth: 100,
+                        },
+                        "& .MuiMenuItem-root:hover": {
+                          backgroundColor: "white",
+                        },
+                      }}
+                    >
+                      {[
+                        "All Services",
+                        "Hair Care",
+                        "Wedding Hairstyle",
+                        "Gunung Sumbing",
+                      ].map((service) => (
+                        <MenuItem
+                          key={service}
+                          style={{
+                            backgroundColor:
+                              service === serviceValue
+                                ? "rgba(25, 118, 210, 0.08)"
+                                : "",
+                          }}
+                          onClick={() => handleServiceSelect(service)}
+                        >
+                          {service}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                    <button onClick={handleOpenModal}>
+                      <MdOutlineAdd className={styles.icon} /> Add Service
+                    </button>
                   </div>
-                  <button
-                    id="info-btn"
-                    className={styles.infobtn}
-                    onClick={(event) => handleInfoClick(event, elem)}
-                    aria-haspopup="true"
-                    aria-expanded={false}
-                  >
-                    <AiOutlineMore />
-                  </button>
+                </div>
+
+                <Servicemodal
+                  open={isModalOpen}
+                  onClose={handleCloseModal}
+                  onAddService={handleAddService}
+                  edit={edit}
+                  seterror={setError}
+                  error={error}
+                />
+
+                <div className={styles.addServices}>
+                  <div className={styles.servicesNames}>
+                    <div className={styles.servicebox}>
+                      <p>
+                        <AiOutlineFieldNumber />
+                      </p>
+                      <p>Image</p>
+                      <p>Service Name</p>
+                      <p>Category</p>
+                      <p className={styles.description}>Description</p>
+                      <p>Price</p>
+                      <p>Duration</p>
+                    </div>
+                  </div>
+
+                  {paginatedServices.length > 0 &&
+                    paginatedServices.map((elem) => (
+                      <div key={elem.id} className={styles.addServicesTwo}>
+                        <div className={styles.servicesNames}>
+                          <div className={styles.servicebox}>
+                            <p>{elem.id}</p>
+                            <div className={styles.img}>
+                              <img src={elem.files} alt="Service" />
+                            </div>
+                            <p>{elem.service}</p>
+                            <p>{elem.category}</p>
+                            <p>{elem.description}</p>
+                            <p>{elem.price}</p>
+                            <p>{elem.duration}</p>
+                          </div>
+                          <button
+                            id="info-btn"
+                            className={styles.infobtn}
+                            onClick={(event) => handleInfoClick(event, elem)}
+                            aria-haspopup="true"
+                            aria-expanded={false}
+                          >
+                            <AiOutlineMore />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
-            ))}
-        </div>
-      </div>
-</div>
-      <Menu
+            </div>
+            {/* <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={infoclose}
@@ -346,18 +346,24 @@ export default function Service() {
           />
           Delete
         </MenuItem>
-      </Menu>
+      </Menu> */}
+            <EditDeleteBtn
+              anchorEl={anchorEl}
+              onClose={infoclose}
+              handleEdit={handleEdit}
+              onClick={() => handleDeleteService(selectedService.id)}
+            />
 
-      <PaginationComponent
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        totalItems={filterServices.length}
-        onPageChange={handlePageChange}
-        onItemsPerPageChange={handleItemsPerPageChange}
-      />
-    </div>
-    </div>
-    </div>
+            <PaginationComponent
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+              totalItems={filterServices.length}
+              onPageChange={handlePageChange}
+              onItemsPerPageChange={handleItemsPerPageChange}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

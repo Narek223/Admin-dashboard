@@ -2,15 +2,15 @@ import React from 'react'
 import { GrEdit } from "react-icons/gr";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Menu, MenuItem } from "@mui/material";
+import styles from './editDeleteBtn.module.scss'
 
-
-export default function EditDeleteBtn({anchorEl,onClose,handleEdit}) {
+export default function EditDeleteBtn({anchorEl,onClose,handleEdit,onClick}) {
   return (
     <div>
           <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
-        onClose={infoclose}
+        onClose={onClose}
         sx={{
           "& .MuiPaper-root": {
             width: "148px",
@@ -32,11 +32,12 @@ export default function EditDeleteBtn({anchorEl,onClose,handleEdit}) {
           Edit
         </MenuItem>
         <MenuItem
-          onClick={() => {
-            if (selectedService) {
-              handleDeleteService(selectedService.id);
-            }
-          }}
+           onClick={onClick}
+          // () => {
+          //   if (selectedService) {
+          //     handleDeleteService(selectedService.id);
+          //   }
+          // }}
         >
           <FaRegTrashAlt
             className={styles.newicon}
