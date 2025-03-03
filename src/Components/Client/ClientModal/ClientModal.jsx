@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { AiOutlineClose } from "react-icons/ai";
@@ -8,14 +8,36 @@ import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 import ChooseFile from "../../Service/ChooseFile/ChooseFile";
 import styles from "./clientmodal.module.scss";
 
-export default function ClientModal({ open, handleClose, error, setError }) {
-  const [id, setId] = useState(0);
+export default function ClientModal({
+  open,
+  handleClose,
+  error,
+  setError,
+  onAddService,
+  edit,
+  id,
+  setid
+}) {
+
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [mail, setMail] = useState("");
   const [phone, setPhone] = useState("");
+  const [files, setFiles] = useState("");
 
-  
+  const resetForm = useCallback(() => {
+    setName("");
+    setDate("");
+    setMail("");
+    setPhone("");
+    setFiles("");
+    setid(0);
+  }, []);
+
+
+
+
+
   useEffect(() => {
     if (name && date && mail && phone) {
       setError(false);
@@ -28,9 +50,27 @@ export default function ClientModal({ open, handleClose, error, setError }) {
 
     if (hasEmptyFields) return;
 
-    const clientObj = { name, date, mail, phone };
-    console.log(clientObj);
+    const clientObj = {
+      id,
+      name,
+      date,
+      mail,
+      phone,
+      files,
+    };
+
+    if (edit) {
+      onAddService(clientObj, true);
+    } else {
+      onAddService(clientObj, false);
+    }
+
     handleClose();
+    resetForm();
+  };
+
+  const handleFileSelect = (fileUrl) => {
+    setFiles(fileUrl);
   };
 
   return (
@@ -60,10 +100,7 @@ export default function ClientModal({ open, handleClose, error, setError }) {
                 type="text"
                 label="Full Name"
               />
-              <DataPicker 
-                setDate={setDate} 
-                error={error && !date} 
-              />
+              <DataPicker setDate={setDate} error={error && !date} />
             </div>
             <div>
               <Inputs
@@ -84,11 +121,11 @@ export default function ClientModal({ open, handleClose, error, setError }) {
                 pattern="[\+]?[0-9]{1,4}?[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}"
               />
             </div>
-            <ChooseFile addimg={null} edit={null} />
+            <ChooseFile addimg={handleFileSelect} edit={null} />
             <ModalBtn
               onClose={handleClose}
               handleSave={handleSave}
-              edit={open}
+              edit={edit}
             />
           </div>
         </div>

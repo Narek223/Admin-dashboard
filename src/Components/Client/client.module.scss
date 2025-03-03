@@ -18,6 +18,12 @@
                 list-style: none;
                 padding: 0 27px;
                 li{
+                  font-size: 14px;
+                  font-weight: 600;
+                  .icons{
+                    width: 20px;
+                    height: 20px;
+                  }
                     &:nth-child(1) {
                         width: 100px;
                         display: flex;
@@ -43,5 +49,68 @@
                 }
             }
         }
+        .clientListConteiner{
+          .clientList{
+            padding: 0 27px;
+            display: flex;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            height: 72px;
+            width: 100%;
+            border: 0.5px solid rgba(222, 222, 222, 0.93);
+          
+            ul{
+           
+              width: 100%;
+              display: flex;
+              align-items: center;
+              list-style: none;
+              li{
+                font-weight: 500;
+                .img{
+                  width: 58px;
+                  height: 58px;
+                
+               object-fit: cover;
+                    border-radius: 50%;
+                  
+                 
+                }
+                &:nth-child(1) {
+                  width: 100px;
+                  display: flex;
+                }
+                &:nth-child(2) {
+                  width: 200px;
+                }
+                &:nth-child(3) {
+                  width: 200px;
+                }
+                &:nth-child(4) {
+                  width: 200px;
+                }
+                &:nth-child(5) {
+                  width: calc(100% - 800px);
+                
+               
+                }
+                &:nth-child(6){
+                  width: 200px;
+               
+                }
+               
+              }
+            }
+            .infobtn{
+              width: 1px;
+              cursor: pointer;
+              background-color: white;
+              border: none;
+            }
+          }
+        }
+
+
+
     }
 }

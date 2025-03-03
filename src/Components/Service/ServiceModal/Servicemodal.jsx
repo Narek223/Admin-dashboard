@@ -30,8 +30,6 @@ export default function Servicemodal({
   const [description, setDescription] = useState("Ten");
   const [files, setFiles] = useState("");
 
-
-
   const resetForm = useCallback(() => {
     setService("Hair Care");
     setCategory("Classic");
@@ -40,7 +38,6 @@ export default function Servicemodal({
     setDescription("Ten");
     setFiles("");
     setId(0);
- 
   }, []);
 
   useEffect(() => {
@@ -58,14 +55,13 @@ export default function Servicemodal({
   }, [edit, resetForm]);
 
   useEffect(() => {
-      if (duration && price) {
-        seterror(false);
-      }
-    }, [ duration, price, seterror]);
-
+    if (duration && price) {
+      seterror(false);
+    }
+  }, [duration, price, seterror]);
 
   const handleSave = () => {
-    const hasEmptyFields = !duration || !price
+    const hasEmptyFields = !duration || !price;
     seterror(hasEmptyFields);
 
     if (hasEmptyFields) return;
@@ -99,7 +95,6 @@ export default function Servicemodal({
 
     onClose();
     resetForm();
-    
   };
 
   const handleFileSelect = (fileUrl) => {
