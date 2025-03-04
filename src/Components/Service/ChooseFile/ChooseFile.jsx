@@ -23,7 +23,6 @@ export default function ChooseFile({ addimg, edit }) {
       setImagePreview(imagePreview);
       addimg(previewURL);
       setname(file.name);
-     console.log(file.name)
     }
     setname(acceptedFiles[0].name);
   }, []);

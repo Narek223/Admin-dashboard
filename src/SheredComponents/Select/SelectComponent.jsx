@@ -24,7 +24,7 @@ export default function SelectComponent({
         {servicename}
       </InputLabel>
       <Select
-      required
+        required
         value={service || deafultvalue}
         IconComponent={FaAngleDown}
         onChange={(e) => sets(e.target.value)}

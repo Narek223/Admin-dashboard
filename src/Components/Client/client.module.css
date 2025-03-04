@@ -1,14 +1,18 @@
-.ClientConteiner .clinetWrapper {
+.ClientConteiner .clientbody {
   padding: 10px 20px;
 }
-.ClientConteiner .clinetWrapper .clientheader {
+.ClientConteiner .clientbody .clinetWrapper {
+  height: calc(90vh - 80px);
+  overflow-y: scroll;
+}
+.ClientConteiner .clientbody .clinetWrapper .clientheader {
   margin: 40px 0 12px 0;
   background-color: #FFFFFF;
   border-radius: 12px;
   height: 72px;
   width: 100%;
 }
-.ClientConteiner .clinetWrapper .clientheader ul {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul {
   width: 100%;
   height: 100%;
   display: flex;
@@ -16,34 +20,34 @@
   list-style: none;
   padding: 0 27px;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li {
   font-size: 14px;
   font-weight: 600;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li .icons {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li .icons {
   width: 20px;
   height: 20px;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(1) {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li:nth-child(1) {
   width: 100px;
   display: flex;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(2) {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li:nth-child(2) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(3) {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li:nth-child(3) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(4) {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li:nth-child(4) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(5) {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li:nth-child(5) {
   width: calc(100% - 800px);
 }
-.ClientConteiner .clinetWrapper .clientheader ul li:nth-child(6) {
+.ClientConteiner .clientbody .clinetWrapper .clientheader ul li:nth-child(6) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList {
   padding: 0 27px;
   display: flex;
   background-color: #FFFFFF;
@@ -52,42 +56,42 @@
   width: 100%;
   border: 0.5px solid rgba(222, 222, 222, 0.93);
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul {
   width: 100%;
   display: flex;
   align-items: center;
   list-style: none;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li {
   font-weight: 500;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li .img {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li .img {
   width: 58px;
   height: 58px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li:nth-child(1) {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li:nth-child(1) {
   width: 100px;
   display: flex;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li:nth-child(2) {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li:nth-child(2) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li:nth-child(3) {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li:nth-child(3) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li:nth-child(4) {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li:nth-child(4) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li:nth-child(5) {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li:nth-child(5) {
   width: calc(100% - 800px);
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList ul li:nth-child(6) {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList ul li:nth-child(6) {
   width: 200px;
 }
-.ClientConteiner .clinetWrapper .clientListConteiner .clientList .infobtn {
+.ClientConteiner .clientbody .clinetWrapper .clientListConteiner .clientList .infobtn {
   width: 1px;
   cursor: pointer;
   background-color: white;

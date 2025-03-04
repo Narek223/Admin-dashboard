@@ -24,6 +24,7 @@ export default function Inputs({
         type={type}
         className={styles.textInput}
         placeholder={placeholder}
+        
       />
     </FormControl>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { AiOutlineClose } from "react-icons/ai";
@@ -15,15 +15,13 @@ export default function ClientModal({
   setError,
   onAddService,
   edit,
-  id,
-  setid
 }) {
-
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [mail, setMail] = useState("");
   const [phone, setPhone] = useState("");
   const [files, setFiles] = useState("");
+  const [id, setId] = useState(0);
 
   const resetForm = useCallback(() => {
     setName("");
@@ -31,12 +29,8 @@ export default function ClientModal({
     setMail("");
     setPhone("");
     setFiles("");
-    setid(0);
+    setId(0);
   }, []);
-
-
-
-
 
   useEffect(() => {
     if (name && date && mail && phone) {
@@ -44,12 +38,29 @@ export default function ClientModal({
     }
   }, [name, date, mail, phone, setError]);
 
+
+  useEffect(() => {
+    if (edit) {
+      setName(edit.name || "");
+      setDate(edit.date || "");
+      setMail(edit.mail || "");
+      setPhone(edit.phone || "");
+      setFiles(edit.files || "");
+      setId(edit.id || 0);
+    
+    } else {
+      resetForm();
+    }
+  }, [edit, resetForm]);
+
   const handleSave = () => {
     const hasEmptyFields = !name || !date || !mail || !phone;
     setError(hasEmptyFields);
 
     if (hasEmptyFields) return;
-
+    if (!name || !date || !mail || !phone || !files) {
+      return;
+    }
     const clientObj = {
       id,
       name,
@@ -88,7 +99,7 @@ export default function ClientModal({
             <AiOutlineClose onClick={handleClose} className={styles.icon} />
           </p>
           <div className={styles.clientmodalpage}>
-            <h1>Add Client</h1>
+          <h1>{edit? "Edit Client ":"Add Client"}</h1>
           </div>
           <div className={styles.clentselect}>
             <div className={styles.clentwrapper}>
@@ -100,7 +111,7 @@ export default function ClientModal({
                 type="text"
                 label="Full Name"
               />
-              <DataPicker setDate={setDate} error={error && !date} />
+              <DataPicker setDate={setDate} error={error && !date} value={null} />
             </div>
             <div>
               <Inputs
@@ -108,7 +119,7 @@ export default function ClientModal({
                 value={mail}
                 state={setMail}
                 placeholder="annesmith@gmail.com"
-                type="text"
+                type="email"
                 label="Email"
               />
               <Inputs
@@ -118,10 +129,9 @@ export default function ClientModal({
                 placeholder="+49 30 12345678"
                 type="tel"
                 label="Phone Number"
-                pattern="[\+]?[0-9]{1,4}?[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}"
               />
             </div>
-            <ChooseFile addimg={handleFileSelect} edit={null} />
+            <ChooseFile addimg={handleFileSelect} edit={edit} />
             <ModalBtn
               onClose={handleClose}
               handleSave={handleSave}

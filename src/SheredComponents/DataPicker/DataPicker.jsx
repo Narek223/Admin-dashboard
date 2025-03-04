@@ -7,13 +7,13 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import styles from "./styles.module.scss";
 import { datestyles } from "../../Services/data/datePickerStyles/datePickerStyles";
 
-export default function ResponsiveDatePickers({error,setDate}) {
+export default function ResponsiveDatePickers({error,setDate,value}) {
   // const [selectedDate, setSelectedDate] = useState(dayjs(new Date));
 
 
   const handleDateChange = (newDate) => {
     // setSelectedDate(newDate); 
-    setDate(newDate.format("DD MMM YYYY"))
+    setDate(newDate.format("DD MM YYYY"))
   };
 
 
@@ -24,7 +24,7 @@ export default function ResponsiveDatePickers({error,setDate}) {
       <DemoContainer components={["DatePicker"]}>
         <DemoItem label="Birth Date">
           <DesktopDatePicker
-      
+    // value={value ? dayjs(value) : null}
             onChange={handleDateChange}
             // defaultValue={dayjs("14 Feb 1996")}
             showDaysOutsideCurrentMonth

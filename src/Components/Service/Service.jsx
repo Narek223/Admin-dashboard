@@ -5,8 +5,6 @@ import { FaAngleDown } from "react-icons/fa";
 import Servicemodal from "./ServiceModal/Servicemodal";
 import { AiOutlineMore } from "react-icons/ai";
 import { FaAngleUp } from "react-icons/fa6";
-import { GrEdit } from "react-icons/gr";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { Menu, MenuItem } from "@mui/material";
 import { AiOutlineFieldNumber } from "react-icons/ai";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
@@ -31,12 +29,16 @@ export default function Service() {
   const [edit, setedit] = useState(null);
   const [error, setError] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
 
   const handleCloseModal = () => {
     setError(false)
     setIsModalOpen(false)
 
-    setError(false)
+    // setError(false)
   };
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -55,8 +57,7 @@ export default function Service() {
     setedit(selectedService);
   };
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+
 
   const handleDeleteService = (id) => {
     setServicesList(servicesList.filter((elem) => elem.id !== id));
@@ -309,44 +310,6 @@ export default function Service() {
                 </div>
               </div>
             </div>
-            {/* <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={infoclose}
-        sx={{
-          "& .MuiPaper-root": {
-            width: "148px",
-            backgroundColor: "rgba(248, 249, 250, 1)",
-            borderRadius: "8px",
-            padding: 0,
-            boxShadow: "none",
-          },
-          "& .MuiMenuItem-root:hover": {
-            backgroundColor: "white",
-          },
-          "& .MuiMenuItem-root:nth-child(2)": {
-            color: "red",
-          },
-        }}
-      >
-        <MenuItem onClick={handleEdit}>
-          <GrEdit className={styles.newicon} style={{ marginRight: "12px" }} />
-          Edit
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            if (selectedService) {
-              handleDeleteService(selectedService.id);
-            }
-          }}
-        >
-          <FaRegTrashAlt
-            className={styles.newicon}
-            style={{ marginRight: "12px" }}
-          />
-          Delete
-        </MenuItem>
-      </Menu> */}
             <EditDeleteBtn
               anchorEl={anchorEl}
               onClose={infoclose}

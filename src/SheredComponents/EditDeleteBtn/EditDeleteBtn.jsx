@@ -1,13 +1,18 @@
-import React from 'react'
+import React from "react";
 import { GrEdit } from "react-icons/gr";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Menu, MenuItem } from "@mui/material";
-import styles from './editDeleteBtn.module.scss'
+import styles from "./editDeleteBtn.module.scss";
 
-export default function EditDeleteBtn({anchorEl,onClose,handleEdit,onClick}) {
+export default function EditDeleteBtn({
+  anchorEl,
+  onClose,
+  handleEdit,
+  onClick,
+}) {
   return (
     <div>
-          <Menu
+      <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={onClose}
@@ -32,7 +37,7 @@ export default function EditDeleteBtn({anchorEl,onClose,handleEdit,onClick}) {
           Edit
         </MenuItem>
         <MenuItem
-           onClick={onClick}
+          onClick={onClick}
           // () => {
           //   if (selectedService) {
           //     handleDeleteService(selectedService.id);
@@ -47,5 +52,5 @@ export default function EditDeleteBtn({anchorEl,onClose,handleEdit,onClick}) {
         </MenuItem>
       </Menu>
     </div>
-  )
+  );
 }
