@@ -1,8 +1,10 @@
 .datepickerConteiner {
-  width: 47%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 }
 .datepickerConteiner .datapicker {
-  font-size: 14px;
-  font-weight: 500;
   color: rgb(127, 129, 136);
+  font-size: 12px;
+  font-weight: 500;
 }/*# sourceMappingURL=styles.module.css.map */

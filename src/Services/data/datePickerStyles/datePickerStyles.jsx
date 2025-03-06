@@ -1,10 +1,12 @@
 export const datestyles = {
   "& .MuiPaper-root": {
-    borderRadius: "20px",
+    borderRadius: "20px",  
     
   },
   "& .MuiStack-root":{
-    width:'47%'
+    width:'47%',
+      margin: "10px 0",
+    marginBottom: "8px",
   },
   "& .MuiPickersCalendarHeader-root .MuiIconButton-root": {
     color: "rgba(212, 163, 115, 1)",

@@ -1,8 +1,9 @@
 .modal {
     display: flex;
     justify-content: center;
-    align-items: center;
-  
+ 
+    
+        align-items: center;
     .clientmodal {
       background-color: white;
       width: 610px;
@@ -33,9 +34,10 @@
       .clentselect {
         .clentwrapper {
           display: flex;
-          align-items: center;
+          align-items: flex-end;
   padding: 20px 0 0 0;
-         
+ 
+
         }
       }
     }

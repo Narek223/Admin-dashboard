@@ -1,4 +1,4 @@
-import  React,{useState} from "react";
+import React from "react";
 import dayjs from "dayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -7,43 +7,46 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import styles from "./styles.module.scss";
 import { datestyles } from "../../Services/data/datePickerStyles/datePickerStyles";
 
-export default function ResponsiveDatePickers({error,setDate,value}) {
-  // const [selectedDate, setSelectedDate] = useState(dayjs(new Date));
-
-
+export default function ResponsiveDatePickers({ error, setDate, value }) {
   const handleDateChange = (newDate) => {
-    // setSelectedDate(newDate); 
-    setDate(newDate.format("DD MM YYYY"))
+    if (newDate) {
+      setDate(newDate.format("DD MM YYYY"));
+    }
   };
 
-
-
-
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} className={styles.datepickerConteiner}>
-      <DemoContainer components={["DatePicker"]}>
-        <DemoItem label="Birth Date">
-          <DesktopDatePicker
-    // value={value ? dayjs(value) : null}
-            onChange={handleDateChange}
-            // defaultValue={dayjs("14 Feb 1996")}
-            showDaysOutsideCurrentMonth
-            disablePast={false}
-            slotProps={{
-              textField: {
-                error: error,
-                InputLabelProps: {
-                  className: "datapicker",
-                  
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className={styles.datepickerConteiner}>
+        
+        <label className={styles.datapicker}>Birth Date</label>
+        <DemoContainer components={["DatePicker"]}>
+          <DemoItem>
+            <DesktopDatePicker
+              value={value ? dayjs(value, "DD MM YYYY") : null}
+              onChange={handleDateChange}
+              showDaysOutsideCurrentMonth
+              disablePast={false}
+              slotProps={{
+                textField: {
+                  placeholder: "MM/DD/YYYY",
+                  error: error,
+                  InputProps: {
+                    sx: {
+                   
+    marginBottom: "8px",
+                      border: "1px solid rgba(98, 99, 115, 0.3)",
+                    },
+                  },
                 },
-              },
-              popper: {
-                sx: datestyles,
-              },
-            }}
-          />
-        </DemoItem>
-      </DemoContainer>
+                popper: {
+                  sx: datestyles,
+                },
+              }}
+            
+            />
+          </DemoItem>
+        </DemoContainer>
+      </div>
     </LocalizationProvider>
   );
 }
