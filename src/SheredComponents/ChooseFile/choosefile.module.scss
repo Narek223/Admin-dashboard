@@ -1,0 +1,71 @@
+.choosefile {
+    margin: 32px 34px;
+    p {
+      color: rgba(108, 111, 119, 1);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .dragandrob {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 156px;
+      background-color: rgba(247, 247, 249, 1);
+      border-radius: 12px;
+      h1 {
+        color: rgba(41, 41, 41, 1);
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: "Manrope";
+      }
+      img {
+        margin: 20px 0;
+      }
+      button {
+        text-decoration: 1px solid blue;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: underline;
+        color: rgba(88, 122, 209, 1);
+        cursor: pointer;
+      }
+    }
+    .UploadedfilesBox {
+      margin: 30px 0;
+      h1 {
+        color: rgba(41, 41, 41, 1);
+        font-size: 20px;
+        font-weight: 400;
+        margin: 17px 0;
+      }
+      .Uploadedfiles {
+        padding: 22px 18px;
+        display: flex;
+        align-items: center;
+        border-radius: 12px;
+        background-color: rgba(247, 247, 249, 1);
+        height: 72px;
+        .global {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          img {
+            width: 26px;
+            height: 32px;
+          }
+          .fileinfo {
+            margin: 0 10px;
+          }
+          .trash {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  

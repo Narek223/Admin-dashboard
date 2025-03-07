@@ -38,7 +38,10 @@ export default function EditDeleteBtn({
           Edit
         </MenuItem>
         <MenuItem
-          onClick={onClick}
+          onClick={() => {
+            onClick()
+            onClose()
+          }}
           // () => {
           //   if (selectedService) {
           //     handleDeleteService(selectedService.id);

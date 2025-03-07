@@ -1,0 +1,71 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .deleteWrapper {
+        width: 413px;
+        height: 247px;
+        border-radius: 12px;
+        background-color: white;
+        padding: 18px 33px;
+        .close {
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            justify-content: flex-end;
+
+            .icon {
+                width: 20px;
+                height: 20px;
+                color: black;
+            }
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 32px;
+        }
+        .delete {
+            height: 100%;
+            .infotext {
+                height: 150px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                p {
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 18px;
+                    text-align: center;
+                    width: 256px;
+                    color: rgba(108, 111, 119, 1);
+                }
+                h1 {
+                    margin: 0 0 7px 0;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+            .buttons {
+                display: flex;
+           
+                button {
+                    border-radius: 6px;
+                    width: 176px;
+                    border: none;
+                    height: 36px;
+                    cursor: pointer;
+                    &:nth-child(1) {
+                        background-color: rgba(247, 247, 249, 1);
+                        margin: 0 12px 0 0;
+                    }
+                    &:nth-child(2) {
+                        background-color: rgba(212, 163, 115, 1);
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

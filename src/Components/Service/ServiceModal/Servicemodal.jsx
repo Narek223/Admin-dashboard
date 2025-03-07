@@ -6,7 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { services } from "../../../Services/data/addServices/services";
-import ChooseFile from "../ChooseFile/ChooseFile";
+import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile"
 import { FaAngleDown } from "react-icons/fa";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";

@@ -10,6 +10,8 @@ import { AiOutlineFieldNumber } from "react-icons/ai";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import Header from "../Header/Header";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
+import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
+
 
 export default function Service() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,7 +30,7 @@ export default function Service() {
   const [edit, setedit] = useState(null);
   const [error, setError] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
@@ -129,10 +131,27 @@ export default function Service() {
     (currentPage + 1) * itemsPerPage
   );
 
+  const handleOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  }
+  
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  }
+
   return (
     <div>
       <Header />
-
+      <DeleteModal
+       open={isDeleteModalOpen}
+       onClose={handleCloseDeleteModal}
+       title="Delete Service"
+       text="Are you sure you want to delete this Service?This action cannot be undone"
+       onDelete={() => {
+        handleDeleteService(selectedService.id); 
+        handleCloseDeleteModal(); 
+      }}
+      />
       <div className={styles.servicesConteiner}>
         <div className={styles.Wrapper}>
           <div className={styles.serviceWrapper}>
@@ -306,7 +325,7 @@ export default function Service() {
               anchorEl={anchorEl}
               onClose={infoclose}
               handleEdit={handleEdit}
-              onClick={() => handleDeleteService(selectedService.id)}
+              onClick={handleOpenDeleteModal}
             />
 
             <PaginationComponent

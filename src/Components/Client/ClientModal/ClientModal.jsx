@@ -5,8 +5,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
-import ChooseFile from "../../Service/ChooseFile/ChooseFile";
 import styles from "./clientmodal.module.scss";
+import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 
 export default function ClientModal({
   open,
@@ -47,7 +47,6 @@ export default function ClientModal({
       setPhone(edit.phone || "");
       setFiles(edit.files || "");
       setId(edit.id || 0);
-    
     } else {
       resetForm();
     }

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import fileimg from "../../../assets/Services/file.png";
+import fileimg from '../../assets/Services/file.png'
 import { useDropzone } from "react-dropzone";
 import styles from "./choosefile.module.scss";
 import { FaTrash } from "react-icons/fa";

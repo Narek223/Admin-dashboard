@@ -6,6 +6,7 @@ import { AiOutlineFieldNumber } from "react-icons/ai";
 import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
+import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 
 export default function Client() {
   const [open, setOpen] = useState(false);
@@ -17,16 +18,19 @@ export default function Client() {
   const [id, setId] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
 
   const handleOpen = () => {
     setOpen(true);
     setError(false);
+    setedit(null);
   };
+
   const handleClose = () => {
     setOpen(false);
     setError(false);
+    setAnchorEl(null)
   };
 
   const handleEdit = () => {
@@ -73,6 +77,13 @@ export default function Client() {
     (currentPage + 1) * itemsPerPage
   );
 
+  const handleOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+  
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
   return (
     <div className={styles.ClientConteiner}>
       <Header handleOpen={handleOpen} />
@@ -85,6 +96,16 @@ export default function Client() {
         edit={edit}
         id={id}
         setid={setId}
+      />
+      <DeleteModal
+       open={isDeleteModalOpen}
+       onClose={handleCloseDeleteModal}
+       title="Delete Client"
+       text="Are you sure you want to delete this client?This action cannot be undone"
+       onDelete={() => {
+        handleDeleteService(selectedService.id); 
+        handleCloseDeleteModal(); 
+      }}
       />
       <div className={styles.clientbody}>
         <div className={styles.clinetWrapper}>
@@ -103,7 +124,7 @@ export default function Client() {
 
           <div className={styles.clientListConteiner}>
             {paginatedClient.map((elem, index) => (
-              <div key={index}>
+              <div key={index} className={styles.clientItem}>
                 <div className={styles.clientList} key={index}>
                   <ul>
                     <li>{elem.id}</li>
@@ -119,22 +140,26 @@ export default function Client() {
                     className={styles.infobtn}
                     aria-haspopup="true"
                     aria-expanded={false}
-                    onClick={(event) => handleInfoClick(event, elem)}
+                   onClick={(event) => handleInfoClick(event, elem)}
                   >
                     <AiOutlineMore />
                   </button>
+               
                 </div>
-              
+                <EditDeleteBtn
+                  anchorEl={anchorEl}
+                  onClose={infoclose}
+                  handleEdit={handleEdit}
+                  onClick={() => {
+                    handleOpenDeleteModal(); 
+                  }}
+                 
+                />
               </div>
             ))}
           </div>
         </div>
-          <EditDeleteBtn
-                  anchorEl={anchorEl}
-                  onClose={infoclose}
-                  handleEdit={handleEdit}
-                  onClick={() => handleDeleteService(selectedService.id)}
-                />
+        
         <PaginationComponent
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}

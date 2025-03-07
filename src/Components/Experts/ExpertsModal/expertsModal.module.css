@@ -1,0 +1,29 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .exportModalConteiner {
+  background-color: white;
+  width: 610px;
+  height: 900px;
+  max-height: 90vh;
+  border-radius: 12px;
+  padding: 18px 33px;
+}
+.modal .exportModalConteiner .close {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .exportModalConteiner .close .icon {
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.modal .exportModalConteiner h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}/*# sourceMappingURL=expertsModal.module.css.map */

@@ -1,0 +1,68 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .deleteWrapper {
+  width: 413px;
+  height: 247px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 18px 33px;
+}
+.modal .deleteWrapper .close {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .deleteWrapper .close .icon {
+  width: 20px;
+  height: 20px;
+  color: black;
+}
+.modal .deleteWrapper h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+.modal .deleteWrapper .delete {
+  height: 100%;
+}
+.modal .deleteWrapper .delete .infotext {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.modal .deleteWrapper .delete .infotext p {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  width: 256px;
+  color: rgb(108, 111, 119);
+}
+.modal .deleteWrapper .delete .infotext h1 {
+  margin: 0 0 7px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.modal .deleteWrapper .delete .buttons {
+  display: flex;
+}
+.modal .deleteWrapper .delete .buttons button {
+  border-radius: 6px;
+  width: 176px;
+  border: none;
+  height: 36px;
+  cursor: pointer;
+}
+.modal .deleteWrapper .delete .buttons button:nth-child(1) {
+  background-color: rgb(247, 247, 249);
+  margin: 0 12px 0 0;
+}
+.modal .deleteWrapper .delete .buttons button:nth-child(2) {
+  background-color: rgb(212, 163, 115);
+  color: white;
+}/*# sourceMappingURL=deleteModal.module.css.map */
