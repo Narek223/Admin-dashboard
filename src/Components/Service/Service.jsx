@@ -9,8 +9,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { AiOutlineFieldNumber } from "react-icons/ai";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import Header from "../Header/Header";
-import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn"
-
+import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 
 export default function Service() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,21 +28,20 @@ export default function Service() {
   const [edit, setedit] = useState(null);
   const [error, setError] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-  
+
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-
   const handleCloseModal = () => {
-    setError(false)
-    setIsModalOpen(false)
+    setError(false);
+    setIsModalOpen(false);
 
     // setError(false)
   };
   const handleOpenModal = () => {
     setIsModalOpen(true);
     setedit(null);
-    setError(false)
+    setError(false);
   };
 
   const handleInfoClick = (event, elem) => {
@@ -56,8 +54,6 @@ export default function Service() {
     setIsModalOpen(true);
     setedit(selectedService);
   };
-
-
 
   const handleDeleteService = (id) => {
     setServicesList(servicesList.filter((elem) => elem.id !== id));
@@ -83,8 +79,7 @@ export default function Service() {
     setServicesAnchorEl(null);
     seticon(true);
     setserviceicon(true);
-    setError(false)
-
+    setError(false);
   };
 
   const infoclose = () => {
@@ -140,13 +135,8 @@ export default function Service() {
 
       <div className={styles.servicesConteiner}>
         <div className={styles.Wrapper}>
-
-
           <div className={styles.serviceWrapper}>
-
             <div className={styles.test}>
-
-
               <div className={styles.service}>
                 <div className={styles.filter}>
                   <h1>Services</h1>
@@ -187,20 +177,22 @@ export default function Service() {
                       open={openCategoryMenu}
                       onClose={handleClose}
                     >
-                      {["All Categories", "Classic", "Modern"].map((category) => (
-                        <MenuItem
-                          key={category}
-                          style={{
-                            backgroundColor:
-                              category === categoryValue
-                                ? "rgba(25, 118, 210, 0.08)"
-                                : "",
-                          }}
-                          onClick={() => handleSelect(category)}
-                        >
-                          {category}
-                        </MenuItem>
-                      ))}
+                      {["All Categories", "Classic", "Modern"].map(
+                        (category) => (
+                          <MenuItem
+                            key={category}
+                            style={{
+                              backgroundColor:
+                                category === categoryValue
+                                  ? "rgba(25, 118, 210, 0.08)"
+                                  : "",
+                            }}
+                            onClick={() => handleSelect(category)}
+                          >
+                            {category}
+                          </MenuItem>
+                        )
+                      )}
                     </Menu>
                     <button onClick={handleServicesClick}>
                       {serviceValue}

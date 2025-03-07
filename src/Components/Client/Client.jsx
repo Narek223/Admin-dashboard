@@ -18,9 +18,7 @@ export default function Client() {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  useEffect(() => {
-    setId(clientlist.length);
-  }, [clientlist]);
+
 
   const handleOpen = () => {
     setOpen(true);
