@@ -16,6 +16,7 @@ export default function EditDeleteBtn({
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={onClose}
+        disablePortal
         sx={{
           "& .MuiPaper-root": {
             width: "148px",

@@ -1,10 +1,14 @@
+.datepickerConteiner {
 
-      .datepickerConteiner{
-        width: 47%;
-        .datapicker {
-      
-          font-size: 14px;
-          font-weight: 500;
-          color: rgba(127, 129, 136, 1);
-        }
-      }
+  display: flex;
+
+  align-items: flex-start;
+  flex-direction: column;
+  .datapicker {
+
+    color: rgba(127, 129, 136, 1);
+    font-size: 12px;
+    font-weight: 500;
+
+  }
+}

@@ -124,16 +124,17 @@ export default function Client() {
                     <AiOutlineMore />
                   </button>
                 </div>
-                <EditDeleteBtn
+              
+              </div>
+            ))}
+          </div>
+        </div>
+          <EditDeleteBtn
                   anchorEl={anchorEl}
                   onClose={infoclose}
                   handleEdit={handleEdit}
                   onClick={() => handleDeleteService(selectedService.id)}
                 />
-              </div>
-            ))}
-          </div>
-        </div>
         <PaginationComponent
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}

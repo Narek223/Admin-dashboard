@@ -111,7 +111,7 @@ export default function ClientModal({
                 type="text"
                 label="Full Name"
               />
-              <DataPicker setDate={setDate} error={error && !date} value={null} />
+              <DataPicker setDate={setDate} error={error && !date} value={date} />
             </div>
             <div>
               <Inputs
