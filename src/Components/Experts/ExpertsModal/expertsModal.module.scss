@@ -1,34 +1,64 @@
 .modal {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .exportModalConteiner {
+    background-color: white;
+    width: 610px;
+    // overflow-y: scroll;
+    overflow: hidden;
+    // height: auto;
+    max-height: 90vh;
+    border-radius: 12px;
+    padding: 18px 33px;
+    
+    .close {
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      justify-content: flex-end;
 
-    align-items: center;
-    .exportModalConteiner {
-        background-color: white;
-        width: 610px;
-        // overflow-y: scroll;
-        height: 900px;
-        // height: auto;
-        max-height: 90vh;
-        border-radius: 12px;
-        padding: 18px 33px;
-        .close {
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            justify-content: flex-end;
-      
-            .icon {
-              width: 24px;
-              height: 24px;
-              color: black;
-            }
-          }
-          h1 {
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 32px;
-          }
+      .icon {
+        width: 24px;
+        height: 24px;
+        color: black;
+      }
+    }
+    .ExportModalTitle {
+      font-size: 24px;
+     
+      line-height: 32px;
+    }
+    .addClient{
+      display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding: 20px 0 0 0;
+    width: 100%;
+    .name{
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+    }
+    .inputs{
+      display: flex;
+      width: 100%;
+    }
+    .adressandSelect{
+      display: flex;
+      align-items: center;
+      width: 100%;
+    
 
     }
+    }
+  }
+}
+@media screen and (max-height: 930px) {
+  .modal {
+    .exportModalConteiner {
+      overflow-y: auto;
+    }
+  }
 }

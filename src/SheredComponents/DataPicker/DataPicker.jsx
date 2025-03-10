@@ -15,9 +15,8 @@ export default function ResponsiveDatePickers({ error, setDate, value }) {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} >
       <div className={styles.datepickerConteiner}>
-        
         <label className={styles.datapicker}>Birth Date</label>
         <DemoContainer components={["DatePicker"]}>
           <DemoItem>
@@ -32,8 +31,7 @@ export default function ResponsiveDatePickers({ error, setDate, value }) {
                   error: error,
                   InputProps: {
                     sx: {
-                   
-    marginBottom: "8px",
+                      marginBottom: "8px",
                       border: "1px solid rgba(98, 99, 115, 0.3)",
                     },
                   },
@@ -42,7 +40,11 @@ export default function ResponsiveDatePickers({ error, setDate, value }) {
                   sx: datestyles,
                 },
               }}
-            
+              sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none', 
+                },
+              }}
             />
           </DemoItem>
         </DemoContainer>

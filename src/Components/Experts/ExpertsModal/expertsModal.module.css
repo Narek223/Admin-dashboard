@@ -6,7 +6,7 @@
 .modal .exportModalConteiner {
   background-color: white;
   width: 610px;
-  height: 900px;
+  overflow: hidden;
   max-height: 90vh;
   border-radius: 12px;
   padding: 18px 33px;
@@ -22,8 +22,35 @@
   height: 24px;
   color: black;
 }
-.modal .exportModalConteiner h1 {
+.modal .exportModalConteiner .ExportModalTitle {
   font-size: 24px;
-  font-weight: 700;
   line-height: 32px;
+}
+.modal .exportModalConteiner .addClient {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding: 20px 0 0 0;
+  width: 100%;
+}
+.modal .exportModalConteiner .addClient .name {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+.modal .exportModalConteiner .addClient .inputs {
+  display: flex;
+  width: 100%;
+}
+.modal .exportModalConteiner .addClient .adressandSelect {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (max-height: 930px) {
+  .modal .exportModalConteiner {
+    overflow-y: auto;
+  }
 }/*# sourceMappingURL=expertsModal.module.css.map */

@@ -22,6 +22,7 @@ export default function Servicemodal({
   seterror,
   error,
 }) {
+
   const [id, setId] = useState(0);
   const [service, setService] = useState("Hair Care");
   const [category, setCategory] = useState("Classic");
@@ -152,7 +153,13 @@ export default function Servicemodal({
           </div>
 
           <div className={styles.description}>
-            <FormControl fullWidth className={styles.descriptionForm}>
+            <FormControl fullWidth className={styles.descriptionForm}
+             sx={{
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none', 
+              },
+            }}
+            >
               <InputLabel
                 shrink={true}
                 variant="standard"
