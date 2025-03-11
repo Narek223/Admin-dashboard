@@ -94,8 +94,8 @@ export default function Client() {
         setError={setError}
         onAddService={handleAddClient}
         edit={edit}
-        id={id}
-        setid={setId}
+        // id={id}
+        // setid={setId}
       />
       <DeleteModal
        open={isDeleteModalOpen}

@@ -1,4 +1,4 @@
-import React, { useState,useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./expertsModal.module.scss";
@@ -10,7 +10,14 @@ import { services } from "../../../Services/data/addServices/services";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 
-export default function ExpertsModal({ open, handleClose, error, seterror,edit,onAddExpert }) {
+export default function ExpertsModal({
+  open,
+  handleClose,
+  error,
+  seterror,
+  edit,
+  onAddExpert,
+}) {
   let [name, setName] = useState("");
   let [mail, setMail] = useState("");
   let [phone, setPhone] = useState("");
@@ -18,6 +25,7 @@ export default function ExpertsModal({ open, handleClose, error, seterror,edit,o
   let [date, setDate] = useState("");
   let [specialist, setSpecialist] = useState("Hair Care");
   let [file, setfile] = useState("");
+  const [id, setId] = useState(0);
 
   const resetForm = useCallback(() => {
     setName("");
@@ -25,9 +33,24 @@ export default function ExpertsModal({ open, handleClose, error, seterror,edit,o
     setMail("");
     setPhone("");
     setfile("");
-    setadress("")
-    setSpecialist("")
+    setadress("");
+    setSpecialist("");
   }, []);
+
+  useEffect(() => {
+    if (edit) {
+      setName(edit.name || "");
+      setDate(edit.date || "");
+      setMail(edit.mail || "");
+      setPhone(edit.phone || "");
+      setfile(edit.files || "");
+      setadress(edit.adress || "");
+      setSpecialist(edit.specialist || "");
+      setId(edit.id || 0);
+    } else {
+      resetForm();
+    }
+  }, [edit, resetForm]);
 
   let inputValues = [
     {
@@ -54,7 +77,9 @@ export default function ExpertsModal({ open, handleClose, error, seterror,edit,o
   const save = () => {
     const hasEmptyFields = !name || !date || !mail || !phone || !adress;
     seterror(hasEmptyFields);
-
+  if (!name || !date || !mail || !phone || !file ||  !adress || !specialist) {
+      return;
+    }
     let expartobj = {
       name,
       mail,
@@ -70,8 +95,8 @@ export default function ExpertsModal({ open, handleClose, error, seterror,edit,o
       onAddExpert(expartobj, false);
     }
 
-    handleClose()
-    resetForm()
+    handleClose();
+    resetForm();
   };
   return (
     <div>
@@ -88,7 +113,7 @@ export default function ExpertsModal({ open, handleClose, error, seterror,edit,o
             <p className={styles.close}>
               <AiOutlineClose onClick={handleClose} className={styles.icon} />
             </p>
-            <h1 className={styles.ExportModalTitle}>Add Expert</h1>
+            <h1  className={styles.ExportModalTitle} >{edit? "Edit Expert ":"Add Expert"}</h1>
             <div className={styles.addClient}>
               <div className={styles.name}>
                 <Inputs
@@ -137,8 +162,8 @@ export default function ExpertsModal({ open, handleClose, error, seterror,edit,o
                 />
               </div>
             </div>
-            <ChooseFile addimg={handleFileSelect} edit={null} />
-            <ModalBtn onClose={handleClose} handleSave={save} edit={null} />
+            <ChooseFile addimg={handleFileSelect} edit={edit} />
+            <ModalBtn onClose={handleClose} handleSave={save} edit={edit} />
           </div>
         </Box>
       </Modal>
