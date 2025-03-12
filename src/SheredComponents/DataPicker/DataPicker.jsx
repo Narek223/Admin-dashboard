@@ -8,6 +8,7 @@ import styles from "./styles.module.scss";
 import { datestyles } from "../../Services/data/datePickerStyles/datePickerStyles";
 
 export default function ResponsiveDatePickers({ error, setDate, value }) {
+  
   const handleDateChange = (newDate) => {
     if (newDate) {
       setDate(newDate.format("DD MM YYYY"));
@@ -40,11 +41,11 @@ export default function ResponsiveDatePickers({ error, setDate, value }) {
                   sx: datestyles,
                 },
               }}
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none', 
-                },
-              }}
+              // sx={{
+              //   '& .MuiOutlinedInput-notchedOutline': {
+              //     border: 'none', 
+              //   },
+              // }}
             />
           </DemoItem>
         </DemoContainer>

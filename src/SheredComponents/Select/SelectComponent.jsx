@@ -16,11 +16,12 @@ export default function SelectComponent({
 }) {
   return (
     <FormControl className={styles.formControl} variant="outlined" 
-    sx={{
-      '& .MuiOutlinedInput-notchedOutline': {
-        border: 'none', 
-      },
-    }}>
+    // sx={{
+    //   '& .MuiOutlinedInput-notchedOutline': {
+    //     border: 'none', 
+    //   },
+    // }}
+    >
       <InputLabel
         shrink={true}
         variant="standard"

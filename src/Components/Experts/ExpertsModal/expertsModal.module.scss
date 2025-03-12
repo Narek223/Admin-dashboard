@@ -6,8 +6,10 @@
     background-color: white;
     width: 610px;
     // overflow-y: scroll;
+    height: auto;
+    max-height: 90vh;
     overflow: hidden;
-     height: auto;
+   
 
     border-radius: 12px;
     padding: 18px 33px;
@@ -58,7 +60,7 @@
 @media screen and (max-height: 930px) {
   .modal {
     .exportModalConteiner {
-      overflow-y: auto;
+      overflow-y: scroll;
     }
   }
 }

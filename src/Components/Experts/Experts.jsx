@@ -5,6 +5,8 @@ import styles from "./experts.module.scss";
 import { AiOutlineMore } from "react-icons/ai";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
+import TimePickerModal from "./TimePicker/TimePickerModal";
+
 
 export default function Experts() {
   let [open, setopen] = useState(false);
@@ -15,6 +17,7 @@ export default function Experts() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [timeModalOpen, setimeModalOpen] = useState(false);
 
   const onOpen = () => {
     setopen(true);
@@ -51,13 +54,22 @@ export default function Experts() {
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
-
+  const handleCloseTimeModal = () => {
+    setimeModalOpen(false);
+  };
   const handleInfoClick = (event, elem) => {
     setAnchorEl(event.currentTarget);
     setSelectedService(elem);
   };
   const handleOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
+  };
+  const handleOpentimeModal = () => {
+    setimeModalOpen(true);
+  };
+  const handleDeleteService = (id) => {
+    setexpert(expert.filter((elem) => elem.id !== id));
+    setAnchorEl(null);
   };
 
   return (
@@ -78,6 +90,23 @@ export default function Experts() {
         onClick={() => {
           handleOpenDeleteModal();
         }}
+        onTimeModal={()=>{
+          handleOpentimeModal()
+         }}
+      />
+       <DeleteModal
+       open={isDeleteModalOpen}
+       onClose={handleCloseDeleteModal}
+       title="Delete Expert"
+       text="Are you sure you want to delete this Expert?This action cannot be undone"
+       onDelete={() => {
+        handleDeleteService(selectedService.id); 
+        handleCloseDeleteModal(); 
+      }}/>
+      <TimePickerModal
+         open={timeModalOpen}
+         onClose={handleCloseTimeModal}
+        
       />
       <div className={styles.cont}>
         <div className={styles.ExpertCard}>
@@ -87,7 +116,7 @@ export default function Experts() {
                 <div>
                   <div className={styles.expertwrapper}>
                     <div className={styles.information}>
-                      <img src={elem.file} />
+                      <img src={elem.files} />
                       <div className={styles.specialistInfo}>
                         <h1>{elem.name}</h1>
                         <p>{elem.specialist}</p>
