@@ -5,13 +5,12 @@
   .exportModalConteiner {
     background-color: white;
     width: 610px;
-    // overflow-y: scroll;
+    height: auto;
+    max-height: 90vh;
     overflow: hidden;
-     height: auto;
-
     border-radius: 12px;
     padding: 18px 33px;
-    
+
     .close {
       width: 100%;
       cursor: pointer;
@@ -26,39 +25,37 @@
     }
     .ExportModalTitle {
       font-size: 24px;
-     
+
       line-height: 32px;
     }
-    .addClient{
+    .addClient {
       display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    padding: 20px 0 0 0;
-    width: 100%;
-    .name{
-      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       align-items: flex-end;
+      padding: 20px 0 0 0;
       width: 100%;
-    }
-    .inputs{
-      display: flex;
-      width: 100%;
-    }
-    .adressandSelect{
-      display: flex;
-      align-items: center;
-      width: 100%;
-    
-
-    }
+      .name {
+        display: flex;
+        align-items: flex-end;
+        width: 100%;
+      }
+      .inputs {
+        display: flex;
+        width: 100%;
+      }
+      .adressandSelect {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
     }
   }
 }
 @media screen and (max-height: 930px) {
   .modal {
     .exportModalConteiner {
-      overflow-y: auto;
+      overflow-y: scroll;
     }
   }
 }

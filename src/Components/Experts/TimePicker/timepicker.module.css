@@ -1,0 +1,50 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .timePicker {
+  width: 413px;
+  height: 247px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 18px 33px;
+}
+.modal .timePicker .close {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .timePicker .close .icon {
+  width: 20px;
+  height: 20px;
+  color: black;
+}
+.modal .timePicker .timePickerWrapper h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.modal .timePicker .timePickerWrapper .chooseTime {
+  display: flex;
+}
+.modal .timePicker .timePickerWrapper .chooseTime .textInput {
+  outline: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  margin-bottom: 8px;
+  position: static;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+  border: 1px solid rgba(98, 99, 115, 0.3);
+}
+.modal .timePicker .timePickerWrapper .chooseTime .textInput:focus {
+  background-color: white;
+}
+.modal .timePicker .timePickerWrapper .chooseTime .inputlabel {
+  position: static;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+}/*# sourceMappingURL=timepicker.module.css.map */

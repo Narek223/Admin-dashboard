@@ -3,13 +3,8 @@ import styles from "./servicemodal.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { AiOutlineClose } from "react-icons/ai";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
 import { services } from "../../../Services/data/addServices/services";
-import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile"
-import { FaAngleDown } from "react-icons/fa";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import Inputs from "../../../SheredComponents/Inputs/Inputs";
@@ -22,13 +17,12 @@ export default function Servicemodal({
   seterror,
   error,
 }) {
-
   const [id, setId] = useState(0);
   const [service, setService] = useState("Hair Care");
   const [category, setCategory] = useState("Classic");
   const [price, setPrice] = useState("");
   const [duration, setDuration] = useState("");
-  const [description, setDescription] = useState("Ten");
+  const [description, setDescription] = useState("One");
   const [files, setFiles] = useState("");
 
   const resetForm = useCallback(() => {
@@ -36,7 +30,7 @@ export default function Servicemodal({
     setCategory("Classic");
     setPrice("");
     setDuration("");
-    setDescription("Ten");
+    setDescription("One");
     setFiles("");
     setId(0);
   }, []);
@@ -47,7 +41,7 @@ export default function Servicemodal({
       setCategory(edit.category || "Classic");
       setPrice(edit.price || "");
       setDuration(edit.duration || "");
-      setDescription(edit.description || "Ten");
+      setDescription(edit.description || "One");
       setFiles(edit.files || "");
       setId(edit.id || 0);
     } else {
@@ -153,48 +147,14 @@ export default function Servicemodal({
           </div>
 
           <div className={styles.description}>
-            <FormControl fullWidth className={styles.descriptionForm}
-             sx={{
-              '& .MuiOutlinedInput-notchedOutline': {
-                border: 'none', 
-              },
-            }}
-            >
-              <InputLabel
-                shrink={true}
-                variant="standard"
-                className={styles.label}
-                htmlFor="uncontrolled-native"
-              >
-                Description
-              </InputLabel>
-              <Select
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                IconComponent={FaAngleDown}
-                className={styles.descriptionSelect}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      backgroundColor: "rgba(248, 249, 250, 1)",
-                      borderRadius: "8px",
-                      padding: 0,
-                      "& .MuiMenuItem-root:hover": {
-                        backgroundColor: "white",
-                      },
-                    },
-                  },
-                }}
-                inputProps={{
-                  name: "Description",
-                  id: "uncontrolled-native",
-                }}
-              >
-                <MenuItem value="Ten">Ten</MenuItem>
-                <MenuItem value="Twenty">Twenty</MenuItem>
-                <MenuItem value="Thirty">Thirty</MenuItem>
-              </Select>
-            </FormControl>
+              <SelectComponent
+              fullWidth={true}
+                deafultvalue={"One"}
+                servicename="Description"
+                service={description}
+                sets={setDescription}
+                services={services[2].options}
+              />
           </div>
           <ChooseFile addimg={handleFileSelect} edit={edit} />
           <ModalBtn onClose={onClose} handleSave={handleSave} edit={edit} />

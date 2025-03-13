@@ -24,7 +24,7 @@ export default function ExpertsModal({
   let [adress, setadress] = useState("");
   let [date, setDate] = useState("");
   let [specialist, setSpecialist] = useState("Hair Care");
-  let [file, setfile] = useState("");
+  let [files, setfile] = useState("");
   const [id, setId] = useState(0);
 
   const resetForm = useCallback(() => {
@@ -35,8 +35,70 @@ export default function ExpertsModal({
     setfile("");
     setadress("");
     setSpecialist("");
+    setId(0)
   }, []);
 
+  let inputValues = [
+    {
+      id: 0,
+      placeholder: "annesmith@gmail.com",
+      value: mail,
+      setstate: setMail,
+      state:mail,
+      type: "text",
+      label: "Email",
+    },
+    {
+      id: 1,
+      placeholder: "+49 30 12345678",
+      value: phone,
+      setstate: setPhone,
+      state:phone,
+      type: "text",
+      label: "Phone Number",
+    },
+  ];
+  const handleFileSelect = (fileUrl) => {
+    setfile(fileUrl);
+  };
+
+  useEffect(() => {
+    if (name && date && mail && phone && files) {
+      seterror(false);
+    }
+  }, [name, date, mail, phone, files, seterror]);
+
+
+  const save = () => {
+   
+      const hasEmptyFields = !name || !date || !mail || !phone || !adress || !specialist || !files;
+      seterror(hasEmptyFields);
+
+  
+    if (hasEmptyFields || !files) {
+      return;
+    }
+
+    const expertObj = {
+      id, 
+      name,
+      mail,
+      phone,
+      adress,
+      date,
+      specialist,
+      files,
+    };
+  
+    if (edit) {
+      onAddExpert(expertObj, true);
+    } else {
+      onAddExpert(expertObj, false);
+    }
+  
+    handleClose();
+    resetForm();
+  };
   useEffect(() => {
     if (edit) {
       setName(edit.name || "");
@@ -51,53 +113,6 @@ export default function ExpertsModal({
       resetForm();
     }
   }, [edit, resetForm]);
-
-  let inputValues = [
-    {
-      id: 0,
-      placeholder: "annesmith@gmail.com",
-      value: mail,
-      state: setMail,
-      type: "text",
-      label: "Email",
-    },
-    {
-      id: 1,
-      placeholder: "+49 30 12345678",
-      value: phone,
-      state: setPhone,
-      type: "text",
-      label: "Phone Number",
-    },
-  ];
-  const handleFileSelect = (fileUrl) => {
-    setfile(fileUrl);
-  };
-
-  const save = () => {
-    const hasEmptyFields = !name || !date || !mail || !phone || !adress;
-    seterror(hasEmptyFields);
-  if (!name || !date || !mail || !phone || !file ||  !adress || !specialist) {
-      return;
-    }
-    let expartobj = {
-      name,
-      mail,
-      phone,
-      adress,
-      date,
-      specialist,
-      file,
-    };
-    if (edit) {
-      onAddExpert(expartobj, true);
-    } else {
-      onAddExpert(expartobj, false);
-    }
-
-    handleClose();
-    resetForm();
-  };
   return (
     <div>
       <Modal
@@ -113,7 +128,9 @@ export default function ExpertsModal({
             <p className={styles.close}>
               <AiOutlineClose onClick={handleClose} className={styles.icon} />
             </p>
-            <h1  className={styles.ExportModalTitle} >{edit? "Edit Expert ":"Add Expert"}</h1>
+            <h1 className={styles.ExportModalTitle}>
+              {edit ? "Edit Expert " : "Add Expert"}
+            </h1>
             <div className={styles.addClient}>
               <div className={styles.name}>
                 <Inputs
@@ -132,11 +149,11 @@ export default function ExpertsModal({
               </div>
               <div className={styles.inputs}>
                 {inputValues.map(
-                  ({ placeholder, value, state, type, label }) => (
+                  ({ placeholder, value, state, type, label,setstate }) => (
                     <Inputs
-                      error={error && !name}
+                      error={error && !state}
                       value={value}
-                      state={state}
+                      state={setstate}
                       placeholder={placeholder}
                       type={type}
                       label={label}
@@ -154,6 +171,7 @@ export default function ExpertsModal({
                   label="Addres"
                 />
                 <SelectComponent
+                  fullWidth={false}
                   deafultvalue={"Hair Care"}
                   servicename="Specialist"
                   service={specialist}

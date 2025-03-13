@@ -9,4 +9,9 @@ export const services = [
       input: "Category",
       options: ["Classic", "Modern"],
     },
+    {
+      id: 2,
+      input: "Description",
+      options: ["One", "Two","Three"],
+    },
   ];

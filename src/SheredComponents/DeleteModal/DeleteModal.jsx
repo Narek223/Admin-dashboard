@@ -21,7 +21,6 @@ export default function DeleteModal({ open, onClose, title, text,onDelete }) {
               <AiOutlineClose onClick={onClose} className={styles.icon} />
             </p>
             <div className={styles.delete}>
-                
               <div className={styles.infotext}>
                 <h1>{title}</h1>
                 <p>{text}</p>

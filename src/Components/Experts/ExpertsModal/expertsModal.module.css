@@ -6,8 +6,9 @@
 .modal .exportModalConteiner {
   background-color: white;
   width: 610px;
-  overflow: hidden;
+  height: auto;
   max-height: 90vh;
+  overflow: hidden;
   border-radius: 12px;
   padding: 18px 33px;
 }
@@ -51,6 +52,6 @@
 
 @media screen and (max-height: 930px) {
   .modal .exportModalConteiner {
-    overflow-y: auto;
+    overflow-y: scroll;
   }
 }/*# sourceMappingURL=expertsModal.module.css.map */
