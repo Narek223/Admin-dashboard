@@ -7,6 +7,7 @@ import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
+import NoAvatar from "../../assets/NoAvatart/download.png"
 
 export default function Client() {
   const [open, setOpen] = useState(false);
@@ -129,7 +130,7 @@ export default function Client() {
                   <ul>
                     <li>{elem.id}</li>
                     <li>
-                      <img className={styles.img} src={elem.files} />
+                      <img className={styles.img} src={elem.files?elem.files:NoAvatar} />
                     </li>
                     <li>{elem.name}</li>
                     <li>{elem.phone}</li>
@@ -140,9 +141,8 @@ export default function Client() {
                     className={styles.infobtn}
                     aria-haspopup="true"
                     aria-expanded={false}
-                   onClick={(event) => handleInfoClick(event, elem)}
-                  >
-                    <AiOutlineMore />
+                   onClick={(event) => handleInfoClick(event, elem)}>
+<AiOutlineMore />
                   </button>
                
                 </div>

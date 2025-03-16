@@ -66,8 +66,8 @@ export default function Servicemodal({
       !category ||
       !price ||
       !duration ||
-      !description.length ||
-      !files
+      !description.length 
+     
     ) {
       return;
     }

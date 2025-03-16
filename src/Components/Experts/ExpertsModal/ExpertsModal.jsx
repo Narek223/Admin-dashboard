@@ -34,7 +34,7 @@ export default function ExpertsModal({
     setPhone("");
     setfile("");
     setadress("");
-    setSpecialist("");
+    setSpecialist("Hair Care");
     setId(0)
   }, []);
 
@@ -71,14 +71,13 @@ export default function ExpertsModal({
 
   const save = () => {
    
-      const hasEmptyFields = !name || !date || !mail || !phone || !adress || !specialist || !files;
+      const hasEmptyFields = !name || !date || !mail || !phone || !adress || !specialist ;
       seterror(hasEmptyFields);
-
-  
-    if (hasEmptyFields || !files) {
-      return;
-    }
-
+      if (hasEmptyFields){
+        return
+      } 
+     
+   
     const expertObj = {
       id, 
       name,

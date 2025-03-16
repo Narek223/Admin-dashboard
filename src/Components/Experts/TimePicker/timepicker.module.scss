@@ -4,8 +4,8 @@
     align-items: center;
 
     .timePicker {
-        width: 413px;
-        height: 247px;
+
+        height: auto;
         border-radius: 12px;
         background-color: white;
         padding: 18px 33px;
@@ -22,13 +22,16 @@
             }
         }
         .timePickerWrapper {
+       
             h1 {
                 font-size: 24px;
                 font-weight: 700;
             }
 
             .chooseTime {
+                padding: 20px 0 0 0;
                 display: flex;
+                flex-direction: column;
                 .textInput {
                     outline: none;
                     border-radius: 5px;
@@ -53,7 +56,12 @@
                     font-weight: 500;
                     color: rgba(127, 129, 136, 1);
                 }
+                .time{
+                    display: flex;
+            flex-direction: column;
+                }
             }
         }
+      
     }
 }

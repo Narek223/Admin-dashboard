@@ -6,7 +6,7 @@ import { AiOutlineMore } from "react-icons/ai";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import TimePickerModal from "./TimePicker/TimePickerModal";
-
+import NoAvatar from "../../assets/NoAvatart/download.png"
 
 export default function Experts() {
   let [open, setopen] = useState(false);
@@ -116,7 +116,7 @@ export default function Experts() {
                 <div>
                   <div className={styles.expertwrapper}>
                     <div className={styles.information}>
-                      <img src={elem.files} />
+                      <img src={elem.files?elem.files:NoAvatar} />
                       <div className={styles.specialistInfo}>
                         <h1>{elem.name}</h1>
                         <p>{elem.specialist}</p>

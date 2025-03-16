@@ -14,11 +14,7 @@ export default function Inputs({
 }) {
   return (
     <FormControl className={styles.formControl}
-    // sx={{
-    //   '& .MuiOutlinedInput-notchedOutline': {
-    //     border: 'none', 
-    //   },
-    // }}
+   
     >
       <InputLabel variant="standard" className={styles.inputlabel}>
         {label}

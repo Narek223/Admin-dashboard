@@ -11,7 +11,7 @@ import PaginationComponent from "../../SheredComponents/Pagination/PaginationCom
 import Header from "../Header/Header";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
-
+import NoAvatar from "../../assets/NoAvatart/download.png"
 
 export default function Service() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -266,7 +266,6 @@ export default function Service() {
                     </button>
                   </div>
                 </div>
-
                 <Servicemodal
                   open={isModalOpen}
                   onClose={handleCloseModal}
@@ -275,7 +274,6 @@ export default function Service() {
                   seterror={setError}
                   error={error}
                 />
-
                 <div className={styles.addServices}>
                   <div className={styles.servicesNames}>
                     <div className={styles.servicebox}>
@@ -290,7 +288,6 @@ export default function Service() {
                       <p>Duration</p>
                     </div>
                   </div>
-
                   {paginatedServices.length > 0 &&
                     paginatedServices.map((elem) => (
                       <div key={elem.id} className={styles.addServicesTwo}>
@@ -298,7 +295,7 @@ export default function Service() {
                           <div className={styles.servicebox}>
                             <p>{elem.id}</p>
                             <div className={styles.img}>
-                              <img src={elem.files} alt="Service" />
+                              <img src={elem.files?elem.files:NoAvatar} alt="Service" />
                             </div>
                             <p>{elem.service}</p>
                             <p>{elem.category}</p>
@@ -327,7 +324,6 @@ export default function Service() {
               handleEdit={handleEdit}
               onClick={handleOpenDeleteModal}
             />
-
             <PaginationComponent
               currentPage={currentPage}
               itemsPerPage={itemsPerPage}

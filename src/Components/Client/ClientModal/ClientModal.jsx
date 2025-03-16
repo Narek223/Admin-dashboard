@@ -57,7 +57,7 @@ export default function ClientModal({
     setError(hasEmptyFields);
 
     if (hasEmptyFields) return;
-    if (!name || !date || !mail || !phone || !files) {
+    if (!name || !date || !mail || !phone ) {
       return;
     }
     const clientObj = {

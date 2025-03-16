@@ -9,9 +9,19 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import InputLabel from "@mui/material/InputLabel";
 import dayjs from "dayjs";
+import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 
 export default function TimePickerModal({ open, onClose }) {
-  const [value, setValue] = useState(dayjs("2022-04-17T15:30"));
+  const [value, setValue] = useState([]);
+  
+
+  const handleTimeChange = (newValue) => {
+    if (newValue) {
+      setValue((prev) => [...prev, dayjs(newValue).format("HH:mm")]);
+    }
+  };
+
+
 
   return (
     <div>
@@ -31,24 +41,34 @@ export default function TimePickerModal({ open, onClose }) {
             <div className={styles.timePickerWrapper}>
               <h1>Free time</h1>
               <div className={styles.chooseTime}>
-
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["TimePicker"]}>
-                  <InputLabel variant="standard" className={styles.inputlabel}>
-                  Free Time
-                  </InputLabel>
-                  <TimePicker
-                    className={styles.textInput}
-                    label="Free Time"
-                    value={value}
-                    onChange={(newValue) => setValue(newValue)}
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-
+                <label className={styles.inputlabel}> Free Time</label>
+                <LocalizationProvider
+                  dateAdapter={AdapterDayjs}
+                  className={styles.time}
+                >
+                  <DemoContainer
+                    components={["TimePicker"]}
+                    className={styles.time}
+                    slotProps={{
+                      popper: {
+                        sx: {
+                          "& .MuiStack-root": {
+                            display: "flex",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    <TimePicker
+                      className={styles.textInput}
+                    
+                      onChange={handleTimeChange }
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
               </div>
-              
             </div>
+            <ModalBtn onClose={onClose} handleSave={null} edit={null} />
           </div>
         </Box>
       </Modal>
