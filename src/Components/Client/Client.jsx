@@ -22,6 +22,8 @@ export default function Client() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
 
+ 
+
   const handleOpen = () => {
     setOpen(true);
     setError(false);
@@ -85,6 +87,9 @@ export default function Client() {
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
+
+
+ 
   return (
     <div className={styles.ClientConteiner}>
       <Header handleOpen={handleOpen} />
@@ -109,7 +114,7 @@ export default function Client() {
       }}
       />
       <div className={styles.clientbody}>
-        <div className={styles.clinetWrapper}>
+        <div className={styles.clinetWrapper} >
           <div className={styles.clientheader}>
             <ul>
               <li>
@@ -159,7 +164,9 @@ export default function Client() {
             ))}
           </div>
         </div>
-        
+        <div>
+          
+        </div>
         <PaginationComponent
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}

@@ -7,6 +7,7 @@ import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import TimePickerModal from "./TimePicker/TimePickerModal";
 import NoAvatar from "../../assets/NoAvatart/download.png"
+import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 
 export default function Experts() {
   let [open, setopen] = useState(false);
@@ -18,6 +19,10 @@ export default function Experts() {
   const [selectedService, setSelectedService] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [timeModalOpen, setimeModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+
+
 
   const onOpen = () => {
     setopen(true);
@@ -72,6 +77,18 @@ export default function Experts() {
     setAnchorEl(null);
   };
 
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+  const handleItemsPerPageChange = (newPerPage) => {
+    setItemsPerPage(newPerPage);
+    setCurrentPage(0);
+  };
+const paginationExperts =expert.slice(
+  currentPage * itemsPerPage,
+  (currentPage + 1) * itemsPerPage
+);
   return (
     <div className={styles.expertConteiner}>
       <Header handleOpen={onOpen} />
@@ -108,10 +125,11 @@ export default function Experts() {
          onClose={handleCloseTimeModal}
         
       />
+      
       <div className={styles.cont}>
         <div className={styles.ExpertCard}>
           <div className={styles.ExpertWrapper}>
-            {expert.map((elem, id) => (
+            {paginationExperts.map((elem, id) => (
               <div key={id} className={styles.expert}>
                 <div>
                   <div className={styles.expertwrapper}>
@@ -143,6 +161,13 @@ export default function Experts() {
           </div>
           
         </div>
+        <PaginationComponent
+                    currentPage={currentPage}
+                    itemsPerPage={itemsPerPage}
+                    totalItems={expert.length}
+                    onPageChange={handlePageChange}
+                    onItemsPerPageChange={handleItemsPerPageChange}
+                  />
       </div>
     </div>
   );
