@@ -144,6 +144,7 @@ export default function ExpertsModal({
                   setDate={setDate}
                   error={error && !date}
                   value={date}
+                  label="Birth Date"
                 />
               </div>
               <div className={styles.inputs}>

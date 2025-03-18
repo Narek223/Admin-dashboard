@@ -26,7 +26,12 @@ export default function Inputs({
         type={type}
         className={styles.textInput}
         placeholder={placeholder}
-        
+        sx={{
+          "& .MuiInputBase-root": {
+            color: "rgba(127, 129, 136, 1)",
+          },
+         
+        }}
       />
     </FormControl>
   );

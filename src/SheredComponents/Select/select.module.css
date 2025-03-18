@@ -1,22 +1,31 @@
 .formControl {
+  margin: 10px 0;
   width: 47%;
 }
 .formControl:nth-child(1) {
   margin: 0 30px 0 0;
 }
-.formControl .inputlabel {
+.formControl .inputConteiner {
+  width: 100%;
+  margin: 10px 0;
+}
+.formControl .inputConteiner .inputlabel {
   position: static;
   font-weight: 500;
   color: rgb(127, 129, 136);
 }
-.formControl .nativeSelect {
+.formControl .inputConteiner .nativeSelect {
   border-radius: 5px;
   border: none;
   margin: 0;
+  width: 100%;
   border: 1px solid rgba(98, 99, 115, 0.3);
   color: rgb(127, 129, 136);
 }
-.formControl .nativeSelect select {
+.formControl .inputConteiner .nativeSelect ul li {
+  color: rgb(127, 129, 136);
+}
+.formControl .inputConteiner .nativeSelect select {
   border-radius: 5px;
   height: 100%;
   padding: 0 18px;
@@ -24,4 +33,7 @@
   font-weight: 500;
   border: none;
   font-size: 14px;
+}
+.formControl .inputConteiner .nativeSelect .option {
+  color: rgb(127, 129, 136);
 }/*# sourceMappingURL=select.module.css.map */

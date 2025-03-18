@@ -1,8 +1,12 @@
 .expertConteiner .cont {
-  padding: 26px 20px;
+  padding: 20px 20px 0 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .expertConteiner .cont .ExpertCard {
   height: calc(90vh - 80px);
+  overflow-y: auto;
 }
 .expertConteiner .cont .ExpertCard .ExpertWrapper {
   display: grid;

@@ -13,37 +13,46 @@ export default function SelectComponent({
   services,
   servicename,
   deafultvalue,
-  fullWidth
+  fullWidth,
 }) {
   return (
-    <FormControl fullWidth={fullWidth} className={styles.formControl} variant="outlined" 
-  
+    <FormControl
+      fullWidth={fullWidth}
+      className={styles.formControl}
+      variant="outlined"
     >
-      <InputLabel
-        shrink={true}
-        variant="standard"
-        className={styles.inputlabel}
-      >
-        {servicename}
-      </InputLabel>
-      <Select
-        required
-        value={service || deafultvalue}
-        IconComponent={FaAngleDown}
-        onChange={(e) => sets(e.target.value)}
-        className={styles.nativeSelect}
-        MenuProps={{
-          PaperProps: {
-            sx: { menuStyles },
-          },
-        }}
-      >
-        {services.map((option, index) => (
-          <MenuItem value={option} className={styles.option} key={index}>
-            {option}
-          </MenuItem>
-        ))}
-      </Select>
+      <div className={styles.inputConteiner}>
+        <InputLabel
+          shrink={true}
+          variant="standard"
+          className={styles.inputlabel}
+        >
+          {servicename}
+        </InputLabel>
+        <Select
+          required
+          value={service || deafultvalue}
+          IconComponent={FaAngleDown}
+          onChange={(e) => sets(e.target.value)}
+          className={styles.nativeSelect}
+          MenuProps={{
+            PaperProps: {
+              sx: { menuStyles },
+            },
+          }}
+        >
+          {services.map((option, index) => (
+            <MenuItem
+              value={option}
+              className={styles.option}
+              key={index}
+              sx={{ color: " rgb(127, 129, 136)" }}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </div>
     </FormControl>
   );
 }

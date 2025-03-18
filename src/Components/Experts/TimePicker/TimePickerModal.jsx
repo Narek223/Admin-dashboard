@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import styles from "./timepicker.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -10,18 +10,33 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import InputLabel from "@mui/material/InputLabel";
 import dayjs from "dayjs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
+import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 
 export default function TimePickerModal({ open, onClose }) {
   const [value, setValue] = useState([]);
-  
+  const [date, setDate] = useState();
+  const [freetimes, setfreeTimes] = useState([]);
+  const [tempValue, setTempValue] = useState(null);
 
   const handleTimeChange = (newValue) => {
-    if (newValue) {
-      setValue((prev) => [...prev, dayjs(newValue).format("HH:mm")]);
+    setTempValue(newValue);
+  };
+
+  const resetForm = useCallback(() => {
+    setDate("");
+  }, []);
+
+  useEffect(() => {
+    setDate("");
+  }, [onClose,resetForm]);
+
+  const handleAccept = () => {
+    if (tempValue) {
+      setValue((prev) => [...prev, dayjs(tempValue).format("HH:mm")]);
     }
   };
 
-
+  const dateSave = () => {};
 
   return (
     <div>
@@ -41,34 +56,53 @@ export default function TimePickerModal({ open, onClose }) {
             <div className={styles.timePickerWrapper}>
               <h1>Free time</h1>
               <div className={styles.chooseTime}>
-                <label className={styles.inputlabel}> Free Time</label>
-                <LocalizationProvider
-                  dateAdapter={AdapterDayjs}
-                  className={styles.time}
-                >
-                  <DemoContainer
-                    components={["TimePicker"]}
-                    className={styles.time}
-                    slotProps={{
-                      popper: {
-                        sx: {
-                          "& .MuiStack-root": {
-                            display: "flex",
+                <DataPicker
+                  setDate={setDate}
+                  error={null}
+                  value={date}
+                  label={"Date"}
+                />
+                {date && (
+                  <div className={styles.timepicker}>
+                    <InputLabel
+                      variant="standard"
+                      className={styles.inputlabel}
+                    >
+                      Free Time
+                    </InputLabel>
+
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      className={styles.time}
+                    >
+                      <DemoContainer
+                        components={["TimePicker"]}
+                        className={styles.time}
+                        slotProps={{
+                          popper: {
+                            sx: {
+                              "& .MuiStack-root": {
+                                display: "flex",
+                              },
+                            },
                           },
-                        },
-                      },
-                    }}
-                  >
-                    <TimePicker
-                      className={styles.textInput}
-                    
-                      onChange={handleTimeChange }
-                    />
-                  </DemoContainer>
-                </LocalizationProvider>
+                        }}
+                      >
+                        <TimePicker
+                          fullWidth
+                          ampm={false}
+                          onChange={handleTimeChange}
+                          onAccept={handleAccept}
+                          value={tempValue}
+                          className={styles.textInput}
+                        />
+                      </DemoContainer>
+                    </LocalizationProvider>
+                  </div>
+                )}
               </div>
             </div>
-            <ModalBtn onClose={onClose} handleSave={null} edit={null} />
+            <ModalBtn onClose={onClose} handleSave={dateSave} edit={null} />
           </div>
         </Box>
       </Modal>

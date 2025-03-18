@@ -7,7 +7,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import styles from "./styles.module.scss";
 import { datestyles } from "../../Services/data/datePickerStyles/datePickerStyles";
 
-export default function ResponsiveDatePickers({ error, setDate, value }) {
+export default function ResponsiveDatePickers({ error, setDate, value,label }) {
   
   const handleDateChange = (newDate) => {
     if (newDate) {
@@ -18,10 +18,11 @@ export default function ResponsiveDatePickers({ error, setDate, value }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} >
       <div className={styles.datepickerConteiner}>
-        <label className={styles.datapicker}>Birth Date</label>
+        <label className={styles.datapicker}>{label}</label>
         <DemoContainer components={["DatePicker"]}>
           <DemoItem>
             <DesktopDatePicker
+            fullWidth
               value={value ? dayjs(value, "DD MM YYYY") : null}
               onChange={handleDateChange}
               showDaysOutsideCurrentMonth
@@ -41,11 +42,7 @@ export default function ResponsiveDatePickers({ error, setDate, value }) {
                   sx: datestyles,
                 },
               }}
-              // sx={{
-              //   '& .MuiOutlinedInput-notchedOutline': {
-              //     border: 'none', 
-              //   },
-              // }}
+            
             />
           </DemoItem>
         </DemoContainer>

@@ -66,6 +66,7 @@
 }
 .modal .modalBox .addService .description {
   margin: 18px 0;
+  width: 100%;
 }
 .modal .modalBox .addService .description .descriptionForm {
   margin: 0 30px 0 0;

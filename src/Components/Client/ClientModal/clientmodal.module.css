@@ -6,7 +6,6 @@
 .modal .clientmodal {
   background-color: white;
   width: 610px;
-  overflow-y: scroll;
   height: auto;
   max-height: 90vh;
   border-radius: 12px;

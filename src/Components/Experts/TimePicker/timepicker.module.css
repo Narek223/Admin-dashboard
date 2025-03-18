@@ -4,8 +4,7 @@
   align-items: center;
 }
 .modal .timePicker {
-  width: 413px;
-  height: 247px;
+  height: auto;
   border-radius: 12px;
   background-color: white;
   padding: 18px 33px;
@@ -24,11 +23,17 @@
 .modal .timePicker .timePickerWrapper h1 {
   font-size: 24px;
   font-weight: 700;
+  width: 100%;
 }
 .modal .timePicker .timePickerWrapper .chooseTime {
+  padding: 20px 0 0 0;
   display: flex;
+  flex-direction: column;
 }
-.modal .timePicker .timePickerWrapper .chooseTime .textInput {
+.modal .timePicker .timePickerWrapper .chooseTime .timepicker {
+  margin: 0 30px 0 0;
+}
+.modal .timePicker .timePickerWrapper .chooseTime .timepicker .textInput {
   outline: none;
   border-radius: 5px;
   margin: 10px 0;
@@ -39,12 +44,16 @@
   color: rgb(127, 129, 136);
   border: 1px solid rgba(98, 99, 115, 0.3);
 }
-.modal .timePicker .timePickerWrapper .chooseTime .textInput:focus {
+.modal .timePicker .timePickerWrapper .chooseTime .timepicker .textInput:focus {
   background-color: white;
 }
-.modal .timePicker .timePickerWrapper .chooseTime .inputlabel {
+.modal .timePicker .timePickerWrapper .chooseTime .timepicker .inputlabel {
   position: static;
   font-size: 12px;
   font-weight: 500;
   color: rgb(127, 129, 136);
+}
+.modal .timePicker .timePickerWrapper .chooseTime .timepicker .time {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=timepicker.module.css.map */
