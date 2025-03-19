@@ -71,11 +71,11 @@ export default function ExpertsModal({
 
   const save = () => {
    
-      const hasEmptyFields = !name || !date || !mail || !phone || !adress || !specialist ;
-      seterror(hasEmptyFields);
-      if (hasEmptyFields){
-        return
-      } 
+      // const hasEmptyFields = !name || !date || !mail || !phone || !adress || !specialist ;
+      // seterror(hasEmptyFields);
+      // if (hasEmptyFields){
+      //   return
+      // } 
      
    
     const expertObj = {

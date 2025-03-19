@@ -20,26 +20,29 @@ export default function ResponsiveDatePickers({ error, setDate, value,label }) {
       <div className={styles.datepickerConteiner}>
         <label className={styles.datapicker}>{label}</label>
         <DemoContainer components={["DatePicker"]}>
-          <DemoItem>
+          <DemoItem  sx={{ width: "100%" }}>
             <DesktopDatePicker
-            fullWidth
+          
               value={value ? dayjs(value, "DD MM YYYY") : null}
               onChange={handleDateChange}
               showDaysOutsideCurrentMonth
               disablePast={false}
+         
               slotProps={{
                 textField: {
                   placeholder: "MM/DD/YYYY",
                   error: error,
+               
                   InputProps: {
                     sx: {
+                    width: "100%",
                       marginBottom: "8px",
                       border: "1px solid rgba(98, 99, 115, 0.3)",
                     },
                   },
                 },
                 popper: {
-                  sx: datestyles,
+                  sx: datestyles  
                 },
               }}
             

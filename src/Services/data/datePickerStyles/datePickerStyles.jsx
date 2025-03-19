@@ -1,10 +1,11 @@
 export const datestyles = {
   "& .MuiPaper-root": {
+    
     borderRadius: "20px",  
     
   },
   "& .MuiStack-root":{
-    width:'47%',
+
       margin: "10px 0",
     marginBottom: "8px",
   },
