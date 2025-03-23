@@ -70,4 +70,9 @@
   margin: 10px 0 0 0;
   font-size: 12px;
   color: #7f8188;
+  display: flex;
+  justify-content: space-between;
+}
+.expertConteiner .cont .ExpertCard .ExpertWrapper .expert .freetime span {
+  margin: 0 2px;
 }/*# sourceMappingURL=experts.module.css.map */

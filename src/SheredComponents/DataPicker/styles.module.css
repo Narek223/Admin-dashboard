@@ -4,6 +4,7 @@
   flex-direction: column;
 }
 .datepickerConteiner .datapicker {
+  width: 100%;
   color: rgb(127, 129, 136);
   font-size: 12px;
   font-weight: 500;

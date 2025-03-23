@@ -12,28 +12,27 @@ import dayjs from "dayjs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 
-export default function TimePickerModal({ open, onClose }) {
+export default function TimePickerModal({ open, onClose, onAddtime }) {
   const [date, setDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
- const [btnclick,setBtnclick]=useState(false)
+  const [id, setid] = useState(0);
+  // const resetForm = useCallback(() => {
+  //   setDate(null);
+  //   setSelectedTime(null);
+  // }, []);
 
-  const resetForm = useCallback(() => {
-    setDate(null);
-    setSelectedTime(null);
-  }, []);
-
-  useEffect(() => {
-    if (!open) resetForm();
-  }, [open, resetForm]);
+  // useEffect(() => {
+  //   if (!open) resetForm();
+  // }, [open, resetForm]);
 
   const handleAccept = () => {
-    timeSlots.times!==null?setBtnclick(false):setBtnclick(true)
     if (date && selectedTime) {
       const formattedTime = dayjs(selectedTime).format("HH:mm");
       const formattedDate = dayjs(date).format("YYYY-MM-DD");
 
-      const isDuplicate = timeSlots.some((elem) =>
+      const isDuplicate = timeSlots.some(
+        (elem) =>
           elem.date === formattedDate && elem.times.includes(formattedTime)
       );
 
@@ -70,6 +69,15 @@ export default function TimePickerModal({ open, onClose }) {
     );
   };
 
+  const savetime = () => {
+    const obj = {
+      id,
+      selectedTime: dayjs(selectedTime).format("HH:mm"),
+      date: dayjs(date).format("YYYY-MM-DD"),
+    };
+    onAddtime(timeSlots);
+    onClose()
+  };
   return (
     <div>
       <Modal
@@ -97,41 +105,40 @@ export default function TimePickerModal({ open, onClose }) {
                 {date && (
                   <div className={styles.timepicker}>
                     <div className={styles.timePickerWrapper}>
-<div  className={styles.timePickerWrapperNext}>
-                      <label className={styles.inputlabel}>lael</label>
-               
-                    <LocalizationProvider
-                      dateAdapter={AdapterDayjs}
-                      className={styles.time}
-                    >
-                      <DemoContainer
-                      label={ " Select Time"}
-                        components={["TimePicker"]}
-                        className={styles.time}
-                        slotProps={{
-                          popper: {
-                            sx: {
-                              "& .MuiStack-root": {
-                                display: "flex",
+                      <div className={styles.timePickerWrapperNext}>
+                        <label className={styles.inputlabel}>lael</label>
+
+                        <LocalizationProvider
+                          dateAdapter={AdapterDayjs}
+                          className={styles.time}
+                        >
+                          <DemoContainer
+                            label={" Select Time"}
+                            components={["TimePicker"]}
+                            className={styles.time}
+                            slotProps={{
+                              popper: {
+                                sx: {
+                                  "& .MuiStack-root": {
+                                    display: "flex",
+                                  },
+                                },
                               },
-                            },
-                          },
-                        }}
-                      >
-                        <TimePicker
-                          fullWidth
-                          ampm={false}
-                          onChange={(newValue) => setSelectedTime(newValue)}
-                      
-                          value={selectedTime}
-                          className={styles.textInput}
-                        />
-                      </DemoContainer>
-                    </LocalizationProvider>
-                    </div>
-                    <button onClick={addTimes} className={styles.add}  disabled={btnclick}  >
-                      Add Time
-                    </button>
+                            }}
+                          >
+                            <TimePicker
+                              fullWidth
+                              ampm={false}
+                              onChange={(newValue) => setSelectedTime(newValue)}
+                              value={selectedTime}
+                              className={styles.textInput}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                      </div>
+                      <button onClick={addTimes} className={styles.add}>
+                        Add Time
+                      </button>
                     </div>
                     <div className={styles.addedTime}>
                       <h3>
@@ -143,8 +150,8 @@ export default function TimePickerModal({ open, onClose }) {
                             (slot) =>
                               slot.date === dayjs(date).format("YYYY-MM-DD")
                           )
-                          ?.times?.map((time, id) => (
-                            <div key={id} className={styles.Listwrapper}>
+                          ?.times?.map((time, index) => (
+                            <div key={index} className={styles.Listwrapper}>
                               <span>{time}</span>
                               <p
                                 onClick={() =>
@@ -164,7 +171,7 @@ export default function TimePickerModal({ open, onClose }) {
                 )}
               </div>
             </div>
-            <ModalBtn onClose={onClose} handleSave={null} edit={null} />
+            <ModalBtn onClose={onClose} handleSave={savetime} edit={null} />
           </div>
         </Box>
       </Modal>

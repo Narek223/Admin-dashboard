@@ -6,6 +6,7 @@ import "./App.css";
 import Experts from "./Components/Experts/Experts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Client from "./Components/Client/Client";
+import BookingAlerts from "./Components/BookingAlerts/BookingAlerts";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -38,6 +39,7 @@ function App() {
               <Route path="/Client" element={<Client />} />
               <Route path="/Blog" element={null} />
               <Route path="/Categories" element={null} />
+              <Route path="/BookingAlerts" element={<BookingAlerts/>} />
             </Routes>
           </div>
         </div>

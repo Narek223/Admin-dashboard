@@ -1,0 +1,29 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .bookingmodal {
+  background-color: white;
+  width: 610px;
+  height: auto;
+  max-height: 90vh;
+  border-radius: 12px;
+  padding: 18px 33px;
+}
+.modal .bookingmodal .close {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .bookingmodal .close .icon {
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.modal .bookingmodal .bookingWrapper h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}/*# sourceMappingURL=booking.module.css.map */
