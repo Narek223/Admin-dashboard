@@ -11,26 +11,36 @@
     border-radius: 12px;
     padding: 18px 33px;
     .close {
-      
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            justify-content: flex-end;
-      
-            .icon {
-              width: 24px;
-              height: 24px;
-              color: black;
-            
-          }
+      width: 100%;
+
+      display: flex;
+      justify-content: flex-end;
+
+      .icon {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        color: black;
+      }
     }
-   
-    .bookingWrapper{
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 32px;
-          }
+
+    .bookingWrapper {
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 32px;
+      }
+      .numberandservice {
+        display: flex;
+        align-items: flex-end;
+      }
+      .TimeandSpecialist{
+        display: flex;
+        align-items: flex-end;
+      }
+      .datapicker{
+        margin: 10px 0;
+      }
     }
   }
 }

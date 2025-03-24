@@ -106,7 +106,7 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
                   <div className={styles.timepicker}>
                     <div className={styles.timePickerWrapper}>
                       <div className={styles.timePickerWrapperNext}>
-                        <label className={styles.inputlabel}>lael</label>
+                        <label className={styles.inputlabel}>Select Time</label>
 
                         <LocalizationProvider
                           dateAdapter={AdapterDayjs}

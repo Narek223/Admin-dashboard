@@ -14,11 +14,12 @@
       padding: 18px 33px;
       .close {
         width: 100%;
-        cursor: pointer;
+
         display: flex;
         justify-content: flex-end;
   
         .icon {
+          cursor: pointer;
           width: 24px;
           height: 24px;
           color: black;

@@ -14,11 +14,11 @@
 }
 .modal .exportModalConteiner .close {
   width: 100%;
-  cursor: pointer;
   display: flex;
   justify-content: flex-end;
 }
 .modal .exportModalConteiner .close .icon {
+  cursor: pointer;
   width: 24px;
   height: 24px;
   color: black;

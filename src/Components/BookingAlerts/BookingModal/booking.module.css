@@ -13,11 +13,11 @@
 }
 .modal .bookingmodal .close {
   width: 100%;
-  cursor: pointer;
   display: flex;
   justify-content: flex-end;
 }
 .modal .bookingmodal .close .icon {
+  cursor: pointer;
   width: 24px;
   height: 24px;
   color: black;
@@ -26,4 +26,12 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
+}
+.modal .bookingmodal .bookingWrapper .numberandservice {
+  display: flex;
+  align-items: flex-end;
+}
+.modal .bookingmodal .bookingWrapper .TimeandSpecialist {
+  display: flex;
+  align-items: flex-end;
 }/*# sourceMappingURL=booking.module.css.map */

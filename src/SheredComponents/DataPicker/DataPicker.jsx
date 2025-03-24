@@ -7,8 +7,12 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import styles from "./styles.module.scss";
 import { datestyles } from "../../Services/data/datePickerStyles/datePickerStyles";
 
-export default function ResponsiveDatePickers({ error, setDate, value,label }) {
-  
+export default function ResponsiveDatePickers({
+  error,
+  setDate,
+  value,
+  label,
+}) {
   const handleDateChange = (newDate) => {
     if (newDate) {
       setDate(newDate.format("DD MM YYYY"));
@@ -16,36 +20,55 @@ export default function ResponsiveDatePickers({ error, setDate, value,label }) {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} >
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={styles.datepickerConteiner}>
         <label className={styles.datapicker}>{label}</label>
-        <DemoContainer components={["DatePicker"]}>
-          <DemoItem  sx={{ width: "100%" }}>
-            <DesktopDatePicker
+        <DemoContainer components={["DatePicker"]}
+          sx={{
+            width: "100%",
+            minWidth: "unset !important", 
+            maxWidth: "100%",
+            "& .MuiStack-root": {
+              width: "100% !important",
+              minWidth: "0 !important",
+            },
+          }}
+        
+        >
+          <DemoItem 
+           sx={{
+            width: "100%",
+            minWidth: "0 !important",
+            maxWidth: "100%",
+            "& .MuiStack-root": {
+              width: "100% !important",
+              minWidth: "0 !important",
+            },
+          }}
           
+          >
+            <DesktopDatePicker
               value={value ? dayjs(value, "DD MM YYYY") : null}
               onChange={handleDateChange}
               showDaysOutsideCurrentMonth
               disablePast={false}
-         
+              
               slotProps={{
                 textField: {
+                  fullWidth: true,
                   placeholder: "MM/DD/YYYY",
                   error: error,
-               
                   InputProps: {
                     sx: {
-                    width: "100%",
                       marginBottom: "8px",
                       border: "1px solid rgba(98, 99, 115, 0.3)",
                     },
                   },
                 },
                 popper: {
-                  sx: datestyles  
+                  sx: datestyles,
                 },
               }}
-            
             />
           </DemoItem>
         </DemoContainer>
