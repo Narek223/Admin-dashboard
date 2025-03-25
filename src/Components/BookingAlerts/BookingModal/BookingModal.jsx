@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./booking.module.scss";
@@ -9,14 +9,15 @@ import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 
-export default function BookingModal({ open, handleClose }) {
-  const [name, setName] = useState(null);
-  const [lastname, setlastname] = useState(null);
-  const [phone, setPhone] = useState(null);
-  const [service, setService] = useState(null);
-  const [specialist, setSpecialist] = useState(null);
-  const [timeline, setimeline] = useState(null);
-  const [date, setDate] = useState(null);
+export default function BookingModal({ open, handleClose, addBooking, edit }) {
+  const [name, setName] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [service, setService] = useState("Hair Care");
+  const [specialist, setSpecialist] = useState("");
+  const [timeline, setimeline] = useState("");
+  const [date, setDate] = useState("");
+  const [id, setId] = useState(0);
 
   let inputValues = [
     {
@@ -38,6 +39,38 @@ export default function BookingModal({ open, handleClose }) {
       label: "Last name",
     },
   ];
+
+  const resetForm = useCallback(() => {
+    setName("");
+    setlastname("");
+    setService("Hair Care");
+    setPhone("");
+    setSpecialist("");
+    setimeline("");
+    setDate("");
+    setId(0);
+  }, []);
+  
+  const Saveinformation = () => {
+    const bookingalerts = {
+      id,
+      name,
+      lastname,
+      phone,
+      service,
+      specialist,
+      timeline,
+      date,
+    };
+
+    if (edit) {
+      addBooking(bookingalerts, true);
+    } else {
+      addBooking(bookingalerts, false);
+    }
+    handleClose();
+    resetForm();
+  };
 
   return (
     <div>
@@ -106,16 +139,19 @@ export default function BookingModal({ open, handleClose }) {
                 />
               </div>
               <div className={styles.datapicker}>
-
-              <DataPicker
-                setDate={setDate}
-                error={null}
-                value={date}
-                label={null}
-              />
+                <DataPicker
+                  setDate={setDate}
+                  error={null}
+                  value={date}
+                  label={null}
+                />
               </div>
-             
-              <ModalBtn onClose={handleClose} handleSave={null} edit={null} />
+
+              <ModalBtn
+                onClose={handleClose}
+                handleSave={Saveinformation}
+                edit={null}
+              />
             </div>
           </div>
         </Box>
