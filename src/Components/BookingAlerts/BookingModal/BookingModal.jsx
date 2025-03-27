@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./booking.module.scss";
@@ -9,7 +9,14 @@ import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 
-export default function BookingModal({ open, handleClose, addBooking, edit }) {
+export default function BookingModal({
+  open,
+  handleClose,
+  addBooking,
+  edit,
+  error,
+  seterror,
+}) {
   const [name, setName] = useState("");
   const [lastname, setlastname] = useState("");
   const [phone, setPhone] = useState("");
@@ -39,7 +46,7 @@ export default function BookingModal({ open, handleClose, addBooking, edit }) {
       label: "Last name",
     },
   ];
-
+ 
   const resetForm = useCallback(() => {
     setName("");
     setlastname("");
@@ -50,8 +57,31 @@ export default function BookingModal({ open, handleClose, addBooking, edit }) {
     setDate("");
     setId(0);
   }, []);
-  
+
   const Saveinformation = () => {
+    const hasEmptyFields =
+      !name ||
+      !date ||
+      !lastname ||
+      !phone ||
+      !service ||
+      !specialist ||
+      !timeline;
+    seterror(hasEmptyFields);
+    if (hasEmptyFields) {
+      return;
+    }
+    if (
+      !name ||
+      !date ||
+      !lastname ||
+      !phone ||
+      !service ||
+      !specialist ||
+      !timeline
+    ) {
+      return;
+    }
     const bookingalerts = {
       id,
       name,
@@ -93,7 +123,7 @@ export default function BookingModal({ open, handleClose, addBooking, edit }) {
               <div>
                 {inputValues.map((elem, index) => (
                   <Inputs
-                    error={null}
+                    error={error && !elem.value}
                     value={elem.value}
                     state={elem.setstate}
                     placeholder={elem.placeholder}
@@ -104,7 +134,7 @@ export default function BookingModal({ open, handleClose, addBooking, edit }) {
               </div>
               <div className={styles.numberandservice}>
                 <Inputs
-                  error={null}
+                  error={error && !phone}
                   value={phone}
                   state={setPhone}
                   placeholder="Mobile Number"
@@ -122,7 +152,7 @@ export default function BookingModal({ open, handleClose, addBooking, edit }) {
               </div>
               <div className={styles.TimeandSpecialist}>
                 <Inputs
-                  error={null}
+                  error={error && !specialist}
                   value={specialist}
                   state={setSpecialist}
                   placeholder="Specialist"
@@ -141,7 +171,7 @@ export default function BookingModal({ open, handleClose, addBooking, edit }) {
               <div className={styles.datapicker}>
                 <DataPicker
                   setDate={setDate}
-                  error={null}
+                  error={error && !date}
                   value={date}
                   label={null}
                 />

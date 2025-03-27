@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./timepicker.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -7,24 +7,27 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import InputLabel from "@mui/material/InputLabel";
 import dayjs from "dayjs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 
-export default function TimePickerModal({ open, onClose, onAddtime }) {
+export default function TimePickerModal({
+  open,
+  onClose,
+  onAddtime,
+  initialFreeTime,
+
+}) {
   const [date, setDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [id, setid] = useState(0);
-  // const resetForm = useCallback(() => {
-  //   setDate(null);
-  //   setSelectedTime(null);
-  // }, []);
+  const [timeSlots, setTimeSlots] = useState(initialFreeTime || []);
 
-  // useEffect(() => {
-  //   if (!open) resetForm();
-  // }, [open, resetForm]);
+  useEffect(() => {
+    if (open) {
+      setTimeSlots(initialFreeTime || []);
+    }
+  }, [open, initialFreeTime]);
+
 
   const handleAccept = () => {
     if (date && selectedTime) {
@@ -42,14 +45,20 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
           if (existing) {
             return prev.map((elem) =>
               elem.date === formattedDate
-                ? { ...elem, times: [...elem.times, formattedTime].sort() }
+                ? {
+                    ...elem,
+                    times: [...elem.times, formattedTime].sort(),
+                  }
                 : elem
             );
           }
+
           return [...prev, { date: formattedDate, times: [formattedTime] }];
         });
       }
+      console.log("update timeSlots:", timeSlots); 
       setSelectedTime(null);
+      
     }
   };
 
@@ -57,7 +66,7 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
     handleAccept();
   };
 
-  const deletime = (dateToDelete, timeToDelete) => {
+  const deleteTime = (dateToDelete, timeToDelete) => {
     setTimeSlots((prev) =>
       prev
         .map((elem) =>
@@ -65,19 +74,19 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
             ? { ...elem, times: elem.times.filter((t) => t !== timeToDelete) }
             : elem
         )
+
         .filter((elem) => elem.times.length > 0)
     );
   };
 
-  const savetime = () => {
-    const obj = {
-      id,
-      selectedTime: dayjs(selectedTime).format("HH:mm"),
-      date: dayjs(date).format("YYYY-MM-DD"),
-    };
+  const saveTime = () => {
+
     onAddtime(timeSlots);
-    onClose()
+    onClose();
+   
+   
   };
+
   return (
     <div>
       <Modal
@@ -107,15 +116,10 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
                     <div className={styles.timePickerWrapper}>
                       <div className={styles.timePickerWrapperNext}>
                         <label className={styles.inputlabel}>Select Time</label>
-
-                        <LocalizationProvider
-                          dateAdapter={AdapterDayjs}
-                          className={styles.time}
-                        >
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DemoContainer
-                            label={" Select Time"}
+                            label={"Select Time"}
                             components={["TimePicker"]}
-                            className={styles.time}
                             slotProps={{
                               popper: {
                                 sx: {
@@ -131,7 +135,6 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
                               ampm={false}
                               onChange={(newValue) => setSelectedTime(newValue)}
                               value={selectedTime}
-                              className={styles.textInput}
                             />
                           </DemoContainer>
                         </LocalizationProvider>
@@ -140,6 +143,7 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
                         Add Time
                       </button>
                     </div>
+
                     <div className={styles.addedTime}>
                       <h3>
                         Added times for {dayjs(date).format("DD.MM.YYYY")}:
@@ -152,10 +156,11 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
                           )
                           ?.times?.map((time, index) => (
                             <div key={index} className={styles.Listwrapper}>
+                   
                               <span>{time}</span>
                               <p
                                 onClick={() =>
-                                  deletime(
+                                  deleteTime(
                                     dayjs(date).format("YYYY-MM-DD"),
                                     time
                                   )
@@ -171,7 +176,7 @@ export default function TimePickerModal({ open, onClose, onAddtime }) {
                 )}
               </div>
             </div>
-            <ModalBtn onClose={onClose} handleSave={savetime} edit={null} />
+            <ModalBtn onClose={onClose} handleSave={saveTime} edit={null} />
           </div>
         </Box>
       </Modal>

@@ -1,1 +1,122 @@
-/*# sourceMappingURL=bookingAlerts.module.css.map */
+.bookingConteiner .bookingWrapper {
+  padding: 20px 20px 0 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.bookingConteiner .bookingWrapper .bookingcont {
+  height: calc(90vh - 80px);
+}
+.bookingConteiner .bookingWrapper .bookingcont .sort {
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+}
+.bookingConteiner .bookingWrapper .bookingcont .sort p {
+  color: #6c6f77;
+  font-size: 16px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .sort button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 16px;
+  width: 100px;
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader {
+  margin: 35px 0 12px 0;
+  width: 100%;
+  background-color: white;
+  height: 72px;
+  border-radius: 12px;
+  padding: 0 27px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul {
+  display: flex;
+  width: 100%;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li {
+  height: 100%;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li:nth-child(1) {
+  width: 150px;
+  display: flex;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li:nth-child(2) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li:nth-child(3) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li:nth-child(4) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li:nth-child(5) {
+  width: calc(100% - 800px);
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingHeader .bookingbox ul li:nth-child(6) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo {
+  margin: 12px 0 0 0;
+  width: 100%;
+  background-color: white;
+  height: 72px;
+  border-radius: 12px;
+  padding: 0 27px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul {
+  display: flex;
+  width: 100%;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li {
+  height: 100%;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6C6F77;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li:nth-child(1) {
+  width: 150px;
+  display: flex;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li:nth-child(2) {
+  width: 180px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li:nth-child(3) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li:nth-child(4) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li:nth-child(5) {
+  width: calc(100% - 800px);
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo ul li:nth-child(6) {
+  width: 200px;
+}
+.bookingConteiner .bookingWrapper .bookingcont .bookingbodytwo .bookingboxtwo .infobtn {
+  width: 1px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+}/*# sourceMappingURL=bookingAlerts.module.css.map */

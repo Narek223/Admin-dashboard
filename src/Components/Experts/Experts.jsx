@@ -9,47 +9,57 @@ import TimePickerModal from "./TimePicker/TimePickerModal";
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import dayjs from "dayjs";
+
 export default function Experts() {
-  const [open, setopen] = useState(false);
-  const [edit, setedit] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(null);
   const [error, setError] = useState(false);
-  const [expert, setexpert] = useState([]);
+  const [expert, setExpert] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [timeModalOpen, setimeModalOpen] = useState(false);
+  const [timeModalOpen, setTimeModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+
   const onOpen = () => {
-    setopen(true);
+    setOpen(true);
     setError(false);
-    setedit(null);
+    setEdit(null);
   };
 
   const onClose = () => {
-    setopen(false);
+    setOpen(false);
     setError(false);
     setAnchorEl(null);
   };
 
   const handleAddExpert = (Expert, isEdit = false) => {
     if (isEdit) {
-      setexpert((prev) =>
-        prev.map((item) => (item.id === Expert.id ? Expert : item))
+      setExpert((prev) =>
+        prev.map((item) =>
+          item.id === Expert.id
+            ? { ...Expert, freeTime: item.freeTime || [] }
+            : item
+        )
       );
-      setedit(null);
+      setEdit(null);
     } else {
-      setexpert((prev) => [
+      setExpert((prev) => [
         ...prev,
-        { ...Expert, id: prev.length + 1, freeTime: [] },
+        {
+          ...Expert,
+          id: Date.now(),
+          freeTime: [],
+        },
       ]);
     }
   };
 
   const handleEdit = () => {
     setAnchorEl(null);
-    setopen(true);
-    setedit(selectedService);
+    setOpen(true);
+    setEdit(selectedService);
   };
 
   const handleCloseDeleteModal = () => {
@@ -57,7 +67,8 @@ export default function Experts() {
   };
 
   const handleCloseTimeModal = () => {
-    setimeModalOpen(false);
+    setTimeModalOpen(false);
+    
   };
 
   const handleInfoClick = (event, elem) => {
@@ -69,12 +80,12 @@ export default function Experts() {
     setIsDeleteModalOpen(true);
   };
 
-  const handleOpentimeModal = () => {
-    setimeModalOpen(true);
+  const handleOpenTimeModal = () => {
+    setTimeModalOpen(true);
   };
 
   const handleDeleteService = (id) => {
-    setexpert(expert.filter((elem) => elem.id !== id));
+    setExpert(expert.filter((elem) => elem.id !== id));
     setAnchorEl(null);
   };
 
@@ -92,13 +103,13 @@ export default function Experts() {
     (currentPage + 1) * itemsPerPage
   );
 
-  const onAddtime = (updatedTimeSlots) => {
+  const onAddTime = (updatedTimeSlots) => {
     if (!selectedService) return;
-    setexpert((prevExperts) =>
-      prevExperts.map((expert) =>
-        expert.id === selectedService.id
-          ? { ...expert, freeTime: updatedTimeSlots }
-          : expert
+    setExpert((prevExperts) =>
+      prevExperts.map((item) =>
+        item.id === selectedService.id
+          ? { ...item, freeTime: updatedTimeSlots }
+          : item
       )
     );
   };
@@ -106,6 +117,7 @@ export default function Experts() {
   return (
     <div className={styles.expertConteiner}>
       <Header handleOpen={onOpen} />
+
       <ExpertsModal
         open={open}
         handleClose={onClose}
@@ -114,28 +126,38 @@ export default function Experts() {
         seterror={setError}
         edit={edit}
       />
+
       <EditDeleteBtn
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
         handleEdit={handleEdit}
         onClick={handleOpenDeleteModal}
-        onTimeModal={handleOpentimeModal}
+        onTimeModal={handleOpenTimeModal}
       />
+
       <DeleteModal
         open={isDeleteModalOpen}
         onClose={handleCloseDeleteModal}
         title="Delete Expert"
         text="Are you sure you want to delete this Expert? This action cannot be undone"
         onDelete={() => {
-          handleDeleteService(selectedService.id);
+          if (selectedService) {
+            handleDeleteService(selectedService.id);
+          }
           handleCloseDeleteModal();
         }}
       />
+
       <TimePickerModal
         open={timeModalOpen}
         onClose={handleCloseTimeModal}
-        onAddtime={onAddtime}
-        initialFreeTime={selectedService?.freeTime || []}
+        onAddtime={onAddTime}
+        initialFreeTime={
+          selectedService
+            ? expert.find((item) => item.id === selectedService.id)?.freeTime ||
+              []
+            : []
+        }
       />
 
       <div className={styles.cont}>
@@ -165,24 +187,22 @@ export default function Experts() {
                     </button>
                   </div>
                   <hr />
-                  <div className={styles.freetime}>
-                    <p> Free time today </p>
-                    {Array.isArray(elem.freeTime) &&
-                      elem.freeTime
-                        .find(
-                          (slot) => slot.date === dayjs().format("YYYY-MM-DD")
-                        )
-                        ?.times.map((time, index) => (
-                          <div key={index}>
-                            <span>{time}</span>
-                          </div>
-                        ))}
+
+                  <div className={styles.freetime} key={elem.id}>
+                    <p>Free time:</p>
+                    {(!elem.freeTime || elem.freeTime.length === 0) && (
+                      <span>No free time yet</span>
+                    )}
+                    {elem.freeTime.map((slot, index) => (
+                      <div key={elem.id}>{slot.times.join(", ")}</div>
+                    ))}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
         <PaginationComponent
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}

@@ -34,4 +34,7 @@
 .modal .bookingmodal .bookingWrapper .TimeandSpecialist {
   display: flex;
   align-items: flex-end;
+}
+.modal .bookingmodal .bookingWrapper .datapicker {
+  margin: 10px 0;
 }/*# sourceMappingURL=booking.module.css.map */

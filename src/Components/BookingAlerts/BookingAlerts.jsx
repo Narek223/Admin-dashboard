@@ -5,6 +5,10 @@ import styles from "./bookingAlerts.module.scss";
 import { Menu, MenuItem } from "@mui/material";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa6";
+import { AiOutlineMore } from "react-icons/ai";
+import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
+import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
+
 
 export default function BookingAlerts() {
   const [open, setopen] = useState(false);
@@ -13,19 +17,34 @@ export default function BookingAlerts() {
   const [icon, seticon] = useState(true);
   const [anchorEl, setanchorEl] = useState(null);
   const [selectelem, setselectelem] = useState("Newest");
+  const [error, setError] = useState(false);
+  const [infoanchorEl, setinfoanchorEl] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
   const openyMenu = Boolean(anchorEl);
 
   const openmodal = () => {
     setopen(true);
+    setError(false);
   };
   const handleClose = () => {
     setopen(false);
     setanchorEl(null);
-    seticon(true);
-  };
 
+    seticon(true);
+    setError(false);
+  };
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+  const handleOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
   const select = (value) => {
     setselectelem(value);
+    value === "Newest"
+      ? setBooking([...booking].sort((a, b) => a.id - b.id))
+      : setBooking([...booking].sort((a, b) => b.id - a.id));
     handleClose();
   };
 
@@ -42,6 +61,7 @@ export default function BookingAlerts() {
 
   const onClick = (event) => {
     setanchorEl(event.currentTarget);
+    
     seticon(false);
   };
 
@@ -49,14 +69,52 @@ export default function BookingAlerts() {
     setanchorEl(null);
     seticon(true);
   };
+
+  const infoclose = () => {
+    setinfoanchorEl(null);
+  };
+
+  const handleInfoClick = (event, elem) => {
+    setinfoanchorEl(event.currentTarget);
+    setSelectedBooking(elem)
+  };
+
+  const handleDeleteService = (id) => {
+    setBooking(booking.filter((elem) => elem.id !== id));
+    setinfoanchorEl(null);
+  };
+
+
   return (
     <div className={styles.bookingConteiner}>
       <Header handleOpen={openmodal} />
       <BookingModal
+        error={error}
+        seterror={setError}
         open={open}
         handleClose={handleClose}
         addBooking={addBooking}
         edit={edit}
+      />
+      <EditDeleteBtn
+        anchorEl={infoanchorEl}
+        onClose={infoclose}
+        handleEdit={null}
+       onClick={() => {
+          handleOpenDeleteModal(); 
+        }}
+      />
+      <DeleteModal
+        open={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        title="Delete this Booking"
+        text="Are you sure you want to delete this booking? This action cannot be undone"
+        onDelete={() => {
+          if (selectedBooking) {
+            handleDeleteService(selectedBooking.id);
+          }
+          handleCloseDeleteModal();
+        }}
       />
       <div>
         <div className={styles.bookingWrapper}>
@@ -99,18 +157,43 @@ export default function BookingAlerts() {
             </div>
             <div className={styles.bookingHeader}>
               <div className={styles.bookingbox}>
-              <ul>
-                <li>Date</li>
-                <li>Specialist</li>
-                <li>Service</li>
-                <li>Client full name</li>
-                <li>Number</li>
-                <li>Amount</li>
-                <li>Status</li>
-              </ul>
+                <ul>
+                  <li>Date</li>
+                  <li>Specialist</li>
+                  <li>Service</li>
+                  <li>Client full name</li>
+                  <li>Number</li>
+                  <li>Amount</li>
+                  <li>Status</li>
+                </ul>
               </div>
-           
             </div>
+
+            {booking.map((elem, id) => (
+              <div key={id} className={styles.bookingbodytwo}>
+                <div key={id} className={styles.bookingboxtwo}>
+                  <ul>
+                    <li>{elem.date}</li>
+                    <li>{elem.specialist}</li>
+                    <li>{elem.service}</li>
+                    <li>
+                      {elem.name} {elem.lastname}
+                    </li>
+                    <li>{elem.phone}</li>
+                    <li>{elem.phone}</li>
+                    <li>{elem.phone}</li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                  <button
+                    className={styles.infobtn}
+                    onClick={(event) => handleInfoClick(event, elem)}
+                  >
+                    <AiOutlineMore />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
