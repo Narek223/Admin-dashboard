@@ -8,6 +8,14 @@ import { services } from "../../../Services/data/addServices/services";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import dayjs from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
 
 export default function BookingModal({
   open,
@@ -22,9 +30,11 @@ export default function BookingModal({
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("Hair Care");
   const [specialist, setSpecialist] = useState("");
-  const [timeline, setimeline] = useState("");
+
   const [date, setDate] = useState("");
   const [id, setId] = useState(0);
+  const [startime, setStartime] = useState(null);
+  const [endtime, setEndtime] = useState(null);
 
   let inputValues = [
     {
@@ -46,15 +56,16 @@ export default function BookingModal({
       label: "Last name",
     },
   ];
- 
+
   const resetForm = useCallback(() => {
     setName("");
     setlastname("");
     setService("Hair Care");
     setPhone("");
     setSpecialist("");
-    setimeline("");
     setDate("");
+    setStartime(null);
+    setEndtime(null);
     setId(0);
   }, []);
 
@@ -66,22 +77,26 @@ export default function BookingModal({
       !phone ||
       !service ||
       !specialist ||
-      !timeline;
+      !startime ||
+      !endtime;
+
     seterror(hasEmptyFields);
     if (hasEmptyFields) {
       return;
     }
-    if (
-      !name ||
-      !date ||
-      !lastname ||
-      !phone ||
-      !service ||
-      !specialist ||
-      !timeline
-    ) {
-      return;
-    }
+    // if (
+    //   !name ||
+    //   !date ||
+    //   !lastname ||
+    //   !phone ||
+    //   !service ||
+    //   !specialist ||
+    //   !timeline ||
+    //   !startime ||
+    //   !endtime
+    // ) {
+    //   return;
+    // }
     const bookingalerts = {
       id,
       name,
@@ -89,8 +104,9 @@ export default function BookingModal({
       phone,
       service,
       specialist,
-      timeline,
       date,
+      startime: startime?.format("HH:mm"), 
+    endtime: endtime?.format("HH:mm"),
     };
 
     if (edit) {
@@ -151,22 +167,79 @@ export default function BookingModal({
                 />
               </div>
               <div className={styles.TimeandSpecialist}>
-                <Inputs
-                  error={error && !specialist}
-                  value={specialist}
-                  state={setSpecialist}
-                  placeholder="Specialist"
-                  type="text"
-                  label="Specialist"
-                />
-                <SelectComponent
-                  fullWidth={false}
-                  deafultvalue={"Hair Care"}
-                  servicename="Time"
-                  service={timeline}
-                  sets={setimeline}
-                  services={services[0].options}
-                />
+                <FormControl className={styles.formControl}>
+                  <InputLabel variant="standard" className={styles.inputlabel}>
+                    Specialist
+                  </InputLabel>
+                  <TextField
+                    error={error && !specialist}
+                    value={specialist}
+                    onChange={(e) => setSpecialist(e.target.value)}
+                    type="text"
+                    className={styles.textInput}
+                    placeholder="Specialist"
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        color: "rgba(127, 129, 136, 1)",
+                      },
+                    }}
+                  />
+                </FormControl>
+              </div>
+              <div className={styles.Demo}>
+                <div>
+                  <label className={styles.inputlabeltwo}>Start Time</label>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer
+                      components={["TimePicker"]}
+                      slotProps={{
+                        popper: {
+                          sx: {
+                            "& .MuiStack-root": {
+                              display: "flex",
+                            },
+                          },
+                        },
+                        textField: {
+                          placeholder: "10.30 am - 11.30 am",
+                        },
+                      }}
+                    >
+                      <TimePicker
+                        onChange={(newValue) => setStartime(newValue)}
+                        value={startime ? dayjs(startime, "hh mm") : null}
+                        ampm={false}
+                        error={error && !startime}
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </div>
+                <div>
+                  <label className={styles.inputlabeltwo}>End Time</label>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer
+                      components={["TimePicker"]}
+                      slotProps={{
+                        textField: {
+                          placeholder: "Select Time",
+                          sx: {
+                            "& .MuiOutlinedInput-root": {
+                              border: "1px solid rgba(98, 99, 115, 0.3)",
+                              borderRadius: "8px",
+                            },
+                          },
+                        },
+                      }}
+                    >
+                      <TimePicker
+                        ampm={false}
+                        onChange={(newValue) => setEndtime(newValue)}
+                        value={endtime ? dayjs(endtime, "hh mm") : null}
+                        error={error && !endtime}
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </div>
               </div>
               <div className={styles.datapicker}>
                 <DataPicker

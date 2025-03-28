@@ -8,6 +8,8 @@
     width: 610px;
     height: auto;
     max-height: 90vh;
+
+    overflow: hidden;
     border-radius: 12px;
     padding: 18px 33px;
     .close {
@@ -25,6 +27,7 @@
     }
 
     .bookingWrapper {
+  
       h1 {
         font-size: 24px;
         font-weight: 700;
@@ -34,13 +37,62 @@
         display: flex;
         align-items: flex-end;
       }
-      .TimeandSpecialist{
+      .TimeandSpecialist {
         display: flex;
-        align-items: flex-end;
+      height: 100%;
+        .formControl {
+      width: 100%;
+ 
+          .inputlabel {
+            margin-bottom: 18px;
+            position: static;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(127, 129, 136, 1) ;
+          }
+          .textInput {
+            outline: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            // width: 255px;
+        
+            margin-bottom: 8px;
+            position: static;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(127, 129, 136, 1);
+        
+            border: 1px solid rgba(98, 99, 115, 0.3);
+        
+            &:focus {
+              background-color: white;
+            }
+          }
+        }
+        
       }
-      .datapicker{
+      .datapicker {
         margin: 10px 0;
       }
+      .Demo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 12px 0;
+        .inputlabeltwo {
+          position: static;
+          font-size: 12px;
+          font-weight: 500;
+          color: rgba(127, 129, 136, 1);
+        }
+      }
+    }
+  }
+}
+@media screen and (max-height: 930px) {
+  .modal {
+    .bookingmodal {
+      overflow-y: scroll;
     }
   }
 }

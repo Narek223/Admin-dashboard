@@ -20,6 +20,7 @@ export default function Inputs({
         {label}
       </InputLabel>
       <TextField
+    
         error={error}
         value={value}
         onChange={(e) => state(e.target.value)}

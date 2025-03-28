@@ -172,8 +172,10 @@ export default function BookingAlerts() {
             {booking.map((elem, id) => (
               <div key={id} className={styles.bookingbodytwo}>
                 <div key={id} className={styles.bookingboxtwo}>
+                  
                   <ul>
-                    <li>{elem.date}</li>
+                    <li>{elem.date  }  {elem.startime}</li>
+                    
                     <li>{elem.specialist}</li>
                     <li>{elem.service}</li>
                     <li>
