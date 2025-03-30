@@ -16,7 +16,7 @@ export default function TimePickerModal({
   onClose,
   onAddtime,
   initialFreeTime,
-
+  edit
 }) {
   const [date, setDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -27,7 +27,6 @@ export default function TimePickerModal({
       setTimeSlots(initialFreeTime || []);
     }
   }, [open, initialFreeTime]);
-
 
   const handleAccept = () => {
     if (date && selectedTime) {
@@ -56,9 +55,8 @@ export default function TimePickerModal({
           return [...prev, { date: formattedDate, times: [formattedTime] }];
         });
       }
-      console.log("update timeSlots:", timeSlots); 
+
       setSelectedTime(null);
-      
     }
   };
 
@@ -80,13 +78,16 @@ export default function TimePickerModal({
   };
 
   const saveTime = () => {
-
     onAddtime(timeSlots);
     onClose();
-   
-   
   };
-
+ useEffect(() => {
+    if (edit) {
+      setDate(edit.date || null)
+      setSelectedTime(edit.selectedTime ? dayjs(edit.selectedTime, "HH:mm") : null);
+      setTimeSlots(edit.timeSlots || []);
+    } 
+  }, [edit]);
   return (
     <div>
       <Modal
@@ -143,35 +144,26 @@ export default function TimePickerModal({
                         Add Time
                       </button>
                     </div>
-
-                    <div className={styles.addedTime}>
-                      <h3>
-                        Added times for {dayjs(date).format("DD.MM.YYYY")}:
-                      </h3>
-                      <div className={styles.list}>
-                        {timeSlots
-                          .find(
-                            (slot) =>
-                              slot.date === dayjs(date).format("YYYY-MM-DD")
-                          )
-                          ?.times?.map((time, index) => (
-                            <div key={index} className={styles.Listwrapper}>
-                   
-                              <span>{time}</span>
-                              <p
-                                onClick={() =>
-                                  deleteTime(
-                                    dayjs(date).format("YYYY-MM-DD"),
-                                    time
-                                  )
-                                }
-                              >
-                                <AiOutlineClose className={styles.icon} />
-                              </p>
+                    {timeSlots.map((slot) => (
+                      <div key={slot.date}>
+                        <h3>
+                          Added times for{" "}
+                          {dayjs(slot.date).format("DD.MM.YYYY")}:
+                        </h3>
+                        {slot.times.map((time, index) => (
+                          <div className={styles.addedTime} key={index}>
+                            <div className={styles.list}>
+                              <div className={styles.Listwrapper}>
+                                <span>{time}</span>
+                                <p onClick={() => deleteTime(slot.date, time)}>
+                                  <AiOutlineClose className={styles.icon} />
+                                </p>
+                              </div>
                             </div>
-                          ))}
+                          </div>
+                        ))}
                       </div>
-                    </div>
+                    ))}
                   </div>
                 )}
               </div>

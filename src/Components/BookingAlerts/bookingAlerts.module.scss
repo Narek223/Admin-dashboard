@@ -41,15 +41,18 @@
           align-items: center;
           ul {
             display: flex;
+            align-items: center;
             width: 100%;
             li {
               height: 100%;
               list-style: none;
               font-size: 14px;
               font-weight: 600;
+
               &:nth-child(1) {
-                width: 150px;
+                width: 120px;
                 display: flex;
+           
               }
               &:nth-child(2) {
                 width: 200px;
@@ -88,6 +91,7 @@
           align-items: center;
           ul {
             display: flex;
+            align-items: center;
             width: 100%;
             li {
               height: 100%;
@@ -96,8 +100,9 @@
               font-weight: 500;
               color:#6C6F77;
               &:nth-child(1) {
-                width: 150px;
+                width: 120px;
                 display: flex;
+           
               }
               &:nth-child(2) {
                 width: 200px;

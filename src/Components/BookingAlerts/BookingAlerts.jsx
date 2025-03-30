@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "../Header/Header";
 import BookingModal from "./BookingModal/BookingModal";
 import styles from "./bookingAlerts.module.scss";
@@ -26,6 +26,7 @@ export default function BookingAlerts() {
   const openmodal = () => {
     setopen(true);
     setError(false);
+    setedit(null);
   };
   const handleClose = () => {
     setopen(false);
@@ -84,6 +85,12 @@ export default function BookingAlerts() {
     setinfoanchorEl(null);
   };
 
+  const handleEdit = () => {
+    setinfoanchorEl(null);
+    setopen(true);
+    setedit(selectedBooking);
+  };
+
 
   return (
     <div className={styles.bookingConteiner}>
@@ -99,7 +106,7 @@ export default function BookingAlerts() {
       <EditDeleteBtn
         anchorEl={infoanchorEl}
         onClose={infoclose}
-        handleEdit={null}
+        handleEdit={handleEdit}
        onClick={() => {
           handleOpenDeleteModal(); 
         }}

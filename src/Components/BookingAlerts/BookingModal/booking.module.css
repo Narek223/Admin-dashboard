@@ -8,6 +8,7 @@
   width: 610px;
   height: auto;
   max-height: 90vh;
+  overflow: hidden;
   border-radius: 12px;
   padding: 18px 33px;
 }
@@ -33,8 +34,50 @@
 }
 .modal .bookingmodal .bookingWrapper .TimeandSpecialist {
   display: flex;
-  align-items: flex-end;
+  height: 100%;
+}
+.modal .bookingmodal .bookingWrapper .TimeandSpecialist .formControl {
+  width: 100%;
+}
+.modal .bookingmodal .bookingWrapper .TimeandSpecialist .formControl .inputlabel {
+  margin-bottom: 18px;
+  position: static;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+}
+.modal .bookingmodal .bookingWrapper .TimeandSpecialist .formControl .textInput {
+  outline: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  margin-bottom: 8px;
+  position: static;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+  border: 1px solid rgba(98, 99, 115, 0.3);
+}
+.modal .bookingmodal .bookingWrapper .TimeandSpecialist .formControl .textInput:focus {
+  background-color: white;
 }
 .modal .bookingmodal .bookingWrapper .datapicker {
   margin: 10px 0;
+}
+.modal .bookingmodal .bookingWrapper .Demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+.modal .bookingmodal .bookingWrapper .Demo .inputlabeltwo {
+  position: static;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(127, 129, 136);
+}
+
+@media screen and (max-height: 930px) {
+  .modal .bookingmodal {
+    overflow-y: scroll;
+  }
 }/*# sourceMappingURL=booking.module.css.map */

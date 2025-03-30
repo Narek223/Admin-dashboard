@@ -158,6 +158,7 @@ export default function Experts() {
               []
             : []
         }
+        edit={edit}
       />
 
       <div className={styles.cont}>

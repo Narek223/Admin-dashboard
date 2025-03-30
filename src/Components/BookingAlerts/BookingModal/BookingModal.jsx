@@ -69,6 +69,22 @@ export default function BookingModal({
     setId(0);
   }, []);
 
+
+  useEffect(() => {
+    if (edit) {
+      setName(edit.name || "");
+      setDate(edit.date || "");
+      setlastname(edit.lastname || "");
+      setPhone(edit.phone || "");
+      setService(edit.service || "");
+      setSpecialist(edit.specialist || ""  )
+      setStartime(edit.startime ? dayjs(edit.startime, 'HH:mm') : null);
+    setEndtime(edit.endtime ? dayjs(edit.endtime, 'HH:mm') : null);
+      setId(edit.id || 0);
+    } else {
+      resetForm();
+    }
+  }, [edit, resetForm]);
   const Saveinformation = () => {
     const hasEmptyFields =
       !name ||
@@ -105,10 +121,10 @@ export default function BookingModal({
       service,
       specialist,
       date,
-      startime: startime?.format("HH:mm"), 
-    endtime: endtime?.format("HH:mm"),
+      startime: startime.format("HH:mm"), 
+    endtime: endtime.format("HH:mm"),
     };
-
+ 
     if (edit) {
       addBooking(bookingalerts, true);
     } else {
@@ -135,7 +151,7 @@ export default function BookingModal({
             </p>
 
             <div className={styles.bookingWrapper}>
-              <h1>Add Booking</h1>
+              <h1>{edit?"Edit Booking":"Add Booking"}</h1>
               <div>
                 {inputValues.map((elem, index) => (
                   <Inputs
@@ -200,16 +216,19 @@ export default function BookingModal({
                             },
                           },
                         },
-                        textField: {
-                          placeholder: "10.30 am - 11.30 am",
-                        },
+                      
                       }}
                     >
                       <TimePicker
                         onChange={(newValue) => setStartime(newValue)}
-                        value={startime ? dayjs(startime, "hh mm") : null}
+                        value={startime ? dayjs(startime, " ") : null}
                         ampm={false}
-                        error={error && !startime}
+          
+                        slotProps={{
+                          textField: {
+                            error: error && !startime,
+                          }
+                        }}
                       />
                     </DemoContainer>
                   </LocalizationProvider>
@@ -221,7 +240,7 @@ export default function BookingModal({
                       components={["TimePicker"]}
                       slotProps={{
                         textField: {
-                          placeholder: "Select Time",
+                         
                           sx: {
                             "& .MuiOutlinedInput-root": {
                               border: "1px solid rgba(98, 99, 115, 0.3)",
@@ -234,8 +253,13 @@ export default function BookingModal({
                       <TimePicker
                         ampm={false}
                         onChange={(newValue) => setEndtime(newValue)}
-                        value={endtime ? dayjs(endtime, "hh mm") : null}
-                        error={error && !endtime}
+                        value={endtime ? dayjs(endtime, " ") : null}
+                    
+                        slotProps={{
+                          textField: {
+                            error: error && !startime,
+                          }
+                        }}
                       />
                     </DemoContainer>
                   </LocalizationProvider>
@@ -253,7 +277,7 @@ export default function BookingModal({
               <ModalBtn
                 onClose={handleClose}
                 handleSave={Saveinformation}
-                edit={null}
+                edit={edit}
               />
             </div>
           </div>
