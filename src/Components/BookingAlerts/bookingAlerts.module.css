@@ -6,6 +6,7 @@
 }
 .bookingConteiner .bookingWrapper .bookingcont {
   height: calc(90vh - 80px);
+  overflow-y: auto;
 }
 .bookingConteiner .bookingWrapper .bookingcont .sort {
   font-size: 16px;

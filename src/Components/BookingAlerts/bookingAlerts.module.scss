@@ -6,7 +6,7 @@
     flex-direction: column;
     .bookingcont {
       height: calc(90vh - 80px);
-
+      overflow-y: auto;
       .sort {
         font-size: 16px;
         font-weight: 400;

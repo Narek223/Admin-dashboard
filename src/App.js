@@ -7,6 +7,8 @@ import Experts from "./Components/Experts/Experts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Client from "./Components/Client/Client";
 import BookingAlerts from "./Components/BookingAlerts/BookingAlerts";
+import Availability from "./Components/Availability/Availability";
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -40,6 +42,7 @@ function App() {
               <Route path="/Blog" element={null} />
               <Route path="/Categories" element={null} />
               <Route path="/BookingAlerts" element={<BookingAlerts/>} />
+              <Route path="/Availability" element={<Availability/>} />
             </Routes>
           </div>
         </div>

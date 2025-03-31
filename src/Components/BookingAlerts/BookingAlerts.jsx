@@ -8,9 +8,11 @@ import { FaAngleUp } from "react-icons/fa6";
 import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
+import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 
 
 export default function BookingAlerts() {
+
   const [open, setopen] = useState(false);
   const [booking, setBooking] = useState([]);
   const [edit, setedit] = useState(null);
@@ -21,6 +23,9 @@ export default function BookingAlerts() {
   const [infoanchorEl, setinfoanchorEl] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
   const openyMenu = Boolean(anchorEl);
 
   const openmodal = () => {
@@ -91,6 +96,17 @@ export default function BookingAlerts() {
     setedit(selectedBooking);
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+  const handleItemsPerPageChange = (newPerPage) => {
+    setItemsPerPage(newPerPage);
+    setCurrentPage(0);
+  };
+  const paginatedBooking = booking.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
 
   return (
     <div className={styles.bookingConteiner}>
@@ -176,7 +192,7 @@ export default function BookingAlerts() {
               </div>
             </div>
 
-            {booking.map((elem, id) => (
+            {paginatedBooking.map((elem, id) => (
               <div key={id} className={styles.bookingbodytwo}>
                 <div key={id} className={styles.bookingboxtwo}>
                   
@@ -205,6 +221,13 @@ export default function BookingAlerts() {
             ))}
           </div>
         </div>
+          <PaginationComponent
+                  currentPage={currentPage}
+                  itemsPerPage={itemsPerPage}
+                  totalItems={booking.length}
+                  onPageChange={handlePageChange}
+                  onItemsPerPageChange={handleItemsPerPageChange}
+                />
       </div>
     </div>
   );

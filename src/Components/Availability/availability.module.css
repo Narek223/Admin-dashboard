@@ -1,0 +1,10 @@
+.conteiner .calendarWrapper {
+  padding: 23px 39px;
+  border: 1px solid #E7E7E7;
+  border-radius: 16px;
+}
+.conteiner .calendarWrapper .rbc-header {
+  font-weight: bold;
+  padding: 10px;
+  background: #f9fafb;
+}/*# sourceMappingURL=availability.module.css.map */

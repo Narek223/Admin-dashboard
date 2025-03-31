@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback} from "react";
 import styles from "./timepicker.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -16,7 +16,7 @@ export default function TimePickerModal({
   onClose,
   onAddtime,
   initialFreeTime,
-  edit
+  edit,
 }) {
   const [date, setDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -81,13 +81,29 @@ export default function TimePickerModal({
     onAddtime(timeSlots);
     onClose();
   };
- useEffect(() => {
+
+  const resetForm = useCallback(() => {
+    setSelectedTime(selectedTime ? dayjs(edit.selectedTime, "HH:mm") : null);
+    setDate("");
+    setTimeSlots("");
+  }, []);
+
+
+  
+  useEffect(() => {
     if (edit) {
-      setDate(edit.date || null)
-      setSelectedTime(edit.selectedTime ? dayjs(edit.selectedTime, "HH:mm") : null);
+      setDate(edit.date || null);
+      setSelectedTime(
+        edit.selectedTime ? dayjs(edit.selectedTime, "HH:mm") : null
+      );
       setTimeSlots(edit.timeSlots || []);
-    } 
-  }, [edit]);
+    } else {
+      resetForm()
+    }
+  }, [edit])
+
+
+
   return (
     <div>
       <Modal
