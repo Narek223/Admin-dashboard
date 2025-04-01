@@ -2,14 +2,20 @@
 
 .calendarWrapper{
     padding: 23px 39px;
-    border: 1px solid #E7E7E7;
-    border-radius: 16px;
 
-    .rbc-header {
-        font-weight: bold;
-        padding: 10px;
-        background: #f9fafb;
-      }
+    border-radius: 16px;
+.calendar{
+  border: 1px solid #E7E7E7;
+  border-radius: 12px;
+  padding: 16px 30px;
+  .rbc-header {
+
+      font-weight: bold;
+      padding: 10px;
+      background: #f9fafb;
+    }
+}
+  
 }
 
 

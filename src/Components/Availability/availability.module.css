@@ -1,9 +1,13 @@
 .conteiner .calendarWrapper {
   padding: 23px 39px;
-  border: 1px solid #E7E7E7;
   border-radius: 16px;
 }
-.conteiner .calendarWrapper .rbc-header {
+.conteiner .calendarWrapper .calendar {
+  border: 1px solid #E7E7E7;
+  border-radius: 12px;
+  padding: 16px 30px;
+}
+.conteiner .calendarWrapper .calendar .rbc-header {
   font-weight: bold;
   padding: 10px;
   background: #f9fafb;
