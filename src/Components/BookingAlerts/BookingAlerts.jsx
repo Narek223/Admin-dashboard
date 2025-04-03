@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import BookingModal from "./BookingModal/BookingModal";
 import styles from "./bookingAlerts.module.scss";
@@ -10,9 +10,7 @@ import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 
-
 export default function BookingAlerts() {
-
   const [open, setopen] = useState(false);
   const [booking, setBooking] = useState([]);
   const [edit, setedit] = useState(null);
@@ -23,8 +21,8 @@ export default function BookingAlerts() {
   const [infoanchorEl, setinfoanchorEl] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const openyMenu = Boolean(anchorEl);
 
@@ -67,7 +65,7 @@ export default function BookingAlerts() {
 
   const onClick = (event) => {
     setanchorEl(event.currentTarget);
-    
+
     seticon(false);
   };
 
@@ -82,7 +80,7 @@ export default function BookingAlerts() {
 
   const handleInfoClick = (event, elem) => {
     setinfoanchorEl(event.currentTarget);
-    setSelectedBooking(elem)
+    setSelectedBooking(elem);
   };
 
   const handleDeleteService = (id) => {
@@ -123,8 +121,8 @@ export default function BookingAlerts() {
         anchorEl={infoanchorEl}
         onClose={infoclose}
         handleEdit={handleEdit}
-       onClick={() => {
-          handleOpenDeleteModal(); 
+        onClick={() => {
+          handleOpenDeleteModal();
         }}
       />
       <DeleteModal
@@ -163,6 +161,14 @@ export default function BookingAlerts() {
                 className={styles.manu}
                 open={openyMenu}
                 onClose={Close}
+                sx={{
+                  "& .MuiPaper-root": {
+                    margin: "4px 0",
+                  },
+                  "& .MuiMenuItem-root:hover": {
+                    backgroundColor: "white",
+                  },
+                }}
               >
                 {["Newest", "Oldest"].map((elem, id) => (
                   <MenuItem
@@ -195,10 +201,11 @@ export default function BookingAlerts() {
             {paginatedBooking.map((elem, id) => (
               <div key={id} className={styles.bookingbodytwo}>
                 <div key={id} className={styles.bookingboxtwo}>
-                  
                   <ul>
-                    <li>{elem.date  }  {elem.startime}</li>
-                    
+                    <li>
+                      {elem.date} {elem.startime}
+                    </li>
+
                     <li>{elem.specialist}</li>
                     <li>{elem.service}</li>
                     <li>
@@ -221,13 +228,13 @@ export default function BookingAlerts() {
             ))}
           </div>
         </div>
-          <PaginationComponent
-                  currentPage={currentPage}
-                  itemsPerPage={itemsPerPage}
-                  totalItems={booking.length}
-                  onPageChange={handlePageChange}
-                  onItemsPerPageChange={handleItemsPerPageChange}
-                />
+        <PaginationComponent
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={booking.length}
+          onPageChange={handlePageChange}
+          onItemsPerPageChange={handleItemsPerPageChange}
+        />
       </div>
     </div>
   );

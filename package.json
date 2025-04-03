@@ -8,6 +8,10 @@
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "^6.4.7",
     "@mui/x-date-pickers": "^7.27.1",
+    "@schedule-x/calendar": "^2.26.0",
+    "@schedule-x/events-service": "^2.26.0",
+    "@schedule-x/react": "^2.26.0",
+    "@schedule-x/theme-default": "^2.26.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -23,6 +27,7 @@
     "react-scripts": "5.0.1",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.85.1",
+    "schedule-x": "^0.0.9",
     "uuid": "^11.1.0",
     "web-vitals": "^2.1.4",
     "yup": "^1.6.1"

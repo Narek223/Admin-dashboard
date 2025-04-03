@@ -180,6 +180,7 @@ export default function Service() {
                           backgroundColor: "rgba(248, 249, 250, 1)",
                           borderRadius: "8px",
                           padding: 0,
+                          margin:"4px 0",
                           width:
                             openCategoryMenu && categoryAnchorEl
                               ? `${categoryAnchorEl.offsetWidth}px`
@@ -230,11 +231,12 @@ export default function Service() {
                           backgroundColor: "rgba(248, 249, 250, 1)",
                           borderRadius: "8px",
                           padding: 0,
+                          margin:"4px 0",
                           width:
                             openServicesMenu && servicesAnchorEl
                               ? `${servicesAnchorEl.offsetWidth}px`
                               : "auto",
-                          minWidth: 100,
+                       
                         },
                         "& .MuiMenuItem-root:hover": {
                           backgroundColor: "white",
