@@ -17,12 +17,6 @@
   padding: 10px 30px;
 }
 
-.todayCell {
-  background: #e3f2fd;
-  position: relative;
-  border: none;
-}
-
 .defaultCell {
   border: 1px solid #E7E7E7;
   border-radius: 12px;

@@ -49,7 +49,7 @@ export default function Availability() {
             endAccessor="end"
             selectable={true}
             style={{ height: "calc(90vh - 80px)" }}
-            daysOfWeek={[1, 2, 3, 4, 5, 6]}
+     
             view={view}
             onView={setView}
             components={{
