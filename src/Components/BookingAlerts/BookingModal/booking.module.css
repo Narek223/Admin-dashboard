@@ -69,12 +69,6 @@
   justify-content: space-between;
   margin: 12px 0;
 }
-.modal .bookingmodal .bookingWrapper .Demo .inputlabeltwo {
-  position: static;
-  font-size: 12px;
-  font-weight: 500;
-  color: rgb(127, 129, 136);
-}
 
 @media screen and (max-height: 930px) {
   .modal .bookingmodal {

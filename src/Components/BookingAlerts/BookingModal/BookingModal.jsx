@@ -16,6 +16,9 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
+import TimePickerComp from "../../../SheredComponents/TimePicker/TimePickerComp";
+
+
 
 export default function BookingModal({
   open,
@@ -69,7 +72,6 @@ export default function BookingModal({
     setId(0);
   }, []);
 
-
   useEffect(() => {
     if (edit) {
       setName(edit.name || "");
@@ -77,9 +79,9 @@ export default function BookingModal({
       setlastname(edit.lastname || "");
       setPhone(edit.phone || "");
       setService(edit.service || "");
-      setSpecialist(edit.specialist || ""  )
-      setStartime(edit.startime ? dayjs(edit.startime, 'HH:mm') : null);
-    setEndtime(edit.endtime ? dayjs(edit.endtime, 'HH:mm') : null);
+      setSpecialist(edit.specialist || "");
+      setStartime(edit.startime ? dayjs(edit.startime, "HH:mm") : null);
+      setEndtime(edit.endtime ? dayjs(edit.endtime, "HH:mm") : null);
       setId(edit.id || 0);
     } else {
       resetForm();
@@ -121,10 +123,10 @@ export default function BookingModal({
       service,
       specialist,
       date,
-      startime: startime.format("HH:mm"), 
-    endtime: endtime.format("HH:mm"),
+      startime: startime.format("HH:mm"),
+      endtime: endtime.format("HH:mm"),
     };
- 
+
     if (edit) {
       addBooking(bookingalerts, true);
     } else {
@@ -151,7 +153,7 @@ export default function BookingModal({
             </p>
 
             <div className={styles.bookingWrapper}>
-              <h1>{edit?"Edit Booking":"Add Booking"}</h1>
+              <h1>{edit ? "Edit Booking" : "Add Booking"}</h1>
               <div>
                 {inputValues.map((elem, index) => (
                   <Inputs
@@ -204,65 +206,20 @@ export default function BookingModal({
               </div>
               <div className={styles.Demo}>
                 <div>
-                  <label className={styles.inputlabeltwo}>Start Time</label>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer
-                      components={["TimePicker"]}
-                      slotProps={{
-                        popper: {
-                          sx: {
-                            "& .MuiStack-root": {
-                              display: "flex",
-                            },
-                          },
-                        },
-                      
-                      }}
-                    >
-                      <TimePicker
-                        onChange={(newValue) => setStartime(newValue)}
-                        value={startime ? dayjs(startime, " ") : null}
-                        ampm={false}
-          
-                        slotProps={{
-                          textField: {
-                            error: error && !startime,
-                          }
-                        }}
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
+                  <TimePickerComp
+                    labalName={"Start Time"}
+                    setstate={setStartime}
+                    state={startime}
+                    error={error && !startime}
+                  />
                 </div>
                 <div>
-                  <label className={styles.inputlabeltwo}>End Time</label>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer
-                      components={["TimePicker"]}
-                      slotProps={{
-                        textField: {
-                         
-                          sx: {
-                            "& .MuiOutlinedInput-root": {
-                              border: "1px solid rgba(98, 99, 115, 0.3)",
-                              borderRadius: "8px",
-                            },
-                          },
-                        },
-                      }}
-                    >
-                      <TimePicker
-                        ampm={false}
-                        onChange={(newValue) => setEndtime(newValue)}
-                        value={endtime ? dayjs(endtime, " ") : null}
-                    
-                        slotProps={{
-                          textField: {
-                            error: error && !startime,
-                          }
-                        }}
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
+                  <TimePickerComp
+                    labalName={"End Time"}
+                    setstate={setEndtime}
+                    state={endtime}
+                    error={error && !endtime}
+                  />
                 </div>
               </div>
               <div className={styles.datapicker}>

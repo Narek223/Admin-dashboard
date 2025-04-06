@@ -7,7 +7,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import CustomToolbar from "./CustomToolbar/CustomToolbar";
 import CustomEvent from "./CustomEvent/CustomEvent";
 import CustomHeader from "./CustomHeader/CustomHeader";
-
+import AvailabilityModal from "./AvailabilityModal/AvailabilityModal";
 
 
 const CustomDateCellWrapper = ({ children, value }) => {
@@ -15,13 +15,18 @@ const CustomDateCellWrapper = ({ children, value }) => {
   
   }
   
-+
+
   </div>;
 };
 
 export default function Availability() {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState("month");
+
+const closemodal=()=>{
+  setOpen(false)
+}
+
 
   const locales = {
     "en-US": require("date-fns/locale/en-US"),
@@ -41,6 +46,11 @@ export default function Availability() {
   return (
     <div className={styles.conteiner}>
       <Header handleOpen={onOpen} />
+      <AvailabilityModal
+      open={open}
+      handleClose={closemodal}
+      
+      />
       <div className={styles.calendarWrapper}>
         <div className={styles.calendar}>
           <Calendar

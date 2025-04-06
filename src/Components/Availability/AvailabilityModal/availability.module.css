@@ -1,0 +1,38 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .availabilityModal {
+  background-color: white;
+  width: 610px;
+  height: auto;
+  max-height: 90vh;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 18px 33px;
+}
+.modal .availabilityModal .close {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .availabilityModal .close .icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.modal .availabilityModal .availabilityWrapper .title {
+  font-size: 24px;
+  line-height: 32px;
+}
+.modal .availabilityModal .availabilityWrapper .nameandStatus {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+}
+.modal .availabilityModal .availabilityWrapper .Demo {
+  display: flex;
+  width: 100%;
+}/*# sourceMappingURL=availability.module.css.map */
