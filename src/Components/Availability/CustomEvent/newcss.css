@@ -1,0 +1,19 @@
+
+.rbc-event {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+}
+
+
+.rbc-event:hover {
+  background-color: transparent !important;
+}
+
+
+.rbc-selected {
+  background-color: transparent !important;
+}

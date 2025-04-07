@@ -10,13 +10,32 @@ import { statusobj } from "../../../Services/availability/status";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import TimePickerComp from "../../../SheredComponents/TimePicker/TimePickerComp";
 
-export default function AvailabilityModal({ open, handleClose }) {
+export default function AvailabilityModal({ open, handleClose,onadd }) {
   const [date, setDate] = useState("");
   const [fullname, setfullname] = useState("");
   const [status, setStatus] = useState("Booked");
   const [startime, setstartime] = useState(null);
   const [endtime, setendtime] = useState(null);
-  const save = () => {};
+
+  const save = () => {
+
+    const [day, month, year] = date.split(' ');
+    const startDate = new Date(year, month - 1, day);
+    startDate.setHours(startime.hour(), startime.minute());
+    
+    const endDate = new Date(year, month - 1, day);
+    endDate.setHours(endtime.hour(), endtime.minute());
+  const availability = {
+    date,     
+    title: fullname,
+    status,
+    start: startDate,
+    end: endDate,
+  };
+onadd(availability)
+handleClose()
+
+  };
   return (
     <div className={styles.availabilityModal}>
       <Modal
@@ -53,15 +72,14 @@ export default function AvailabilityModal({ open, handleClose }) {
                   services={statusobj[0].options}
                 />
               </div>
-              <div  className={styles.Demo}>
+              <div className={styles.Demo}>
                 <TimePickerComp
                   labalName={"Start Time"}
                   setstate={setstartime}
                   state={startime}
                   error={null}
                 />
-           
-             
+
                 <TimePickerComp
                   labalName={"End Time"}
                   setstate={setendtime}
