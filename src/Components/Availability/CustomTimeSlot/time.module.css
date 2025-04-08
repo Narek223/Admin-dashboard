@@ -4,4 +4,11 @@
   justify-content: center;
   color: #7F8188;
   font-size: 14px;
+}
+
+.rbc-time-column .rbc-timeslot-group {
+  flex: 1 1;
+  border-radius: 18px;
+  margin: 2px;
+  border: 0.5px solid #E7E7E7;
 }/*# sourceMappingURL=time.module.css.map */

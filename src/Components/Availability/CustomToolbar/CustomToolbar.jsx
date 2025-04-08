@@ -53,9 +53,33 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
           <FaRegCalendarAlt /> {view === "month" ? "Monthly" : "Weekly"}
         </button>
 
-        <Menu anchorEl={anchorEl} open={openyMenu} onClose={Close}>
+        <Menu
+          anchorEl={anchorEl}
+          open={openyMenu}
+          onClose={Close}
+          sx={{
+            "& .MuiPaper-root": {
+              borderRadius: "8px",
+              padding: 0,
+              margin: "4px 0",
+              width:
+                openyMenu && anchorEl ? `${anchorEl.offsetWidth}px` : "auto",
+              minWidth: 100,
+            },
+            "& .MuiMenuItem-root:hover": {
+              backgroundColor: "white",
+            },
+          }}
+        >
           {["Monthly", "Weekly"].map((elem, index) => (
-            <MenuItem key={index} onClick={() => selectElem(elem)}>
+            <MenuItem key={index} onClick={() => selectElem(elem)}
+            
+            style={{
+              backgroundColor:
+                elem === view
+                  ? "rgba(25, 118, 210, 0.08)"
+                  : "",
+            }}>
               {elem}
             </MenuItem>
           ))}

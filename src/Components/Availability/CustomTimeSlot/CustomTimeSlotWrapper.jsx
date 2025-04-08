@@ -21,6 +21,7 @@ export default function CustomTimeSlotWrapper({ children, value }) {
         overflow: "hidden",
       }}
     >
+      
       {/* Показываем время в верхнем левом углу
       <div className={styles.timeLabel}>{timeLabel}</div> */}
       {children}
