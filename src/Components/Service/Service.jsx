@@ -12,6 +12,8 @@ import Header from "../Header/Header";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import NoAvatar from "../../assets/NoAvatart/download.png"
+import { VscDebugRestart } from "react-icons/vsc";
+
 
 export default function Service() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +23,7 @@ export default function Service() {
   const openCategoryMenu = Boolean(categoryAnchorEl);
   const openServicesMenu = Boolean(servicesAnchorEl);
 
-  const [categoryValue, setcategoryValue] = useState("All Categories");
+  const [categoryValue, setcategoryValue] = useState("All Categories"); 
   const [serviceValue, setserviceValue] = useState("All Services");
   const [icon, seticon] = useState(true);
   const [serviceicon, setserviceicon] = useState(true);
@@ -139,6 +141,11 @@ export default function Service() {
     setIsDeleteModalOpen(false);
   }
 
+
+  const restarTwo=()=>{
+    setcategoryValue("All Categories")
+    setserviceValue("All Services")
+  }
   return (
     <div>
       <Header />
@@ -160,6 +167,7 @@ export default function Service() {
                 <div className={styles.filter}>
                   <h1>Services</h1>
                   <div className={styles.buttonBox}>
+                    <button className={styles.restart} onClick={()=>restarTwo()}><VscDebugRestart /></button>
                     <button
                       onClick={handleCategoryClick}
                       variant="contained"

@@ -31,6 +31,7 @@ export default function TimePickerComp({labalName,setstate,state,error}) {
             onChange={(newValue) => setstate(newValue)}
             value={state ? dayjs(state, " ") : null}
             ampm={false}
+            
             slotProps={{
               textField: {
                 error: error,

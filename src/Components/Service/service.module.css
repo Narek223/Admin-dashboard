@@ -22,6 +22,11 @@
 .servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox {
   display: flex;
 }
+.servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox .restart {
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 .servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox .manu {
   background-color: rgb(248, 249, 250);
 }

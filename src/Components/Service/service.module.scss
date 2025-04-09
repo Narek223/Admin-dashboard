@@ -24,6 +24,11 @@
         font-weight: 700;
       }
       .buttonBox {
+        .restart{
+          width: 50px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
         display: flex;
         .manu {
           background-color: rgba(248, 249, 250, 1);

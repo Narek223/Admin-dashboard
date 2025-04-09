@@ -1,3 +1,6 @@
+.timeSlotWrapper {
+  border-radius: 12px;
+}
 .timeSlotWrapper .timeLabel {
   display: flex;
   align-items: center;

@@ -17,15 +17,6 @@
   padding: 10px 30px;
 }
 
-.defaultCell {
-  border: 1px solid #E7E7E7;
-  border-radius: 12px;
-  width: 100%;
-  height: 100%;
-  margin: 2px;
-  text-align: center;
-}
-
 .rbc-month-view {
   border: none !important;
 }
@@ -61,4 +52,17 @@
 
 .current-hour {
   background-color: #cc3131;
+}
+
+.defaultCell {
+  border: 1px solid #E7E7E7;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  margin: 2px;
+  text-align: center;
+}
+.defaultCell .add {
+  width: 24px;
+  height: 24px;
 }/*# sourceMappingURL=availability.module.css.map */

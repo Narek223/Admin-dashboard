@@ -10,15 +10,15 @@ import CustomHeader from "./CustomHeader/CustomHeader";
 import AvailabilityModal from "./AvailabilityModal/AvailabilityModal";
 import CustomTimeSlotWrapper from "./CustomTimeSlot/CustomTimeSlotWrapper";
 import TimeHeader from "./CustomTimeHeader/TimeHeader";
-
-const CustomDateCellWrapper = ({ children, value }) => {
-  return <div className={styles.defaultCell}>{children}</div>;
-};
+import CustomDate from './CustomDate/CustomDate'
 
 export default function Availability() {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState("month");
   const [eventobj, seteventobj] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+
 
   const closemodal = () => {
     setOpen(false);
@@ -35,9 +35,11 @@ export default function Availability() {
     locales,
   });
 
-  const onOpen = () => {
+  const onOpen = (date) => {
+    setSelectedDate(date);
     setOpen(true);
   };
+  
   const event = (events) => {
     seteventobj((prev) => [
       ...prev,
@@ -52,7 +54,7 @@ export default function Availability() {
   return (
     <div className={styles.conteiner}>
       <Header handleOpen={onOpen} />
-      <AvailabilityModal open={open} handleClose={closemodal} onadd={event} />
+      <AvailabilityModal open={open} handleClose={closemodal} onadd={event} selectdate={selectedDate} />
       <div className={styles.calendarWrapper}>
         <div className={styles.calendar}>
           <Calendar
@@ -60,7 +62,7 @@ export default function Availability() {
             startAccessor="start"
             events={eventobj}
             endAccessor="end"
-            selectable={true}
+            selectable={false}
             style={{ height: "calc(90vh - 80px)" }}
             view={view}
             onView={setView}
@@ -73,12 +75,17 @@ export default function Availability() {
               toolbar: (props) => (
                 <CustomToolbar {...props} setView={setView} view={view} />
               ),
+              month: {
+                dateCellWrapper:(props)=>(
 
-              dateCellWrapper: CustomDateCellWrapper,
+                  <CustomDate  {...props} onOpen={onOpen} />
+                ) 
+              },
               header: CustomHeader,
               event: CustomEvent,
               timeSlotWrapper: CustomTimeSlotWrapper,
               timeGutterHeader: TimeHeader,
+             
             }}
             formats={{
               timeGutterFormat: (date, culture, localizer) =>

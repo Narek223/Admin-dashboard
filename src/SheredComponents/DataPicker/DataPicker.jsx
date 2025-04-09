@@ -15,7 +15,8 @@ export default function ResponsiveDatePickers({
 }) {
   const handleDateChange = (newDate) => {
     if (newDate) {
-      setDate(newDate.format("DD MM YYYY"));
+      // Pass the Date object directly instead of formatted string
+      setDate(newDate.toDate());
     }
   };
 
@@ -48,7 +49,7 @@ export default function ResponsiveDatePickers({
           
           >
             <DesktopDatePicker
-              value={value ? dayjs(value, "DD MM YYYY") : null}
+              value={value ? dayjs(value) : null}
               onChange={handleDateChange}
               showDaysOutsideCurrentMonth
               disablePast={false}

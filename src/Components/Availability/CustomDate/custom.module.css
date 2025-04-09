@@ -1,0 +1,28 @@
+.timeSlotWrapper {
+  border: 1px solid #E7E7E7;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  margin: 2px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.timeSlotWrapper .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timeSlotWrapper .content .addBtn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #292929;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.timeSlotWrapper .content .addBtn:hover {
+  color: #000;
+}/*# sourceMappingURL=custom.module.css.map */

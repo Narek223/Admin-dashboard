@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useCallback } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./availability.module.scss";
@@ -9,32 +9,43 @@ import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import { statusobj } from "../../../Services/availability/status";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import TimePickerComp from "../../../SheredComponents/TimePicker/TimePickerComp";
+import moment from "moment";
 
-export default function AvailabilityModal({ open, handleClose,onadd }) {
-  const [date, setDate] = useState("");
+export default function AvailabilityModal({ open, handleClose, onadd,selectedDate }) {
+  const [date, setDate] = useState(null);
   const [fullname, setfullname] = useState("");
   const [status, setStatus] = useState("Booked");
   const [startime, setstartime] = useState(null);
   const [endtime, setendtime] = useState(null);
 
+  const resetForm = useCallback(() => {
+    setStatus("Booked");
+    setfullname("");
+    setDate(null);
+    setstartime(null);
+    setendtime(null);
+  }, []);
+
   const save = () => {
+    const selected = moment(date || selectedDate);
+  const startDate = selected.clone().toDate();
+  startDate.setHours(startime.hour(), startime.minute());
 
-    const [day, month, year] = date.split(' ');
-    const startDate = new Date(year, month - 1, day);
-    startDate.setHours(startime.hour(), startime.minute());
-    
-    const endDate = new Date(year, month - 1, day);
-    endDate.setHours(endtime.hour(), endtime.minute());
-  const availability = {
-    date,     
-    title: fullname,
-    status,
-    start: startDate,
-    end: endDate,
-  };
-onadd(availability)
-handleClose()
+  const endDate = selected.clone().toDate();
+  endDate.setHours(endtime.hour(), endtime.minute());
+ console.log(selected.format("MM/DD/YYYY"))
 
+
+    const availability = {
+      date:date || selectedDate,
+      title: fullname,
+      status,
+      start: startDate,
+      end: endDate,
+    };
+    onadd(availability);
+    handleClose();
+    resetForm()
   };
   return (
     <div className={styles.availabilityModal}>
@@ -88,9 +99,9 @@ handleClose()
                 />
               </div>
               <DataPicker
-                setDate={setDate}
+                setDate={setDate }
                 error={null}
-                value={date}
+                value={date || (selectedDate ? new Date(selectedDate) : null)}
                 label={"Select Date"}
               />
               <ModalBtn onClose={handleClose} handleSave={save} edit={null} />
