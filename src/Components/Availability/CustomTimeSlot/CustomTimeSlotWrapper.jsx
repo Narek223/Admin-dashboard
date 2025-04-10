@@ -1,6 +1,8 @@
 import React from "react";
 import { format, isToday } from "date-fns";
 import styles from "./time.module.scss";
+ import './timeslot.css'
+
 
 export default function CustomTimeSlotWrapper({ children, value }) {
 
@@ -10,7 +12,7 @@ export default function CustomTimeSlotWrapper({ children, value }) {
     <div
       className={styles.timeSlotWrapper}
       style={{
-
+ 
         border: "1px solid #eee",
      
         margin: "2px",
