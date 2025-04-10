@@ -63,6 +63,7 @@ export default function Availability() {
             events={eventobj}
             endAccessor="end"
             selectable={false}
+            showMultiDayTimes={false}
             style={{ height: "calc(90vh - 80px)" }}
             view={view}
             onView={setView}
@@ -88,6 +89,7 @@ export default function Availability() {
              
             }}
             formats={{
+              eventTimeRangeFormat: () => null,
               timeGutterFormat: (date, culture, localizer) =>
                 localizer.format(date, 'hh:mm a', culture)
             }}
