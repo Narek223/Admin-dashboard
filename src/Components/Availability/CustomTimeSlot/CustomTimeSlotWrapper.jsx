@@ -1,30 +1,49 @@
 import React from "react";
-import { format, isToday } from "date-fns";
 import styles from "./time.module.scss";
- import './timeslot.css'
+import { IoAddOutline } from "react-icons/io5";
+
+export default function CustomTimeSlotWrapper({
+  children,
+  value,
+  onOpen,
+  event,
+  hasevent,
+  view
+}) {
+
+  const slotDate = value;
+  const hasEvent = hasevent(slotDate, event, view);
 
 
-export default function CustomTimeSlotWrapper({ children, value }) {
 
-  const timeLabel = format(value, "hh:mm a");
 
-  return (
-    <div
-      className={styles.timeSlotWrapper}
-      style={{
- 
-        border: "1px solid #eee",
-     
-        margin: "2px",
-        position: "relative",
   
-        height: "80px",
-        overflow: "hidden",
-      }}
-    >
-      
+  return (
+    <div className={styles.timeSlotWrapper}
+    style={{
+
+      border: "1px solid #eee",
+   
+      margin: "2px",
+      position: "relative",
+
+      height: "80px",
+      overflow: "hidden",
+    }}
     
+    >
       {children}
+      {!hasEvent && (
+        <button
+          className={styles.btn}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpen(slotDate);
+          }}
+        >
+          <IoAddOutline />
+        </button>
+      )}
     </div>
   );
 }

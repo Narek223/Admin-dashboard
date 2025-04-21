@@ -11,10 +11,13 @@ export default function Inputs({
   placeholder,
   type,
   label,
+  Fullwidth,
+  width
 }) {
   return (
     <FormControl className={styles.formControl}
-   
+    style={{ width: Fullwidth ? width : "47%" }}
+
     >
       <InputLabel variant="standard" className={styles.inputlabel}>
         {label}

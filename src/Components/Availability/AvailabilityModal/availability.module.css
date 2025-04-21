@@ -34,5 +34,6 @@
 }
 .modal .availabilityModal .availabilityWrapper .Demo {
   display: flex;
+  justify-content: space-between;
   width: 100%;
 }/*# sourceMappingURL=availability.module.css.map */

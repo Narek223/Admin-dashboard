@@ -1,0 +1,121 @@
+.blogConteiner {
+  .blog {
+    padding: 10px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .blogHeader {
+      height: calc(90vh - 80px);
+      overflow-y: auto;
+      .blogHeaderTitle {
+        margin: 40px 0 12px 0;
+        background-color: #ffffff;
+        border-radius: 12px;
+        height: 72px;
+        width: 100%;
+
+        ul {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          list-style: none;
+          padding: 0 27px;
+          li {
+            font-size: 14px;
+            font-weight: 600;
+            .icons {
+              width: 20px;
+              height: 20px;
+            }
+            &:nth-child(1) {
+              width: 200px;
+              display: flex;
+            }
+            &:nth-child(2) {
+              width: 200px;
+            }
+            &:nth-child(3) {
+              width: 200px;
+            }
+            &:nth-child(4) {
+              width: 200px;
+            }
+            &:nth-child(5) {
+              width: calc(100% - 800px);
+            }
+            &:nth-child(6) {
+              width: 200px;
+            }
+            &:nth-child(7) {
+              width: 200px;
+            }
+          }
+        }
+      }
+      .blogList {
+        .blogbody {
+          .blogbodylist {
+            padding: 0 27px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            height: 146px;
+            width: 100%;
+          
+              ul {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                list-style: none;
+           
+                li {
+                  font-size: 14px;
+                  font-weight: 600;
+                  .img{
+                    width: 111px;
+                    height: 93px;
+                    border-radius: 12px;
+                  }
+                  .icons {
+                    width: 20px;
+                    height: 20px;
+                  }
+                  &:nth-child(1) {
+                    width: 200px;
+             
+                  }
+                  &:nth-child(2) {
+                    width: 200px;
+                  }
+                  &:nth-child(3) {
+                    width: 200px;
+                  }
+                  &:nth-child(4) {
+                    width: 200px;
+                  }
+                  &:nth-child(5) {
+                    width: calc(100% - 800px);
+                  }
+                  &:nth-child(6) {
+                    width: 200px;
+                  }
+               
+                }
+              
+            }
+            .infobtn {
+              width: 1px;
+              cursor: pointer;
+              background-color: white;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

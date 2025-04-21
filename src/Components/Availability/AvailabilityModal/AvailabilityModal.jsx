@@ -1,4 +1,4 @@
-import React, { useState,useCallback } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./availability.module.scss";
@@ -10,13 +10,21 @@ import { statusobj } from "../../../Services/availability/status";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import TimePickerComp from "../../../SheredComponents/TimePicker/TimePickerComp";
 import moment from "moment";
+import dayjs from "dayjs";
 
-export default function AvailabilityModal({ open, handleClose, onadd,selectedDate }) {
+export default function AvailabilityModal({
+  open,
+  handleClose,
+  onadd,
+  selectedDate,
+  edit,
+}) {
   const [date, setDate] = useState(null);
   const [fullname, setfullname] = useState("");
   const [status, setStatus] = useState("Booked");
   const [startime, setstartime] = useState(null);
   const [endtime, setendtime] = useState(null);
+  const [id, setid] = useState(0);
 
   const resetForm = useCallback(() => {
     setStatus("Booked");
@@ -24,28 +32,49 @@ export default function AvailabilityModal({ open, handleClose, onadd,selectedDat
     setDate(null);
     setstartime(null);
     setendtime(null);
+    setid(0);
   }, []);
+
+  useEffect(() => {
+    if (edit) {
+      setfullname(edit.title || "");
+      setDate(edit.date || "");
+      setStatus(edit.status || "Booked");
+
+      setstartime(dayjs(edit.start) || null);
+      setendtime(dayjs(edit.end) || null);
+      setid(edit.id || 0);
+    } else {
+      resetForm();
+    }
+  }, [edit, resetForm]);
 
   const save = () => {
     const selected = moment(date || selectedDate);
-  const startDate = selected.clone().toDate();
-  startDate.setHours(startime.hour(), startime.minute());
+    const startDate = selected.clone().toDate();
+    startDate.setHours(startime.hour(), startime.minute());
 
-  const endDate = selected.clone().toDate();
-  endDate.setHours(endtime.hour(), endtime.minute());
- console.log(selected.format("MM/DD/YYYY"))
-
+    const endDate = selected.clone().toDate();
+    endDate.setHours(endtime.hour(), endtime.minute());
+    console.log(selected.format("MM/DD/YYYY"));
 
     const availability = {
-      date:date || selectedDate,
+      id,
+      date: date || selectedDate,
       title: fullname,
       status,
       start: startDate,
       end: endDate,
     };
-    onadd(availability);
+
+    if (edit) {
+      onadd(availability, true);
+    } else {
+      onadd(availability, false);
+    }
+  
     handleClose();
-    resetForm()
+    resetForm();
   };
   return (
     <div className={styles.availabilityModal}>
@@ -64,7 +93,7 @@ export default function AvailabilityModal({ open, handleClose, onadd,selectedDat
             </p>
 
             <div className={styles.availabilityWrapper}>
-              <h1 className={styles.title}>Add Availability</h1>
+              <h1 className={styles.title}>{edit ? "Edit Availability" :"Add Availability"}</h1>
               <div className={styles.nameandStatus}>
                 <Inputs
                   error={null}
@@ -99,12 +128,12 @@ export default function AvailabilityModal({ open, handleClose, onadd,selectedDat
                 />
               </div>
               <DataPicker
-                setDate={setDate }
+                setDate={setDate}
                 error={null}
                 value={date || (selectedDate ? new Date(selectedDate) : null)}
                 label={"Select Date"}
               />
-              <ModalBtn onClose={handleClose} handleSave={save} edit={null} />
+              <ModalBtn onClose={handleClose} handleSave={save} edit={edit} />
             </div>
           </div>
         </Box>

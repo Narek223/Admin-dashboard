@@ -18,10 +18,7 @@
   background: transparent;
   border: none;
   font-size: 24px;
-  color: #292929;
+  color: #888;
   cursor: pointer;
   transition: color 0.3s;
-}
-.timeSlotWrapper .content .addBtn:hover {
-  color: #000;
 }/*# sourceMappingURL=custom.module.css.map */

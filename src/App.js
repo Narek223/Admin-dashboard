@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Client from "./Components/Client/Client";
 import BookingAlerts from "./Components/BookingAlerts/BookingAlerts";
 import Availability from "./Components/Availability/Availability";
-
+import Blog from "./Components/Blog/Blog";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -39,7 +39,7 @@ function App() {
               <Route path="/Services" element={<Service />} />
               <Route path="/Experts" element={<Experts />} />
               <Route path="/Client" element={<Client />} />
-              <Route path="/Blog" element={null} />
+              <Route path="/Blog" element={<Blog/>} />
               <Route path="/Categories" element={null} />
               <Route path="/BookingAlerts" element={<BookingAlerts/>} />
               <Route path="/Availability" element={<Availability/>} />

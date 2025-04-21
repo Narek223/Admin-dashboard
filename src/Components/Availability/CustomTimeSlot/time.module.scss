@@ -1,17 +1,34 @@
-.timeSlotWrapper{
-border-radius: 12px;
-    .timeLabel{
- display: flex;
- align-items: center;
- justify-content: center;
-        color: #7F8188;
-        font-size: 14px;
+.timeSlotWrapper {
+    position: relative;
+    border-radius: 12px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+  j
+    .timeLabel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7F8188;
+      font-size: 14px;
     }
-}
-.rbc-time-column .rbc-timeslot-group {
-    flex: 1 1;
-    border-radius: 18px;
-    margin: 2px;
-    border: 0.5px solid #E7E7E7;
-}
-
+  
+    .btn {
+      position: absolute;
+      background: transparent;
+  
+      font-size: 24px;
+ 
+      border: none;
+      cursor: pointer;
+      color: #888;
+   
+  
+    
+      z-index: 10;
+      pointer-events: auto;
+    }
+  
+   
+  }
+  
