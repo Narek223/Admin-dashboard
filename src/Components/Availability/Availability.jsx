@@ -39,7 +39,7 @@ export default function Availability() {
   });
 
   const onOpen = (date) => {
-    setSelectedDate(date);
+ setSelectedDate(date);
     setOpen(true);
     setedit(null);
   };
@@ -99,7 +99,7 @@ export default function Availability() {
         open={open}
         handleClose={closemodal}
         onadd={event}
-        selectdate={selectedDate}
+        selectedDate={selectedDate}
         edit={edit}
       />
 

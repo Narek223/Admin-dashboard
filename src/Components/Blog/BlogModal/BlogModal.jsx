@@ -98,7 +98,7 @@ export default function BlogModal({
             </p>
 
             <div className={styles.BlogWrapper}>
-              <h1> Add Blog</h1>
+              <h1>{edit?"Edit blog":"Add blog"}</h1>
               <Inputs
                 error={error && !title}
                 value={title}
@@ -133,6 +133,7 @@ export default function BlogModal({
               />
               <div>
                 <TextField
+                error={error && !content}
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Write a blog text..."

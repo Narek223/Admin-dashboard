@@ -130,7 +130,7 @@ export default function AvailabilityModal({
               <DataPicker
                 setDate={setDate}
                 error={null}
-                value={date || (selectedDate ? new Date(selectedDate) : null)}
+                value={date ||  new Date(selectedDate)}
                 label={"Select Date"}
               />
               <ModalBtn onClose={handleClose} handleSave={save} edit={edit} />

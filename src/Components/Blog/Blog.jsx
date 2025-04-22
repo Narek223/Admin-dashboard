@@ -6,6 +6,9 @@ import { AiOutlineMore } from "react-icons/ai";
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
+import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
+
+
 
 export default function Blog() {
   const [open, setopen] = useState(false);
@@ -15,6 +18,9 @@ export default function Blog() {
   const [selectedblog, setselectedblog] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [error, setError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
 
   const openmodal = () => {
     setopen(true);
@@ -60,6 +66,20 @@ export default function Blog() {
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+  const handleItemsPerPageChange = (newPerPage) => {
+    setItemsPerPage(newPerPage);
+    setCurrentPage(0);
+  };
+  const paginatedBlog= bloglist.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+
   return (
     <div className={styles.blogConteiner}>
       <Header handleOpen={openmodal} />
@@ -106,7 +126,7 @@ export default function Blog() {
           </div>
 
           <div className={styles.blogList}>
-            {bloglist.map((elem, id) => (
+            {paginatedBlog.map((elem, id) => (
               <div className={styles.blogbody} key={id}>
                 <div className={styles.blogbodylist}>
                   <ul>
@@ -133,6 +153,13 @@ export default function Blog() {
             ))}
           </div>
         </div>
+         <PaginationComponent
+                  currentPage={currentPage}
+                  itemsPerPage={itemsPerPage}
+                  totalItems={bloglist.length}
+                  onPageChange={handlePageChange}
+                  onItemsPerPageChange={handleItemsPerPageChange}
+                />
       </div>
     </div>
   );
