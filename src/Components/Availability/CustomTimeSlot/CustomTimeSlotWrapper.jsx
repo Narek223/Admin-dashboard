@@ -17,7 +17,8 @@ export default function CustomTimeSlotWrapper({
 
 
 
-  
+
+
   return (
     <div className={styles.timeSlotWrapper}
     style={{

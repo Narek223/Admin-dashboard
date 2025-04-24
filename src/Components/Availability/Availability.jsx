@@ -21,6 +21,9 @@ export default function Availability() {
   const [edit, setedit] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [eventToDelete, setEventToDelete] = useState(null);
+  const [viewDate, setViewDate] = useState(new Date());
+
+
 
   const closemodal = () => {
     setOpen(false);
@@ -57,22 +60,23 @@ export default function Availability() {
 
   const hasEventAtSlot = (cellDate, events, view = "month") => {
     return events.some((event) => {
-      const eventDate = new Date(event.start);
+      const eventStart = new Date(event.start);
+      const eventEnd = new Date(event.end);
+  
       if (view === "month") {
         return (
-          eventDate.getFullYear() === cellDate.getFullYear() &&
-          eventDate.getMonth() === cellDate.getMonth() &&
-          eventDate.getDate() === cellDate.getDate()
+          eventStart.getFullYear() === cellDate.getFullYear() &&
+          eventStart.getMonth() === cellDate.getMonth() &&
+          eventStart.getDate() === cellDate.getDate()
         );
-      } else {
-        eventDate.setSeconds(0, 0);
-        const cellDateCopy = new Date(cellDate);
-        cellDateCopy.setSeconds(0, 0);
-        return eventDate.getTime() === cellDateCopy.getTime();
+      } else if (view === "week") {
+        return (
+          cellDate >= eventStart && cellDate < eventEnd
+        );
       }
+      return false;
     });
   };
-
   const handleEditGlobal = (event) => {
     setedit(event);
     setOpen(true);
@@ -119,6 +123,7 @@ export default function Availability() {
             endAccessor="end"
             events={eventobj}
             selectable={false}
+            onNavigate={newDate => setViewDate(newDate)}
             showMultiDayTimes={false}
             style={{ height: "calc(90vh - 80px)" }}
             view={view}
@@ -127,6 +132,7 @@ export default function Availability() {
             max={new Date(1970, 1, 1, 18, 0, 0)}
             step={60}
             timeslots={1}
+            views={['month', 'week']} 
            components={{
               toolbar: (props) => (
                 <CustomToolbar {...props} setView={setView} view={view} />
@@ -136,9 +142,11 @@ export default function Availability() {
                 dateCellWrapper: (props) => (
                   <CustomDate 
                     {...props} 
+                    view={view}
                     onOpen={onOpen} 
                     event={eventobj} 
                     hasevent={hasEventAtSlot}
+                    viewDate={viewDate}
                   />
                 )
               },
@@ -151,9 +159,16 @@ export default function Availability() {
                     event={eventobj}
                     hasevent={hasEventAtSlot}
                     view="week"
+
+                    viewDate={viewDate}
                   />
                 ),
               },
+              timeGutterWrapper: ({ children }) => (
+                <div>
+                  {children}
+                </div>
+              ),
               
             
          

@@ -10,27 +10,29 @@ export default function CustomDate({
   onOpen,
   event,
   hasevent,
-  view
+  view,
+  viewDate,
 }) {
   
-  const slotDate = value;
+  const slotDate = new Date(value);
 // slotDate.setSeconds(0, 0);
 const hasEvent = hasevent(value, event, view);
+ 
 
 
-
-
+const isThisMonth = value.getMonth() === viewDate.getMonth();
 
 
 
 
   return (
-    <div className={styles.timeSlotWrapper}>
+    <div  key={value.toISOString()} className={styles.timeSlotWrapper}>
       <div className={styles.content}>
-        {!hasEvent && (
+        {isThisMonth && (
           <button
             className={styles.addBtn}
             onClick={() => onOpen(slotDate)}
+            disabled={hasEvent}
           >
             <IoAddOutline/>
           </button>

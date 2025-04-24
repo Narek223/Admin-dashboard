@@ -50,7 +50,7 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
       </div>
       <div className={styles.buttons}>
         <button onClick={onclick}>
-          <FaRegCalendarAlt /> {view === "month" ? "Monthly" : "Weekly"}
+          <FaRegCalendarAlt   className={styles.icon}/> {view === "month" ? "Monthly" : "Weekly"}
         </button>
 
         <Menu
@@ -72,21 +72,21 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
           }}
         >
           {["Monthly", "Weekly"].map((elem, index) => (
-            <MenuItem key={index} onClick={() => selectElem(elem)}
-            
-            style={{
-              backgroundColor:
-                elem === view
-                  ? "rgba(25, 118, 210, 0.08)"
-                  : "",
-            }}>
+            <MenuItem
+              key={index}
+              onClick={() => selectElem(elem)}
+              style={{
+                backgroundColor:
+                  elem === view ? "rgba(25, 118, 210, 0.08)" : "",
+              }}
+            >
               {elem}
             </MenuItem>
           ))}
         </Menu>
 
         <button>
-          Experts <FaAngleDown />
+          Experts <FaAngleDown className={styles.icon} />
         </button>
       </div>
     </div>
