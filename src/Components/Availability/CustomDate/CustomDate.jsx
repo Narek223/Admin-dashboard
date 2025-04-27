@@ -14,7 +14,7 @@ export default function CustomDate({
   viewDate,
 }) {
   
-  const slotDate = new Date(value);
+  const slotDate =value;
 // slotDate.setSeconds(0, 0);
 const hasEvent = hasevent(value, event, view);
  

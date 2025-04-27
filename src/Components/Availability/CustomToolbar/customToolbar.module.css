@@ -49,6 +49,9 @@
 .toolbarConteiner .Customtoolbar ul li:nth-child(3)::marker {
   color: #008000;
 }
+.toolbarConteiner .buttons {
+  display: flex;
+}
 .toolbarConteiner .buttons button {
   margin: 0 12px;
   cursor: pointer;
@@ -56,7 +59,13 @@
   width: 156px;
   border-radius: 8px;
   font-size: 16px;
-  color: #7F8188;
+  color: #7f8188;
   border: none;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toolbarConteiner .buttons button .icon {
+  margin: 0 2px;
 }/*# sourceMappingURL=customToolbar.module.css.map */

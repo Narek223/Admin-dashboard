@@ -190,6 +190,7 @@ export default function Availability() {
                 style: {
                   display: isWeekend ? "none" : "block", 
                 },
+              
               };
             }}
             formats={{

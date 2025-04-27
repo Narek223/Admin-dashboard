@@ -1,34 +1,25 @@
 .timeSlotWrapper {
-    position: relative;
-    border-radius: 12px;
-    display: flex; 
+  position: relative;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  .timeLabel {
+    display: flex;
     align-items: center;
     justify-content: center;
-  j
-    .timeLabel {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7F8188;
-      font-size: 14px;
-    }
-  
-    .btn {
-      position: absolute;
-      background: transparent;
-  
-      font-size: 24px;
- 
-      border: none;
-      cursor: pointer;
-      color: #888;
-   
-  
-    
-      z-index: 10;
-      pointer-events: auto;
-    }
-  
-   
+    color: #7f8188;
+    font-size: 14px;
   }
-  
+
+
+}
+.rbc-time-gutter    {
+  .btnone{
+
+    display: none;
+  }
+
+   }
+   

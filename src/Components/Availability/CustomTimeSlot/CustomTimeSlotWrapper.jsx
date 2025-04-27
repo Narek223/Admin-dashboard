@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./time.module.scss";
+import "./timeslot.css";
 import { IoAddOutline } from "react-icons/io5";
 
 export default function CustomTimeSlotWrapper({
@@ -8,42 +9,39 @@ export default function CustomTimeSlotWrapper({
   onOpen,
   event,
   hasevent,
-  view
+  view,
+  viewDate,
 }) {
-
   const slotDate = value;
+
   const hasEvent = hasevent(slotDate, event, view);
 
-
-
-
-
+  const shouldShowPlus = !hasEvent;
 
   return (
-    <div className={styles.timeSlotWrapper}
-    style={{
+    <div
+      className={styles.timeSlotWrapper}
+      style={{
+        border: "1px solid #eee",
 
-      border: "1px solid #eee",
-   
-      margin: "2px",
-      position: "relative",
-
-      height: "80px",
-      overflow: "hidden",
-    }}
-    
+        position: "relative",
+        height: "80px",
+        overflow: "hidden",
+      }}
     >
-      {children}
-      {!hasEvent && (
-        <button
-          className={styles.btn}
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpen(slotDate);
-          }}
-        >
-          <IoAddOutline />
-        </button>
+      <div className="time-label">{children}</div>
+
+      {shouldShowPlus && (
+        <div className="btnone">
+          <button
+            className="btnbutton"
+            onClick={(e) => {
+              onOpen(slotDate);
+            }}
+          >
+            <IoAddOutline />
+          </button>
+        </div>
       )}
     </div>
   );

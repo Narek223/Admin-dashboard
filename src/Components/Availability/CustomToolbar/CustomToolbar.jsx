@@ -77,7 +77,7 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
               onClick={() => selectElem(elem)}
               style={{
                 backgroundColor:
-                  elem === view ? "rgba(25, 118, 210, 0.08)" : "",
+                (view === "month" && elem === "Monthly") || (view === "week" && elem === "Weekly") ? "rgba(25, 118, 210, 0.08)" : "",
               }}
             >
               {elem}
