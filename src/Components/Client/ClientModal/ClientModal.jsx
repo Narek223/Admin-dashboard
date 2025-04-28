@@ -7,6 +7,7 @@ import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 import styles from "./clientmodal.module.scss";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
+import dayjs from "dayjs";
 
 export default function ClientModal({
   open,
@@ -38,7 +39,6 @@ export default function ClientModal({
     }
   }, [name, date, mail, phone, setError]);
 
-
   useEffect(() => {
     if (edit) {
       setName(edit.name || "");
@@ -57,13 +57,15 @@ export default function ClientModal({
     setError(hasEmptyFields);
 
     if (hasEmptyFields) return;
-    if (!name || !date || !mail || !phone ) {
+    if (!name || !date || !mail || !phone) {
       return;
     }
+    const formattedDate =
+      date instanceof Date ? dayjs(date).format("YYYY-MM-DD") : date;
     const clientObj = {
       id,
       name,
-      date,
+      date: formattedDate,
       mail,
       phone,
       files,
@@ -98,7 +100,7 @@ export default function ClientModal({
             <AiOutlineClose onClick={handleClose} className={styles.icon} />
           </p>
           <div className={styles.clientmodalpage}>
-          <h1>{edit? "Edit Client ":"Add Client"}</h1>
+            <h1>{edit ? "Edit Client " : "Add Client"}</h1>
           </div>
           <div className={styles.clentselect}>
             <div className={styles.clentwrapper}>
@@ -110,7 +112,11 @@ export default function ClientModal({
                 type="text"
                 label="Full Name"
               />
-              <DataPicker setDate={setDate} error={error && !date} value={date} />
+              <DataPicker
+                setDate={setDate}
+                error={error && !date}
+                value={date}
+              />
             </div>
             <div>
               <Inputs

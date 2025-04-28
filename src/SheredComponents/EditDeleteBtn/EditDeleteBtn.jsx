@@ -6,13 +6,14 @@ import styles from "./editDeleteBtn.module.scss";
 import { useLocation } from "react-router-dom";
 import { MdFreeBreakfast } from "react-icons/md";
 import { MdOutlineFreeBreakfast } from "react-icons/md";
+import { PiEyes } from "react-icons/pi";
 
 export default function EditDeleteBtn({
   anchorEl,
   onClose,
   handleEdit,
   onClick,
-  onTimeModal
+  onTimeModal,
 }) {
   const location = useLocation();
   return (
@@ -33,7 +34,6 @@ export default function EditDeleteBtn({
           "& .MuiMenuItem-root:hover": {
             backgroundColor: "white",
           },
-         
         }}
       >
         <MenuItem onClick={handleEdit}>
@@ -42,16 +42,22 @@ export default function EditDeleteBtn({
         </MenuItem>
 
         {location.pathname === "/Experts" ? (
-          <MenuItem  onClick={() => {
-            onTimeModal();
-            onClose();
-         
-          }}>
+          <MenuItem
+            onClick={() => {
+              onTimeModal();
+              onClose();
+            }}
+          >
             <MdOutlineFreeBreakfast
               className={styles.newicon}
               style={{ marginRight: "12px" }}
             />
             Graphics
+          </MenuItem>
+        ) : null}
+        {location.pathname === "/Blog" ? (
+          <MenuItem>
+            <PiEyes style={{ marginRight: "12px" }} /> View
           </MenuItem>
         ) : null}
 
@@ -61,19 +67,15 @@ export default function EditDeleteBtn({
             onClose();
           }}
           sx={{
-              
             color: "red",
-        
-        }}
+          }}
         >
           <FaRegTrashAlt
             className={styles.newicon}
             style={{ marginRight: "12px" }}
-            
           />
           Delete
         </MenuItem>
-       
       </Menu>
     </div>
   );

@@ -1,0 +1,36 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .blogModal {
+  background-color: white;
+  width: 610px;
+  height: auto;
+  max-height: 90vh;
+  overflow-y: scroll;
+  border-radius: 12px;
+  padding: 18px 33px;
+}
+.modal .blogModal .close {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .blogModal .close .icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.modal .blogModal .BlogWrapper h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+@media screen and (max-height: 930px) {
+  .modal .bookingmodal {
+    overflow-y: scroll;
+  }
+}/*# sourceMappingURL=blogModal.module.css.map */

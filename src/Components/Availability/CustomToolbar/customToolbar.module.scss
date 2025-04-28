@@ -1,11 +1,11 @@
 .toolbarConteiner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 30px 0;
   .Customtoolbar {
     display: flex;
-  
+
     .prev {
       width: 24px;
       height: 24px;
@@ -27,43 +27,50 @@
       font-size: 20px;
       margin: 0 18px;
     }
-  
-      ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    width: 400px;
-        li {
-            font-weight: 500;
-            font-size: 14px;
-            width: 100px;
-            color: #000000;
-          &:nth-child(1)::marker {
-            color: #ff0000;
-         
-          }
-          &:nth-child(2)::marker {
-            color: #ffa500;
-          }
-          &:nth-child(3)::marker {
-            color: #008000;
-          }
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 400px;
+      li {
+        font-weight: 500;
+        font-size: 14px;
+        width: 100px;
+        color: #000000;
+        &:nth-child(1)::marker {
+          color: #ff0000;
+        }
+        &:nth-child(2)::marker {
+          color: #ffa500;
+        }
+        &:nth-child(3)::marker {
+          color: #008000;
         }
       }
-    
+    }
   }
-  .buttons{
-    button{
-        margin: 0 12px;
-        cursor: pointer;
-        height: 56px;
-        width: 156px;
-        border-radius: 8px;
-        font-size: 16px;
-        color: #7F8188;
-        border:none;
-        background-color: white;
+  .buttons {
+    display: flex;
+    button {
+      margin: 0 12px;
+      cursor: pointer;
+      height: 56px;
+      width: 156px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #7f8188;
+      border: none;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon{
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
       }
+    }
   }
- 
 }

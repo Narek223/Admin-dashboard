@@ -1,4 +1,36 @@
 
 .rbc-day-slot, .rbc-time-content, .rbc-time-column {
     border: none;
+  
+  }
+ 
+  
+  .rbc-time-column .rbc-timeslot-group .rbc-slot-add-btn {
+    display: none ;
+  }
+  .rbc-time-gutter .btnone   {
+ display: none;
+  }
+  .btnbutton {
+
+    width: 100%;
+    height: 100%;
+position: absolute;
+    background: transparent;
+
+    font-size: 24px;
+
+    border: none;
+    cursor: pointer;
+    color: #888;
+
+    z-index: 10;
+    pointer-events: auto;
+  }
+  .btnone{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  
+   
   }

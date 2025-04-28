@@ -14,6 +14,8 @@ import CustomEvent from "./CustomEvent/CustomEvent";
 const CustomHeader = ({ label, date }) => {
   const dayOfWeek = format(date, 'eeee'); 
   const isWeekend = ['Saturday', 'Sunday'].includes(dayOfWeek);
+console.log(date.getDay())
+
 
   return (
     <div 

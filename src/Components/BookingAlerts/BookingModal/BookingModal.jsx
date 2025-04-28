@@ -8,11 +8,7 @@ import { services } from "../../../Services/data/addServices/services";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs from "dayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
@@ -115,6 +111,9 @@ export default function BookingModal({
     // ) {
     //   return;
     // }
+    const formattedDate =
+    date instanceof Date ? dayjs(date).format("YYYY-MM-DD") : date;
+
     const bookingalerts = {
       id,
       name,
@@ -122,7 +121,7 @@ export default function BookingModal({
       phone,
       service,
       specialist,
-      date,
+      date:formattedDate,
       startime: startime.format("HH:mm"),
       endtime: endtime.format("HH:mm"),
     };
@@ -205,22 +204,22 @@ export default function BookingModal({
                 </FormControl>
               </div>
               <div className={styles.Demo}>
-                <div>
+           
                   <TimePickerComp
                     labalName={"Start Time"}
                     setstate={setStartime}
                     state={startime}
                     error={error && !startime}
                   />
-                </div>
-                <div>
+             
+              
                   <TimePickerComp
                     labalName={"End Time"}
                     setstate={setEndtime}
                     state={endtime}
                     error={error && !endtime}
                   />
-                </div>
+              
               </div>
               <div className={styles.datapicker}>
                 <DataPicker
