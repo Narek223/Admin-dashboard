@@ -7,8 +7,6 @@ import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import { services } from "../../../Services/data/addServices/services";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 
@@ -26,19 +24,19 @@ export default function BlogModal({
   const [files, setFiles] = useState("");
   const [content, setContent] = useState("");
   const [id, setId] = useState(0);
+  const [subtitle, setSubtitle] = useState("");
 
   const handleFileSelect = (fileUrl) => {
     setFiles(fileUrl);
   };
+
   const resetForm = useCallback(() => {
     setitle("");
     setCategory("Classic");
-
     setAuthor("");
-
     setFiles("");
     setContent("");
-
+    setSubtitle("");
     setId(0);
   }, []);
 
@@ -49,6 +47,7 @@ export default function BlogModal({
       setAuthor(edit.Author || "");
       setFiles(edit.files || "");
       setContent(edit.content || "");
+      setSubtitle(edit.subtitle || "");
       setId(edit.id || 0);
     } else {
       resetForm();
@@ -56,8 +55,7 @@ export default function BlogModal({
   }, [edit, resetForm]);
 
   const handleSave = () => {
-    const hasEmptyFields = !title || !category || !Author  || !content;
-
+    const hasEmptyFields = !title || !category || !Author || !content || !subtitle;
     seterror(hasEmptyFields);
     if (hasEmptyFields) {
       return;
@@ -98,7 +96,7 @@ export default function BlogModal({
             </p>
 
             <div className={styles.BlogWrapper}>
-              <h1>{edit?"Edit blog":"Add blog"}</h1>
+              <h1>{edit ? "Edit blog" : "Add blog"}</h1>
               <Inputs
                 error={error && !title}
                 value={title}
@@ -110,6 +108,16 @@ export default function BlogModal({
                 width={"100%"}
               />
 
+              <Inputs
+                error={error && !subtitle}
+                value={subtitle}
+                state={setSubtitle}
+                placeholder={"Subtitle"}
+                type="text"
+                label={"Subtitle"}
+                Fullwidth={true}
+                width={"100%"}
+              />
               <div>
                 <SelectComponent
                   fullWidth={true}
@@ -131,9 +139,10 @@ export default function BlogModal({
                 Fullwidth={true}
                 width={"100%"}
               />
+
               <div>
                 <TextField
-                error={error && !content}
+                  error={error && !content}
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Write a blog text..."
