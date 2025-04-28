@@ -6,7 +6,7 @@ import styles from "./time.module.scss";
 
 export default function CustomTimeSlotWrapper({ children, value }) {
 
-  const timeLabel = format(value, "hh:mm a");
+  // const timeLabel = format(value, "hh:mm a");
 
   return (
     <div
