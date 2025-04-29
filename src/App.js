@@ -9,6 +9,9 @@ import Client from "./Components/Client/Client";
 import BookingAlerts from "./Components/BookingAlerts/BookingAlerts";
 import Availability from "./Components/Availability/Availability";
 import Blog from "./Components/Blog/Blog";
+import Categories from "./Components/Categories/Categories";
+
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -40,7 +43,7 @@ function App() {
               <Route path="/Experts" element={<Experts />} />
               <Route path="/Client" element={<Client />} />
               <Route path="/Blog" element={<Blog/>} />
-              <Route path="/Categories" element={null} />
+              <Route path="/Categories" element={<Categories/>} />
               <Route path="/BookingAlerts" element={<BookingAlerts/>} />
               <Route path="/Availability" element={<Availability/>} />
             </Routes>

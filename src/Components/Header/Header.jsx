@@ -12,8 +12,16 @@ export default function Header({ handleOpen }) {
     location.pathname === "/Experts"
       ? "Add Expert"
       : location.pathname === "/Client"
-      ? "Add Client":location.pathname ==="/BookingAlerts"?
-      "Add Booking":   location.pathname === "/Availability"?"Add Availability":   location.pathname === "/Blog"? "Add Blog": null;
+      ? "Add Client"
+      : location.pathname === "/BookingAlerts"
+      ? "Add Booking"
+      : location.pathname === "/Availability"
+      ? "Add Availability"
+      : location.pathname === "/Blog"
+      ? "Add Blog"
+      : location.pathname === "/Categories"
+      ? "Add Categories"
+      : null;
 
   return (
     <div className={styles.conteiner}>

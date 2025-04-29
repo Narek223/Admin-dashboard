@@ -1,0 +1,29 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .categoriesModal {
+  background-color: white;
+  width: 610px;
+  height: auto;
+  max-height: 90vh;
+  border-radius: 12px;
+  padding: 18px 33px;
+}
+.modal .categoriesModal .close {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .categoriesModal .close .icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: black;
+}
+.modal .categoriesModal .title h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}/*# sourceMappingURL=categoriesmodal.module.css.map */
