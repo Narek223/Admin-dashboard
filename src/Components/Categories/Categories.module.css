@@ -1,1 +1,48 @@
-/*# sourceMappingURL=Categories.module.css.map */
+.categories {
+  padding: 10px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.categories .categoriesHeader {
+  height: calc(90vh - 80px);
+  overflow-y: auto;
+}
+.categories .categoriesHeader .categoriesTitle {
+  margin: 40px 0 12px 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  height: 72px;
+  width: 100%;
+}
+.categories .categoriesHeader .categoriesTitle ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0 27px;
+}
+.categories .categoriesHeader .categoriesTitle ul li {
+  font-size: 14px;
+  font-weight: 600;
+}
+.categories .categoriesHeader .categoriesTitle ul li .icons {
+  width: 20px;
+  height: 20px;
+}
+.categories .categoriesHeader .categoriesTitle ul li:nth-child(1) {
+  width: 50px;
+}
+.categories .categoriesHeader .categoriesTitle ul li:nth-child(2) {
+  width: 200px;
+}
+.categories .categoriesHeader .categoriesTitle ul li:nth-child(3) {
+  width: 200px;
+}
+.categories .categoriesHeader .categoriesTitle ul li:nth-child(4) {
+  width: calc(100% - 450px);
+}
+.categories .categoriesHeader .categoriesTitle ul li:nth-child(5) {
+  width: 200px;
+}/*# sourceMappingURL=Categories.module.css.map */
