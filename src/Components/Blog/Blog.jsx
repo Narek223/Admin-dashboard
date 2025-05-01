@@ -43,6 +43,8 @@ export default function Blog() {
       setbloglist((prev) => [...prev, { ...blog, id: prev.length + 1 }]);
     }
   };
+
+  
   const infoclose = () => {
     setinfoanchorEl(null);
   };

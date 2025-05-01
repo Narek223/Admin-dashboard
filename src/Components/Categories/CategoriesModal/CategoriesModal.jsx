@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styles from "./categoriesmodal.module.scss";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -7,17 +7,40 @@ import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 
-
-export default function CategoriesModal({ open, close }) {
+export default function CategoriesModal({ open, close, addcategories, edit }) {
   const [name, setName] = useState("");
- const [description, setDescription] = useState("");
-const [files, setFiles] = useState("");
+  const [description, setDescription] = useState("");
+  const [files, setFiles] = useState("");
   const [id, setId] = useState(0);
 
-const handleFileSelect = (fileUrl) => {
+  const handleFileSelect = (fileUrl) => {
     setFiles(fileUrl);
-  }
+  };
 
+  const resetForm = useCallback(() => {
+    setName("");
+    setDescription("");
+    setFiles("");
+    setId(0);
+  }, []);
+
+  const save = () => {
+    const categoriesobj = {
+      id,
+      name,
+      description,
+      files,
+      date: new Date().toLocaleDateString(),
+    };
+
+    if (edit) {
+      addcategories(categoriesobj, true);
+    } else {
+      addcategories(categoriesobj, false);
+    }
+    close();
+    resetForm()
+  };
   return (
     <Modal
       open={open}
@@ -36,36 +59,30 @@ const handleFileSelect = (fileUrl) => {
             <h1>Add Categories</h1>
           </div>
           <div>
-          <Inputs
-            error={null}
-            value={name}
-            state={setName}
-            placeholder="Category Name"
-            type="text"
-            label="Category Name"
-            Fullwidth={true}
-            width={"100%"}
-          />
-           <Inputs
-            error={null}
-            value={description}
-            state={setDescription}
-            placeholder="Description"
-            type="text"
-            label="Description"
-            Fullwidth={true}
-            width={"100%"}
-          />
+            <Inputs
+              error={null}
+              value={name}
+              state={setName}
+              placeholder="Category Name"
+              type="text"
+              label="Category Name"
+              Fullwidth={true}
+              width={"100%"}
+            />
+            <Inputs
+              error={null}
+              value={description}
+              state={setDescription}
+              placeholder="Description"
+              type="text"
+              label="Description"
+              Fullwidth={true}
+              width={"100%"}
+            />
 
-<ChooseFile addimg={handleFileSelect} edit={null} />
-            <ModalBtn
-                        onClose={close}
-                        handleSave={null}
-                        edit={null}
-                      />
-                   
+            <ChooseFile addimg={handleFileSelect} edit={null} />
+            <ModalBtn onClose={close} handleSave={save} edit={null} />
           </div>
-        
         </div>
       </Box>
     </Modal>

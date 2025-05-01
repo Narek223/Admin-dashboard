@@ -1,57 +1,101 @@
-.categories{
-    padding: 10px 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.categories {
+  padding: 10px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 
-.categoriesHeader{
+  .categoriesHeader {
     height: calc(90vh - 80px);
     overflow-y: auto;
-    .categoriesTitle{
-        margin: 40px 0 12px 0;
-        background-color: #ffffff;
-        border-radius: 12px;
-        height: 72px;
-        width: 100%;
-       ul{
+    .categoriesTitle {
+      margin: 40px 0 12px 0;
+      background-color: #ffffff;
+      border-radius: 12px;
+      height: 72px;
+      width: 100%;
+      ul {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         list-style: none;
         padding: 0 27px;
-        li{
-            font-size: 14px;
-            font-weight: 600;
-            .icons {
-              width: 20px;
-              height: 20px;
-            }
-            &:nth-child(1) {
+        li {
+          font-size: 14px;
+          font-weight: 600;
+          .icons {
+            width: 20px;
+            height: 20px;
+          }
+          &:nth-child(1) {
+            width: 50px;
+          }
+          &:nth-child(2) {
+            width: 200px;
+          }
+          &:nth-child(3) {
+            width: 200px;
+          }
+          &:nth-child(4) {
+            width: calc(100% - 450px);
+          }
+          &:nth-child(5) {
+            width: 200px;
+          }
+        }
+      }
+    }
+    .categoriesListContainer {
+      .categoriesList {
+        .categoriesListItem {
+          padding: 0 27px;
+          margin: 26px 0;
+          display: flex;
+          align-items: center;
+          background-color: #ffffff;
+          border-radius: 12px;
+          height: 146px;
+          width: 100%;
+
+          ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            list-style: none;
+            li {
+              font-size: 14px;
+              font-weight: 600;
+
+              .img {
+                width: 58px;
+                height: 58px;
+  
+                object-fit: cover;
+       
+              }
+              &:nth-child(1) {
                 width: 50px;
-              
               }
               &:nth-child(2) {
                 width: 200px;
               }
               &:nth-child(3) {
-            width: 200px;
+                width: 200px;
               }
               &:nth-child(4) {
                 width: calc(100% - 450px);
-              
               }
               &:nth-child(5) {
-            
                 width: 200px;
-              }
-           
-             
-
+            
+            }
+            }
+            
+              
+          }
         }
-       } 
+      }
     }
-
-}
-
+  }
 }
