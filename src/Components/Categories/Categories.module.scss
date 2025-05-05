@@ -54,7 +54,7 @@
           align-items: center;
           background-color: #ffffff;
           border-radius: 12px;
-          height: 146px;
+          height: 100px;
           width: 100%;
 
           ul {
@@ -70,9 +70,8 @@
               .img {
                 width: 58px;
                 height: 58px;
-  
+                border-radius: 4px;
                 object-fit: cover;
-       
               }
               &:nth-child(1) {
                 width: 50px;
@@ -88,11 +87,14 @@
               }
               &:nth-child(5) {
                 width: 200px;
-            
+              }
             }
-            }
-            
-              
+          }
+          .infobtn {
+            width: 1px;
+            cursor: pointer;
+            background-color: white;
+            border: none;
           }
         }
       }

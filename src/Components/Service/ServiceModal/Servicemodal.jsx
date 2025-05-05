@@ -18,30 +18,30 @@ export default function Servicemodal({
   error,
 }) {
   const [id, setId] = useState(0);
-  const [service, setService] = useState("Hair Care");
+  const [service, setService] = useState("");
   const [category, setCategory] = useState("Classic");
   const [price, setPrice] = useState("");
   const [duration, setDuration] = useState("");
-  const [description, setDescription] = useState("One");
+  const [description, setDescription] = useState("");
   const [files, setFiles] = useState("");
 
   const resetForm = useCallback(() => {
-    setService("Hair Care");
+    setService("");
     setCategory("Classic");
     setPrice("");
     setDuration("");
-    setDescription("One");
+    setDescription("");
     setFiles("");
     setId(0);
   }, []);
 
   useEffect(() => {
     if (edit) {
-      setService(edit.service || "Hair Care");
+      setService(edit.service || "");
       setCategory(edit.category || "Classic");
       setPrice(edit.price || "");
       setDuration(edit.duration || "");
-      setDescription(edit.description || "One");
+      setDescription(edit.description || "");
       setFiles(edit.files || "");
       setId(edit.id || 0);
     } else {
@@ -61,14 +61,7 @@ export default function Servicemodal({
 
     if (hasEmptyFields) return;
 
-    if (
-      !service ||
-      !category ||
-      !price ||
-      !duration ||
-      !description.length 
-     
-    ) {
+    if (!service || !category || !price || !duration || !description.length) {
       return;
     }
 
@@ -111,13 +104,15 @@ export default function Servicemodal({
         <h1>{edit ? "Edit Service" : "Add Service"}</h1>
         <div className={styles.addService}>
           <div className={styles.service}>
-            <SelectComponent
-              deafultvalue={"Hair Care"}
-              servicename="Service Name"
-              service={service}
-              sets={setService}
-              services={services[0].options}
+          <Inputs
+              error={error && !service}
+              value={service}
+              state={setService}
+              placeholder="Service Name"
+              type="text"
+              label="Service Name"
             />
+         
             <SelectComponent
               deafultvalue={"Classic"}
               servicename="Category"
@@ -147,14 +142,16 @@ export default function Servicemodal({
           </div>
 
           <div className={styles.description}>
-              <SelectComponent
-              fullWidth={true}
-                deafultvalue={"One"}
-                servicename="Description"
-                service={description}
-                sets={setDescription}
-                services={services[2].options}
-              />
+            <Inputs
+              error={error && !description}
+              value={description}
+              state={setDescription}
+              placeholder="Description"
+              type="text"
+              label="Description"
+              Fullwidth={true}
+              width="100%"
+            />
           </div>
           <ChooseFile addimg={handleFileSelect} edit={edit} />
           <ModalBtn onClose={onClose} handleSave={handleSave} edit={edit} />

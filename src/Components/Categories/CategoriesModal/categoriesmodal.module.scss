@@ -9,7 +9,13 @@
     max-height: 90vh;
     border-radius: 12px;
     padding: 18px 33px;
-
+    .title {
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 32px;
+      }
+    }
     .close {
       width: 100%;
 
@@ -23,12 +29,6 @@
         color: black;
       }
     }
-    .title {
-      h1 {
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 32px;
-      }
-    }
+  
   }
 }

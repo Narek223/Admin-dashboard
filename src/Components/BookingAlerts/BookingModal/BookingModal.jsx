@@ -98,19 +98,7 @@ export default function BookingModal({
     if (hasEmptyFields) {
       return;
     }
-    // if (
-    //   !name ||
-    //   !date ||
-    //   !lastname ||
-    //   !phone ||
-    //   !service ||
-    //   !specialist ||
-    //   !timeline ||
-    //   !startime ||
-    //   !endtime
-    // ) {
-    //   return;
-    // }
+  
     const formattedDate =
     date instanceof Date ? dayjs(date).format("YYYY-MM-DD") : date;
 
@@ -209,7 +197,11 @@ export default function BookingModal({
                     labalName={"Start Time"}
                     setstate={setStartime}
                     state={startime}
-                    error={error && !startime}
+                    error={
+                      error &&
+                      (!endtime ||
+                        (startime && endtime && !startime.isBefore(endtime)))
+                    }
                   />
              
               
@@ -217,7 +209,11 @@ export default function BookingModal({
                     labalName={"End Time"}
                     setstate={setEndtime}
                     state={endtime}
-                    error={error && !endtime}
+                    error={
+                      error &&
+                      (!endtime ||
+                        (startime && endtime && !startime.isBefore(endtime)))
+                    }
                   />
               
               </div>

@@ -53,7 +53,7 @@
   align-items: center;
   background-color: #ffffff;
   border-radius: 12px;
-  height: 146px;
+  height: 100px;
   width: 100%;
 }
 .categories .categoriesHeader .categoriesListContainer .categoriesList .categoriesListItem ul {
@@ -70,6 +70,7 @@
 .categories .categoriesHeader .categoriesListContainer .categoriesList .categoriesListItem ul li .img {
   width: 58px;
   height: 58px;
+  border-radius: 4px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -87,4 +88,10 @@
 }
 .categories .categoriesHeader .categoriesListContainer .categoriesList .categoriesListItem ul li:nth-child(5) {
   width: 200px;
+}
+.categories .categoriesHeader .categoriesListContainer .categoriesList .categoriesListItem .infobtn {
+  width: 1px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
 }/*# sourceMappingURL=Categories.module.css.map */

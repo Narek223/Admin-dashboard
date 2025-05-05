@@ -253,9 +253,7 @@ export default function Service() {
                     >
                       {[
                         "All Services",
-                        "Hair Care",
-                        "Wedding Hairstyle",
-                        "Gunung Sumbing",
+                        ...new Set(servicesList.map(s => s.service))
                       ].map((service) => (
                         <MenuItem
                           key={service}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import styles from "./categoriesmodal.module.scss";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -24,6 +24,16 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
     setId(0);
   }, []);
 
+  useEffect(() => {
+    if (edit) {
+      setName(edit.name || "");
+      setDescription(edit.description || "");
+      setFiles(edit.files || "");
+      setId(edit.id || 0);
+    } else {
+      resetForm();
+    }
+  }, [edit, resetForm]);
   const save = () => {
     const categoriesobj = {
       id,
@@ -39,7 +49,7 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
       addcategories(categoriesobj, false);
     }
     close();
-    resetForm()
+    resetForm();
   };
   return (
     <Modal
@@ -56,7 +66,7 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
             <AiOutlineClose onClick={close} className={styles.icon} />
           </p>
           <div className={styles.title}>
-            <h1>Add Categories</h1>
+            <h1>{edit?"Edit Categories":"Add Categories "}</h1>
           </div>
           <div>
             <Inputs
@@ -80,8 +90,8 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
               width={"100%"}
             />
 
-            <ChooseFile addimg={handleFileSelect} edit={null} />
-            <ModalBtn onClose={close} handleSave={save} edit={null} />
+            <ChooseFile addimg={handleFileSelect} edit={edit} />
+            <ModalBtn onClose={close} handleSave={save} edit={edit} />
           </div>
         </div>
       </Box>
