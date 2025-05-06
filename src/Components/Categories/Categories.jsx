@@ -7,6 +7,8 @@ import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
+import NoAvatar from "../../assets/NoAvatart/download.png"
+
 
 export default function Categories() {
   const [open, setopen] = useState(false);
@@ -17,14 +19,18 @@ export default function Categories() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [error, setError] = useState(false);
+
 
   const openHeader = () => {
     setopen(true);
+    setError(false);
     setedit(null);
   };
 
   const handleClose = () => {
     setopen(false);
+    setError(false);
     setinfoanchorEl(null);
   };
 
@@ -41,6 +47,7 @@ export default function Categories() {
       ]);
     }
   };
+
   const handleInfoClick = (event, elem) => {
     setinfoanchorEl(event.currentTarget);
     setselectedcadegories(elem);
@@ -59,7 +66,7 @@ export default function Categories() {
   };
 
   const handleDeleteblog = (id) => {
-    setselectedcadegories(categorieslist.filter((elem) => elem.id !== id));
+    setcategorieslist(categorieslist.filter((elem) => elem.id !== id));
     setinfoanchorEl(null);
   };
 
@@ -87,6 +94,9 @@ export default function Categories() {
         close={handleClose}
         addcategories={addcategories}
         edit={edit}
+        error={error}
+        setError={setError}
+
       />
       <EditDeleteBtn
         anchorEl={infoanchorEl}
@@ -102,10 +112,11 @@ export default function Categories() {
         title="Delete this Categorie?"
         text="Are you sure you want to delete this Categorie? This action cannot be undone"
         onDelete={() => {
-          if (selectedcadegories) {
+        
             handleDeleteblog(selectedcadegories.id);
-          }
-          handleCloseDeleteModal();
+            handleCloseDeleteModal();
+          
+      
         }}
       />
       <div className={styles.categories}>
@@ -130,7 +141,7 @@ export default function Categories() {
 
                     <li>
                       <img
-                        src={elem.files}
+                      src={elem.files?elem.files:NoAvatar}
                         className={styles.img}
                         alt="Service"
                       />

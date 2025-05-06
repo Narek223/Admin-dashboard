@@ -9,6 +9,8 @@ import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
+import { manageItems } from "../../Utils/EditFunction";
+
 
 export default function BookingAlerts() {
   const [open, setopen] = useState(false);
@@ -34,16 +36,18 @@ export default function BookingAlerts() {
   const handleClose = () => {
     setopen(false);
     setanchorEl(null);
-
     seticon(true);
     setError(false);
   };
+  
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
+
   const handleOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
   };
+  
   const select = (value) => {
     setselectelem(value);
     value === "Newest"
@@ -53,14 +57,7 @@ export default function BookingAlerts() {
   };
 
   const addBooking = (bookingAlert, isEdit = false) => {
-    if (isEdit) {
-      setBooking((prev) =>
-        prev.map((item) => (item.id === bookingAlert.id ? bookingAlert : item))
-      );
-      setedit(null);
-    } else {
-      setBooking((prev) => [...prev, { ...bookingAlert, id: prev.length + 1 }]);
-    }
+    setBooking((prev) => manageItems(prev, bookingAlert, isEdit));
   };
 
   const onClick = (event) => {

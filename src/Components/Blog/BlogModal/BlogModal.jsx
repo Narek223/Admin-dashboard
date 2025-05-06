@@ -68,6 +68,7 @@ export default function BlogModal({
       Author,
       files,
       content,
+      subtitle,
     };
 
     if (edit) {

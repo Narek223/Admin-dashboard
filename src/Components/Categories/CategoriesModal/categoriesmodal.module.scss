@@ -32,3 +32,10 @@
   
   }
 }
+@media screen and (max-height: 930px) {
+  .modal {
+    .categoriesModal {
+      overflow-y: scroll;
+    }
+  }
+}

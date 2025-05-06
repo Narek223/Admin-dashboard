@@ -8,6 +8,9 @@ import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import NoAvatar from "../../assets/NoAvatart/download.png"
+import { manageItems } from "../../Utils/EditFunction";
+
+
 
 export default function Client() {
   const [open, setOpen] = useState(false);
@@ -43,14 +46,7 @@ export default function Client() {
   };
 
   const handleAddClient = (client, isEdit = false) => {
-    if (isEdit) {
-      setClientlist((prev) =>
-        prev.map((item) => (item.id === client.id ? client : item))
-      );
-      setedit(null);
-    } else {
-      setClientlist((prev) => [...prev, { ...client, id: prev.length + 1 }]);
-    }
+    setClientlist((prev) => manageItems(prev, client, isEdit));
   };
 
   const handleInfoClick = (event, elem) => {
@@ -100,8 +96,7 @@ export default function Client() {
         setError={setError}
         onAddService={handleAddClient}
         edit={edit}
-        // id={id}
-        // setid={setId}
+     
       />
       <DeleteModal
        open={isDeleteModalOpen}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback,useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styles from "./categoriesmodal.module.scss";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -7,7 +7,14 @@ import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 
-export default function CategoriesModal({ open, close, addcategories, edit }) {
+export default function CategoriesModal({
+  open,
+  close,
+  addcategories,
+  edit,
+  error,
+  setError,
+}) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState("");
@@ -23,6 +30,11 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
     setFiles("");
     setId(0);
   }, []);
+  useEffect(() => {
+    if (name && description && files) {
+      setError(false);
+    }
+  }, [name, description, files, setError]);
 
   useEffect(() => {
     if (edit) {
@@ -34,7 +46,17 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
       resetForm();
     }
   }, [edit, resetForm]);
+
   const save = () => {
+    const hasEmptyFields = !name || !description || !files;
+    setError(hasEmptyFields);
+
+    if (hasEmptyFields) return;
+    if (!name || !description || !files) {
+      return;
+    }
+
+
     const categoriesobj = {
       id,
       name,
@@ -66,11 +88,11 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
             <AiOutlineClose onClick={close} className={styles.icon} />
           </p>
           <div className={styles.title}>
-            <h1>{edit?"Edit Categories":"Add Categories "}</h1>
+            <h1>{edit ? "Edit Categories" : "Add Categories "}</h1>
           </div>
           <div>
             <Inputs
-              error={null}
+              error={error && !name}
               value={name}
               state={setName}
               placeholder="Category Name"
@@ -80,7 +102,7 @@ export default function CategoriesModal({ open, close, addcategories, edit }) {
               width={"100%"}
             />
             <Inputs
-              error={null}
+              error={error && !description}
               value={description}
               state={setDescription}
               placeholder="Description"
