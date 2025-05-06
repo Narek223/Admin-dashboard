@@ -18,7 +18,7 @@ export const sidebardata = [
 ];
 
 export const otherpages = [
-  { id: 1, title: "Inbox", icon: <GrProjects/>, path:"/Inbox"},
+  { id: 1, title: "Inbox", icon: <GrProjects/>, path:"/lnbox"},
   { id: 2, title: "Booking Alerts", icon: <PiListChecksBold />,path:"/BookingAlerts" },
   { id: 3, title: "Availability", icon: <BiCalendar />,path:"/Availability" },
   

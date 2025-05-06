@@ -30,6 +30,7 @@ export default function CategoriesModal({
     setFiles("");
     setId(0);
   }, []);
+
   useEffect(() => {
     if (name && description && files) {
       setError(false);
@@ -48,11 +49,11 @@ export default function CategoriesModal({
   }, [edit, resetForm]);
 
   const save = () => {
-    const hasEmptyFields = !name || !description || !files;
+    const hasEmptyFields = !name ;
     setError(hasEmptyFields);
 
     if (hasEmptyFields) return;
-    if (!name || !description || !files) {
+    if (!name   ) {
       return;
     }
 
@@ -102,7 +103,7 @@ export default function CategoriesModal({
               width={"100%"}
             />
             <Inputs
-              error={error && !description}
+              error={null}
               value={description}
               state={setDescription}
               placeholder="Description"

@@ -10,7 +10,7 @@ import BookingAlerts from "./Components/BookingAlerts/BookingAlerts";
 import Availability from "./Components/Availability/Availability";
 import Blog from "./Components/Blog/Blog";
 import Categories from "./Components/Categories/Categories";
-
+import Inbox from "./Components/Inbox/Inbox";
 
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
               <Route path="/Categories" element={<Categories/>} />
               <Route path="/BookingAlerts" element={<BookingAlerts/>} />
               <Route path="/Availability" element={<Availability/>} />
+              <Route path="/lnbox" element={<Inbox/>} />
             </Routes>
           </div>
         </div>

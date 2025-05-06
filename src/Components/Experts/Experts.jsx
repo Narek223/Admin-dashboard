@@ -9,6 +9,9 @@ import TimePickerModal from "./TimePicker/TimePickerModal";
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import dayjs from "dayjs";
+import { paginate } from "../../Utils/pagination";
+
+
 
 export default function Experts() {
   const [open, setOpen] = useState(false);
@@ -98,10 +101,8 @@ export default function Experts() {
     setCurrentPage(0);
   };
 
-  const paginationExperts = expert.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+   const paginationExperts = paginate(expert, currentPage, itemsPerPage);
+ 
 
   const onAddTime = (updatedTimeSlots) => {
     if (!selectedService) return;

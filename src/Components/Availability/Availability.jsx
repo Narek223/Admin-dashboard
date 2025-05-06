@@ -12,6 +12,8 @@ import CustomTimeSlotWrapper from "./CustomTimeSlot/CustomTimeSlotWrapper";
 import TimeHeader from "./CustomTimeHeader/TimeHeader";
 import CustomDate from "./CustomDate/CustomDate";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
+import { manageItems } from "../../Utils/EditFunction";
+
 
 export default function Availability() {
   const [open, setOpen] = useState(false);
@@ -50,14 +52,8 @@ export default function Availability() {
   };
 
   const event = (events, isEdit = false) => {
-    if (isEdit) {
-      seteventobj((prev) =>
-        prev.map((item) => (item.id === events.id ? events : item))
-      );
-      setedit(null);
-    } else {
-      seteventobj((prev) => [...prev, { ...events, id: prev.length + 1 }]);
-    }
+    seteventobj((prev) => manageItems(prev, events, isEdit));
+  
   };
 
   const hasEventAtSlot = (cellDate, events, view = "month") => {

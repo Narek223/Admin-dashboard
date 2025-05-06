@@ -11,6 +11,11 @@
   border-radius: 12px;
   padding: 18px 33px;
 }
+.modal .categoriesModal .title h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
 .modal .categoriesModal .close {
   width: 100%;
   display: flex;
@@ -22,8 +27,9 @@
   height: 24px;
   color: black;
 }
-.modal .categoriesModal .title h1 {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 32px;
+
+@media screen and (max-height: 930px) {
+  .modal .categoriesModal {
+    overflow-y: scroll;
+  }
 }/*# sourceMappingURL=categoriesmodal.module.css.map */

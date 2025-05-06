@@ -7,6 +7,8 @@ import NoAvatar from "../../assets/NoAvatart/download.png";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
+import { manageItems } from "../../Utils/EditFunction";
+import { paginate } from "../../Utils/pagination";
 
 
 
@@ -34,14 +36,8 @@ export default function Blog() {
   };
 
   const addblog = (blog, isEdit = false) => {
-    if (isEdit) {
-      setbloglist((prev) =>
-        prev.map((item) => (item.id === blog.id ? blog : item))
-      );
-      setedit(null);
-    } else {
-      setbloglist((prev) => [...prev, { ...blog, id: prev.length + 1 }]);
-    }
+    setbloglist((prev) => manageItems(prev, blog, isEdit));
+   
   };
 
   
@@ -76,11 +72,9 @@ export default function Blog() {
     setItemsPerPage(newPerPage);
     setCurrentPage(0);
   };
-  const paginatedBlog= bloglist.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
 
+  const paginatedBlog = paginate(bloglist, currentPage, itemsPerPage);
+ 
 
   return (
     <div className={styles.blogConteiner}>

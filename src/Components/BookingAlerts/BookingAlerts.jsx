@@ -10,7 +10,7 @@ import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import { manageItems } from "../../Utils/EditFunction";
-
+import { paginate } from "../../Utils/pagination";
 
 export default function BookingAlerts() {
   const [open, setopen] = useState(false);
@@ -98,10 +98,10 @@ export default function BookingAlerts() {
     setItemsPerPage(newPerPage);
     setCurrentPage(0);
   };
-  const paginatedBooking = booking.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+    
+      const paginatedBooking = paginate(booking, currentPage, itemsPerPage);
+  
+
 
   return (
     <div className={styles.bookingConteiner}>

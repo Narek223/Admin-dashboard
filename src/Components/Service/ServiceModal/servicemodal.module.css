@@ -24,12 +24,10 @@
   width: 24px;
   height: 24px;
 }
-.modal .modalBox .addService {
-  padding: 20px 0;
-}
 .modal .modalBox .addService .service {
   display: flex;
   margin: 18px 0 0 0;
+  align-items: flex-end;
 }
 .modal .modalBox .addService .inputGroup {
   width: 100%;

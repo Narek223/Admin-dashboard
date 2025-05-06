@@ -9,7 +9,7 @@ import PaginationComponent from "../../SheredComponents/Pagination/PaginationCom
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import NoAvatar from "../../assets/NoAvatart/download.png"
 import { manageItems } from "../../Utils/EditFunction";
-
+import { paginate } from "../../Utils/pagination";
 
 
 export default function Client() {
@@ -70,11 +70,9 @@ export default function Client() {
     setItemsPerPage(newPerPage);
     setCurrentPage(0);
   };
-
-  const paginatedClient = clientlist.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+  
+  const paginatedClient = paginate(clientlist, currentPage, itemsPerPage);
+ 
 
   const handleOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);

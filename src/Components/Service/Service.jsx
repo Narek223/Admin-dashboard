@@ -11,8 +11,10 @@ import PaginationComponent from "../../SheredComponents/Pagination/PaginationCom
 import Header from "../Header/Header";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
-import NoAvatar from "../../assets/NoAvatart/download.png"
+import NoAvatar from "../../assets/NoAvatart/download.png";
 import { VscDebugRestart } from "react-icons/vsc";
+import { manageItems } from "../../Utils/EditFunction";
+import { paginate } from "../../Utils/pagination";
 
 
 export default function Service() {
@@ -23,7 +25,7 @@ export default function Service() {
   const openCategoryMenu = Boolean(categoryAnchorEl);
   const openServicesMenu = Boolean(servicesAnchorEl);
 
-  const [categoryValue, setcategoryValue] = useState("All Categories"); 
+  const [categoryValue, setcategoryValue] = useState("All Categories");
   const [serviceValue, setserviceValue] = useState("All Services");
   const [icon, seticon] = useState(true);
   const [serviceicon, setserviceicon] = useState(true);
@@ -39,8 +41,6 @@ export default function Service() {
   const handleCloseModal = () => {
     setError(false);
     setIsModalOpen(false);
-
-    // setError(false)
   };
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -65,17 +65,7 @@ export default function Service() {
   };
 
   const handleAddService = (newService, isEdit = false) => {
-    if (isEdit) {
-      setServicesList((prev) =>
-        prev.map((item) => (item.id === newService.id ? newService : item))
-      );
-      setedit(null);
-    } else {
-      setServicesList((prev) => [
-        ...prev,
-        { ...newService, id: prev.length + 1 },
-      ]);
-    }
+    setServicesList((prev) => manageItems(prev, newService, isEdit));
   };
 
   const handleClose = () => {
@@ -128,36 +118,32 @@ export default function Service() {
     setCurrentPage(0);
   };
 
-  const paginatedServices = filterServices.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+  const paginatedServices = paginate(filterServices, currentPage, itemsPerPage);
 
   const handleOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
-  }
-  
+  };
+
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
-  }
+  };
 
-
-  const restarTwo=()=>{
-    setcategoryValue("All Categories")
-    setserviceValue("All Services")
-  }
+  const restarTwo = () => {
+    setcategoryValue("All Categories");
+    setserviceValue("All Services");
+  };
   return (
     <div>
       <Header />
       <DeleteModal
-       open={isDeleteModalOpen}
-       onClose={handleCloseDeleteModal}
-       title="Delete Service"
-       text="Are you sure you want to delete this Service?This action cannot be undone"
-       onDelete={() => {
-        handleDeleteService(selectedService.id); 
-        handleCloseDeleteModal(); 
-      }}
+        open={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        title="Delete Service"
+        text="Are you sure you want to delete this Service?This action cannot be undone"
+        onDelete={() => {
+          handleDeleteService(selectedService.id);
+          handleCloseDeleteModal();
+        }}
       />
       <div className={styles.servicesConteiner}>
         <div className={styles.Wrapper}>
@@ -167,7 +153,12 @@ export default function Service() {
                 <div className={styles.filter}>
                   <h1>Services</h1>
                   <div className={styles.buttonBox}>
-                    <button className={styles.restart} onClick={()=>restarTwo()}><VscDebugRestart /></button>
+                    <button
+                      className={styles.restart}
+                      onClick={() => restarTwo()}
+                    >
+                      <VscDebugRestart />
+                    </button>
                     <button
                       onClick={handleCategoryClick}
                       variant="contained"
@@ -188,7 +179,7 @@ export default function Service() {
                           backgroundColor: "rgba(248, 249, 250, 1)",
                           borderRadius: "8px",
                           padding: 0,
-                          margin:"4px 0",
+                          margin: "4px 0",
                           width:
                             openCategoryMenu && categoryAnchorEl
                               ? `${categoryAnchorEl.offsetWidth}px`
@@ -239,12 +230,11 @@ export default function Service() {
                           backgroundColor: "rgba(248, 249, 250, 1)",
                           borderRadius: "8px",
                           padding: 0,
-                          margin:"4px 0",
+                          margin: "4px 0",
                           width:
                             openServicesMenu && servicesAnchorEl
                               ? `${servicesAnchorEl.offsetWidth}px`
                               : "auto",
-                       
                         },
                         "& .MuiMenuItem-root:hover": {
                           backgroundColor: "white",
@@ -253,7 +243,7 @@ export default function Service() {
                     >
                       {[
                         "All Services",
-                        ...new Set(servicesList.map(s => s.service))
+                        ...new Set(servicesList.map((s) => s.service)),
                       ].map((service) => (
                         <MenuItem
                           key={service}
@@ -303,7 +293,10 @@ export default function Service() {
                           <div className={styles.servicebox}>
                             <p>{elem.id}</p>
                             <div className={styles.img}>
-                              <img src={elem.files?elem.files:NoAvatar} alt="Service" />
+                              <img
+                                src={elem.files ? elem.files : NoAvatar}
+                                alt="Service"
+                              />
                             </div>
                             <p>{elem.service}</p>
                             <p>{elem.category}</p>

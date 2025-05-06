@@ -8,7 +8,8 @@ import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import NoAvatar from "../../assets/NoAvatart/download.png"
-
+import { manageItems } from "../../Utils/EditFunction";
+import { paginate } from "../../Utils/pagination";
 
 export default function Categories() {
   const [open, setopen] = useState(false);
@@ -35,17 +36,7 @@ export default function Categories() {
   };
 
   const addcategories = (categories, isEdit = false) => {
-    if (isEdit) {
-      setcategorieslist((prev) =>
-        prev.map((item) => (item.id === categories.id ? categories : item))
-      );
-      setedit(null);
-    } else {
-      setcategorieslist((prev) => [
-        ...prev,
-        { ...categories, id: prev.length + 1 },
-      ]);
-    }
+    setcategorieslist((prev) => manageItems(prev, categories, isEdit));
   };
 
   const handleInfoClick = (event, elem) => {
@@ -81,10 +72,9 @@ export default function Categories() {
     setItemsPerPage(newPerPage);
     setCurrentPage(0);
   };
-  const paginatedClient = categorieslist.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+  
+    const paginatedClient = paginate(categorieslist, currentPage, itemsPerPage);
+
 
   return (
     <div>
