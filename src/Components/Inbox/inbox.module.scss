@@ -1,69 +1,181 @@
-.inbox{
-   .inboxheader{
-    padding: 10px 20px;
-    display: flex;
+.inbox {
+  .header {
+    padding: 40px 20px;
+    .headerWrapper {
+      display: flex;
+      justify-content: space-between;
 
-width: 100%;
-.inbox_Messages{
-
-
-padding: 25px 20px;
-width:  480px;
-border-radius: 12px;
-height: 708px;
-background-color: #fff;
-.searchWrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    .Icon {
-      margin: 0 0 0 12px;
-      font-size: 20px;
-      width: 24px;
-      height: 24px;
-      color: black;
-      cursor: pointer;
-      position: absolute;
-      font-weight: 600;
-    }
-    input[type="text"] {
-      outline: none;
-      height: 48px;
-      width: 100%;
-      background-color: rgba(248, 249, 250, 1);
-      border: none;
-      padding: 10px 15px 10px 40px;
-      font-size: 14px;
-      font-weight: 400;
-      &::placeholder {
-        margin: 12px;
-        font-size: 14px;
-        font-weight: 400;
-        color: rgba(160, 174, 192, 1);
+      font-weight: 700;
+      font-size: 18px;
+      height: 38px;
+      .icon {
+        width: 24px;
+        height: 24px;
       }
     }
   }
-}
+  .inboxheader {
+    padding: 0 20px;
+    display: flex;
 
-.messagesCont{
-    width: calc(100% - 450px);
-    padding: 0 15px;
-    .Message_Header{
-        box-shadow: 0px 4px 4px 0px #D4D4D440;
+    width: 100%;
+    height: 100%;
+    .inbox_Messages {
+      padding: 25px 20px;
+      width: 480px;
+      border-radius: 12px;
+      height: calc(100vh - 130px);
+
+      background-color: #fff;
+
+      .userbox {
+        width: 100%;
+        height: auto;
+        margin: 30px 0 0 0;
+        :hover {
+          background-color: rgba(249, 250, 251, 1);
+        }
+        .users {
+          cursor: pointer;
+          padding: 16px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 200px;
+          }
+          .usermessages {
+            padding: 8px;
+            width: 100%;
+            .name {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+            }
+            h1 {
+              font-size: 14px;
+              font-weight: 500;
+            }
+            p {
+              color: rgba(127, 129, 136, 1);
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+          height: 72px;
+        }
+      }
+      .searchWrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        .Icon {
+          margin: 0 0 0 12px;
+          font-size: 20px;
+          width: 24px;
+          height: 24px;
+          color: black;
+          cursor: pointer;
+          position: absolute;
+          font-weight: 600;
+        }
+        input[type="text"] {
+          outline: none;
+          height: 48px;
+          width: 100%;
+          background-color: rgba(248, 249, 250, 1);
+          border: none;
+          padding: 10px 15px 10px 40px;
+          font-size: 14px;
+          font-weight: 400;
+          &::placeholder {
+            margin: 12px;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(160, 174, 192, 1);
+          }
+        }
+      }
+      .noDialogs {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #a0aec0;
+
+        .icon {
+          font-size: 70px;
+          margin-bottom: 16px;
+          color: #cbd5e0;
+        }
+
+        p {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 6px;
+        }
+
+        span {
+          font-size: 14px;
+          max-width: 280px;
+        }
+      }
+    }
+
+    .messagesCont {
+      width: calc(100% - 450px);
+    height: 100%;
+     
+      padding: 0 0 0 15px;
+      .Message_Header {
+        box-shadow: 0px 4px 4px 0px #d4d4d440;
 
         border-radius: 12px;
         height: 108px;
         width: 100%;
         background-color: #fff;
         margin: 0 0 20px 0;
-    }
+      }
 
-.messagesBox{
-    width: 100%;
-    border-radius: 12px;
-height: 578px;
-background-color: #fff;
-}
-}
-   } 
+      .messagesBox {
+   
+        width: 100%;
+        border-radius: 12px;
+      
+        background-color: #fff;
+
+        .noChatSelected {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: #a0aec0;
+          text-align: center;
+
+          .chatIcon {
+            font-size: 80px;
+            margin-bottom: 16px;
+            color: #cbd5e0;
+          }
+
+          p {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
+
+          span {
+            font-size: 14px;
+            max-width: 300px;
+          }
+        }
+      }
+    }
+  }
 }

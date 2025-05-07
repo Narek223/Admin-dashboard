@@ -1,14 +1,68 @@
+.inbox .header {
+  padding: 40px 20px;
+}
+.inbox .header .headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 18px;
+  height: 38px;
+}
+.inbox .header .headerWrapper .icon {
+  width: 24px;
+  height: 24px;
+}
 .inbox .inboxheader {
-  padding: 10px 20px;
+  padding: 0 20px;
   display: flex;
   width: 100%;
+  height: 100%;
 }
 .inbox .inboxheader .inbox_Messages {
   padding: 25px 20px;
   width: 480px;
   border-radius: 12px;
-  height: 708px;
+  height: calc(100vh - 130px);
   background-color: #fff;
+}
+.inbox .inboxheader .inbox_Messages .userbox {
+  width: 100%;
+  height: auto;
+  margin: 30px 0 0 0;
+}
+.inbox .inboxheader .inbox_Messages .userbox :hover {
+  background-color: rgb(249, 250, 251);
+}
+.inbox .inboxheader .inbox_Messages .userbox .users {
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 72px;
+}
+.inbox .inboxheader .inbox_Messages .userbox .users img {
+  width: 40px;
+  height: 40px;
+  border-radius: 200px;
+}
+.inbox .inboxheader .inbox_Messages .userbox .users .usermessages {
+  padding: 8px;
+  width: 100%;
+}
+.inbox .inboxheader .inbox_Messages .userbox .users .usermessages .name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.inbox .inboxheader .inbox_Messages .userbox .users .usermessages h1 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.inbox .inboxheader .inbox_Messages .userbox .users .usermessages p {
+  color: rgb(127, 129, 136);
+  font-size: 14px;
+  font-weight: 500;
 }
 .inbox .inboxheader .inbox_Messages .searchWrapper {
   position: relative;
@@ -47,9 +101,33 @@
   font-weight: 400;
   color: rgb(160, 174, 192);
 }
+.inbox .inboxheader .inbox_Messages .noDialogs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #a0aec0;
+}
+.inbox .inboxheader .inbox_Messages .noDialogs .icon {
+  font-size: 70px;
+  margin-bottom: 16px;
+  color: #cbd5e0;
+}
+.inbox .inboxheader .inbox_Messages .noDialogs p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.inbox .inboxheader .inbox_Messages .noDialogs span {
+  font-size: 14px;
+  max-width: 280px;
+}
 .inbox .inboxheader .messagesCont {
   width: calc(100% - 450px);
-  padding: 0 15px;
+  height: 100%;
+  padding: 0 0 0 15px;
 }
 .inbox .inboxheader .messagesCont .Message_Header {
   box-shadow: 0px 4px 4px 0px rgba(212, 212, 212, 0.2509803922);
@@ -62,6 +140,28 @@
 .inbox .inboxheader .messagesCont .messagesBox {
   width: 100%;
   border-radius: 12px;
-  height: 578px;
   background-color: #fff;
+}
+.inbox .inboxheader .messagesCont .messagesBox .noChatSelected {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #a0aec0;
+  text-align: center;
+}
+.inbox .inboxheader .messagesCont .messagesBox .noChatSelected .chatIcon {
+  font-size: 80px;
+  margin-bottom: 16px;
+  color: #cbd5e0;
+}
+.inbox .inboxheader .messagesCont .messagesBox .noChatSelected p {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.inbox .inboxheader .messagesCont .messagesBox .noChatSelected span {
+  font-size: 14px;
+  max-width: 300px;
 }/*# sourceMappingURL=inbox.module.css.map */
