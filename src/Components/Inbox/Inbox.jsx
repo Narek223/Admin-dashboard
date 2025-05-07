@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaComments } from "react-icons/fa";
 import { FaRegPaperPlane } from "react-icons/fa";
 import { GoBell } from "react-icons/go";
+import { AiOutlineMore } from "react-icons/ai";
 
 const Users = [
   {
@@ -30,10 +31,14 @@ export default function Inbox() {
   const [messages, setmessages] = useState(Users);
   const [dialog, setdialog] = useState(false);
   const [dialogheader, setdialogheader] = useState(true);
+  const [user, setuser] = useState();
 
-  const usersMessages = () => {
+
+  const usersMessages = (el) => {
     setdialog(true);
     setdialogheader(false);
+
+    setuser(el);
   };
   return (
     <div className={styles.inbox}>
@@ -64,7 +69,7 @@ export default function Inbox() {
                 <div
                   key={index}
                   className={styles.users}
-                  onClick={usersMessages}
+                  onClick={() => usersMessages(elem)}
                 >
                   <img src={elem.avatar} />
                   <div className={styles.usermessages}>
@@ -84,7 +89,15 @@ export default function Inbox() {
           <div
             className={styles.Message_Header}
             style={{ display: dialog ? "block" : "none" }}
-          ></div>
+          >
+          <div className={styles.header}>
+            <div className={styles.headerbox}>
+              <img src={user?.avatar} alt="avatar" />
+              <h1>{user?.name}</h1>
+            </div>
+            <AiOutlineMore className={styles.icon}/>
+          </div>
+          </div>
           <div
             className={styles.messagesBox}
             style={{
