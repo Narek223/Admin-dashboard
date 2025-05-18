@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import BookingModal from "./BookingModal/BookingModal";
 import styles from "./bookingAlerts.module.scss";
@@ -9,129 +9,61 @@ import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
-import { manageItems } from "../../Utils/EditFunction";
 import { paginate } from "../../Utils/pagination";
+import { useSelector, useDispatch } from "react-redux";
+import * as bookingAlertsSlice from "../../Features/BookingAlerts/BookingAlertsSlice";
 
 export default function BookingAlerts() {
-  const [open, setopen] = useState(false);
-  const [booking, setBooking] = useState([]);
-  const [edit, setedit] = useState(null);
-  const [icon, seticon] = useState(true);
-  const [anchorEl, setanchorEl] = useState(null);
-  const [selectelem, setselectelem] = useState("Newest");
-  const [error, setError] = useState(false);
-  const [infoanchorEl, setinfoanchorEl] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedBooking, setSelectedBooking] = useState(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const {
+    open,
+    booking,
+    edit,
+    icon,
+    anchorEl,
+    selectelem,
+    error,
+    infoanchorEl,
+    isDeleteModalOpen,
+    selectedBooking,
+    currentPage,
+    itemsPerPage,
+  } = useSelector((state) => state.bookingAlerts);
 
+  
+  const dispatch = useDispatch();
   const openyMenu = Boolean(anchorEl);
-
-  const openmodal = () => {
-    setopen(true);
-    setError(false);
-    setedit(null);
-  };
-  const handleClose = () => {
-    setopen(false);
-    setanchorEl(null);
-    seticon(true);
-    setError(false);
-  };
-  
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const handleOpenDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-  
-  const select = (value) => {
-    setselectelem(value);
-    value === "Newest"
-      ? setBooking([...booking].sort((a, b) => a.id - b.id))
-      : setBooking([...booking].sort((a, b) => b.id - a.id));
-    handleClose();
-  };
-
-  const addBooking = (bookingAlert, isEdit = false) => {
-    setBooking((prev) => manageItems(prev, bookingAlert, isEdit));
-  };
-
-  const onClick = (event) => {
-    setanchorEl(event.currentTarget);
-
-    seticon(false);
-  };
-
-  const Close = () => {
-    setanchorEl(null);
-    seticon(true);
-  };
-
-  const infoclose = () => {
-    setinfoanchorEl(null);
-  };
-
-  const handleInfoClick = (event, elem) => {
-    setinfoanchorEl(event.currentTarget);
-    setSelectedBooking(elem);
-  };
-
-  const handleDeleteService = (id) => {
-    setBooking(booking.filter((elem) => elem.id !== id));
-    setinfoanchorEl(null);
-  };
-
-  const handleEdit = () => {
-    setinfoanchorEl(null);
-    setopen(true);
-    setedit(selectedBooking);
-  };
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-  const handleItemsPerPageChange = (newPerPage) => {
-    setItemsPerPage(newPerPage);
-    setCurrentPage(0);
-  };
-    
-      const paginatedBooking = paginate(booking, currentPage, itemsPerPage);
-  
+  const paginatedBooking = paginate(booking, currentPage, itemsPerPage);
 
 
   return (
     <div className={styles.bookingConteiner}>
-      <Header handleOpen={openmodal} />
+      <Header handleOpen={() => dispatch(bookingAlertsSlice.openModal())} />
       <BookingModal
         error={error}
-        seterror={setError}
+        seterror={(err) => dispatch(bookingAlertsSlice.setError(err))}
         open={open}
-        handleClose={handleClose}
-        addBooking={addBooking}
+        handleClose={() => dispatch(bookingAlertsSlice.closeModal())}
+        addBooking={(bookingAlert, isEdit = false) =>
+          dispatch(bookingAlertsSlice.addBooking({ bookingAlert, isEdit }))
+        }
         edit={edit}
       />
       <EditDeleteBtn
         anchorEl={infoanchorEl}
-        onClose={infoclose}
-        handleEdit={handleEdit}
-        onClick={() => {
-          handleOpenDeleteModal();
-        }}
+        onClose={() => dispatch(bookingAlertsSlice.closeInfo())}
+        handleEdit={() => dispatch(bookingAlertsSlice.handleEdit())}
+        onClick={() => dispatch(bookingAlertsSlice.setIsDeleteModalOpen(true))}
       />
       <DeleteModal
         open={isDeleteModalOpen}
-        onClose={handleCloseDeleteModal}
+        onClose={() => dispatch(bookingAlertsSlice.setIsDeleteModalOpen(false))}
         title="Delete this Booking"
         text="Are you sure you want to delete this booking? This action cannot be undone"
         onDelete={() => {
           if (selectedBooking) {
-            handleDeleteService(selectedBooking.id);
+            dispatch(bookingAlertsSlice.deleteBooking(selectedBooking.id));
           }
-          handleCloseDeleteModal();
+          dispatch(bookingAlertsSlice.setIsDeleteModalOpen(false));
         }}
       />
       <div>
@@ -140,7 +72,10 @@ export default function BookingAlerts() {
             <div className={styles.sort}>
               <p>Sort By:</p>
               <button
-                onClick={onClick}
+                onClick={(event) => {
+                  dispatch(bookingAlertsSlice.setAnchorEl(event.currentTarget));
+                  dispatch(bookingAlertsSlice.setIcon(false));
+                }}
                 variant="contained"
                 id="basic-button"
                 aria-haspopup="true"
@@ -157,7 +92,10 @@ export default function BookingAlerts() {
                 anchorEl={anchorEl}
                 className={styles.manu}
                 open={openyMenu}
-                onClose={Close}
+                onClose={() => {
+                  dispatch(bookingAlertsSlice.setAnchorEl(null));
+                  dispatch(bookingAlertsSlice.setIcon(true));
+                }}
                 sx={{
                   "& .MuiPaper-root": {
                     margin: "4px 0",
@@ -174,7 +112,11 @@ export default function BookingAlerts() {
                       backgroundColor:
                         selectelem === elem ? "rgba(25, 118, 210, 0.08)" : "",
                     }}
-                    onClick={() => select(elem)}
+                    onClick={() => {
+                      dispatch(bookingAlertsSlice.setSelectElem(elem));
+                      dispatch(bookingAlertsSlice.setAnchorEl(null));
+                      dispatch(bookingAlertsSlice.setIcon(true));
+                    }}
                   >
                     {elem}
                   </MenuItem>
@@ -202,7 +144,6 @@ export default function BookingAlerts() {
                     <li>
                       {elem.date} {elem.startime}
                     </li>
-
                     <li>{elem.specialist}</li>
                     <li>{elem.service}</li>
                     <li>
@@ -216,7 +157,10 @@ export default function BookingAlerts() {
                   </ul>
                   <button
                     className={styles.infobtn}
-                    onClick={(event) => handleInfoClick(event, elem)}
+                    onClick={(event) => {
+                      dispatch(bookingAlertsSlice.setInfoAnchorEl(event.currentTarget));
+                      dispatch(bookingAlertsSlice.setSelectedBooking(elem));
+                    }}
                   >
                     <AiOutlineMore />
                   </button>
@@ -229,8 +173,12 @@ export default function BookingAlerts() {
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           totalItems={booking.length}
-          onPageChange={handlePageChange}
-          onItemsPerPageChange={handleItemsPerPageChange}
+          onPageChange={(newPage) =>
+            dispatch(bookingAlertsSlice.handlePageChange(newPage))
+          }
+          onItemsPerPageChange={(newPerPage) =>
+            dispatch(bookingAlertsSlice.handleItemsPerPageChange(newPerPage))
+          }
         />
       </div>
     </div>

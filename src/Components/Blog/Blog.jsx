@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import styles from "./blog.module.scss";
 import BlogModal from "./BlogModal/BlogModal";
@@ -7,107 +7,57 @@ import NoAvatar from "../../assets/NoAvatart/download.png";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
-import { manageItems } from "../../Utils/EditFunction";
 import { paginate } from "../../Utils/pagination";
-
-
+import { useSelector, useDispatch } from "react-redux";
+import * as blogActions from "../../Features/blog/blogSlice";
 
 export default function Blog() {
-  const [open, setopen] = useState(false);
-  const [edit, setedit] = useState(null);
-  const [bloglist, setbloglist] = useState([]);
-  const [infoanchorEl, setinfoanchorEl] = useState(null);
-  const [selectedblog, setselectedblog] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [error, setError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const blogslice = useSelector((state) => state.blog);
+  const dispatch = useDispatch();
 
-
-  const openmodal = () => {
-    setopen(true);
-    setError(false);
-    setedit(null);
-  };
-
-  const handleClose = () => {
-    setopen(false);
-    setError(false);
-  };
-
-  const addblog = (blog, isEdit = false) => {
-    setbloglist((prev) => manageItems(prev, blog, isEdit));
-   
-  };
-
-  
-  const infoclose = () => {
-    setinfoanchorEl(null);
-  };
-  const handleEdit = () => {
-    setinfoanchorEl(null);
-    setopen(true);
-    setedit(selectedblog);
-  };
-  const handleOpenDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleInfoClick = (event, elem) => {
-    setselectedblog(elem);
-    setinfoanchorEl(event.currentTarget);
-  };
-  const handleDeleteblog = (id) => {
-    setbloglist(bloglist.filter((elem) => elem.id !== id));
-    setinfoanchorEl(null);
-  };
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-  const handleItemsPerPageChange = (newPerPage) => {
-    setItemsPerPage(newPerPage);
-    setCurrentPage(0);
-  };
-
-  const paginatedBlog = paginate(bloglist, currentPage, itemsPerPage);
- 
+  const paginatedBlog = paginate(
+    blogslice.blogList,
+    blogslice.currentPage,
+    blogslice.itemsPerPage
+  );
 
   return (
     <div className={styles.blogConteiner}>
-      <Header handleOpen={openmodal} />
+      <Header handleOpen={() => dispatch(blogActions.openmodal())} />
 
       <BlogModal
-        error={error}
-        seterror={setError}
-        open={open}
-        handleClose={handleClose}
-        addblog={addblog}
-        edit={edit}
+        error={blogslice.error}
+        seterror={(error) => dispatch(blogActions.setError(error))}
+        open={blogslice.open}
+        handleClose={() => dispatch(blogActions.handleClose())}
+        addblog={(blog, isEdit = false) =>
+          dispatch(blogActions.addblog({ blog, isEdit }))
+        }
+        edit={blogslice.edit}
       />
+
       <EditDeleteBtn
-        anchorEl={infoanchorEl}
-        onClose={infoclose}
-        handleEdit={handleEdit}
+        anchorEl={blogslice.infoanchorEl}
+        onClose={() => dispatch(blogActions.infoclose())}
+        handleEdit={() => dispatch(blogActions.handleEdit())}
         onClick={() => {
-          handleOpenDeleteModal();
+          dispatch(blogActions.handleOpenDeleteModal());
         }}
       />
+
       <DeleteModal
-        open={isDeleteModalOpen}
-        onClose={handleCloseDeleteModal}
+        open={blogslice.isDeleteModalOpen}
+        onClose={() => dispatch(blogActions.handleCloseDeleteModal())}
         title="Delete this Blog?"
         text="Are you sure you want to delete this blog? This action cannot be undone"
         onDelete={() => {
-          if (selectedblog) {
-            handleDeleteblog(selectedblog.id);
-          }
-          handleCloseDeleteModal();
+       
+          dispatch(blogActions.handleDeleteblog(blogslice.selectedblog.id));
+          
+          dispatch(blogActions.handleCloseDeleteModal());
         }}
       />
+
       <div className={styles.blog}>
         <div className={styles.blogHeader}>
           <div className={styles.blogHeaderTitle}>
@@ -130,6 +80,7 @@ export default function Blog() {
                       <img
                         className={styles.img}
                         src={elem.files ? elem.files : NoAvatar}
+                        alt="Blog"
                       />
                     </li>
                     <li>{elem.title}</li>
@@ -140,7 +91,9 @@ export default function Blog() {
                   </ul>
                   <button
                     className={styles.infobtn}
-                    onClick={(event) => handleInfoClick(event, elem)}
+                    onClick={(event) =>
+                      dispatch(blogActions.handleInfoClick({ event, elem }))
+                    }
                   >
                     <AiOutlineMore />
                   </button>
@@ -149,13 +102,17 @@ export default function Blog() {
             ))}
           </div>
         </div>
-         <PaginationComponent
-                  currentPage={currentPage}
-                  itemsPerPage={itemsPerPage}
-                  totalItems={bloglist.length}
-                  onPageChange={handlePageChange}
-                  onItemsPerPageChange={handleItemsPerPageChange}
-                />
+        <PaginationComponent
+          currentPage={blogslice.currentPage}
+          itemsPerPage={blogslice.itemsPerPage}
+          totalItems={blogslice.blogList.length}
+          onPageChange={(newPage) =>
+            dispatch(blogActions.handlePageChange({ newPage }))
+          }
+          onItemsPerPageChange={(newPerPage) =>
+            dispatch(blogActions.handleItemsPerPageChange({ newPerPage }))
+          }
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./blogModal.module.scss";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -9,6 +9,17 @@ import { services } from "../../../Services/data/addServices/services";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import TextField from "@mui/material/TextField";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setTitle,
+  setCategory,
+  setAuthor,
+  setFiles,
+  setContent,
+  setSubtitle,
+  setId,
+  resetForm,
+} from "../../../Features/blog/blogModalSlice";
 
 export default function BlogModal({
   open,
@@ -18,66 +29,41 @@ export default function BlogModal({
   error,
   seterror,
 }) {
-  const [title, setitle] = useState("");
-  const [category, setCategory] = useState("Classic");
-  const [Author, setAuthor] = useState("");
-  const [files, setFiles] = useState("");
-  const [content, setContent] = useState("");
-  const [id, setId] = useState(0);
-  const [subtitle, setSubtitle] = useState("");
+  const dispatch = useDispatch();
+  const { title, category, Author, files, content, subtitle, id } = useSelector(
+    (state) => state.blogModal
+  );
 
   const handleFileSelect = (fileUrl) => {
-    setFiles(fileUrl);
+    dispatch(setFiles(fileUrl));
   };
-
-  const resetForm = useCallback(() => {
-    setitle("");
-    setCategory("Classic");
-    setAuthor("");
-    setFiles("");
-    setContent("");
-    setSubtitle("");
-    setId(0);
-  }, []);
 
   useEffect(() => {
     if (edit) {
-      setitle(edit.title || "");
-      setCategory(edit.category || "Classic");
-      setAuthor(edit.Author || "");
-      setFiles(edit.files || "");
-      setContent(edit.content || "");
-      setSubtitle(edit.subtitle || "");
-      setId(edit.id || 0);
+      dispatch(setTitle(edit.title || ""));
+      dispatch(setCategory(edit.category || "Classic"));
+      dispatch(setAuthor(edit.Author || ""));
+      dispatch(setFiles(edit.files || ""));
+      dispatch(setContent(edit.content || ""));
+      dispatch(setSubtitle(edit.subtitle || ""));
+      dispatch(setId(edit.id || 0));
     } else {
-      resetForm();
+      dispatch(resetForm());
     }
-  }, [edit, resetForm]);
+  }, [edit, dispatch]);
+
 
   const handleSave = () => {
-    const hasEmptyFields = !title || !category || !Author || !content || !subtitle;
+    
+    const hasEmptyFields =
+      !title || !category || !Author || !content || !subtitle;
     seterror(hasEmptyFields);
-    if (hasEmptyFields) {
-      return;
-    }
+    if (hasEmptyFields) return;
 
-    const blogobj = {
-      id,
-      title,
-      category,
-      Author,
-      files,
-      content,
-      subtitle,
-    };
-
-    if (edit) {
-      addblog(blogobj, true);
-    } else {
-      addblog(blogobj, false);
-    }
+    const blogobj = { id, title, category, Author, files, content, subtitle };
+    addblog(blogobj, !!edit);
+    dispatch(resetForm());
     handleClose();
-    resetForm();
   };
 
   return (
@@ -101,65 +87,62 @@ export default function BlogModal({
               <Inputs
                 error={error && !title}
                 value={title}
-                state={setitle}
-                placeholder={"Title"}
+                state={(val) => dispatch(setTitle(val))}
+                placeholder="Title"
                 type="text"
-                label={"Title"}
+                label="Title"
                 Fullwidth={true}
-                width={"100%"}
+                width="100%"
               />
 
               <Inputs
                 error={error && !subtitle}
                 value={subtitle}
-                state={setSubtitle}
-                placeholder={"Subtitle"}
+                state={(val) => dispatch(setSubtitle(val))}
+                placeholder="Subtitle"
                 type="text"
-                label={"Subtitle"}
+                label="Subtitle"
                 Fullwidth={true}
-                width={"100%"}
+                width="100%"
               />
-              <div>
-                <SelectComponent
-                  fullWidth={true}
-                  deafultvalue={"Classic"}
-                  servicename="Category"
-                  service={category}
-                  sets={setCategory}
-                  services={services[1].options}
-                />
-              </div>
+
+              <SelectComponent
+                fullWidth={true}
+                deafultvalue="Classic"
+                servicename="Category"
+                service={category}
+                sets={(val) => dispatch(setCategory(val))}
+                services={services[1].options}
+              />
 
               <Inputs
                 error={error && !Author}
                 value={Author}
-                state={setAuthor}
-                placeholder={"Author"}
+                state={(val) => dispatch(setAuthor(val))}
+                placeholder="Author"
                 type="text"
-                label={"Author"}
+                label="Author"
                 Fullwidth={true}
-                width={"100%"}
+                width="100%"
               />
 
-              <div>
-                <TextField
-                  error={error && !content}
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="Write a blog text..."
-                  multiline
-                  rows={10}
-                  variant="outlined"
-                  fullWidth
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      margin: "10px 0",
-                      color: "rgba(127, 129, 136, 1)",
-                      border: "1px solid rgba(98, 99, 115, 0.3);",
-                    },
-                  }}
-                />
-              </div>
+              <TextField
+                error={error && !content}
+                value={content}
+                onChange={(e) => dispatch(setContent(e.target.value))}
+                placeholder="Write a blog text..."
+                multiline
+                rows={10}
+                variant="outlined"
+                fullWidth
+                sx={{
+                  "& .MuiInputBase-root": {
+                    margin: "10px 0",
+                    color: "rgba(127, 129, 136, 1)",
+                    border: "1px solid rgba(98, 99, 115, 0.3);",
+                  },
+                }}
+              />
 
               <ChooseFile addimg={handleFileSelect} edit={edit} />
               <ModalBtn

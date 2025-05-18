@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./categoriesmodal.module.scss";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -6,6 +6,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
+import { useSelector, useDispatch } from "react-redux";
+import * as modal from "../../../Features/Categories/CategoriesModalSlice";
 
 export default function CategoriesModal({
   open,
@@ -15,48 +17,31 @@ export default function CategoriesModal({
   error,
   setError,
 }) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [files, setFiles] = useState("");
-  const [id, setId] = useState(0);
+  const { name, description, files, id } = useSelector(
+    (state) => state.categoriesModal
+  );
+  const dispatch = useDispatch();
 
   const handleFileSelect = (fileUrl) => {
-    setFiles(fileUrl);
+    dispatch(modal.setFiles(fileUrl));
   };
 
-  const resetForm = useCallback(() => {
-    setName("");
-    setDescription("");
-    setFiles("");
-    setId(0);
-  }, []);
-
-  useEffect(() => {
-    if (name && description && files) {
-      setError(false);
-    }
-  }, [name, description, files, setError]);
 
   useEffect(() => {
     if (edit) {
-      setName(edit.name || "");
-      setDescription(edit.description || "");
-      setFiles(edit.files || "");
-      setId(edit.id || 0);
+      dispatch(modal.setName(edit.name || ""));
+      dispatch(modal.setDescription(edit.description || ""));
+      dispatch(modal.setFiles(edit.files || ""));
+      dispatch(modal.setId(edit.id || 0));
     } else {
-      resetForm();
+      dispatch(modal.resetForm());
     }
-  }, [edit, resetForm]);
+  }, [edit, dispatch]);
 
   const save = () => {
     const hasEmptyFields = !name ;
     setError(hasEmptyFields);
-
     if (hasEmptyFields) return;
-    if (!name   ) {
-      return;
-    }
-
 
     const categoriesobj = {
       id,
@@ -66,14 +51,12 @@ export default function CategoriesModal({
       date: new Date().toLocaleDateString(),
     };
 
-    if (edit) {
-      addcategories(categoriesobj, true);
-    } else {
-      addcategories(categoriesobj, false);
-    }
+    addcategories(categoriesobj, !!edit);
+
+    dispatch(modal.resetForm());
     close();
-    resetForm();
   };
+
   return (
     <Modal
       open={open}
@@ -95,7 +78,7 @@ export default function CategoriesModal({
             <Inputs
               error={error && !name}
               value={name}
-              state={setName}
+              state={(value) => dispatch(modal.setName(value))}
               placeholder="Category Name"
               type="text"
               label="Category Name"
@@ -105,14 +88,13 @@ export default function CategoriesModal({
             <Inputs
               error={null}
               value={description}
-              state={setDescription}
+              state={(value) => dispatch(modal.setDescription(value))}
               placeholder="Description"
               type="text"
               label="Description"
               Fullwidth={true}
               width={"100%"}
             />
-
             <ChooseFile addimg={handleFileSelect} edit={edit} />
             <ModalBtn onClose={close} handleSave={save} edit={edit} />
           </div>

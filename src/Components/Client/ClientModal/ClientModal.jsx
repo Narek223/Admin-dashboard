@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { AiOutlineClose } from "react-icons/ai";
@@ -8,6 +8,8 @@ import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 import styles from "./clientmodal.module.scss";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import dayjs from "dayjs";
+import { useSelector, useDispatch } from "react-redux";
+import * as clientModalSlice from "../../../Features/Client/ClientModalSlice";
 
 export default function ClientModal({
   open,
@@ -17,21 +19,10 @@ export default function ClientModal({
   onAddService,
   edit,
 }) {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [mail, setMail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [files, setFiles] = useState("");
-  const [id, setId] = useState(0);
-
-  const resetForm = useCallback(() => {
-    setName("");
-    setDate("");
-    setMail("");
-    setPhone("");
-    setFiles("");
-    setId(0);
-  }, []);
+  const { name, date, mail, phone, files, id } = useSelector(
+    (state) => state.clientModal
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (name && date && mail && phone) {
@@ -41,25 +32,23 @@ export default function ClientModal({
 
   useEffect(() => {
     if (edit) {
-      setName(edit.name || "");
-      setDate(edit.date || "");
-      setMail(edit.mail || "");
-      setPhone(edit.phone || "");
-      setFiles(edit.files || "");
-      setId(edit.id || 0);
+      dispatch(clientModalSlice.setName(edit.name || ""));
+      dispatch(clientModalSlice.setDate(edit.date || ""));
+      dispatch(clientModalSlice.setMail(edit.mail || ""));
+      dispatch(clientModalSlice.setPhone(edit.phone || ""));
+      dispatch(clientModalSlice.setFiles(edit.files || ""));
+      dispatch(clientModalSlice.setId(edit.id || 0));
     } else {
-      resetForm();
+      dispatch(clientModalSlice.resetForm());
     }
-  }, [edit, resetForm]);
+  }, [edit, dispatch]);
 
   const handleSave = () => {
     const hasEmptyFields = !name || !date || !mail || !phone;
     setError(hasEmptyFields);
 
     if (hasEmptyFields) return;
-    if (!name || !date || !mail || !phone) {
-      return;
-    }
+
     const formattedDate =
       date instanceof Date ? dayjs(date).format("YYYY-MM-DD") : date;
     const clientObj = {
@@ -71,18 +60,14 @@ export default function ClientModal({
       files,
     };
 
-    if (edit) {
-      onAddService(clientObj, true);
-    } else {
-      onAddService(clientObj, false);
-    }
+    onAddService(clientObj, !!edit);
 
     handleClose();
-    resetForm();
+    dispatch(clientModalSlice.resetForm());
   };
 
   const handleFileSelect = (fileUrl) => {
-    setFiles(fileUrl);
+    dispatch(clientModalSlice.setFiles(fileUrl));
   };
 
   return (
@@ -107,13 +92,13 @@ export default function ClientModal({
               <Inputs
                 error={error && !name}
                 value={name}
-                state={setName}
+                state={(value) => dispatch(clientModalSlice.setName(value))}
                 placeholder="Anna Smith"
                 type="text"
                 label="Full Name"
               />
               <DataPicker
-                setDate={setDate}
+                setDate={(value) => dispatch(clientModalSlice.setDate(value))}
                 error={error && !date}
                 value={date}
               />
@@ -122,7 +107,7 @@ export default function ClientModal({
               <Inputs
                 error={error && !mail}
                 value={mail}
-                state={setMail}
+                state={(value) => dispatch(clientModalSlice.setMail(value))}
                 placeholder="annesmith@gmail.com"
                 type="email"
                 label="Email"
@@ -130,7 +115,7 @@ export default function ClientModal({
               <Inputs
                 error={error && !phone}
                 value={phone}
-                state={setPhone}
+                state={(value) => dispatch(clientModalSlice.setPhone(value))}
                 placeholder="+49 30 12345678"
                 type="tel"
                 label="Phone Number"

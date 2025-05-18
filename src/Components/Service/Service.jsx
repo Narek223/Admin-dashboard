@@ -1,84 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./service.module.scss";
 import { MdOutlineAdd } from "react-icons/md";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import Servicemodal from "./ServiceModal/Servicemodal";
-import { AiOutlineMore } from "react-icons/ai";
-import { FaAngleUp } from "react-icons/fa6";
-import { Menu, MenuItem } from "@mui/material";
-import { AiOutlineFieldNumber } from "react-icons/ai";
+import { AiOutlineMore, AiOutlineFieldNumber } from "react-icons/ai";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import Header from "../Header/Header";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import { VscDebugRestart } from "react-icons/vsc";
-import { manageItems } from "../../Utils/EditFunction";
+import { Menu, MenuItem } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import * as serviceActions from "../../Features/Service/ServiceSlice";
 import { paginate } from "../../Utils/pagination";
 
-
 export default function Service() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
-  const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
-
+  const dispatch = useDispatch();
+  const {
+    anchorEl,
+    categoryAnchorEl,
+    servicesAnchorEl,
+    categoryValue,
+    serviceValue,
+    icon,
+    serviceicon,
+    isModalOpen,
+    servicesList,
+    edit,
+    error,
+    selectedService,
+    isDeleteModalOpen,
+    currentPage,
+    itemsPerPage,
+  } = useSelector((state) => state.service);
+  const { categorieslist } = useSelector((state) => state.categories);
   const openCategoryMenu = Boolean(categoryAnchorEl);
   const openServicesMenu = Boolean(servicesAnchorEl);
-
-  const [categoryValue, setcategoryValue] = useState("All Categories");
-  const [serviceValue, setserviceValue] = useState("All Services");
-  const [icon, seticon] = useState(true);
-  const [serviceicon, setserviceicon] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [servicesList, setServicesList] = useState([]);
-  const [edit, setedit] = useState(null);
-  const [error, setError] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-
-  const handleCloseModal = () => {
-    setError(false);
-    setIsModalOpen(false);
-  };
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-    setedit(null);
-    setError(false);
-  };
-
-  const handleInfoClick = (event, elem) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedService(elem);
-  };
-
-  const handleEdit = () => {
-    setAnchorEl(null);
-    setIsModalOpen(true);
-    setedit(selectedService);
-  };
-
-  const handleDeleteService = (id) => {
-    setServicesList(servicesList.filter((elem) => elem.id !== id));
-    setAnchorEl(null);
-  };
-
-  const handleAddService = (newService, isEdit = false) => {
-    setServicesList((prev) => manageItems(prev, newService, isEdit));
-  };
-
-  const handleClose = () => {
-    setCategoryAnchorEl(null);
-    setServicesAnchorEl(null);
-    seticon(true);
-    setserviceicon(true);
-    setError(false);
-  };
-
-  const infoclose = () => {
-    setAnchorEl(null);
-  };
 
   const filterCategory =
     categoryValue === "All Categories"
@@ -90,59 +48,19 @@ export default function Service() {
       ? filterCategory
       : filterCategory.filter((elem) => elem.service === serviceValue);
 
-  const handleSelect = (value) => {
-    setcategoryValue(value);
-    handleClose();
-  };
-
-  const handleServiceSelect = (value) => {
-    setserviceValue(value);
-    handleClose();
-  };
-
-  const handleCategoryClick = (event) => {
-    setCategoryAnchorEl(event.currentTarget);
-    seticon(false);
-  };
-
-  const handleServicesClick = (event) => {
-    setServicesAnchorEl(event.currentTarget);
-    setserviceicon(false);
-  };
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-  const handleItemsPerPageChange = (newPerPage) => {
-    setItemsPerPage(newPerPage);
-    setCurrentPage(0);
-  };
-
   const paginatedServices = paginate(filterServices, currentPage, itemsPerPage);
 
-  const handleOpenDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const restarTwo = () => {
-    setcategoryValue("All Categories");
-    setserviceValue("All Services");
-  };
   return (
     <div>
       <Header />
       <DeleteModal
         open={isDeleteModalOpen}
-        onClose={handleCloseDeleteModal}
+        onClose={() => dispatch(serviceActions.handleCloseDeleteModal())}
         title="Delete Service"
-        text="Are you sure you want to delete this Service?This action cannot be undone"
+        text="Are you sure you want to delete this Service? This action cannot be undone"
         onDelete={() => {
-          handleDeleteService(selectedService.id);
-          handleCloseDeleteModal();
+          dispatch(serviceActions.handleDeleteService(selectedService.id));
+          dispatch(serviceActions.handleCloseDeleteModal());
         }}
       />
       <div className={styles.servicesConteiner}>
@@ -155,12 +73,12 @@ export default function Service() {
                   <div className={styles.buttonBox}>
                     <button
                       className={styles.restart}
-                      onClick={() => restarTwo()}
+                      onClick={() => dispatch(serviceActions.restarTwo())}
                     >
                       <VscDebugRestart />
                     </button>
                     <button
-                      onClick={handleCategoryClick}
+                      onClick={(e) => dispatch(serviceActions.handleCategoryClick(e))}
                       variant="contained"
                       id="basic-button"
                       aria-haspopup="true"
@@ -185,6 +103,7 @@ export default function Service() {
                               ? `${categoryAnchorEl.offsetWidth}px`
                               : "auto",
                           minWidth: 100,
+                          minHeight: 10,
                         },
                         "& .MuiMenuItem-root:hover": {
                           backgroundColor: "white",
@@ -194,9 +113,9 @@ export default function Service() {
                       className={styles.manu}
                       anchorEl={categoryAnchorEl}
                       open={openCategoryMenu}
-                      onClose={handleClose}
+                      onClose={() => dispatch(serviceActions.handleClose())}
                     >
-                      {["All Categories", "Classic", "Modern"].map(
+                      {["All Categories", ...new Set(categorieslist.map((s) => s.name))].map(
                         (category) => (
                           <MenuItem
                             key={category}
@@ -206,14 +125,14 @@ export default function Service() {
                                   ? "rgba(25, 118, 210, 0.08)"
                                   : "",
                             }}
-                            onClick={() => handleSelect(category)}
+                            onClick={() => dispatch(serviceActions.handleSelect(category))}
                           >
                             {category}
                           </MenuItem>
                         )
                       )}
                     </Menu>
-                    <button onClick={handleServicesClick}>
+                    <button onClick={(e) => dispatch(serviceActions.handleServicesClick(e))}>
                       {serviceValue}
                       {serviceicon ? (
                         <FaAngleDown className={styles.icon} />
@@ -224,7 +143,7 @@ export default function Service() {
                     <Menu
                       anchorEl={servicesAnchorEl}
                       open={openServicesMenu}
-                      onClose={handleClose}
+                      onClose={() => dispatch(serviceActions.handleClose())}
                       sx={{
                         "& .MuiPaper-root": {
                           backgroundColor: "rgba(248, 249, 250, 1)",
@@ -253,23 +172,25 @@ export default function Service() {
                                 ? "rgba(25, 118, 210, 0.08)"
                                 : "",
                           }}
-                          onClick={() => handleServiceSelect(service)}
+                          onClick={() => dispatch(serviceActions.handleServiceSelect(service))}
                         >
                           {service}
                         </MenuItem>
                       ))}
                     </Menu>
-                    <button onClick={handleOpenModal}>
+                    <button onClick={() => dispatch(serviceActions.handleOpenModal())}>
                       <MdOutlineAdd className={styles.icon} /> Add Service
                     </button>
                   </div>
                 </div>
                 <Servicemodal
                   open={isModalOpen}
-                  onClose={handleCloseModal}
-                  onAddService={handleAddService}
+                  onClose={() => dispatch(serviceActions.handleCloseModal())}
+                  onAddService={(newService, isEdit) =>
+                    dispatch(serviceActions.handleAddService({ newService, isEdit }))
+                  }
                   edit={edit}
-                  seterror={setError}
+                  seterror={(val) => dispatch(serviceActions.setError(val))}
                   error={error}
                 />
                 <div className={styles.addServices}>
@@ -307,7 +228,11 @@ export default function Service() {
                           <button
                             id="info-btn"
                             className={styles.infobtn}
-                            onClick={(event) => handleInfoClick(event, elem)}
+                            onClick={(event) =>
+                              dispatch(
+                                serviceActions.handleInfoClick({ event, elem })
+                              )
+                            }
                             aria-haspopup="true"
                             aria-expanded={false}
                           >
@@ -321,16 +246,18 @@ export default function Service() {
             </div>
             <EditDeleteBtn
               anchorEl={anchorEl}
-              onClose={infoclose}
-              handleEdit={handleEdit}
-              onClick={handleOpenDeleteModal}
+              onClose={() => dispatch(serviceActions.infoclose())}
+              handleEdit={() => dispatch(serviceActions.handleEdit())}
+              onClick={() => dispatch(serviceActions.handleOpenDeleteModal())}
             />
             <PaginationComponent
               currentPage={currentPage}
               itemsPerPage={itemsPerPage}
               totalItems={filterServices.length}
-              onPageChange={handlePageChange}
-              onItemsPerPageChange={handleItemsPerPageChange}
+              onPageChange={(page) => dispatch(serviceActions.handlePageChange(page))}
+              onItemsPerPageChange={(perPage) =>
+                dispatch(serviceActions.handleItemsPerPageChange(perPage))
+              }
             />
           </div>
         </div>

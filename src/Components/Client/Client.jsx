@@ -1,113 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import styles from "./client.module.scss";
 import ClientModal from "./ClientModal/ClientModal";
-import { AiOutlineFieldNumber } from "react-icons/ai";
-import { AiOutlineMore } from "react-icons/ai";
+import { AiOutlineFieldNumber, AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
-import NoAvatar from "../../assets/NoAvatart/download.png"
-import { manageItems } from "../../Utils/EditFunction";
+import NoAvatar from "../../assets/NoAvatart/download.png";
 import { paginate } from "../../Utils/pagination";
-
+import { useSelector, useDispatch } from "react-redux";
+import * as clientSlice from "../../Features/Client/ClientSlice";
 
 export default function Client() {
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
-  const [clientlist, setClientlist] = useState([]);
-  const [edit, setedit] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedService, setSelectedService] = useState(null);
-  const [id, setId] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const clientSliceState = useSelector((state) => state.client);
+  const dispatch = useDispatch();
 
+  const paginatedClient = paginate(
+    clientSliceState.clientList,
+    clientSliceState.currentPage,
+    clientSliceState.itemsPerPage
+  );
 
- 
-
-  const handleOpen = () => {
-    setOpen(true);
-    setError(false);
-    setedit(null);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setError(false);
-    setAnchorEl(null)
-  };
-
-  const handleEdit = () => {
-    setAnchorEl(null);
-    setOpen(true);
-    setedit(selectedService);
-  };
-
-  const handleAddClient = (client, isEdit = false) => {
-    setClientlist((prev) => manageItems(prev, client, isEdit));
-  };
-
-  const handleInfoClick = (event, elem) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedService(elem);
-  };
-
-  const infoclose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleDeleteService = (id) => {
-    setClientlist(clientlist.filter((elem) => elem.id !== id));
-    setAnchorEl(null);
-  };
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-  const handleItemsPerPageChange = (newPerPage) => {
-    setItemsPerPage(newPerPage);
-    setCurrentPage(0);
-  };
-  
-  const paginatedClient = paginate(clientlist, currentPage, itemsPerPage);
- 
-
-  const handleOpenDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-  
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-
- 
   return (
     <div className={styles.ClientConteiner}>
-      <Header handleOpen={handleOpen} />
+      <Header handleOpen={() => dispatch(clientSlice.openModal())} />
       <ClientModal
-        open={open}
-        handleClose={handleClose}
-        error={error}
-        setError={setError}
-        onAddService={handleAddClient}
-        edit={edit}
-     
+        open={clientSliceState.open}
+        handleClose={() => dispatch(clientSlice.closeModal())}
+        error={clientSliceState.error}
+        setError={(error) => dispatch(clientSlice.setError(error))}
+        onAddService={(client, isEdit = false) =>
+          dispatch(clientSlice.addClient({ client, isEdit }))
+        }
+        edit={clientSliceState.edit}
       />
       <DeleteModal
-       open={isDeleteModalOpen}
-       onClose={handleCloseDeleteModal}
-       title="Delete Client"
-       text="Are you sure you want to delete this client?This action cannot be undone"
-       onDelete={() => {
-        handleDeleteService(selectedService.id); 
-        handleCloseDeleteModal(); 
-      }}
+        open={clientSliceState.isDeleteModalOpen}
+        onClose={() => dispatch(clientSlice.closeDeleteModal())}
+        title="Delete Client"
+        text="Are you sure you want to delete this client? This action cannot be undone"
+        onDelete={() => {
+          dispatch(clientSlice.deleteClient(clientSliceState.selectedClient.id));
+          dispatch(clientSlice.closeDeleteModal());
+        }}
       />
       <div className={styles.clientbody}>
-        <div className={styles.clinetWrapper} >
+        <div className={styles.clinetWrapper}>
           <div className={styles.clientheader}>
             <ul>
               <li>
@@ -128,7 +66,11 @@ export default function Client() {
                   <ul>
                     <li>{elem.id}</li>
                     <li>
-                      <img className={styles.img} src={elem.files?elem.files:NoAvatar} />
+                      <img
+                        className={styles.img}
+                        src={elem.files ? elem.files : NoAvatar}
+                        alt="Client"
+                      />
                     </li>
                     <li>{elem.name}</li>
                     <li>{elem.phone}</li>
@@ -139,33 +81,33 @@ export default function Client() {
                     className={styles.infobtn}
                     aria-haspopup="true"
                     aria-expanded={false}
-                   onClick={(event) => handleInfoClick(event, elem)}>
-<AiOutlineMore />
+                    onClick={(event) =>
+                      dispatch(clientSlice.handleInfoClick({ event, elem }))
+                    }
+                  >
+                    <AiOutlineMore />
                   </button>
-               
                 </div>
                 <EditDeleteBtn
-                  anchorEl={anchorEl}
-                  onClose={infoclose}
-                  handleEdit={handleEdit}
-                  onClick={() => {
-                    handleOpenDeleteModal(); 
-                  }}
-                 
+                  anchorEl={clientSliceState.anchorEl}
+                  onClose={() => dispatch(clientSlice.closeInfo())}
+                  handleEdit={() => dispatch(clientSlice.handleEdit())}
+                  onClick={() => dispatch(clientSlice.openDeleteModal())}
                 />
               </div>
             ))}
           </div>
         </div>
-        <div>
-          
-        </div>
         <PaginationComponent
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          totalItems={clientlist.length}
-          onPageChange={handlePageChange}
-          onItemsPerPageChange={handleItemsPerPageChange}
+          currentPage={clientSliceState.currentPage}
+          itemsPerPage={clientSliceState.itemsPerPage}
+          totalItems={clientSliceState.clientList.length}
+          onPageChange={(newPage) =>
+            dispatch(clientSlice.handlePageChange({ newPage }))
+          }
+          onItemsPerPageChange={(newPerPage) =>
+            dispatch(clientSlice.handleItemsPerPageChange({ newPerPage }))
+          }
         />
       </div>
     </div>

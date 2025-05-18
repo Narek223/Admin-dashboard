@@ -32,6 +32,8 @@
         display: flex;
         .manu {
           background-color: rgba(248, 249, 250, 1);
+          min-height: 10px;
+          overflow-y: scroll;
           .customMenuItem {
             background-color: #141313;
           }

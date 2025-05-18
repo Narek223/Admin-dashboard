@@ -29,6 +29,8 @@
 }
 .servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox .manu {
   background-color: rgb(248, 249, 250);
+  min-height: 10px;
+  overflow-y: scroll;
 }
 .servicesConteiner .Wrapper .serviceWrapper .service .filter .buttonBox .manu .customMenuItem {
   background-color: #141313;

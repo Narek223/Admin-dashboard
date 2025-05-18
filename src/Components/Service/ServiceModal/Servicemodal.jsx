@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./servicemodal.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -8,6 +8,8 @@ import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import Inputs from "../../../SheredComponents/Inputs/Inputs";
+import { useSelector, useDispatch } from "react-redux";
+import * as modal from "../../../Features/Service/ServiceModalSlice";
 
 export default function Servicemodal({
   open,
@@ -17,37 +19,27 @@ export default function Servicemodal({
   seterror,
   error,
 }) {
-  const [id, setId] = useState(0);
-  const [service, setService] = useState("");
-  const [category, setCategory] = useState("Classic");
-  const [price, setPrice] = useState("");
-  const [duration, setDuration] = useState("");
-  const [description, setDescription] = useState("");
-  const [files, setFiles] = useState("");
-
-  const resetForm = useCallback(() => {
-    setService("");
-    setCategory("Classic");
-    setPrice("");
-    setDuration("");
-    setDescription("");
-    setFiles("");
-    setId(0);
-  }, []);
+  const dispatch = useDispatch();
+  const { id, service, category, price, duration, description, files } =
+    useSelector((state) => state.serviceModal);
 
   useEffect(() => {
     if (edit) {
-      setService(edit.service || "");
-      setCategory(edit.category || "Classic");
-      setPrice(edit.price || "");
-      setDuration(edit.duration || "");
-      setDescription(edit.description || "");
-      setFiles(edit.files || "");
-      setId(edit.id || 0);
+      dispatch(
+        modal.setAllFields({
+          id: edit.id || 0,
+          service: edit.service || "",
+          category: edit.category || "Classic",
+          price: edit.price || "",
+          duration: edit.duration || "",
+          description: edit.description || "",
+          files: edit.files || "",
+        })
+      );
     } else {
-      resetForm();
+      dispatch(modal.resetModalForm());
     }
-  }, [edit, resetForm]);
+  }, [edit, dispatch]);
 
   useEffect(() => {
     if (duration && price) {
@@ -82,42 +74,51 @@ export default function Servicemodal({
     }
 
     onClose();
-    resetForm();
+    dispatch(modal.resetModalForm());
   };
 
   const handleFileSelect = (fileUrl) => {
-    setFiles(fileUrl);
+    dispatch(modal.setFiles(fileUrl));
   };
 
   return (
     <Modal
       open={open}
-      onClose={onClose}
+      onClose={() => {
+        onClose();
+        dispatch(modal.resetModalForm());
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       className={styles.modal}
     >
       <Box className={styles.modalBox}>
         <p className={styles.close}>
-          <AiOutlineClose onClick={onClose} className={styles.icon} />
+          <AiOutlineClose
+            onClick={() => {
+              onClose();
+              dispatch(modal.resetModalForm());
+            }}
+            className={styles.icon}
+          />
         </p>
         <h1>{edit ? "Edit Service" : "Add Service"}</h1>
         <div className={styles.addService}>
           <div className={styles.service}>
-          <Inputs
+            <Inputs
               error={error && !service}
               value={service}
-              state={setService}
+              state={(val) => dispatch(modal.setService(val))}
               placeholder="Service Name"
               type="text"
               label="Service Name"
             />
-         
+
             <SelectComponent
               deafultvalue={"Classic"}
               servicename="Category"
               service={category}
-              sets={setCategory}
+              sets={(val) => dispatch(modal.setCategory(val))}
               services={services[1].options}
             />
           </div>
@@ -126,7 +127,7 @@ export default function Servicemodal({
             <Inputs
               error={error && !price}
               value={price}
-              state={setPrice}
+              state={(val) => dispatch(modal.setPrice(val))}
               placeholder="$45"
               type="number"
               label="Price"
@@ -134,7 +135,7 @@ export default function Servicemodal({
             <Inputs
               error={error && !duration}
               value={duration}
-              state={setDuration}
+              state={(val) => dispatch(modal.setDuration(val))}
               placeholder="30 min"
               type="text"
               label="Duration"
@@ -145,7 +146,7 @@ export default function Servicemodal({
             <Inputs
               error={error && !description}
               value={description}
-              state={setDescription}
+              state={(val) => dispatch(modal.setDescription(val))}
               placeholder="Description"
               type="text"
               label="Description"

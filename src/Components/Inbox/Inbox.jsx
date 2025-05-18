@@ -1,60 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./inbox.module.scss";
 import Header from "../Header/Header";
 import { CiSearch } from "react-icons/ci";
 import { FaComments } from "react-icons/fa";
-import { FaRegPaperPlane } from "react-icons/fa";
+import { FaRegPaperPlane, FaRegTrashAlt } from "react-icons/fa";
 import { GoBell } from "react-icons/go";
 import { AiOutlineMore } from "react-icons/ai";
 import { Menu, MenuItem } from "@mui/material";
-import { FaRegTrashAlt } from "react-icons/fa";
-
-const Users = [
-  {
-    id: 1,
-    name: "Jane Doe",
-    avatar: "https://i.pravatar.cc/150?img=1",
-    lastMessage: "Hey! How are you?",
-    messages: [
-      { id: 1, text: "Hey!", sender: "Jane", timestamp: "10:00 AM" },
-      { id: 2, text: "How are you?", sender: "Jane", timestamp: "10:01 AM" },
-    ],
-  },
-  {
-    id: 2,
-    name: "John Smith",
-    avatar: "https://i.pravatar.cc/150?img=2",
-    lastMessage: "Let's catch up later!",
-    messages: [],
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import {
+  usersMessages,
+  deletefunc,
+  deletedialog,
+  seacrchFunc,
+  closeMenu,
+}  from "../../Features/Inbox/InboxSlice";
 
 export default function Inbox() {
-  const [messages, setmessages] = useState(Users);
-  const [dialog, setdialog] = useState(false);
-  const [dialogheader, setdialogheader] = useState(true);
-  const [user, setuser] = useState();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const {
+    messages,
+    searchTerm,
+    dialogheader,
+    user,
+    anchorEl,
+    selectedUserId,
+    dialog,
+  } = useSelector((state) => state.inbox);
 
-  const usersMessages = (el) => {
-    setdialog(true);
-    setdialogheader(false);
-
-    setuser(el);
-  };
-
-  const deletefunc = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const deletedialog = () => {
-    setmessages((prev) => prev.filter((item) => item.id !== user.id));
-
-    setuser(null);
-    setAnchorEl(null);
-    setdialog(false);
-    setdialogheader(true);
-  };
   return (
     <div className={styles.inbox}>
       <div className={styles.header}>
@@ -65,34 +38,45 @@ export default function Inbox() {
           </p>
         </div>
       </div>
+
       <div className={styles.inboxheader}>
         <div className={styles.inbox_Messages}>
           <div className={styles.searchWrapper}>
             <CiSearch className={styles.Icon} />
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => dispatch(seacrchFunc(e.target.value))}
+            />
           </div>
 
-          {!messages  ||  messages.length === 0? (
+          {messages.length === 0 && !searchTerm ? (
             <div className={styles.noDialogs}>
               <FaRegPaperPlane className={styles.icon} />
               <p>No messages yet</p>
               <span>Start a conversation to see it here</span>
+            </div>
+          ) : messages.length === 0 && searchTerm ? (
+            <div className={styles.noDialogs}>
+              <p>Nothing found</p>
+              <span>Try changing the query</span>
             </div>
           ) : (
             <div className={styles.userbox}>
               {messages.map((elem, index) => (
                 <div
                   key={index}
-                  className={styles.users}
-                  onClick={() => usersMessages(elem)}
+                  className={`${styles.users} ${
+                    selectedUserId === elem.id ? styles.selected : ""
+                  }`}
+                  onClick={() => dispatch(usersMessages(elem))}
                 >
-                  <img src={elem.avatar} />
+                  <img src={elem.avatar} alt="avatar" />
                   <div className={styles.usermessages}>
                     <div className={styles.name}>
-                      <h1> {elem.name} </h1>
+                      <h1>{elem.name}</h1>
                       <h1>10:30</h1>
                     </div>
-
                     <p>{elem.lastMessage}</p>
                   </div>
                 </div>
@@ -100,6 +84,7 @@ export default function Inbox() {
             </div>
           )}
         </div>
+
         <div className={styles.messagesCont}>
           <div
             className={styles.Message_Header}
@@ -112,9 +97,7 @@ export default function Inbox() {
               </div>
               <button
                 className={styles.infobtn}
-                aria-haspopup="true"
-                aria-expanded={false}
-                onClick={(event) => deletefunc(event)}
+                onClick={(e) => dispatch(deletefunc(e.currentTarget))}
               >
                 <AiOutlineMore className={styles.icon} />
               </button>
@@ -122,8 +105,7 @@ export default function Inbox() {
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-                disablePortal
+                onClose={() => dispatch(closeMenu())}
                 sx={{
                   "& .MuiPaper-root": {
                     width: "148px",
@@ -138,10 +120,8 @@ export default function Inbox() {
                 }}
               >
                 <MenuItem
-                  sx={{
-                    color: "red",
-                  }}
-                  onClick={deletedialog}
+                  sx={{ color: "red" }}
+                  onClick={() => dispatch(deletedialog())}
                 >
                   <FaRegTrashAlt
                     className={styles.newicon}
@@ -152,12 +132,13 @@ export default function Inbox() {
               </Menu>
             </div>
           </div>
+
           <div
             className={styles.messagesBox}
             style={{
               height: dialog
-                ? "   calc(100vh - 258px)"
-                : "      calc(100vh - 130px)",
+                ? "calc(100vh - 258px)"
+                : "calc(100vh - 130px)",
             }}
           >
             {dialogheader ? (
@@ -166,7 +147,18 @@ export default function Inbox() {
                 <p>Select a conversation</p>
                 <span>Choose a contact on the left to start chatting</span>
               </div>
-            ) : null}
+            ) : (
+              <div className={styles.messagesConteiner}>
+                {user?.messages.map((msg, index) => (
+                  <div key={index} className={styles.message}>
+                    <img src={user.avatar} alt="avatar" />
+                    <div className={styles.messageContent}>
+                      <p>{msg.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
