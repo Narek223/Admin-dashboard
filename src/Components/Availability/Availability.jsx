@@ -13,6 +13,9 @@ import TimeHeader from "./CustomTimeHeader/TimeHeader";
 import CustomDate from "./CustomDate/CustomDate";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import { manageItems } from "../../Utils/EditFunction";
+import { useSelector, useDispatch } from "react-redux";
+import * as AvailabilitySlice from "../../Features/Availability/AvailabilitySlice"
+
 
 
 export default function Availability() {
@@ -25,7 +28,6 @@ export default function Availability() {
   const [eventToDelete, setEventToDelete] = useState(null);
   const [viewDate, setViewDate] = useState(new Date());
   const [error, setError] = useState(false);
-
 
   const closemodal = () => {
     setError(false);
@@ -45,7 +47,7 @@ export default function Availability() {
   });
 
   const onOpen = (date) => {
- setSelectedDate(date);
+    setSelectedDate(date);
     setOpen(true);
     setedit(null);
     setError(false);
@@ -53,14 +55,13 @@ export default function Availability() {
 
   const event = (events, isEdit = false) => {
     seteventobj((prev) => manageItems(prev, events, isEdit));
-  
   };
 
   const hasEventAtSlot = (cellDate, events, view = "month") => {
     return events.some((event) => {
       const eventStart = new Date(event.start);
       const eventEnd = new Date(event.end);
-  
+
       if (view === "month") {
         return (
           eventStart.getFullYear() === cellDate.getFullYear() &&
@@ -68,13 +69,12 @@ export default function Availability() {
           eventStart.getDate() === cellDate.getDate()
         );
       } else if (view === "week") {
-        return (
-          cellDate >= eventStart && cellDate < eventEnd
-        );
+        return cellDate >= eventStart && cellDate < eventEnd;
       }
       return false;
     });
   };
+
   const handleEditGlobal = (event) => {
     setedit(event);
     setOpen(true);
@@ -123,7 +123,7 @@ export default function Availability() {
             endAccessor="end"
             events={eventobj}
             selectable={false}
-            onNavigate={newDate => setViewDate(newDate)}
+            onNavigate={(newDate) => setViewDate(newDate)}
             showMultiDayTimes={false}
             style={{ height: "calc(90vh - 80px)" }}
             view={view}
@@ -132,26 +132,25 @@ export default function Availability() {
             max={new Date(1970, 1, 1, 18, 0, 0)}
             step={60}
             timeslots={1}
-            views={['month', 'week']} 
-           components={{
+            views={["month", "week"]}
+            components={{
               toolbar: (props) => (
                 <CustomToolbar {...props} setView={setView} view={view} />
               ),
-              
+
               month: {
                 dateCellWrapper: (props) => (
-                  <CustomDate 
-                    {...props} 
+                  <CustomDate
+                    {...props}
                     view={view}
-                    onOpen={onOpen} 
-                    event={eventobj} 
+                    onOpen={onOpen}
+                    event={eventobj}
                     hasevent={hasEventAtSlot}
                     viewDate={viewDate}
                   />
-                )
+                ),
               },
               week: {
-              
                 timeSlotWrapper: (props) => (
                   <CustomTimeSlotWrapper
                     {...props}
@@ -159,20 +158,12 @@ export default function Availability() {
                     event={eventobj}
                     hasevent={hasEventAtSlot}
                     view="week"
-
                     viewDate={viewDate}
                   />
                 ),
               },
-              timeGutterWrapper: ({ children }) => (
-                <div>
-                  {children}
-                </div>
-              ),
-              
-            
-         
-            
+              timeGutterWrapper: ({ children }) => <div>{children}</div>,
+
               event: (props) => (
                 <CustomEvent
                   {...props}
@@ -188,9 +179,8 @@ export default function Availability() {
               const isWeekend = date.getDay() === 0 || date.getDay() === 6;
               return {
                 style: {
-                  display: isWeekend ? "none" : "block", 
+                  display: isWeekend ? "none" : "block",
                 },
-              
               };
             }}
             formats={{
