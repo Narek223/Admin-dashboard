@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import styles from "./availability.module.scss";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
@@ -12,56 +12,49 @@ import CustomTimeSlotWrapper from "./CustomTimeSlot/CustomTimeSlotWrapper";
 import TimeHeader from "./CustomTimeHeader/TimeHeader";
 import CustomDate from "./CustomDate/CustomDate";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
-import { manageItems } from "../../Utils/EditFunction";
 import { useSelector, useDispatch } from "react-redux";
-import * as AvailabilitySlice from "../../Features/Availability/AvailabilitySlice"
+import * as AvailabilitySlice from "../../Features/Availability/AvailabilitySlice";
 
+const locales = {
+  "en-US": require("date-fns/locale/en-US"),
+};
 
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
+  getDay,
+  locales,
+});
 
 export default function Availability() {
-  const [open, setOpen] = useState(false);
-  const [view, setView] = useState("month");
-  const [eventobj, seteventobj] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [edit, setedit] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [eventToDelete, setEventToDelete] = useState(null);
-  const [viewDate, setViewDate] = useState(new Date());
-  const [error, setError] = useState(false);
-
-  const closemodal = () => {
-    setError(false);
-    setOpen(false);
-  };
-
-  const locales = {
-    "en-US": require("date-fns/locale/en-US"),
-  };
-
-  const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
-    getDay,
-    locales,
-  });
+  const dispatch = useDispatch();
+  const {
+    events,
+    open,
+    selectedDate,
+    edit,
+    isDeleteModalOpen,
+    eventToDelete,
+    view,
+    viewDate,
+    error,
+  } = useSelector((state) => state.availability);
 
   const onOpen = (date) => {
-    setSelectedDate(date);
-    setOpen(true);
-    setedit(null);
-    setError(false);
+    dispatch(AvailabilitySlice.setSelectedDate(date));
+    dispatch(AvailabilitySlice.setEdit(null));
+    dispatch(AvailabilitySlice.setOpen(true));
   };
 
-  const event = (events, isEdit = false) => {
-    seteventobj((prev) => manageItems(prev, events, isEdit));
+  const handleAddEvent = (event, isEdit = false) => {
+    dispatch(AvailabilitySlice.addOrUpdateEvent({ event, isEdit }));
   };
 
   const hasEventAtSlot = (cellDate, events, view = "month") => {
     return events.some((event) => {
       const eventStart = new Date(event.start);
       const eventEnd = new Date(event.end);
-
       if (view === "month") {
         return (
           eventStart.getFullYear() === cellDate.getFullYear() &&
@@ -76,21 +69,13 @@ export default function Availability() {
   };
 
   const handleEditGlobal = (event) => {
-    setedit(event);
-    setOpen(true);
+    dispatch(AvailabilitySlice.setEdit(event));
+    dispatch(AvailabilitySlice.setOpen(true));
   };
 
   const handleDeleteGlobal = (event) => {
-    setEventToDelete(event);
-    setIsDeleteModalOpen(true);
-  };
-
-  const confirmDelete = () => {
-    if (eventToDelete) {
-      seteventobj((prev) => prev.filter((ev) => ev.id !== eventToDelete.id));
-      setEventToDelete(null);
-    }
-    setIsDeleteModalOpen(false);
+    dispatch(AvailabilitySlice.setEventToDelete(event));
+    dispatch(AvailabilitySlice.setIsDeleteModalOpen(true));
   };
 
   return (
@@ -99,20 +84,20 @@ export default function Availability() {
 
       <AvailabilityModal
         open={open}
-        handleClose={closemodal}
-        onadd={event}
+        handleClose={() => dispatch(AvailabilitySlice.setOpen(false))}
+        onadd={handleAddEvent}
         selectedDate={selectedDate}
         edit={edit}
         error={error}
-        setError={setError}
+        setError={(val) => dispatch(AvailabilitySlice.setError(val))}
       />
 
       <DeleteModal
         open={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
+        onClose={() => dispatch(AvailabilitySlice.setIsDeleteModalOpen(false))}
         title="Delete this Event"
         text="Are you sure you want to delete this Event? This action cannot be undone"
-        onDelete={confirmDelete}
+        onDelete={() => dispatch(AvailabilitySlice.confirmDelete())}
       />
 
       <div className={styles.calendarWrapper}>
@@ -121,13 +106,13 @@ export default function Availability() {
             localizer={localizer}
             startAccessor="start"
             endAccessor="end"
-            events={eventobj}
+            events={events}
             selectable={false}
-            onNavigate={(newDate) => setViewDate(newDate)}
+            onNavigate={(newDate) => dispatch(AvailabilitySlice.setViewDate(newDate))}
             showMultiDayTimes={false}
             style={{ height: "calc(90vh - 80px)" }}
             view={view}
-            onView={setView}
+            onView={(view) => dispatch(AvailabilitySlice.setView(view))}
             min={new Date(1970, 1, 1, 8, 0, 0)}
             max={new Date(1970, 1, 1, 18, 0, 0)}
             step={60}
@@ -135,16 +120,15 @@ export default function Availability() {
             views={["month", "week"]}
             components={{
               toolbar: (props) => (
-                <CustomToolbar {...props} setView={setView} view={view} />
+                <CustomToolbar {...props} setView={(v) => dispatch(AvailabilitySlice.setView(v))} view={view} />
               ),
-
               month: {
                 dateCellWrapper: (props) => (
                   <CustomDate
                     {...props}
                     view={view}
                     onOpen={onOpen}
-                    event={eventobj}
+                    event={events}
                     hasevent={hasEventAtSlot}
                     viewDate={viewDate}
                   />
@@ -155,7 +139,7 @@ export default function Availability() {
                   <CustomTimeSlotWrapper
                     {...props}
                     onOpen={onOpen}
-                    event={eventobj}
+                    event={events}
                     hasevent={hasEventAtSlot}
                     view="week"
                     viewDate={viewDate}
@@ -163,7 +147,6 @@ export default function Availability() {
                 ),
               },
               timeGutterWrapper: ({ children }) => <div>{children}</div>,
-
               event: (props) => (
                 <CustomEvent
                   {...props}

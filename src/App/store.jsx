@@ -11,6 +11,8 @@ import bookingAlertsModalSlice from "../Features/BookingAlerts/BookingModalSlice
 import servicesSlice from "../Features/Service/ServiceSlice";
 import serviceModalSlice from "../Features/Service/ServiceModalSlice";
 import AvailabilitySlice from "../Features/Availability/AvailabilitySlice";
+import AvailabilityModalSlice from "../Features/Availability/AvailabilityModalSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +27,7 @@ export const store = configureStore({
     bookingModal: bookingAlertsModalSlice,
     service: servicesSlice,
     serviceModal: serviceModalSlice,
-    CalendarSlice: AvailabilitySlice,
+    availability: AvailabilitySlice,
+    availabilityModal: AvailabilityModalSlice,
   },
 });

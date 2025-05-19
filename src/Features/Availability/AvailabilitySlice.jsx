@@ -1,77 +1,76 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { manageItems } from "../../Utils/EditFunction";
+// Features/Availability/AvailabilitySlice.js
+import { createSlice } from '@reduxjs/toolkit';
+import { manageItems } from '../../Utils/EditFunction';
 
 const initialState = {
+  events: [],
   open: false,
-  view: "month",
-  eventobj: [],
   selectedDate: null,
   edit: null,
   isDeleteModalOpen: false,
   eventToDelete: null,
+  view: 'month',
   viewDate: new Date(),
   error: false,
 };
 
-export const AvailabilitySlice = createSlice({
-  name: "CalendarSlice",
+const AvailabilitySlice = createSlice({
+  name: 'availability',
   initialState,
   reducers: {
-    closemodal: (state) => {
-      state.error = false;
-      state.open = false;
+    setOpen(state, action) {
+      state.open = action.payload;
+      if (!action.payload) {
+        state.error = false;
+      }
     },
-    onOpen: (state, action) => {
+    setSelectedDate(state, action) {
       state.selectedDate = action.payload;
-      state.open = true;
-      state.edit = null;
-      state.error = false;
     },
-    event: (state, action) => {
+    addOrUpdateEvent(state, action) {
       const { event, isEdit } = action.payload;
-      state.eventobj = manageItems(state.eventobj, event, isEdit);
+      state.events = manageItems(state.events, event, isEdit);
     },
-    handleEditGlobal: (state, action) => {
+    setEdit(state, action) {
       state.edit = action.payload;
-      state.open = true;
     },
-    handleDeleteGlobal: (state, action) => {
+    setIsDeleteModalOpen(state, action) {
+      state.isDeleteModalOpen = action.payload;
+    },
+    setEventToDelete(state, action) {
       state.eventToDelete = action.payload;
-      state.isDeleteModalOpen = true;
     },
-    confirmDelete: (state) => {
+    confirmDelete(state) {
       if (state.eventToDelete) {
-        state.eventobj = state.eventobj.filter(
+        state.events = state.events.filter(
           (ev) => ev.id !== state.eventToDelete.id
         );
         state.eventToDelete = null;
       }
+      state.isDeleteModalOpen = false;
     },
-    setView: (state, action) => {
+    setView(state, action) {
       state.view = action.payload;
     },
-    setViewDate: (state, action) => {
+    setViewDate(state, action) {
       state.viewDate = action.payload;
     },
-    setEditData: (state, action) => {
-      state.edit = action.payload;
-    },
-    setError: (state, action) => {
+    setError(state, action) {
       state.error = action.payload;
     },
   },
 });
 
 export const {
-  closemodal,
-  onOpen,
-  event,
-  handleEditGlobal,
-  handleDeleteGlobal,
+  setOpen,
+  setSelectedDate,
+  addOrUpdateEvent,
+  setEdit,
+  setIsDeleteModalOpen,
+  setEventToDelete,
   confirmDelete,
   setView,
   setViewDate,
-  setEditData,
   setError,
 } = AvailabilitySlice.actions;
 
