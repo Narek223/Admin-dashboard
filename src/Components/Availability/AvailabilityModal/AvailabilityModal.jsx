@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./availability.module.scss";
@@ -11,6 +11,8 @@ import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import TimePickerComp from "../../../SheredComponents/TimePicker/TimePickerComp";
 import moment from "moment";
 import dayjs from "dayjs";
+import { useSelector, useDispatch } from "react-redux";
+import * as ModalSlice from "../../../Redax/Slices/Availability/AvailabilityModalSlice";
 
 export default function AvailabilityModal({
   open,
@@ -18,58 +20,64 @@ export default function AvailabilityModal({
   onadd,
   selectedDate,
   edit,
-  error,
-  setError,
+  error: parentError,
+  setError: setParentError,
 }) {
-  const [date, setDate] = useState(null);
-  const [fullname, setfullname] = useState("");
-  const [status, setStatus] = useState("Booked");
-  const [startime, setstartime] = useState(null);
-  const [endtime, setendtime] = useState(null);
+  const dispatch = useDispatch();
+  const {
+    fullname,
+    status,
+    date,
+    startime,
+    endtime,
+    id,
+    error,
+  } = useSelector((state) => state.availabilityModal);
 
-  const [id, setid] = useState(0);
+ 
+  const handleResetForm = useCallback(() => {
+    dispatch(ModalSlice.resetForm());
+  }, [dispatch]);
 
-  const resetForm = useCallback(() => {
-    setStatus("Booked");
-    setfullname("");
-    setDate(null);
-    setstartime(null);
-    setendtime(null);
-    setid(0);
-  }, []);
-
+  
   useEffect(() => {
     if (edit) {
-      setfullname(edit.title || "");
-      setDate(edit.date || "");
-      setStatus(edit.status || "Booked");
-
-      setstartime(dayjs(edit.start) || null);
-      setendtime(dayjs(edit.end) || null);
-      setid(edit.id || 0);
+      dispatch(
+        ModalSlice.setAll({
+          fullname: edit.title || "",
+          date: edit.date || "",
+          status: edit.status || "Booked",
+          startime: edit.start || null,
+          endtime: edit.end || null,
+          id: edit.id || 0,
+        })
+      );
     } else {
-      resetForm();
+      handleResetForm();
     }
-  }, [edit, resetForm]);
+  }, [edit, handleResetForm, dispatch]);
+
 
   const save = () => {
     const hasEmptyFields =
       !(date || selectedDate) || !fullname || !status || !startime || !endtime;
 
     if (hasEmptyFields) {
-      setError(true);
+      dispatch(ModalSlice.setError(true));
+      setParentError && setParentError(true);
       return;
     }
-    if (!startime || !endtime || !startime.isBefore(endtime)) {
-      setError(true);
+    if (!startime || !endtime || !dayjs(startime).isBefore(dayjs(endtime))) {
+      dispatch(ModalSlice.setError(true));
+      setParentError && setParentError(true);
       return;
     }
     const selected = moment(date || selectedDate);
     const startDate = selected.clone().toDate();
-    startDate.setHours(startime.hour(), startime.minute());
+    startDate.setHours(dayjs(startime).hour(), dayjs(startime).minute());
 
     const endDate = selected.clone().toDate();
-    endDate.setHours(endtime.hour(), endtime.minute());
+    endDate.setHours(dayjs(endtime).hour(), dayjs(endtime).minute());
 
     const availability = {
       id,
@@ -87,14 +95,21 @@ export default function AvailabilityModal({
     }
 
     handleClose();
-    resetForm();
+    handleResetForm();
+    dispatch(ModalSlice.setError(false));
+    setParentError && setParentError(false);
   };
 
   return (
     <div className={styles.availabilityModal}>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+          handleClose();
+          handleResetForm();
+          dispatch(ModalSlice.setError(false));
+          setParentError && setParentError(false);
+        }}
         disablePortal
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -103,7 +118,15 @@ export default function AvailabilityModal({
         <Box>
           <div className={styles.availabilityModal}>
             <p className={styles.close}>
-              <AiOutlineClose onClick={handleClose} className={styles.icon} />
+              <AiOutlineClose
+                onClick={() => {
+                  handleClose();
+                  handleResetForm();
+                  dispatch(ModalSlice.setError(false));
+                  setParentError && setParentError(false);
+                }}
+                className={styles.icon}
+              />
             </p>
 
             <div className={styles.availabilityWrapper}>
@@ -112,9 +135,9 @@ export default function AvailabilityModal({
               </h1>
               <div className={styles.nameandStatus}>
                 <Inputs
-                  error={error && !fullname}
+                  error={(error || parentError) && !fullname}
                   value={fullname}
-                  state={setfullname}
+                  state={(val) => dispatch(ModalSlice.setFullname(val))}
                   placeholder="Anna Smith"
                   type="text"
                   label="Full Name"
@@ -124,36 +147,36 @@ export default function AvailabilityModal({
                   deafultvalue={"Booked"}
                   servicename="Select Status"
                   service={status}
-                  sets={setStatus}
+                  sets={(val) => dispatch(ModalSlice.setStatus(val))}
                   services={statusobj[0].options}
                 />
               </div>
               <div className={styles.Demo}>
                 <TimePickerComp
                   labalName={"Start Time"}
-                  setstate={setstartime}
+                  setstate={(val) => dispatch(ModalSlice.setStartTime(val))}
                   state={startime}
                   error={
-                    error &&
+                    (error || parentError) &&
                     (!endtime ||
-                      (startime && endtime && !startime.isBefore(endtime)))
+                      (startime && endtime && !dayjs(startime).isBefore(dayjs(endtime))))
                   }
                 />
 
                 <TimePickerComp
                   labalName={"End Time"}
-                  setstate={setendtime}
+                  setstate={(val) => dispatch(ModalSlice.setEndTime(val))}
                   state={endtime}
                   error={
-                    error &&
+                    (error || parentError) &&
                     (!endtime ||
-                      (startime && endtime && !startime.isBefore(endtime)))
+                      (startime && endtime && !dayjs(startime).isBefore(dayjs(endtime))))
                   }
                 />
               </div>
               <DataPicker
-                setDate={setDate}
-                error={error && !(date || selectedDate)}
+                setDate={(val) => dispatch(ModalSlice.setDate(val))}
+                error={(error || parentError) && !(date || selectedDate)}
                 value={date || new Date(selectedDate)}
                 label={"Select Date"}
               />

@@ -8,13 +8,7 @@ import { GoBell } from "react-icons/go";
 import { AiOutlineMore } from "react-icons/ai";
 import { Menu, MenuItem } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  usersMessages,
-  deletefunc,
-  deletedialog,
-  seacrchFunc,
-  closeMenu,
-}  from "../../Features/Inbox/InboxSlice";
+import * as InboxSlice from "../../Redax/Slices/Inbox/InboxSlice";
 
 export default function Inbox() {
   const dispatch = useDispatch();
@@ -46,7 +40,7 @@ export default function Inbox() {
             <input
               type="text"
               placeholder="Search"
-              onChange={(e) => dispatch(seacrchFunc(e.target.value))}
+              onChange={(e) => dispatch(InboxSlice.seacrchFunc(e.target.value))}
             />
           </div>
 
@@ -69,7 +63,7 @@ export default function Inbox() {
                   className={`${styles.users} ${
                     selectedUserId === elem.id ? styles.selected : ""
                   }`}
-                  onClick={() => dispatch(usersMessages(elem))}
+                  onClick={() => dispatch(InboxSlice.usersMessages(elem))}
                 >
                   <img src={elem.avatar} alt="avatar" />
                   <div className={styles.usermessages}>
@@ -97,7 +91,7 @@ export default function Inbox() {
               </div>
               <button
                 className={styles.infobtn}
-                onClick={(e) => dispatch(deletefunc(e.currentTarget))}
+                onClick={(e) => dispatch(InboxSlice.deletefunc(e.currentTarget))}
               >
                 <AiOutlineMore className={styles.icon} />
               </button>
@@ -105,7 +99,7 @@ export default function Inbox() {
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
-                onClose={() => dispatch(closeMenu())}
+                onClose={() => dispatch(InboxSlice.closeMenu())}
                 sx={{
                   "& .MuiPaper-root": {
                     width: "148px",
@@ -121,7 +115,7 @@ export default function Inbox() {
               >
                 <MenuItem
                   sx={{ color: "red" }}
-                  onClick={() => dispatch(deletedialog())}
+                  onClick={() => dispatch(InboxSlice.deletedialog())}
                 >
                   <FaRegTrashAlt
                     className={styles.newicon}

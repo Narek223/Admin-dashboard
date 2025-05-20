@@ -9,7 +9,7 @@ import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import { paginate } from "../../Utils/pagination";
 import { useSelector, useDispatch } from "react-redux";
-import * as clientSlice from "../../Features/Client/ClientSlice";
+import * as clientSlice from "../../Redax/Slices/Client/ClientSlice";
 
 export default function Client() {
   const clientSliceState = useSelector((state) => state.client);

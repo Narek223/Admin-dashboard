@@ -11,7 +11,7 @@ import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import { paginate } from "../../Utils/pagination";
 import { useSelector, useDispatch } from "react-redux";
-import * as bookingAlertsSlice from "../../Features/BookingAlerts/BookingAlertsSlice";
+import * as bookingAlertsSlice from "../../Redax/Slices/BookingAlerts/BookingAlertsSlice";
 
 export default function BookingAlerts() {
   const {

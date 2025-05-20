@@ -3,7 +3,8 @@ import styles from "./customEvent.module.scss";
 import "./newcss.css";
 import { AiOutlineMore } from "react-icons/ai";
 import EditDeleteBtn from "../../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleClick, handleClose, handleEdit, handleDelete } from "../../../Redax/Slices/Availability/EventSlice";
 
 const statusColors = {
   Booked: "#F9F0F0",
@@ -13,28 +14,29 @@ const statusColors = {
 };
 
 const CustomEvent = ({ event, handleEditGlobal, handleDeleteGlobal }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const anchorEl = useSelector((state) => state.eventSlice.anchorEl);
 
   const getBackgroundColor = () => {
     return statusColors[event.status] || statusColors.Default;
   };
 
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget);
+  const handleMenuClick = (e) => {
+    dispatch(handleClick(e.currentTarget));
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleMenuClose = () => {
+    dispatch(handleClose());
   };
 
-  const handleEdit = () => {
-    handleEditGlobal(event); 
-    setAnchorEl(null);
+  const handleEditEvent = () => {
+    dispatch(handleEdit(event));
+    if (handleEditGlobal) handleEditGlobal(event);
   };
 
-  const handleDelete = () => {
-    handleDeleteGlobal(event);
-    setAnchorEl(null);
+  const handleDeleteEvent = () => {
+    dispatch(handleDelete(event));
+    if (handleDeleteGlobal) handleDeleteGlobal(event);
   };
 
   return (
@@ -42,18 +44,17 @@ const CustomEvent = ({ event, handleEditGlobal, handleDeleteGlobal }) => {
       className={styles.eventContainer}
       style={{ backgroundColor: getBackgroundColor() }}
     >
-       <EditDeleteBtn
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          handleEdit={handleEdit}
-          onClick={handleDelete}
-        />
+      <EditDeleteBtn
+        anchorEl={anchorEl}
+        onClose={handleMenuClose}
+        handleEdit={handleEditEvent}
+        onClick={handleDeleteEvent}
+      />
       <div className={styles.eventTitle}>
         <p>{event.title}</p>
-        <button className={styles.infobtn} onClick={handleClick}>
+        <button className={styles.infobtn} onClick={handleMenuClick}>
           <AiOutlineMore />
         </button>
-       
       </div>
       <div className={styles.eventTime}>
         {format(event.start, "HH:mm")} - {format(event.end, "HH:mm")}

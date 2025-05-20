@@ -9,7 +9,7 @@ import styles from "./clientmodal.module.scss";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
-import * as clientModalSlice from "../../../Features/Client/ClientModalSlice";
+import * as clientModalSlice from "../../../Redax/Slices/Client/ClientModalSlice";
 
 export default function ClientModal({
   open,

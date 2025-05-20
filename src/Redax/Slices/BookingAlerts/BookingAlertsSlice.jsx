@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { manageItems } from "../../Utils/EditFunction";
+import { manageItems } from "../../../Utils/EditFunction";
 
 const initialState = {
   open: false,

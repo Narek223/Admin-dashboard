@@ -9,7 +9,7 @@ import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import { paginate } from "../../Utils/pagination";
 import { useSelector, useDispatch } from "react-redux";
-import * as blogActions from "../../Features/blog/blogSlice";
+import * as blogActions from "../../Redax/Slices/blog/blogSlice"
 
 export default function Blog() {
   const blogslice = useSelector((state) => state.blog);

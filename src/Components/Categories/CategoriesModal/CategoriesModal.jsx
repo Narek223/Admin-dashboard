@@ -7,7 +7,7 @@ import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import { useSelector, useDispatch } from "react-redux";
-import * as modal from "../../../Features/Categories/CategoriesModalSlice";
+import * as modal from "../../../Redax/Slices/Categories/CategoriesModalSlice";
 
 export default function CategoriesModal({
   open,

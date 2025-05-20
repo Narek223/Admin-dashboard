@@ -13,7 +13,7 @@ import TimeHeader from "./CustomTimeHeader/TimeHeader";
 import CustomDate from "./CustomDate/CustomDate";
 import DeleteModal from "../../SheredComponents/DeleteModal/DeleteModal";
 import { useSelector, useDispatch } from "react-redux";
-import * as AvailabilitySlice from "../../Features/Availability/AvailabilitySlice";
+import * as AvailabilitySlice from "../../Redax/Slices/Availability/AvailabilitySlice";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -103,6 +103,7 @@ export default function Availability() {
       <div className={styles.calendarWrapper}>
         <div className={styles.calendar}>
           <Calendar
+          
             localizer={localizer}
             startAccessor="start"
             endAccessor="end"
@@ -112,6 +113,7 @@ export default function Availability() {
             showMultiDayTimes={false}
             style={{ height: "calc(90vh - 80px)" }}
             view={view}
+              date={viewDate} 
             onView={(view) => dispatch(AvailabilitySlice.setView(view))}
             min={new Date(1970, 1, 1, 8, 0, 0)}
             max={new Date(1970, 1, 1, 18, 0, 0)}

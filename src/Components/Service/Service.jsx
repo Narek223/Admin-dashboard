@@ -12,7 +12,7 @@ import NoAvatar from "../../assets/NoAvatart/download.png";
 import { VscDebugRestart } from "react-icons/vsc";
 import { Menu, MenuItem } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import * as serviceActions from "../../Features/Service/ServiceSlice";
+import * as serviceActions from "../../Redax/Slices/Service/ServiceSlice";
 import { paginate } from "../../Utils/pagination";
 
 export default function Service() {

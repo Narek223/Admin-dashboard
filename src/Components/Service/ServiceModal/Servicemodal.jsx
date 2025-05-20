@@ -9,7 +9,7 @@ import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import Inputs from "../../../SheredComponents/Inputs/Inputs";
 import { useSelector, useDispatch } from "react-redux";
-import * as modal from "../../../Features/Service/ServiceModalSlice";
+import * as modal from "../../../Redax/Slices/Service/ServiceModalSlice";
 
 export default function Servicemodal({
   open,

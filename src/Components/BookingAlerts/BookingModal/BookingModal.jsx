@@ -14,7 +14,7 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import TimePickerComp from "../../../SheredComponents/TimePicker/TimePickerComp";
 import { useSelector, useDispatch } from "react-redux";
-import * as bookingModalSlice from "../../../Features/BookingAlerts/BookingModalSlice";
+import * as bookingModalSlice from "../../../Redax/Slices/BookingAlerts/BookingModalSlice";
 
 export default function BookingModal({
   open,

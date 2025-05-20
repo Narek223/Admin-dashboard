@@ -23,10 +23,14 @@ export default function TimePickerModal({
   const [timeSlots, setTimeSlots] = useState(initialFreeTime || []);
 
   useEffect(() => {
-    if (open) {
-      setTimeSlots(initialFreeTime || []);
+  if (open) {
+    setTimeSlots(initialFreeTime || []);
+ if (!edit && (!initialFreeTime || initialFreeTime.length === 0)) {
+      setDate(null);
+      setSelectedTime(null);
     }
-  }, [open, initialFreeTime]);
+  }
+}, [open, initialFreeTime, edit]);
 
   const handleAccept = () => {
     if (date && selectedTime) {

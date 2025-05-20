@@ -19,7 +19,7 @@ import {
   setSubtitle,
   setId,
   resetForm,
-} from "../../../Features/blog/blogModalSlice";
+} from "../../../Redax/Slices/blog/blogModalSlice";
 
 export default function BlogModal({
   open,

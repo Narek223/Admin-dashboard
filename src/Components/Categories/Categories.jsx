@@ -9,7 +9,7 @@ import PaginationComponent from "../../SheredComponents/Pagination/PaginationCom
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import { paginate } from "../../Utils/pagination";
 import { useSelector, useDispatch } from "react-redux";
-import * as categoriesSlice from "../../Features/Categories/CategoriesSlice";
+import * as categoriesSlice from "../../Redax/Slices/Categories/CategoriesSlice";
 
 export default function Categories() {
   const categoriesslice = useSelector((state) => state.categories);

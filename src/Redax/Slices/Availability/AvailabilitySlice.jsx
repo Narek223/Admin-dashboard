@@ -1,6 +1,6 @@
 // Features/Availability/AvailabilitySlice.js
-import { createSlice } from '@reduxjs/toolkit';
-import { manageItems } from '../../Utils/EditFunction';
+import { createSlice } from "@reduxjs/toolkit";
+import { manageItems } from "../../../Utils/EditFunction";
 
 const initialState = {
   events: [],
@@ -9,13 +9,13 @@ const initialState = {
   edit: null,
   isDeleteModalOpen: false,
   eventToDelete: null,
-  view: 'month',
+  view: "month",
   viewDate: new Date(),
   error: false,
 };
 
 const AvailabilitySlice = createSlice({
-  name: 'availability',
+  name: "availability",
   initialState,
   reducers: {
     setOpen(state, action) {
@@ -53,7 +53,7 @@ const AvailabilitySlice = createSlice({
       state.view = action.payload;
     },
     setViewDate(state, action) {
-      state.viewDate = action.payload;
+      state.viewDate = new Date(action.payload);
     },
     setError(state, action) {
       state.error = action.payload;

@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-import { GrPrevious } from "react-icons/gr";
-import { GrNext } from "react-icons/gr";
-import { enUS } from "date-fns/locale";
-import styles from "./customToolbar.module.scss";
-import { FaRegCalendarAlt } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { GrPrevious, GrNext } from "react-icons/gr";
+import { FaRegCalendarAlt, FaAngleDown } from "react-icons/fa";
 import { Menu, MenuItem } from "@mui/material";
+import { enUS } from "date-fns/locale";
 import { format, startOfWeek, endOfWeek, isValid } from "date-fns";
+import styles from "./customToolbar.module.scss";
+import { openMenu, closeMenu } from "../../../Redax/Slices/Availability/ToolbarSlice"
 
 export default function CustomToolbar({ label, onNavigate, setView, view }) {
-  const [anchorEl, setanchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const anchorEl = useSelector((state) => state.calendarUI.anchorEl);
   const openyMenu = Boolean(anchorEl);
-
-  const onclick = (event) => setanchorEl(event.currentTarget);
-  const Close = () => setanchorEl(null);
-
-  const selectElem = (el) => {
-    setView(el === "Monthly" ? "month" : "week");
-    setanchorEl(null);
-  };
 
   if (!isValid(new Date(label))) {
     label = new Date();
   }
+
   const formattedLabel =
     view === "week"
       ? `${format(startOfWeek(new Date(label)), "MMM d")} - ${format(
@@ -30,6 +24,11 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
           "MMM d, yyyy"
         )}`
       : format(new Date(label), "MMMM yyyy", { locale: enUS });
+
+  const handleSelect = (el) => {
+    setView(el === "Monthly" ? "month" : "week");
+    dispatch(closeMenu());
+  };
 
   return (
     <div className={styles.toolbarConteiner}>
@@ -48,15 +47,17 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
           <li>Not Confirm</li>
         </ul>
       </div>
+
       <div className={styles.buttons}>
-        <button onClick={onclick}>
-          <FaRegCalendarAlt   className={styles.icon}/> {view === "month" ? "Monthly" : "Weekly"}
+        <button onClick={(e) => dispatch(openMenu(e.currentTarget))}>
+          <FaRegCalendarAlt className={styles.icon} />
+          {view === "month" ? "Monthly" : "Weekly"}
         </button>
 
         <Menu
           anchorEl={anchorEl}
           open={openyMenu}
-          onClose={Close}
+          onClose={() => dispatch(closeMenu())}
           sx={{
             "& .MuiPaper-root": {
               borderRadius: "8px",
@@ -74,10 +75,13 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
           {["Monthly", "Weekly"].map((elem, index) => (
             <MenuItem
               key={index}
-              onClick={() => selectElem(elem)}
+              onClick={() => handleSelect(elem)}
               style={{
                 backgroundColor:
-                (view === "month" && elem === "Monthly") || (view === "week" && elem === "Weekly") ? "rgba(25, 118, 210, 0.08)" : "",
+                  (view === "month" && elem === "Monthly") ||
+                  (view === "week" && elem === "Weekly")
+                    ? "rgba(25, 118, 210, 0.08)"
+                    : "",
               }}
             >
               {elem}
