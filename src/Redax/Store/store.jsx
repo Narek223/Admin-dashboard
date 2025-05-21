@@ -14,6 +14,9 @@ import AvailabilitySlice from "../Slices/Availability/AvailabilitySlice";
 import AvailabilityModalSlice from "../Slices/Availability/AvailabilityModalSlice";
 import EventSlice from "../Slices/Availability/EventSlice";
 import calendarUISlice from "../Slices/Availability/ToolbarSlice";
+import ExpertsSlice  from "../Slices/Experts/ExpertsSlice";
+import ExpertsModalSlice from "../Slices/Experts/ExpertsModalSlice"
+
 
 
 export const store = configureStore({
@@ -33,5 +36,7 @@ export const store = configureStore({
     availabilityModal: AvailabilityModalSlice,
     eventSlice: EventSlice,
     calendarUI: calendarUISlice,
+    expert:ExpertsSlice,
+    expertsModal:ExpertsModalSlice
   },
 });

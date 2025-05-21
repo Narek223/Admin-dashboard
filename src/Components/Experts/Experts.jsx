@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import ExpertsModal from "./ExpertsModal/ExpertsModal";
 import styles from "./experts.module.scss";
@@ -10,153 +10,81 @@ import NoAvatar from "../../assets/NoAvatart/download.png";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
 import dayjs from "dayjs";
 import { paginate } from "../../Utils/pagination";
-
-
+import * as ExpertSlice from "../../Redax/Slices/Experts/ExpertsSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Experts() {
-  const [open, setOpen] = useState(false);
-  const [edit, setEdit] = useState(null);
-  const [error, setError] = useState(false);
-  const [expert, setExpert] = useState([]);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedService, setSelectedService] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [timeModalOpen, setTimeModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const dispatch = useDispatch();
+  const {
+    open,
+    edit,
+    error,
+    expert,
+    anchorEl,
+    selectedService,
+    isDeleteModalOpen,
+    timeModalOpen,
+    currentPage,
+    itemsPerPage,
+  } = useSelector((state) => state.expert);
 
-  const onOpen = () => {
-    setOpen(true);
-    setError(false);
-    setEdit(null);
-  };
+  const paginationExperts = paginate(expert, currentPage, itemsPerPage);
 
-  const onClose = () => {
-    setOpen(false);
-    setError(false);
-    setAnchorEl(null);
-  };
-
-  const handleAddExpert = (Expert, isEdit = false) => {
+  const handleAddExpert = (newExpert, isEdit = false) => {
     if (isEdit) {
-      setExpert((prev) =>
-        prev.map((item) =>
-          item.id === Expert.id
-            ? { ...Expert, freeTime: item.freeTime || [] }
-            : item
-        )
-      );
-      setEdit(null);
+      dispatch(ExpertSlice.editExpert(newExpert));
     } else {
-      setExpert((prev) => [
-        ...prev,
-        {
-          ...Expert,
-          id: Date.now(),
-          freeTime: [],
-        },
-      ]);
+      dispatch(ExpertSlice.addExpert(newExpert));
     }
   };
 
-  const handleEdit = () => {
-    setAnchorEl(null);
-    setOpen(true);
-    setEdit(selectedService);
-  };
-
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const handleCloseTimeModal = () => {
-    setTimeModalOpen(false);
-    
-  };
-
-  const handleInfoClick = (event, elem) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedService(elem);
-  };
-
-  const handleOpenDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleOpenTimeModal = () => {
-    setTimeModalOpen(true);
-  };
-
-  const handleDeleteService = (id) => {
-    setExpert(expert.filter((elem) => elem.id !== id));
-    setAnchorEl(null);
-  };
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  const handleItemsPerPageChange = (newPerPage) => {
-    setItemsPerPage(newPerPage);
-    setCurrentPage(0);
-  };
-
-   const paginationExperts = paginate(expert, currentPage, itemsPerPage);
- 
-
+  
   const onAddTime = (updatedTimeSlots) => {
-    if (!selectedService) return ;
-    setExpert((prevExperts) =>
-      prevExperts.map((item) =>
-        item.id === selectedService.id
-          ? { ...item, freeTime: updatedTimeSlots }
-          : item
-      )
-    );
+    if (!selectedService) return;
+    dispatch(ExpertSlice.updateExpertTime({ id: selectedService.id, updatedTimeSlots }));
   };
 
   return (
     <div className={styles.expertConteiner}>
-      <Header handleOpen={onOpen} />
+      <Header handleOpen={() => dispatch(ExpertSlice.onOpen())} />
 
       <ExpertsModal
         open={open}
-        handleClose={onClose}
+        handleClose={() => dispatch(ExpertSlice.onClose())}
         onAddExpert={handleAddExpert}
         error={error}
-        seterror={setError}
+        seterror={(error) => dispatch(ExpertSlice.setError(error))}
         edit={edit}
       />
 
       <EditDeleteBtn
         anchorEl={anchorEl}
-        onClose={() => setAnchorEl(null)}
-        handleEdit={handleEdit}
-        onClick={handleOpenDeleteModal}
-        onTimeModal={handleOpenTimeModal}
+        onClose={() => dispatch(ExpertSlice.onClose())}
+        handleEdit={() => dispatch(ExpertSlice.handleEdit())}
+        onClick={() => dispatch(ExpertSlice.handleOpenDeleteModal())}
+        onTimeModal={() => dispatch(ExpertSlice.handleOpenTimeModal())}
       />
 
       <DeleteModal
         open={isDeleteModalOpen}
-        onClose={handleCloseDeleteModal}
+        onClose={() => dispatch(ExpertSlice.handleCloseDeleteModal())}
         title="Delete Expert"
         text="Are you sure you want to delete this Expert? This action cannot be undone"
         onDelete={() => {
           if (selectedService) {
-            handleDeleteService(selectedService.id);
+            dispatch(ExpertSlice.handleDeleteService(selectedService.id));
           }
-          handleCloseDeleteModal();
+          dispatch(ExpertSlice.handleCloseDeleteModal());
         }}
       />
 
       <TimePickerModal
         open={timeModalOpen}
-        onClose={handleCloseTimeModal}
+        onClose={() => dispatch(ExpertSlice.handleCloseTimeModal())}
         onAddtime={onAddTime}
         initialFreeTime={
           selectedService
-            ? expert.find((item) => item.id === selectedService.id)?.freeTime ||
-              []
+            ? expert.find((item) => item.id === selectedService.id)?.freeTime || []
             : []
         }
         edit={edit}
@@ -183,20 +111,19 @@ export default function Experts() {
                       className={styles.infobtn}
                       aria-haspopup="true"
                       aria-expanded={false}
-                      onClick={(event) => handleInfoClick(event, elem)}
+                      onClick={(event) => dispatch(ExpertSlice.handleInfoClick({event, elem}))}
                     >
                       <AiOutlineMore className={styles.icon} />
                     </button>
                   </div>
                   <hr />
-
-                  <div className={styles.freetime} key={elem.id}>
+                  <div className={styles.freetime}>
                     <p>Free time:</p>
                     {(!elem.freeTime || elem.freeTime.length === 0) && (
                       <span>No free time yet</span>
                     )}
-                    {elem.freeTime.map((slot, index) => (
-                      <div key={elem.id}>{slot.times.join(", ")}</div>
+                    {elem.freeTime.map((slot) => (
+                      <div key={slot.date}>{slot.times.join(", ")}</div>
                     ))}
                   </div>
                 </div>
@@ -209,8 +136,10 @@ export default function Experts() {
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           totalItems={expert.length}
-          onPageChange={handlePageChange}
-          onItemsPerPageChange={handleItemsPerPageChange}
+          onPageChange={(page) => dispatch(ExpertSlice.handlePageChange(page))}
+          onItemsPerPageChange={(count) =>
+            dispatch(ExpertSlice.handleItemsPerPageChange(count))
+          }
         />
       </div>
     </div>

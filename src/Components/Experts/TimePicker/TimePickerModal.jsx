@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./timepicker.module.scss";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -23,14 +23,14 @@ export default function TimePickerModal({
   const [timeSlots, setTimeSlots] = useState(initialFreeTime || []);
 
   useEffect(() => {
-  if (open) {
-    setTimeSlots(initialFreeTime || []);
- if (!edit && (!initialFreeTime || initialFreeTime.length === 0)) {
-      setDate(null);
-      setSelectedTime(null);
+    if (open) {
+      setTimeSlots(initialFreeTime || []);
+      if (!edit && (!initialFreeTime || initialFreeTime.length === 0)) {
+        setDate(null);
+        setSelectedTime(null);
+      }
     }
-  }
-}, [open, initialFreeTime, edit]);
+  }, [open, initialFreeTime, edit]);
 
   const handleAccept = () => {
     if (date && selectedTime) {
@@ -92,8 +92,6 @@ export default function TimePickerModal({
     setTimeSlots("");
   }, []);
 
-
-  
   useEffect(() => {
     if (edit) {
       setDate(edit.date || null);
@@ -102,11 +100,9 @@ export default function TimePickerModal({
       );
       setTimeSlots(edit.timeSlots || []);
     } else {
-      resetForm()
+      resetForm();
     }
-  }, [edit])
-
-
+  }, [edit]);
 
   return (
     <div>

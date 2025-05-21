@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styles from "./expertsModal.module.scss";
@@ -9,6 +9,8 @@ import SelectComponent from "../../../SheredComponents/Select/SelectComponent";
 import { services } from "../../../Services/data/addServices/services";
 import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
+import { useDispatch, useSelector } from "react-redux";
+import * as ModalSlice from "../../../Redax/Slices/Experts/ExpertsModalSlice";
 
 export default function ExpertsModal({
   open,
@@ -18,33 +20,25 @@ export default function ExpertsModal({
   edit,
   onAddExpert,
 }) {
-  let [name, setName] = useState("");
-  let [mail, setMail] = useState("");
-  let [phone, setPhone] = useState("");
-  let [adress, setadress] = useState("");
-  let [date, setDate] = useState("");
-  let [specialist, setSpecialist] = useState("Hair Care");
-  let [files, setfile] = useState("");
-  const [id, setId] = useState(0);
+  const dispatch = useDispatch();
+  const {
+    name,
+    mail,
+    phone,
+    adress,
+    date,
+    specialist,
+    files,
+    id,
+  } = useSelector((state) => state.expertsModal);
 
-  const resetForm = useCallback(() => {
-    setName("");
-    setDate("");
-    setMail("");
-    setPhone("");
-    setfile("");
-    setadress("");
-    setSpecialist("Hair Care");
-    setId(0)
-  }, []);
-
-  let inputValues = [
+  const inputValues = [
     {
       id: 0,
       placeholder: "annesmith@gmail.com",
       value: mail,
-      setstate: setMail,
-      state:mail,
+      setstate: (val) => dispatch(ModalSlice.setMail(val)),
+      state: mail,
       type: "text",
       label: "Email",
     },
@@ -52,14 +46,19 @@ export default function ExpertsModal({
       id: 1,
       placeholder: "+49 30 12345678",
       value: phone,
-      setstate: setPhone,
-      state:phone,
+      setstate: (val) => dispatch(ModalSlice.setPhone(val)),
+      state: phone,
       type: "text",
       label: "Phone Number",
     },
   ];
+
+  const resetForm = useCallback(() => {
+    dispatch(ModalSlice.resetExpertForm());
+  }, [dispatch]);
+
   const handleFileSelect = (fileUrl) => {
-    setfile(fileUrl);
+    dispatch(ModalSlice.setFiles(fileUrl));
   };
 
   useEffect(() => {
@@ -68,18 +67,15 @@ export default function ExpertsModal({
     }
   }, [name, date, mail, phone, files, seterror]);
 
-
   const save = () => {
-   
-      // const hasEmptyFields = !name || !date || !mail || !phone || !adress || !specialist ;
-      // seterror(hasEmptyFields);
-      // if (hasEmptyFields){
-      //   return
-      // } 
-     
-   
+    const hasEmptyFields =
+      !name || !date || !mail || !phone || !adress || !specialist;
+
+    seterror(hasEmptyFields);
+    if (hasEmptyFields) return;
+
     const expertObj = {
-      id, 
+      id,
       name,
       mail,
       phone,
@@ -88,30 +84,32 @@ export default function ExpertsModal({
       specialist,
       files,
     };
-  
+
     if (edit) {
       onAddExpert(expertObj, true);
     } else {
       onAddExpert(expertObj, false);
     }
-  
+
     handleClose();
     resetForm();
   };
+
   useEffect(() => {
     if (edit) {
-      setName(edit.name || "");
-      setDate(edit.date || "");
-      setMail(edit.mail || "");
-      setPhone(edit.phone || "");
-      setfile(edit.files || "");
-      setadress(edit.adress || "");
-      setSpecialist(edit.specialist || "");
-      setId(edit.id || 0);
+      dispatch(ModalSlice.setName(edit.name || ""));
+      dispatch(ModalSlice.setDate(edit.date || ""));
+      dispatch(ModalSlice.setMail(edit.mail || ""));
+      dispatch(ModalSlice.setPhone(edit.phone || ""));
+      dispatch(ModalSlice.setFiles(edit.files || ""));
+      dispatch(ModalSlice.setAdress(edit.adress || ""));
+      dispatch(ModalSlice.setSpecialist(edit.specialist || ""));
+      dispatch(ModalSlice.setId(edit.id || 0));
     } else {
       resetForm();
     }
-  }, [edit, resetForm]);
+  }, [edit, dispatch, resetForm]);
+
   return (
     <div>
       <Modal
@@ -135,13 +133,13 @@ export default function ExpertsModal({
                 <Inputs
                   error={error && !name}
                   value={name}
-                  state={setName}
+                  state={(val) => dispatch(ModalSlice.setName(val))}
                   placeholder="Anna Smith"
                   type="text"
                   label="Full Name"
                 />
                 <DataPicker
-                  setDate={setDate}
+                  setDate={(val) => dispatch(ModalSlice.setDate(val))}
                   error={error && !date}
                   value={date}
                   label="Birth Date"
@@ -149,8 +147,9 @@ export default function ExpertsModal({
               </div>
               <div className={styles.inputs}>
                 {inputValues.map(
-                  ({ placeholder, value, state, type, label,setstate }) => (
+                  ({ placeholder, value, state, type, label, setstate }) => (
                     <Inputs
+                      key={label}
                       error={error && !state}
                       value={value}
                       state={setstate}
@@ -165,17 +164,17 @@ export default function ExpertsModal({
                 <Inputs
                   error={error && !adress}
                   value={adress}
-                  state={setadress}
+                  state={(val) => dispatch(ModalSlice.setAdress(val))}
                   placeholder="Berliner Strabe 25"
                   type="text"
                   label="Addres"
                 />
                 <SelectComponent
                   fullWidth={false}
-                  deafultvalue={"Hair Care"}
+                  deafultvalue="Hair Care"
                   servicename="Specialist"
                   service={specialist}
-                  sets={setSpecialist}
+                  sets={(val) => dispatch(ModalSlice.setSpecialist(val))}
                   services={services[0].options}
                 />
               </div>
