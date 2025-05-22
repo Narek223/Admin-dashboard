@@ -16,7 +16,7 @@ import EventSlice from "../Slices/Availability/EventSlice";
 import calendarUISlice from "../Slices/Availability/ToolbarSlice";
 import ExpertsSlice  from "../Slices/Experts/ExpertsSlice";
 import ExpertsModalSlice from "../Slices/Experts/ExpertsModalSlice"
-
+import fileSlice from "../Slices/ChooseFile/FileSice";
 
 
 export const store = configureStore({
@@ -37,6 +37,7 @@ export const store = configureStore({
     eventSlice: EventSlice,
     calendarUI: calendarUISlice,
     expert:ExpertsSlice,
-    expertsModal:ExpertsModalSlice
+    expertsModal:ExpertsModalSlice,
+    file: fileSlice,
   },
 });

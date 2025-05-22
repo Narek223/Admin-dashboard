@@ -11,7 +11,7 @@ import Availability from "./Components/Availability/Availability";
 import Blog from "./Components/Blog/Blog";
 import Categories from "./Components/Categories/Categories";
 import Inbox from "./Components/Inbox/Inbox";
-
+import Dashdoard from "./Components/Dashdoard/Dashdoard";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -38,7 +38,7 @@ function App() {
           <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
           <div className="content">
             <Routes>
-              <Route path="/" element={null} />
+              <Route path="/" element={<Dashdoard/>} />
               <Route path="/Services" element={<Service />} />
               <Route path="/Experts" element={<Experts />} />
               <Route path="/Client" element={<Client />} />

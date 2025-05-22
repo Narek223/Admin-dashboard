@@ -1,0 +1,70 @@
+.dashdoardCont {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+.dashdoardCont .conteiner {
+  padding: 31px 44px;
+}
+.dashdoardCont .conteiner .wrapper {
+  height: calc(90vh - 80px);
+  overflow-y: auto;
+}
+.dashdoardCont .conteiner .wrapper .dashboards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard div {
+  width: 100%;
+  max-width: 350px;
+  height: 111px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity {
+  background-color: #d7a86e;
+  color: white;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity svg {
+  color: white;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .chart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  height: 380px;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .chart .TotalEarnings {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 731px;
+  height: 380px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.dashdoardCont .conteiner .wrapper .dashboards .chart .TotalEarnings .charts {
+  width: 100%;
+  height: 100%;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .chart .calendar {
+  flex-shrink: 0;
+  width: 330px;
+  height: 380px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}/*# sourceMappingURL=Dashdoard.module.css.map */

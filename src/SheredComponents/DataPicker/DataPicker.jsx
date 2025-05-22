@@ -15,7 +15,6 @@ export default function ResponsiveDatePickers({
 }) {
   const handleDateChange = (newDate) => {
     if (newDate) {
-      // Pass the Date object directly instead of formatted string
       setDate(newDate.toDate());
     }
   };
