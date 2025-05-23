@@ -19,7 +19,24 @@
   justify-content: space-between;
   gap: 20px;
 }
-.dashdoardCont .conteiner .wrapper .dashboards .dashdoard div {
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active {
+  background-color: #d7a86e !important;
+  color: white !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active p {
+  color: white !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active .iconCont .icon {
+  width: 100%;
+  height: 100%;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active .iconCont .icon .icons {
+  color: white !important;
+  width: 100%;
+  height: 100%;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .TotalBookings {
+  cursor: pointer;
   width: 100%;
   max-width: 350px;
   height: 111px;
@@ -28,12 +45,88 @@
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .TotalBookings .Total p {
+  color: rgb(163, 174, 208);
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .TotalBookings .iconCont .icon {
+  width: 100%;
+  height: 100%;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .TotalBookings .iconCont .icon .icons {
+  color: #d7a86e;
+  width: 100%;
+  height: 100%;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active {
+  color: white !important;
+  background-color: #d7a86e !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active .graph .graphicon {
+  color: white !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .NewClients {
+  cursor: pointer;
+  width: 100%;
+  max-width: 350px;
+  height: 111px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .NewClients .clientsConteiner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .NewClients .clientsConteiner .personicon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #d7a86e !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .NewClients .clientsConteiner .personicon .Icon {
+  color: #fcf6f6;
+  width: 28px;
+  height: 28px;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .NewClients .clientsConteiner .newClients p {
+  color: rgb(163, 174, 208);
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .NewClients .clientsConteiner .graph .graphicon {
+  width: 58px;
+  height: 28px;
+  color: #d7a86e;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings {
+  width: 100%;
+  max-width: 350px;
+  height: 111px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
   justify-content: space-between;
 }
 .dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity {
-  background-color: #d7a86e;
-  color: white;
+  width: 100%;
+  max-width: 350px;
+  height: 111px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
 }
 .dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity svg {
   color: white;
@@ -43,13 +136,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
-  height: 380px;
+  height: 400px;
 }
 .dashdoardCont .conteiner .wrapper .dashboards .chart .TotalEarnings {
-  flex: 1 1 0;
+  flex: 1;
   min-width: 0;
   width: 731px;
-  height: 380px;
+  height: 410px;
   background-color: white;
   border-radius: 12px;
   padding: 24px;
@@ -58,13 +151,16 @@
 .dashdoardCont .conteiner .wrapper .dashboards .chart .TotalEarnings .charts {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .dashdoardCont .conteiner .wrapper .dashboards .chart .calendar {
   flex-shrink: 0;
   width: 330px;
-  height: 380px;
+  height: 410px;
   background-color: white;
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}/*# sourceMappingURL=Dashdoard.module.css.map */
+}/*# sourceMappingURL=dashdoard.module.css.map */

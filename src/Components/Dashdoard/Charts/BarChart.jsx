@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
+  LineElement,
+  PointElement,
   Tooltip,
   Legend,
 } from "chart.js";
-
+import styles from "./barChart.module.scss";
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  LineElement, 
+  PointElement,
   Title,
   Tooltip,
   Legend
@@ -21,8 +25,8 @@ ChartJS.register(
 
 export default function BarChart() {
   return (
-    <div>
-      <Bar
+    <div className={styles.conteiner}>
+      <Line
         data={{
           labels: [
             "Jan",
@@ -41,16 +45,15 @@ export default function BarChart() {
           datasets: [
             {
               data: [80, 160, 140, 130, 90, 179, 100, 160, 70, 100, 60, 110],
-              backgroundColor:"#D4A37336",
-             
+              backgroundColor: "#D4A37336",
+              height: "100%",
               borderRadius: 8,
-             
             },
           ],
         }}
         options={{
           responsive: true,
-             maintainAspectRatio: false,
+          maintainAspectRatio: false,
           plugins: {
             legend: { display: false },
           },

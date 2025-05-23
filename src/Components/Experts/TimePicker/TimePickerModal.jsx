@@ -18,6 +18,7 @@ export default function TimePickerModal({
   initialFreeTime,
   edit,
 }) {
+
   const [date, setDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [timeSlots, setTimeSlots] = useState(initialFreeTime || []);
@@ -33,6 +34,7 @@ export default function TimePickerModal({
   }, [open, initialFreeTime, edit]);
 
   const handleAccept = () => {
+
     if (date && selectedTime) {
       const formattedTime = dayjs(selectedTime).format("HH:mm");
       const formattedDate = dayjs(date).format("YYYY-MM-DD");
@@ -93,15 +95,17 @@ export default function TimePickerModal({
   }, []);
 
   useEffect(() => {
+
     if (edit) {
-      setDate(edit.date || null);
+      setDate(edit.date || "");
       setSelectedTime(
-        edit.selectedTime ? dayjs(edit.selectedTime, "HH:mm") : null
+        edit.selectedTime ? dayjs(edit.selectedTime, "HH:mm") : ""
       );
       setTimeSlots(edit.timeSlots || []);
     } else {
       resetForm();
     }
+    
   }, [edit]);
 
   return (
@@ -125,7 +129,7 @@ export default function TimePickerModal({
                 <DataPicker
                   setDate={setDate}
                   error={null}
-                  value={date}
+                  value={date || ""}
                   label={"Select Date"}
                 />
                 {date && (
