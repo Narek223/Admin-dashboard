@@ -6,6 +6,8 @@ import Calendar from "./Calendar/Calendar";
 import { IoStatsChartSharp } from "react-icons/io5";
 import { MdPeopleAlt } from "react-icons/md";
 import { SlGraph } from "react-icons/sl";
+import { FaChartSimple } from "react-icons/fa6";
+import { MdShowChart } from "react-icons/md";
 
 export default function Dashdoard() {
   const [activeBox, setActiveBox] = useState(null);
@@ -61,8 +63,44 @@ export default function Dashdoard() {
                   </div>
                 </div>
               </div>
-              <div className={styles.Earnings}></div>
-              <div className={styles.Activity}></div>
+              <div
+                className={`${styles.Earnings} ${
+                  activeBox === "Earnings" ? styles.active : ""
+                }`}
+                onClick={() => handleClick("Earnings")}
+              >
+                <div className={styles.earningsCont}>
+                  <div className={styles.earningsWrapper}>
+                    <div className={styles.earningsIcon}>
+                      <p>
+                        <FaChartSimple className={styles.icon} />
+                      </p>
+                    </div>
+
+                    <div className={styles.earningsText}>
+                      <p>Earnings</p>
+                      <h1>123</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={`${styles.Activity} ${
+                  activeBox === "Activity" ? styles.active : ""
+                }`}
+                onClick={() => handleClick("Activity")}
+              >
+                <div className={styles.ActivityConteiner}>
+                  <div className={styles.texts}>
+                    <p>Activity</p>
+                    <h1>454</h1>
+                  </div>
+                  <div className={styles.iconCont}>
+                    <p>
+                      <MdShowChart className={styles.iconActivity} />
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className={styles.chart}>

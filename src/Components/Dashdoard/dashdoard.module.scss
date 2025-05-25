@@ -71,12 +71,11 @@
               }
             }
           }
-          .active{
+          .active {
             color: white !important;
             background-color: #d7a86e !important;
-            .graph{
-              .graphicon{
-              
+            .graph {
+              .graphicon {
                 color: white !important;
               }
             }
@@ -90,8 +89,6 @@
               align-items: center;
               justify-content: space-between;
 
-
-              
               .personicon {
                 width: 56px;
                 height: 56px;
@@ -100,19 +97,19 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                .Icon{
+                .Icon {
                   color: #fcf6f6;
                   width: 28px;
                   height: 28px;
                 }
               }
-              .newClients{
+              .newClients {
                 p {
                   color: rgba(163, 174, 208, 1);
                 }
               }
-              .graph{
-                .graphicon{
+              .graph {
+                .graphicon {
                   width: 58px;
                   height: 28px;
                   color: #d7a86e;
@@ -120,17 +117,87 @@
               }
             }
           }
+          .active {
+            background-color: #d7a86e !important;
+            color: white !important;
+            p {
+              color: white !important;
+            }
+            .earningsIcon {
+              background-color: #d7a86e !important;
+
+              p {
+                color: white;
+              }
+            }
+          }
           .Earnings {
             @include divs;
-          }
+            cursor: pointer;
+            .earningsCont {
+              display: flex;
+              align-items: center;
+              width: 100%;
+              .earningsWrapper {
+                width: 100%;
+                display: flex;
+                align-items: center;
 
+                justify-content: space-evenly;
+                .earningsIcon {
+                  width: 56px;
+                  height: 56px;
+                  border-radius: 50%;
+                  background-color: #f5f4f2;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  p {
+                    color: #d4a373;
+                  }
+                }
+                .earningsText {
+                  p {
+                    color: rgba(163, 174, 208, 1);
+                    .icon {
+                      width: 32px;
+                      height: 32px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .active {
+            .iconActivity {
+              color: white !important;
+            }
+          }
           .Activity {
+            cursor: pointer;
             @include divs;
             // background-color: #d7a86e;
             // color: white;
 
-            svg {
-              color: white;
+            .ActivityConteiner {
+              display: flex;
+              width: 100%;
+              align-items: center;
+              justify-content: space-around;
+              .texts {
+                p {
+                  color: rgba(163, 174, 208, 1);
+                }
+              }
+              .iconCont {
+                p {
+                  .iconActivity {
+                    color: #d7a86e;
+                    width: 35px;
+                    height: 35px;
+                  }
+                }
+              }
             }
           }
         }

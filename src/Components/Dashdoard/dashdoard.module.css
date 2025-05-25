@@ -106,6 +106,19 @@
   height: 28px;
   color: #d7a86e;
 }
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active {
+  background-color: #d7a86e !important;
+  color: white !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active p {
+  color: white !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active .earningsIcon {
+  background-color: #d7a86e !important;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active .earningsIcon p {
+  color: white;
+}
 .dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings {
   width: 100%;
   max-width: 350px;
@@ -116,8 +129,43 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings .earningsCont {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings .earningsCont .earningsWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings .earningsCont .earningsWrapper .earningsIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #f5f4f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings .earningsCont .earningsWrapper .earningsIcon p {
+  color: #d4a373;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings .earningsCont .earningsWrapper .earningsText p {
+  color: rgb(163, 174, 208);
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Earnings .earningsCont .earningsWrapper .earningsText p .icon {
+  width: 32px;
+  height: 32px;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .active .iconActivity {
+  color: white !important;
 }
 .dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity {
+  cursor: pointer;
   width: 100%;
   max-width: 350px;
   height: 111px;
@@ -128,8 +176,19 @@
   display: flex;
   justify-content: space-between;
 }
-.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity svg {
-  color: white;
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity .ActivityConteiner {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity .ActivityConteiner .texts p {
+  color: rgb(163, 174, 208);
+}
+.dashdoardCont .conteiner .wrapper .dashboards .dashdoard .Activity .ActivityConteiner .iconCont p .iconActivity {
+  color: #d7a86e;
+  width: 35px;
+  height: 35px;
 }
 .dashdoardCont .conteiner .wrapper .dashboards .chart {
   display: flex;
@@ -163,4 +222,4 @@
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}/*# sourceMappingURL=dashdoard.module.css.map */
+}/*# sourceMappingURL=Dashdoard.module.css.map */
