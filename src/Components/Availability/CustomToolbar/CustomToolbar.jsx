@@ -10,6 +10,7 @@ import { openMenu, closeMenu } from "../../../Redax/Slices/Availability/ToolbarS
 
 export default function CustomToolbar({ label, onNavigate, setView, view }) {
   const dispatch = useDispatch();
+  const viewDate = useSelector((state) => state.availability.viewDate);
   const anchorEl = useSelector((state) => state.calendarUI.anchorEl);
   const openyMenu = Boolean(anchorEl);
 
@@ -19,8 +20,8 @@ export default function CustomToolbar({ label, onNavigate, setView, view }) {
 
   const formattedLabel =
     view === "week"
-      ? `${format(startOfWeek(new Date(label)), "MMM d")} - ${format(
-          endOfWeek(new Date(label)),
+      ? `${format(startOfWeek(new Date(viewDate)), "MMM d")} - ${format(
+          endOfWeek(new Date(viewDate)),
           "MMM d, yyyy"
         )}`
       : format(new Date(label), "MMMM yyyy", { locale: enUS });

@@ -17,7 +17,7 @@ import calendarUISlice from "../Slices/Availability/ToolbarSlice";
 import ExpertsSlice  from "../Slices/Experts/ExpertsSlice";
 import ExpertsModalSlice from "../Slices/Experts/ExpertsModalSlice"
 import fileSlice from "../Slices/ChooseFile/FileSice";
-
+import Dashdoard from "../Slices/Dashdoard/Dashdoard";
 
 export const store = configureStore({
   reducer: {
@@ -39,5 +39,6 @@ export const store = configureStore({
     expert:ExpertsSlice,
     expertsModal:ExpertsModalSlice,
     file: fileSlice,
+    DashdoardSlice:Dashdoard
   },
 });

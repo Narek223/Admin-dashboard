@@ -11,12 +11,13 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import styles from "./barChart.module.scss";
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
-  LineElement, 
+
+  LineElement,
   PointElement,
   Title,
   Tooltip,
@@ -25,7 +26,8 @@ ChartJS.register(
 
 export default function BarChart() {
   return (
-    <div className={styles.conteiner}>
+    <div >
+      
       <Line
         data={{
           labels: [
@@ -68,6 +70,7 @@ export default function BarChart() {
           },
         }}
       />
+
     </div>
   );
 }

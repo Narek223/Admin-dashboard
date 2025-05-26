@@ -1,3 +1,14 @@
+@mixin btnNextandPrev {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: unset;
+  color: #7f8188;
+  cursor: pointer;
+}
+
 .toolbarConteiner {
   display: flex;
   justify-content: space-between;
@@ -5,22 +16,12 @@
   margin: 30px 0;
   .Customtoolbar {
     display: flex;
-
+    align-items: center;
     .prev {
-      width: 24px;
-      height: 24px;
-      border: none;
-      background-color: unset;
-      color: #7f8188;
-      cursor: pointer;
+      @include btnNextandPrev();
     }
     .next {
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      border: none;
-      background-color: unset;
-      color: #7f8188;
+      @include btnNextandPrev();
     }
     .toolbarlabel {
       font-weight: 700;
@@ -66,7 +67,7 @@
       align-items: center;
       justify-content: center;
 
-      .icon{
+      .icon {
         width: 20px;
         height: 20px;
         margin: 0 5px;

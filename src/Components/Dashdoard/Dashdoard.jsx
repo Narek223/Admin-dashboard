@@ -1,22 +1,36 @@
 import React, { useState } from "react";
 import Header from "../Header/Header";
 import styles from "./dashdoard.module.scss";
-import BarChart from "./Charts/BarChart";
+import BarChart from "./Charts/BarChart/BarChart";
 import Calendar from "./Calendar/Calendar";
 import { IoStatsChartSharp } from "react-icons/io5";
 import { MdPeopleAlt } from "react-icons/md";
 import { SlGraph } from "react-icons/sl";
 import { FaChartSimple } from "react-icons/fa6";
 import { MdShowChart } from "react-icons/md";
+import { useSelector, useDispatch } from "react-redux";
+import * as DashdoardSlice from "../../Redax/Slices/Dashdoard/Dashdoard";
+import Verticalbar from "./Charts/VerticalBar/Verticalbar";
 
 export default function Dashdoard() {
-  const [activeBox, setActiveBox] = useState(null);
+  const dispatch = useDispatch();
+  const { activeBox } = useSelector((state) => state.DashdoardSlice);
 
-  const handleClick = (elem) => {
-    setActiveBox(elem);
+
+  const chartComponents = {
+    bookings: <Verticalbar />,
+    Activity: <BarChart />,
+    clients: <BarChart />,
+    Earnings:<Verticalbar />
   };
 
+
+
   return (
+
+
+
+
     <div className={styles.dashdoardCont}>
       <Header />
       <div className={styles.conteiner}>
@@ -27,7 +41,7 @@ export default function Dashdoard() {
                 className={`${styles.TotalBookings} ${
                   activeBox === "bookings" ? styles.active : ""
                 }`}
-                onClick={() => handleClick("bookings")}
+                onClick={() => dispatch(DashdoardSlice.handleClick("bookings"))}
               >
                 <div className={styles.Total}>
                   <p>Total Bookings</p>
@@ -44,7 +58,7 @@ export default function Dashdoard() {
                 className={`${styles.NewClients} ${
                   activeBox === "clients" ? styles.active : ""
                 }`}
-                onClick={() => handleClick("clients")}
+                onClick={() => dispatch(DashdoardSlice.handleClick("clients"))}
               >
                 <div className={styles.clientsConteiner}>
                   <div className={styles.personicon}>
@@ -67,7 +81,7 @@ export default function Dashdoard() {
                 className={`${styles.Earnings} ${
                   activeBox === "Earnings" ? styles.active : ""
                 }`}
-                onClick={() => handleClick("Earnings")}
+                onClick={() => dispatch(DashdoardSlice.handleClick("Earnings"))}
               >
                 <div className={styles.earningsCont}>
                   <div className={styles.earningsWrapper}>
@@ -84,10 +98,11 @@ export default function Dashdoard() {
                   </div>
                 </div>
               </div>
-              <div className={`${styles.Activity} ${
+              <div
+                className={`${styles.Activity} ${
                   activeBox === "Activity" ? styles.active : ""
                 }`}
-                onClick={() => handleClick("Activity")}
+                onClick={() => dispatch(DashdoardSlice.handleClick("Activity"))}
               >
                 <div className={styles.ActivityConteiner}>
                   <div className={styles.texts}>
@@ -109,7 +124,10 @@ export default function Dashdoard() {
                   <div>
                     <h1>Total Earnings </h1>
                   </div>
-                  <BarChart />
+               
+  {chartComponents[activeBox]}
+
+              
                 </div>
               </div>
               <div className={styles.calendar}>
