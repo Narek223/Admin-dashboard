@@ -14,11 +14,11 @@ import AvailabilitySlice from "../Slices/Availability/AvailabilitySlice";
 import AvailabilityModalSlice from "../Slices/Availability/AvailabilityModalSlice";
 import EventSlice from "../Slices/Availability/EventSlice";
 import calendarUISlice from "../Slices/Availability/ToolbarSlice";
-import ExpertsSlice  from "../Slices/Experts/ExpertsSlice";
-import ExpertsModalSlice from "../Slices/Experts/ExpertsModalSlice"
+import ExpertsSlice from "../Slices/Experts/ExpertsSlice";
+import ExpertsModalSlice from "../Slices/Experts/ExpertsModalSlice";
 import fileSlice from "../Slices/ChooseFile/FileSice";
 import Dashdoard from "../Slices/Dashdoard/Dashdoard";
-
+import timePickerReducer from "../Slices/Experts/TimePickerSlice";
 export const store = configureStore({
   reducer: {
     blog: blogSlice,
@@ -36,9 +36,10 @@ export const store = configureStore({
     availabilityModal: AvailabilityModalSlice,
     eventSlice: EventSlice,
     calendarUI: calendarUISlice,
-    expert:ExpertsSlice,
-    expertsModal:ExpertsModalSlice,
+    expert: ExpertsSlice,
+    expertsModal: ExpertsModalSlice,
     file: fileSlice,
-    DashdoardSlice:Dashdoard
+    DashdoardSlice: Dashdoard,
+    timePicker: timePickerReducer,
   },
 });

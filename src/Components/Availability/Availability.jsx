@@ -52,21 +52,23 @@ export default function Availability() {
   };
 
   const hasEventAtSlot = (cellDate, events, view = "month") => {
+  if (view === "month") {
+    // Всегда показывать плюсик в месячном виде
+    return false;
+  } else if (view === "week") {
     return events.some((event) => {
       const eventStart = new Date(event.start);
-      const eventEnd = new Date(event.end);
-      if (view === "month") {
-        return (
-          eventStart.getFullYear() === cellDate.getFullYear() &&
-          eventStart.getMonth() === cellDate.getMonth() &&
-          eventStart.getDate() === cellDate.getDate()
-        );
-      } else if (view === "week") {
-        return cellDate >= eventStart && cellDate < eventEnd;
-      }
-      return false;
+      return (
+        cellDate.getFullYear() === eventStart.getFullYear() &&
+        cellDate.getMonth() === eventStart.getMonth() &&
+        cellDate.getDate() === eventStart.getDate() &&
+        cellDate.getHours() === eventStart.getHours() &&
+        cellDate.getMinutes() === eventStart.getMinutes()
+      );
     });
-  };
+  }
+  return false;
+};
 
   const handleEditGlobal = (event) => {
     dispatch(AvailabilitySlice.setEdit(event));

@@ -11,58 +11,40 @@ import dayjs from "dayjs";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import DataPicker from "../../../SheredComponents/DataPicker/DataPicker";
 
-export default function TimePickerModal({
-  open,
-  onClose,
-  onAddtime,
-  initialFreeTime,
-  edit,
-}) {
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setDate,
+  setSelectedTime,
+  addTimeSlot,
+  deleteTimeSlot,
+  setTimeSlots,
+  reset,
+} from "../../../Redax/Slices/Experts/TimePickerSlice";
 
-  const [date, setDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [timeSlots, setTimeSlots] = useState(initialFreeTime || []);
 
-  useEffect(() => {
-    if (open) {
-      setTimeSlots(initialFreeTime || []);
-      if (!edit && (!initialFreeTime || initialFreeTime.length === 0)) {
-        setDate(null);
-        setSelectedTime(null);
-      }
+export default function TimePickerModal({ open, onClose, onAddtime, edit,initialFreeTime }) {
+  const dispatch = useDispatch();
+  const { date, selectedTime, timeSlots } = useSelector((state) => state.timePicker);
+
+
+
+useEffect(() => {
+  if (open) {
+    dispatch(setTimeSlots(initialFreeTime && initialFreeTime.length > 0 ? initialFreeTime : []));
+    if (edit) {
+      dispatch(setDate(edit.date || null));
     }
-  }, [open, initialFreeTime, edit]);
+  }
+}, [open, edit, initialFreeTime, dispatch]);
+  
+  
 
   const handleAccept = () => {
-
     if (date && selectedTime) {
       const formattedTime = dayjs(selectedTime).format("HH:mm");
       const formattedDate = dayjs(date).format("YYYY-MM-DD");
-
-      const isDuplicate = timeSlots.some(
-        (elem) =>
-          elem.date === formattedDate && elem.times.includes(formattedTime)
-      );
-
-      if (!isDuplicate) {
-        setTimeSlots((prev) => {
-          const existing = prev.find((elem) => elem.date === formattedDate);
-          if (existing) {
-            return prev.map((elem) =>
-              elem.date === formattedDate
-                ? {
-                    ...elem,
-                    times: [...elem.times, formattedTime].sort(),
-                  }
-                : elem
-            );
-          }
-
-          return [...prev, { date: formattedDate, times: [formattedTime] }];
-        });
-      }
-
-      setSelectedTime(null);
+      dispatch(addTimeSlot({ date: formattedDate, time: formattedTime }));
+      dispatch(setSelectedTime(null));
     }
   };
 
@@ -70,43 +52,14 @@ export default function TimePickerModal({
     handleAccept();
   };
 
-  const deleteTime = (dateToDelete, timeToDelete) => {
-    setTimeSlots((prev) =>
-      prev
-        .map((elem) =>
-          elem.date === dateToDelete
-            ? { ...elem, times: elem.times.filter((t) => t !== timeToDelete) }
-            : elem
-        )
-
-        .filter((elem) => elem.times.length > 0)
-    );
+  const handleDeleteTime = (dateToDelete, timeToDelete) => {
+    dispatch(deleteTimeSlot({ date: dateToDelete, time: timeToDelete }));
   };
 
   const saveTime = () => {
     onAddtime(timeSlots);
     onClose();
   };
-
-  const resetForm = useCallback(() => {
-    setSelectedTime(selectedTime ? dayjs(edit.selectedTime, "HH:mm") : null);
-    setDate("");
-    setTimeSlots("");
-  }, []);
-
-  useEffect(() => {
-
-    if (edit) {
-      setDate(edit.date || "");
-      setSelectedTime(
-        edit.selectedTime ? dayjs(edit.selectedTime, "HH:mm") : ""
-      );
-      setTimeSlots(edit.timeSlots || []);
-    } else {
-      resetForm();
-    }
-    
-  }, [edit]);
 
   return (
     <div>
@@ -127,7 +80,7 @@ export default function TimePickerModal({
               <h1>Free time</h1>
               <div className={styles.chooseTime}>
                 <DataPicker
-                  setDate={setDate}
+                  setDate={(val) => dispatch(setDate(val))}
                   error={null}
                   value={date || ""}
                   label={"Select Date"}
@@ -154,7 +107,7 @@ export default function TimePickerModal({
                             <TimePicker
                               fullWidth
                               ampm={false}
-                              onChange={(newValue) => setSelectedTime(newValue)}
+                              onChange={(newValue) => dispatch(setSelectedTime(newValue))}
                               value={selectedTime}
                             />
                           </DemoContainer>
@@ -167,15 +120,14 @@ export default function TimePickerModal({
                     {timeSlots.map((slot) => (
                       <div key={slot.date}>
                         <h3>
-                          Added times for{" "}
-                          {dayjs(slot.date).format("DD.MM.YYYY")}:
+                          Added times for {dayjs(slot.date).format("DD.MM.YYYY")}:
                         </h3>
                         {slot.times.map((time, index) => (
                           <div className={styles.addedTime} key={index}>
                             <div className={styles.list}>
                               <div className={styles.Listwrapper}>
                                 <span>{time}</span>
-                                <p onClick={() => deleteTime(slot.date, time)}>
+                                <p onClick={() => handleDeleteTime(slot.date, time)}>
                                   <AiOutlineClose className={styles.icon} />
                                 </p>
                               </div>

@@ -46,9 +46,11 @@ export default function Inbox() {
 
           {messages.length === 0 && !searchTerm ? (
             <div className={styles.noDialogs}>
-              <FaRegPaperPlane className={styles.icon} />
-              <p>No messages yet</p>
-              <span>Start a conversation to see it here</span>
+              <div>
+                <FaRegPaperPlane className={styles.icon} />
+                <p>No messages yet</p>
+                <span>Start a conversation to see it here</span>
+              </div>
             </div>
           ) : messages.length === 0 && searchTerm ? (
             <div className={styles.noDialogs}>
@@ -91,7 +93,9 @@ export default function Inbox() {
               </div>
               <button
                 className={styles.infobtn}
-                onClick={(e) => dispatch(InboxSlice.deletefunc(e.currentTarget))}
+                onClick={(e) =>
+                  dispatch(InboxSlice.deletefunc(e.currentTarget))
+                }
               >
                 <AiOutlineMore className={styles.icon} />
               </button>
@@ -130,9 +134,7 @@ export default function Inbox() {
           <div
             className={styles.messagesBox}
             style={{
-              height: dialog
-                ? "calc(100vh - 258px)"
-                : "calc(100vh - 130px)",
+              height: dialog ? "calc(100vh - 258px)" : "calc(100vh - 130px)",
             }}
           >
             {dialogheader ? (

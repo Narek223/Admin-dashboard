@@ -103,7 +103,10 @@ export default function Service() {
                               ? `${categoryAnchorEl.offsetWidth}px`
                               : "auto",
                           minWidth: 100,
-                          minHeight: 10,
+                          maxHeight: 150,
+                              overflowY: "auto",
+                           
+ 
                         },
                         "& .MuiMenuItem-root:hover": {
                           backgroundColor: "white",
@@ -154,6 +157,8 @@ export default function Service() {
                             openServicesMenu && servicesAnchorEl
                               ? `${servicesAnchorEl.offsetWidth}px`
                               : "auto",
+                                 maxHeight: 150,
+                              overflowY: "auto",
                         },
                         "& .MuiMenuItem-root:hover": {
                           backgroundColor: "white",
