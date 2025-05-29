@@ -36,3 +36,10 @@ button:active {
 }
 
 
+.MuiPickersLayout-contentWrapper {
+  grid-column: 2 / 3 !important;
+  grid-row: 2 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}

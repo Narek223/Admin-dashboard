@@ -23,6 +23,7 @@
   width: 480px;
   border-radius: 12px;
   height: calc(100vh - 130px);
+  overflow-y: auto;
   background-color: #fff;
 }
 .inbox .inboxheader .inbox_Messages .userbox {
@@ -102,7 +103,8 @@
   color: rgb(160, 174, 192);
 }
 .inbox .inboxheader .inbox_Messages .noDialogs {
-  height: 100%;
+  height: calc(100vh - 250px);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -41,10 +41,17 @@ export const datestyles = {
     color: "white !important",
   },
   "& .MuiPickersDay-root.Mui-disabled": {
-    color: "rgba(0, 0, 0, 0.3)",
+    color: "rgba(196, 176, 182, 0.3)",
   },
   "& .MuiPickersDay-root.MuiPickersDay-dayOutsideMonth": {
     opacity: 0.5,
     color: "gray",
+  },
+  "& .MuiPickersLayout-contentWrapper": {
+    gridColumn: "2 / 3 !important",
+    gridRow: 2,
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
 };

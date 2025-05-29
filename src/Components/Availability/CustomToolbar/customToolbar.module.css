@@ -6,8 +6,11 @@
 }
 .toolbarConteiner .Customtoolbar {
   display: flex;
+  align-items: center;
 }
 .toolbarConteiner .Customtoolbar .prev {
+  display: flex;
+  align-items: center;
   width: 24px;
   height: 24px;
   border: none;
@@ -16,12 +19,14 @@
   cursor: pointer;
 }
 .toolbarConteiner .Customtoolbar .next {
-  cursor: pointer;
+  display: flex;
+  align-items: center;
   width: 24px;
   height: 24px;
   border: none;
   background-color: unset;
   color: #7f8188;
+  cursor: pointer;
 }
 .toolbarConteiner .Customtoolbar .toolbarlabel {
   font-weight: 700;

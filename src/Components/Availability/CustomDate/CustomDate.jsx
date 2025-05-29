@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./custom.module.scss";
 import { IoAddOutline } from "react-icons/io5";
 
 export default function CustomDate({
-  children,
+  children,     
   value,
   onOpen,
-  event,
-  hasevent,
   view,
+  event,
   viewDate,
+hasevent
 }) {
   const slotDate = value;
-  const hasEvent = hasevent(value, event, view);
-
   const isThisMonth = value.getMonth() === viewDate.getMonth();
-
+ const slotHasEvent = hasevent(slotDate, event, view);
   return (
-    <div key={value.toISOString()} className={styles.timeSlotWrapper}>
-      <div className={styles.content}>
-        {isThisMonth && (
-          <button
-            className={styles.addBtn}
-            onClick={() => onOpen(slotDate)}
-            disabled={hasEvent}
-          >
-            <IoAddOutline />
-          </button>
-        )}
-      </div>
+    <div className={styles.timeSlotWrapper}>
+    
+  
+      {isThisMonth && !slotHasEvent &&(
+        <button
+    
+          className={styles.addBtn}
+          onClick={() => onOpen(slotDate)}
+
+        >
+          <IoAddOutline />
+        </button>
+      )}
     </div>
   );
 }

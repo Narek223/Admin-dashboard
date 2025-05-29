@@ -53,8 +53,14 @@ export default function Availability() {
 
   const hasEventAtSlot = (cellDate, events, view = "month") => {
   if (view === "month") {
-    // Всегда показывать плюсик в месячном виде
-    return false;
+    return events.some((event) => {
+      const eventStart = new Date(event.start);
+      return (
+        cellDate.getFullYear() === eventStart.getFullYear() &&
+        cellDate.getMonth() === eventStart.getMonth() &&
+        cellDate.getDate() === eventStart.getDate()
+      );
+    });
   } else if (view === "week") {
     return events.some((event) => {
       const eventStart = new Date(event.start);

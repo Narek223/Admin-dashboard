@@ -30,6 +30,7 @@ const AvailabilitySlice = createSlice({
     addOrUpdateEvent(state, action) {
       const { event, isEdit } = action.payload;
       state.events = manageItems(state.events, event, isEdit);
+      
     },
     setEdit(state, action) {
       state.edit = action.payload;
