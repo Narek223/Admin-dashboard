@@ -11,6 +11,7 @@ import ChooseFile from "../../../SheredComponents/ChooseFile/ChooseFile";
 import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import { useDispatch, useSelector } from "react-redux";
 import * as ModalSlice from "../../../Redax/Slices/Experts/ExpertsModalSlice";
+import TextField from "@mui/material/TextField";
 
 export default function ExpertsModal({
   open,
@@ -28,7 +29,10 @@ export default function ExpertsModal({
     adress,
     date,
     specialist,
+    expertSummary,
     files,
+    experians,
+    experiansTo,
     id,
   } = useSelector((state) => state.expertsModal);
 
@@ -62,14 +66,14 @@ export default function ExpertsModal({
   };
 
   useEffect(() => {
-    if (name && date && mail && phone && files) {
+    if (name && date && mail && phone && files && expertSummary && experians && experiansTo) {
       seterror(false);
     }
-  }, [name, date, mail, phone, files, seterror]);
+  }, [name, date, mail, phone, files, expertSummary,experians, experiansTo,seterror]);
 
   const save = () => {
     // const hasEmptyFields =
-    //   !name || !date || !mail || !phone || !adress || !specialist;
+    //   !name || !date || !mail || !phone || !adress || !specialist ||expertSummary || experians || experiansTo ;
 
     // seterror(hasEmptyFields);
     // if (hasEmptyFields) return;
@@ -178,6 +182,51 @@ export default function ExpertsModal({
                   services={services[0].options}
                 />
               </div>
+            <div className={styles.experians}>  
+              
+                <Inputs
+                  error={error && !experians}
+                  value={experians}
+                  state={(val) => dispatch(ModalSlice.setexperians(val))}
+                  placeholder="2020"
+                  type="text"
+                  label="Experiance"
+                />
+                <Inputs
+                  error={error && !experiansTo}
+                  value={experiansTo}
+                  state={(val) => dispatch(ModalSlice.setexperiansTo(val))}
+                  placeholder=" 2023 "
+                  type="text"
+                  label="To"
+                />
+                </div>
+
+
+              <div className={styles.expertSummary}>
+               <TextField
+                error={error && !expertSummary}
+                value={expertSummary}
+                onChange={(e) => dispatch(ModalSlice.setexpertSummary(e.target.value))}
+                placeholder="Summery..."
+                multiline
+                rows={10}
+                variant="outlined"
+                fullWidth
+                sx={{
+                  "& .MuiInputBase-root": {
+                    margin: "10px 0",
+                    color: "rgba(127, 129, 136, 1)",
+                    border: "1px solid rgba(98, 99, 115, 0.3);",
+                  },
+                }}
+              />
+              </div>
+           
+            </div>
+
+            <div>
+              
             </div>
             <ChooseFile addimg={handleFileSelect} edit={edit} />
             <ModalBtn onClose={handleClose} handleSave={save} edit={edit} />

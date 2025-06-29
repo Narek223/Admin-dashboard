@@ -9,6 +9,9 @@ const initialState = {
   date: "",
   specialist: "Hair Care",
   files: "",
+  expertSummary:"",
+  experians:"",
+  experiansTo:""
 };
 
 export const ExpertsModalSlice = createSlice({
@@ -39,7 +42,15 @@ export const ExpertsModalSlice = createSlice({
     setFiles: (state, action) => {
       state.files = action.payload;
     },
-
+   setexpertSummary: (state, action) => {
+      state.expertSummary = action.payload;
+    },
+  setexperians: (state, action) => {
+      state.experians = action.payload;
+    },
+      setexperiansTo: (state, action) => {
+      state.experiansTo = action.payload;
+    },
     resetExpertForm: () => initialState,
   },
 });
@@ -47,8 +58,11 @@ export const ExpertsModalSlice = createSlice({
 export const {
   setId,
   setName,
+  setexperians,
+  setexperiansTo,
   setMail,
   setPhone,
+  setexpertSummary,
   setAdress,
   setDate,
   setSpecialist,
