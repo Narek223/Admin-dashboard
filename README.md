@@ -41,7 +41,6 @@ Demo: *(coming soon — add deployment URL here when available)*
   - Redax/ — Redux slices and related components
   - services/ — API clients and admin-specific endpoints
   - store/ — Redux store configuration
-  - styles/ — global SCSS and theming
   - utils/ — helper functions
   - App.jsx / index.jsx — entry points
 
