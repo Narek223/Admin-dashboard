@@ -55,8 +55,8 @@ Demo: *(coming soon — add deployment URL here when available)*
 
 | | |
 |---|---|
-| <img src="src/assets/Screenshots/add_services.png" width="420" /> | <img src="src/assets/Screenshots/Availability.png" width="420" /> |
-| <img src="src/assets/Screenshots/Experts.png" width="420" /> | <img src="src/assets/Screenshots/inbox.png" width="420" /> |
+| <img src="src/assets/ScreenShots/add_services.png" width="420" /> | <img src="src/assets/ScreenShots/Availability.png" width="420" /> |
+| <img src="src/assets/ScreenShots/Experts.png" width="420" /> | <img src="src/assets/ScreenShots/inbox.png" width="420" /> |
 
 
 
