@@ -12,6 +12,14 @@
   border-radius: 12px;
   padding: 18px 33px;
 }
+.modal .exportModalConteiner .choosefile {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.modal .exportModalConteiner .choosefile .multiImageUploader {
+  flex: 1 1 48%;
+}
 .modal .exportModalConteiner .close {
   width: 100%;
   display: flex;
@@ -49,6 +57,13 @@
   align-items: center;
   width: 100%;
   align-items: flex-end;
+}
+.modal .exportModalConteiner .addClient .expertSummary {
+  width: 100%;
+}
+.modal .exportModalConteiner .addClient .experians {
+  display: flex;
+  width: 100%;
 }
 
 @media screen and (max-height: 930px) {

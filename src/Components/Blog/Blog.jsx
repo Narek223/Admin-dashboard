@@ -79,7 +79,15 @@ export default function Blog() {
                     <li>
                       <img
                         className={styles.img}
-                        src={elem.files ? elem.files : NoAvatar}
+                 src={
+                             elem.files && elem.files.length > 0
+                               ? elem.files[0] instanceof File
+                                 ? URL.createObjectURL(elem.files[0])
+                                 : elem.files[0].path.startsWith("/")
+                                   ? elem.files[0].path
+                                   : "/" + elem.files[0].path
+                               : NoAvatar
+                           }
                         alt="Blog"
                       />
                     </li>

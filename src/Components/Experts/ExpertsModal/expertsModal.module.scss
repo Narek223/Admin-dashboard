@@ -11,6 +11,16 @@
     border-radius: 12px;
     padding: 18px 33px;
 
+.choosefile {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  .multiImageUploader {
+    flex: 1 1 48%; // делает 2 колонки для drag-and-drop
+  }
+}
+
     .close {
       width: 100%;
      

@@ -5,35 +5,37 @@ import styles from "./choosefile.module.scss";
 import { FaTrash } from "react-icons/fa";
 
 export default function ChooseFile({ addimg, edit }) {
-  const [files, setFiles] = useState([]);
-  const [imagePreview, setImagePreview] = useState(" ");
-  const [name, setname] = useState("");
+  const [file, setFile] = useState([]);
 
-  useEffect(() => {
-    if (edit && edit.files) {
-      setFiles(edit.files[0]);
-    }
-  }, [edit]);
+useEffect(() => {
+  if (edit && edit.files && edit.files.length > 0) {
+    const url = edit.files[0];
+    setFile({
+      file: url,
+      preview: url instanceof File ? URL.createObjectURL(url) : url.path,
+      name: url.name,
+      size: url.size || 0,
+    });
+  } else {
+    setFile([]);
+  }
+}, [edit]);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      if (acceptedFiles.length === 0) return;
+      const fileObj = acceptedFiles[0];
+      const mappedFile = {
+        file: fileObj,
+        preview: URL.createObjectURL(fileObj),
+        name: fileObj.name,
+        size: fileObj.size,
+      };
+      setFile(mappedFile);
+      addimg([mappedFile.file || mappedFile.preview]);
+    },
+    [addimg]
+  );
 
-  const onDrop = useCallback((acceptedFiles) => {
-    setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-    if (acceptedFiles.length > 0  ) {
-      const file = acceptedFiles[0];
-      const previewURL = URL.createObjectURL(file);
-      setImagePreview(imagePreview);
-      addimg(previewURL);
-      setname(file.name);
-    }
-    setname(acceptedFiles[0].name);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (imagePreview) {
-        URL.revokeObjectURL(imagePreview);
-      }
-    };
-  }, [imagePreview]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -43,8 +45,8 @@ export default function ChooseFile({ addimg, edit }) {
   });
 
   const delate = () => {
-    setFiles([]);
-    setImagePreview("");
+ setFile([]);
+    addimg([]);
   };
 
   return (
@@ -63,17 +65,17 @@ export default function ChooseFile({ addimg, edit }) {
           <button type="button"> Choose file </button>
         </div>
         <p>Only .doc, .txt and .pdf files 2500 kb max file size</p>
-        {files.length !== 0 ? (
+        {file.length !== 0 ? (
           <div className={styles.UploadedfilesBox}>
-            <h1>Uploaded Images</h1>
+            <h1>Uploaded Profile Image</h1>
             <div className={styles.Uploadedfiles}>
               <div className={styles.global}>
                 <img src={fileimg} />
                 <div className={styles.fileinfo}>
-                  <p>{name.name}</p>
+                 
 
-                  <p>{files[0].name}</p>
-                  <p>{(files[0].size / 1024).toFixed(2)} kb </p>
+                  <p>{file.name}</p>
+                  <p>{(file.size / 1024).toFixed(2)} kb </p>
                 </div>
                 <div className={styles.trash} onClick={delate}>
                   <FaTrash />

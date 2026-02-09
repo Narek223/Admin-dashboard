@@ -47,6 +47,26 @@ Demo: *(coming soon — add deployment URL here when available)*
 ---
 
 
+<div align="center">
+
+
+
+## 📸 Screenshots
+
+| | |
+|---|---|
+| <img src="src/assets/Screenshots/add_services.png" width="420" /> | <img src="src/assets/Screenshots/Availability.png" width="420" /> |
+| <img src="src/assets/Screenshots/Experts.png" width="420" /> | <img src="src/assets/Screenshots/inbox.png" width="420" /> |
+
+
+
+</div>
+
+
+
+
+---
+
 ## 📂 Quick Start (Local Development)
 1) Clone repository
 ```bash

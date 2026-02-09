@@ -11,13 +11,18 @@ const initialState = {
   files: "",
   expertSummary:"",
   experians:"",
-  experiansTo:""
+  experiansTo:"",
+  myWorks: [],
+certificates: [],
+
 };
 
 export const ExpertsModalSlice = createSlice({
   name: "expertsModal",
   initialState,
   reducers: {
+    
+
     setId: (state, action) => {
       state.id = action.payload;
     },
@@ -51,6 +56,12 @@ export const ExpertsModalSlice = createSlice({
       setexperiansTo: (state, action) => {
       state.experiansTo = action.payload;
     },
+    setMyWorks: (state, action) => {
+  state.myWorks = action.payload;
+},
+    setCertificates: (state, action) => {
+  state.certificates = action.payload;
+},
     resetExpertForm: () => initialState,
   },
 });
@@ -59,6 +70,8 @@ export const {
   setId,
   setName,
   setexperians,
+  setCertificates,
+  setMyWorks,
   setexperiansTo,
   setMail,
   setPhone,

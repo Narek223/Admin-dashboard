@@ -12,7 +12,7 @@ import ModalBtn from "../../../SheredComponents/ModalButtons/ModalBtn";
 import { useDispatch, useSelector } from "react-redux";
 import * as ModalSlice from "../../../Redax/Slices/Experts/ExpertsModalSlice";
 import TextField from "@mui/material/TextField";
-
+import MultiImageUploader from "../../../SheredComponents/ChooseFile/MultiImageUploader/MultiImageUploader";
 export default function ExpertsModal({
   open,
   handleClose,
@@ -34,6 +34,8 @@ export default function ExpertsModal({
     experians,
     experiansTo,
     id,
+    myWorks,
+    certificates,
   } = useSelector((state) => state.expertsModal);
 
   const inputValues = [
@@ -63,13 +65,35 @@ export default function ExpertsModal({
 
   const handleFileSelect = (fileUrl) => {
     dispatch(ModalSlice.setFiles(fileUrl));
+    
   };
 
   useEffect(() => {
-    if (name && date && mail && phone && files && expertSummary && experians && experiansTo) {
+    if (
+      name &&
+      date &&
+      mail &&
+      phone &&
+      files &&
+      expertSummary &&
+      experians &&
+      myWorks &&
+      certificates &&
+      experiansTo
+    ) {
       seterror(false);
     }
-  }, [name, date, mail, phone, files, expertSummary,experians, experiansTo,seterror]);
+  }, [
+    name,
+    date,
+    mail,
+    phone,
+    files,
+    expertSummary,
+    experians,
+    experiansTo,
+    seterror,
+  ]);
 
   const save = () => {
     // const hasEmptyFields =
@@ -87,6 +111,8 @@ export default function ExpertsModal({
       date,
       specialist,
       files,
+      myWorks,
+      certificates,
     };
 
     if (edit) {
@@ -105,10 +131,12 @@ export default function ExpertsModal({
       dispatch(ModalSlice.setDate(edit.date || ""));
       dispatch(ModalSlice.setMail(edit.mail || ""));
       dispatch(ModalSlice.setPhone(edit.phone || ""));
-      dispatch(ModalSlice.setFiles(edit.files || ""));
+      dispatch(ModalSlice.setFiles(edit.files || []));
       dispatch(ModalSlice.setAdress(edit.adress || ""));
       dispatch(ModalSlice.setSpecialist(edit.specialist || ""));
       dispatch(ModalSlice.setId(edit.id || 0));
+      dispatch(ModalSlice.setMyWorks(edit.myWorks || ""));
+      dispatch(ModalSlice.setCertificates(edit.certificates || ""));
     } else {
       resetForm();
     }
@@ -182,8 +210,7 @@ export default function ExpertsModal({
                   services={services[0].options}
                 />
               </div>
-            <div className={styles.experians}>  
-              
+              <div className={styles.experians}>
                 <Inputs
                   error={error && !experians}
                   value={experians}
@@ -200,35 +227,54 @@ export default function ExpertsModal({
                   type="text"
                   label="To"
                 />
-                </div>
-
+              </div>
 
               <div className={styles.expertSummary}>
-               <TextField
-                error={error && !expertSummary}
-                value={expertSummary}
-                onChange={(e) => dispatch(ModalSlice.setexpertSummary(e.target.value))}
-                placeholder="Summery..."
-                multiline
-                rows={10}
-                variant="outlined"
-                fullWidth
-                sx={{
-                  "& .MuiInputBase-root": {
-                    margin: "10px 0",
-                    color: "rgba(127, 129, 136, 1)",
-                    border: "1px solid rgba(98, 99, 115, 0.3);",
-                  },
-                }}
-              />
+                <TextField
+                  error={error && !expertSummary}
+                  value={expertSummary}
+                  onChange={(e) =>
+                    dispatch(ModalSlice.setexpertSummary(e.target.value))
+                  }
+                  placeholder="Summery..."
+                  multiline
+                  rows={10}
+                  variant="outlined"
+                  fullWidth
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      margin: "10px 0",
+                      color: "rgba(127, 129, 136, 1)",
+                      border: "1px solid rgba(98, 99, 115, 0.3);",
+                    },
+                  }}
+                />
               </div>
-           
             </div>
 
-            <div>
-              
+            <ChooseFile addimg={handleFileSelect} edit={edit?.files || []} />
+            <div className={styles.choosefile}>
+              <div className={styles.multiImageUploader}>
+                <MultiImageUploader
+                  addimg={(filesArray) =>
+                    dispatch(ModalSlice.setMyWorks(filesArray))
+                  }
+                  edit={edit?.myWorks || []}
+                  label="Uploaded Works"
+                  DragAndDrop="Drag & drop your Works here or"
+                />
+              </div>
+
+              <div className={styles.multiImageUploader}>
+                <MultiImageUploader
+                  addimg={(imgs) => dispatch(ModalSlice.setCertificates(imgs))}
+                  edit={edit?.certificates || []}
+                  label="Uploaded Certificates"
+                  DragAndDrop="Drag & drop your Certificates here or"
+                />
+              </div>
             </div>
-            <ChooseFile addimg={handleFileSelect} edit={edit} />
+
             <ModalBtn onClose={handleClose} handleSave={save} edit={edit} />
           </div>
         </Box>

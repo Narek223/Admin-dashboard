@@ -8,7 +8,6 @@ import EditDeleteBtn from "../../SheredComponents/EditDeleteBtn/EditDeleteBtn";
 import TimePickerModal from "./TimePicker/TimePickerModal";
 import NoAvatar from "../../assets/NoAvatart/download.png";
 import PaginationComponent from "../../SheredComponents/Pagination/PaginationComponent";
-import dayjs from "dayjs";
 import { paginate } from "../../Utils/pagination";
 import * as ExpertSlice from "../../Redax/Slices/Experts/ExpertsSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,6 +29,7 @@ export default function Experts() {
 
   const paginationExperts = paginate(expert, currentPage, itemsPerPage);
 
+  console.log(paginationExperts)
   const handleAddExpert = (newExpert, isEdit = false) => {
     if (isEdit) {
       dispatch(ExpertSlice.editExpert(newExpert));
@@ -38,7 +38,7 @@ export default function Experts() {
     }
   };
 
-  
+
   const onAddTime = (updatedTimeSlots) => {
     if (!selectedService) return;
     dispatch(ExpertSlice.updateExpertTime({ id: selectedService.id, updatedTimeSlots }));
@@ -88,7 +88,7 @@ export default function Experts() {
             : []
         }
         edit={edit}
-        
+
       />
 
       <div className={styles.cont}>
@@ -99,8 +99,17 @@ export default function Experts() {
                 <div>
                   <div className={styles.expertwrapper}>
                     <div className={styles.information}>
+
                       <img
-                        src={elem.files ? elem.files : NoAvatar}
+                        src={
+                          elem.files && elem.files.length > 0
+                            ? elem.files[0] instanceof File
+                              ? URL.createObjectURL(elem.files[0])
+                              : elem.files[0].path.startsWith("/")
+                                ? elem.files[0].path
+                                : "/" + elem.files[0].path
+                            : NoAvatar
+                        }
                         alt="Expert Avatar"
                       />
                       <div className={styles.specialistInfo}>
@@ -112,7 +121,7 @@ export default function Experts() {
                       className={styles.infobtn}
                       aria-haspopup="true"
                       aria-expanded={false}
-                      onClick={(event) => dispatch(ExpertSlice.handleInfoClick({event, elem}))}
+                      onClick={(event) => dispatch(ExpertSlice.handleInfoClick({ event, elem }))}
                     >
                       <AiOutlineMore className={styles.icon} />
                     </button>

@@ -11,6 +11,7 @@ import { paginate } from "../../Utils/pagination";
 import { useSelector, useDispatch } from "react-redux";
 import * as categoriesSlice from "../../Redax/Slices/Categories/CategoriesSlice";
 
+
 export default function Categories() {
   const categoriesslice = useSelector((state) => state.categories);
   const dispatch = useDispatch();
@@ -75,7 +76,15 @@ export default function Categories() {
                     <li>{elem.id}</li>
                     <li>
                       <img
-                        src={elem.files ? elem.files : NoAvatar}
+           src={
+                             elem.files && elem.files.length > 0
+                               ? elem.files[0] instanceof File
+                                 ? URL.createObjectURL(elem.files[0])
+                                 : elem.files[0].path.startsWith("/")
+                                   ? elem.files[0].path
+                                   : "/" + elem.files[0].path
+                               : NoAvatar
+                           }
                         className={styles.img}
                         alt="Service"
                       />

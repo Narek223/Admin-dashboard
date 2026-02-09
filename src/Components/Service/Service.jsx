@@ -220,7 +220,15 @@ export default function Service() {
                             <p>{elem.id}</p>
                             <div className={styles.img}>
                               <img
-                                src={elem.files ? elem.files : NoAvatar}
+                       src={
+                             elem.files && elem.files.length > 0
+                               ? elem.files[0] instanceof File
+                                 ? URL.createObjectURL(elem.files[0])
+                                 : elem.files[0].path.startsWith("/")
+                                   ? elem.files[0].path
+                                   : "/" + elem.files[0].path
+                               : NoAvatar
+                           }
                                 alt="Service"
                               />
                             </div>
